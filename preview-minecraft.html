@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🟩 Family Travel — Minecraft Edition</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap');
+
+  :root {
+    --dirt: #8B6914;
+    --dirt-dark: #6B4F12;
+    --grass: #5D9B37;
+    --grass-light: #7BC74D;
+    --stone: #8B8B8B;
+    --stone-dark: #6B6B6B;
+    --wood: #BC9862;
+    --wood-dark: #8B6914;
+    --sky-day: #87CEEB;
+    --sky-night: #191970;
+    --water: #3F76E4;
+    --lava: #FF6600;
+    --gold: #FFAA00;
+    --diamond: #55FFFF;
+    --emerald: #00D93A;
+    --redstone: #FF0000;
+    --obsidian: #1D1024;
+    --endstone: #DBCD82;
+    --netherrack: #6F3535;
+    --chat-bg: rgba(0,0,0,0.55);
+    --inv-bg: #C6C6C6;
+    --inv-border-light: #FFFFFF;
+    --inv-border-dark: #555555;
+    --inv-slot: #8B8B8B;
+    --hp-red: #FF1111;
+    --xp-green: #80FF20;
+    --hunger: #D48020;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+
+  body {
+    font-family:'Silkscreen','Courier New',monospace;
+    background:#87CEEB; color:#fff; line-height:1.6;
+    image-rendering:pixelated; -ms-interpolation-mode:nearest-neighbor;
+    cursor:url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16'><rect width='16' height='16' fill='%23fff' rx='0'/><rect x='2' y='2' width='12' height='12' fill='%23555' rx='0'/><rect x='4' y='4' width='8' height='8' fill='%23ddd' rx='0'/></svg>") 8 8, auto;
+  }
+
+  /* ══════════ Pixel border mixin ══════════ */
+  .mc-panel {
+    background:#C6C6C6;
+    border:4px solid;
+    border-color:#FFFFFF #555555 #555555 #FFFFFF;
+    box-shadow:inset 2px 2px 0 rgba(255,255,255,0.3), inset -2px -2px 0 rgba(0,0,0,0.3);
+    color:#3F3F3F;
+    image-rendering:pixelated;
+  }
+
+  .mc-panel-dark {
+    background:#2D2D2D;
+    border:4px solid;
+    border-color:#555555 #1a1a1a #1a1a1a #555555;
+    color:#AAAAAA;
+  }
+
+  .mc-btn {
+    display:inline-block; padding:8px 20px;
+    background:#C6C6C6;
+    border:3px solid;
+    border-color:#FFFFFF #555555 #555555 #FFFFFF;
+    font-family:'Silkscreen',monospace; font-size:0.8rem;
+    color:#3F3F3F; cursor:pointer; text-decoration:none;
+    transition:filter 0.1s;
+  }
+  .mc-btn:hover { filter:brightness(1.2); }
+  .mc-btn:active { border-color:#555555 #FFFFFF #FFFFFF #555555; }
+
+  /* ══════════ Scrollbar ══════════ */
+  ::-webkit-scrollbar { width:12px; }
+  ::-webkit-scrollbar-track { background:#2D2D2D; }
+  ::-webkit-scrollbar-thumb { background:#8B8B8B; border:2px solid #555; }
+
+  /* ══════════ TITLE SCREEN — MC Main Menu ══════════ */
+  .title-screen {
+    min-height:100vh; display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    position:relative; overflow:hidden;
+    text-align:center; padding:2rem;
+    background:#000;
+  }
+
+  /* Panorama background — slow pan */
+  .panorama {
+    position:absolute; inset:0; z-index:0;
+    background:
+      linear-gradient(180deg,
+        #4A80C8 0%, #6BA4D6 20%, #87CEEB 35%,
+        #7BC74D 52%, #5D9B37 55%,
+        #4A8B2A 56%, #3D7A20 58%,
+        #8B6914 60%, #6B4F12 100%);
+    animation:panorama-drift 30s ease-in-out infinite alternate;
+    filter:blur(1.5px) brightness(0.65);
+    transform:scale(1.15);
+  }
+  @keyframes panorama-drift {
+    0% { transform:scale(1.15) translateX(-2%); }
+    100% { transform:scale(1.15) translateX(2%); }
+  }
+
+  /* Panorama pixel grid overlay */
+  .panorama::after {
+    content:''; position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(90deg, transparent, transparent 30px, rgba(0,0,0,0.03) 30px, rgba(0,0,0,0.03) 31px),
+      repeating-linear-gradient(180deg, transparent, transparent 30px, rgba(0,0,0,0.03) 30px, rgba(0,0,0,0.03) 31px);
+  }
+
+  /* Dark vignette */
+  .panorama-vignette {
+    position:absolute; inset:0; z-index:1;
+    background:radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.5) 100%);
+    pointer-events:none;
+  }
+
+  /* ── MC Logo ── */
+  .mc-logo-wrap {
+    position:relative; z-index:3;
+    margin-bottom:0.5rem;
+    margin-top:-6vh;
+  }
+
+  .mc-logo-main {
+    font-size:clamp(2.5rem,9vw,5.5rem); font-weight:700;
+    letter-spacing:3px; line-height:1;
+    color:#3E3E3E; position:relative; display:inline-block;
+    /* 3D stone extrusion */
+    text-shadow:
+      0 1px 0 #555,
+      0 2px 0 #4a4a4a,
+      0 3px 0 #444,
+      0 4px 0 #3a3a3a,
+      0 5px 0 #333,
+      0 6px 0 #2a2a2a,
+      0 7px 0 #222,
+      0 8px 8px rgba(0,0,0,0.4);
+    /* Stone texture via gradient on text */
+    background:
+      repeating-linear-gradient(0deg, transparent 0px, transparent 4px, rgba(0,0,0,0.06) 4px, rgba(0,0,0,0.06) 5px),
+      repeating-linear-gradient(90deg, transparent 0px, transparent 6px, rgba(0,0,0,0.04) 6px, rgba(0,0,0,0.04) 7px),
+      linear-gradient(180deg, #8B8B8B 0%, #7B7B7B 20%, #6B6B6B 45%, #5B5B5B 55%, #4B4B4B 80%, #3B3B3B 100%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    filter:drop-shadow(0 1px 0 rgba(255,255,255,0.15));
+  }
+
+  /* Top highlight bevel */
+  .mc-logo-main::before {
+    content:attr(data-text);
+    position:absolute; top:-1px; left:0;
+    font-size:inherit; font-weight:inherit; letter-spacing:inherit; line-height:inherit;
+    background:linear-gradient(180deg, #AAAAAA 0%, #999 15%, transparent 50%);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    z-index:1; pointer-events:none;
+  }
+
+  /* "Java Edition" → subtitle */
+  .mc-edition-label {
+    position:relative; z-index:3;
+    font-size:clamp(0.6rem,1.8vw,0.8rem);
+    color:#AAAAAA; letter-spacing:1px;
+    text-shadow:1px 1px 0 #000;
+    margin-top:0.2rem;
+  }
+
+  /* ── Splash text (yellow, rotated, near logo) ── */
+  .mc-splash {
+    position:relative; z-index:3;
+    color:#FFFF55; font-size:clamp(0.65rem,2vw,0.9rem);
+    transform-origin:center center;
+    transform:rotate(-18deg) translateX(30px) translateY(-10px);
+    animation:splash-pulse 1.2s ease infinite;
+    text-shadow:1px 1px 0 #3F3F00;
+    white-space:nowrap;
+  }
+  @keyframes splash-pulse {
+    0%,100% { transform:rotate(-18deg) translateX(30px) translateY(-10px) scale(1); }
+    50% { transform:rotate(-18deg) translateX(30px) translateY(-10px) scale(1.06); }
+  }
+
+  /* ── Menu Buttons (exact MC style) ── */
+  .mc-menu {
+    position:relative; z-index:3;
+    display:flex; flex-direction:column; align-items:center;
+    gap:6px; margin-top:2.5rem; width:100%; max-width:420px;
+  }
+
+  .mc-menu-btn {
+    display:block; width:100%; padding:10px 0;
+    background:linear-gradient(180deg, #737373 0%, #5B5B5B 45%, #535353 55%, #484848 100%);
+    border:3px solid; border-color:#9A9A9A #585858 #585858 #9A9A9A;
+    font-family:'Silkscreen','Courier New',monospace;
+    font-size:0.85rem; color:#E0E0E0;
+    text-shadow:2px 2px 0 #2D2D2D;
+    cursor:pointer; text-decoration:none; text-align:center;
+    transition:all 0.05s;
+    position:relative;
+  }
+  .mc-menu-btn:hover {
+    background:linear-gradient(180deg, #8B8BB5 0%, #6A6A9A 45%, #5E5E8E 55%, #4E4E7E 100%);
+    border-color:#AAAADD #5555AA #5555AA #AAAADD;
+    color:#FFFFA0;
+  }
+  .mc-menu-btn:active {
+    border-color:#585858 #9A9A9A #9A9A9A #585858;
+  }
+  .mc-menu-btn.disabled {
+    background:linear-gradient(180deg, #404040 0%, #383838 45%, #333 55%, #2D2D2D 100%);
+    border-color:#555 #2D2D2D #2D2D2D #555;
+    color:#6D6D6D; cursor:default;
+  }
+  .mc-menu-btn.disabled:hover { background:linear-gradient(180deg, #404040 0%, #383838 45%, #333 55%, #2D2D2D 100%); border-color:#555 #2D2D2D #2D2D2D #555; color:#6D6D6D; }
+
+  .mc-menu-row {
+    display:flex; gap:6px; width:100%;
+  }
+  .mc-menu-row .mc-menu-btn { flex:1; }
+
+  /* ── Bottom info (version, copyright) ── */
+  .mc-bottom-left {
+    position:absolute; bottom:1rem; left:1rem; z-index:3;
+    font-size:0.5rem; color:rgba(255,255,255,0.55);
+    text-shadow:1px 1px 0 rgba(0,0,0,0.7);
+    text-align:left; line-height:1.6;
+  }
+  .mc-bottom-right {
+    position:absolute; bottom:1rem; right:1rem; z-index:3;
+    font-size:0.5rem; color:rgba(255,255,255,0.4);
+    text-shadow:1px 1px 0 rgba(0,0,0,0.7);
+    text-align:right; line-height:1.6;
+  }
+
+  /* ══════════ HUD ══════════ */
+  .hud {
+    position:sticky; top:0; z-index:100;
+    background:rgba(0,0,0,0.7); padding:6px 12px;
+    display:flex; align-items:center; justify-content:center;
+    flex-wrap:wrap; gap:8px 16px;
+    border-bottom:3px solid #555;
+    font-size:0.65rem;
+  }
+  .hud-hearts { display:flex; gap:2px; }
+  .hud-heart { color:var(--hp-red); font-size:0.85rem; filter:drop-shadow(1px 1px 0 #3F0000); }
+  .hud-hunger { display:flex; gap:2px; }
+  .hud-food { color:var(--hunger); font-size:0.85rem; filter:drop-shadow(1px 1px 0 #3F2000); }
+  .hud-xp {
+    display:flex; align-items:center; gap:6px;
+  }
+  .xp-bar-outer { width:120px; height:8px; background:#222; border:1px solid #555; }
+  .xp-bar-inner { height:100%; background:var(--xp-green); width:0%; transition:width 1.5s ease; }
+  .xp-level { color:var(--xp-green); font-weight:700; text-shadow:1px 1px 0 #004400; }
+  .hud-nav {
+    display:flex; gap:4px; flex-wrap:wrap; justify-content:center;
+  }
+  .hud-nav a {
+    padding:3px 10px; background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15); color:#aaa;
+    font-family:'Silkscreen',monospace; font-size:0.55rem;
+    text-decoration:none; transition:all 0.2s;
+  }
+  .hud-nav a:hover { background:rgba(255,255,255,0.15); color:#fff; }
+
+  /* ══════════ ACHIEVEMENT ══════════ */
+  .achievement {
+    margin:0 auto; padding:0.8rem; max-width:600px;
+    display:flex; align-items:center; gap:1rem;
+    background:#21005C; border:3px solid;
+    border-color:#6F3EAD #2D0070 #2D0070 #6F3EAD;
+    animation:achievement-slide 0.5s ease-out;
+  }
+  @keyframes achievement-slide {
+    0% { transform:translateY(-100%); opacity:0; }
+    100% { transform:translateY(0); opacity:1; }
+  }
+  .achievement-icon {
+    width:48px; height:48px; background:#555;
+    border:2px solid; border-color:#8B8B8B #2D2D2D #2D2D2D #8B8B8B;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.8rem;
+  }
+  .achievement-text { flex:1; }
+  .achievement-label { font-size:0.6rem; color:#FFFF55; }
+  .achievement-title { font-size:0.85rem; color:#fff; }
+
+  /* ══════════ CITY SECTION ══════════ */
+  .city-section {
+    position:relative; padding:4rem 1.2rem;
+    background-size:60px 60px;
+  }
+
+  .city-section.biome-snow {
+    background-color:#E8F0FF;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(200,220,255,0.3) 59px, rgba(200,220,255,0.3) 60px),
+      repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(200,220,255,0.3) 59px, rgba(200,220,255,0.3) 60px);
+  }
+  .city-section.biome-plains {
+    background-color:#C6ECAE;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(93,155,55,0.15) 59px, rgba(93,155,55,0.15) 60px),
+      repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(93,155,55,0.15) 59px, rgba(93,155,55,0.15) 60px);
+  }
+  .city-section.biome-cherry {
+    background-color:#FFE4EE;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(255,183,197,0.2) 59px, rgba(255,183,197,0.2) 60px),
+      repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(255,183,197,0.2) 59px, rgba(255,183,197,0.2) 60px);
+  }
+  .city-section.biome-nether {
+    background-color:#3B1717;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 59px, rgba(111,53,53,0.3) 59px, rgba(111,53,53,0.3) 60px),
+      repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(111,53,53,0.3) 59px, rgba(111,53,53,0.3) 60px);
+  }
+  .city-section.biome-nether .sec-header h2,
+  .city-section.biome-nether .sec-header p,
+  .city-section.biome-nether .day-tag { color:#FF9955; }
+  .city-section.biome-nether .tl-card { background:#4A1F1F; border-color:#6F3535 #2D1010 #2D1010 #6F3535; color:#FFAA77; }
+  .city-section.biome-nether .tl-card h4 { color:#FF9955; }
+  .city-section.biome-nether .tl-card p { color:#CC8866; }
+  .city-section.biome-nether .item-tag { background:#6F3535; color:#FF9955; border-color:#8B4545 #4A2020 #4A2020 #8B4545; }
+
+  .container { max-width:850px; margin:0 auto; }
+
+  .sec-header { text-align:center; margin-bottom:2.5rem; }
+  .sec-header h2 {
+    font-size:clamp(1.8rem,5vw,2.8rem); color:#3F3F3F;
+    text-shadow:2px 2px 0 rgba(0,0,0,0.1); margin-bottom:0.3rem;
+  }
+  .sec-header p { font-size:0.8rem; color:#6B6B6B; }
+
+  .day-tag {
+    display:inline-block; padding:4px 14px;
+    font-size:0.65rem; font-weight:700; color:#3F3F3F;
+    background:#C6C6C6; border:2px solid;
+    border-color:#fff #888 #888 #fff;
+    margin-bottom:0.8rem;
+  }
+
+  /* ── Timeline Card ── */
+  .tl-card {
+    background:#C6C6C6; padding:1.2rem 1.5rem; margin-bottom:0.8rem;
+    border:3px solid; border-color:#FFFFFF #555555 #555555 #FFFFFF;
+    color:#3F3F3F; transition:all 0.2s;
+    position:relative;
+  }
+  .tl-card:hover { filter:brightness(1.08); transform:translateX(4px); }
+
+  .tl-time-badge {
+    display:inline-block; padding:2px 10px;
+    background:#555; color:#FFFF55;
+    border:2px solid; border-color:#8B8B8B #2D2D2D #2D2D2D #8B8B8B;
+    font-size:0.6rem; margin-bottom:0.4rem;
+  }
+  .tl-card h4 { font-size:0.9rem; color:#2D2D2D; margin-bottom:0.3rem; }
+  .tl-card p { font-size:0.7rem; line-height:1.8; color:#555; }
+
+  .item-tags { display:flex; gap:6px; margin-top:0.6rem; flex-wrap:wrap; }
+  .item-tag {
+    font-size:0.55rem; padding:2px 8px;
+    border:2px solid; font-weight:700;
+  }
+  .item-tag.food { background:#FFE4B5; color:#8B4513; border-color:#FFCC80 #CC8844 #CC8844 #FFCC80; }
+  .item-tag.spot { background:#B0E0FF; color:#1E4D8C; border-color:#CCE8FF #6699CC #6699CC #CCE8FF; }
+  .item-tag.exp { background:#D4FFD4; color:#2D6B2D; border-color:#BBFFBB #448844 #448844 #BBFFBB; }
+
+  /* ── Chat / Tip ── */
+  .chat-msg {
+    padding:0.8rem 1rem; margin-top:1rem;
+    background:var(--chat-bg); color:#FFFF55;
+    font-size:0.7rem; line-height:1.8;
+    border-left:4px solid #FFAA00;
+  }
+  .chat-msg::before { content:'<System> '; color:#AAAAAA; }
+  .chat-msg.whisper { color:#AAAAAA; border-left-color:#888; }
+  .chat-msg.whisper::before { content:'[팁] '; color:#FFAA00; }
+
+  /* ══════════ INTERLUDE — 몹 등장 ══════════ */
+  .mob-interlude {
+    position:relative; overflow:hidden;
+    padding:4rem 1.5rem; min-height:50vh;
+    display:flex; align-items:center; justify-content:center;
+    background:#1D1D1D;
+    border-top:4px solid #555; border-bottom:4px solid #555;
+  }
+
+  .mob-interlude::before {
+    content:''; position:absolute; inset:0;
+    background:
+      repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.1) 3px, rgba(0,0,0,0.1) 4px);
+    pointer-events:none;
+  }
+
+  .mob-card {
+    position:relative; z-index:2; text-align:center;
+    max-width:600px; width:100%;
+    opacity:0; transform:translateY(40px) scale(0.9);
+    transition:all 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .mob-interlude.visible .mob-card {
+    opacity:1; transform:translateY(0) scale(1);
+  }
+
+  .mob-sprite {
+    font-size:5rem; margin-bottom:1rem;
+    animation:mob-bob 2s ease infinite;
+    filter:drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+  }
+  @keyframes mob-bob {
+    0%,100% { transform:translateY(0); }
+    50% { transform:translateY(-8px); }
+  }
+
+  .mob-name-tag {
+    display:inline-block; padding:4px 16px;
+    background:rgba(0,0,0,0.6); color:#fff;
+    font-size:0.75rem; margin-bottom:1rem;
+    border:1px solid rgba(255,255,255,0.2);
+  }
+
+  .mob-quote-box {
+    background:#C6C6C6; padding:1.5rem 2rem;
+    border:4px solid; border-color:#FFFFFF #555555 #555555 #FFFFFF;
+    color:#3F3F3F; margin:0 auto;
+    position:relative;
+  }
+  .mob-quote-box::after {
+    content:''; position:absolute; bottom:-12px; left:50%;
+    transform:translateX(-50%);
+    width:0; height:0;
+    border-left:12px solid transparent; border-right:12px solid transparent;
+    border-top:12px solid #555555;
+  }
+
+  .mob-quote {
+    font-size:clamp(0.85rem,2.5vw,1.1rem); line-height:1.8;
+    color:#2D2D2D; font-weight:700;
+  }
+
+  .mob-source {
+    margin-top:1rem; font-size:0.65rem; color:#888;
+    text-shadow:1px 1px 0 rgba(0,0,0,0.3);
+  }
+  .mob-source strong { color:#FFAA00; }
+
+  .mob-context {
+    margin-top:0.5rem; font-size:0.6rem; color:#666;
+    text-shadow:1px 1px 0 rgba(0,0,0,0.3);
+  }
+
+  /* Damage flash */
+  .mob-interlude.damage-flash::after {
+    content:''; position:absolute; inset:0;
+    background:rgba(255,0,0,0.3); z-index:10;
+    pointer-events:none;
+    animation:dmg 0.3s ease-out forwards;
+  }
+  @keyframes dmg {
+    0% { opacity:1; } 100% { opacity:0; }
+  }
+
+  /* ══════════ CRAFTING SECTION ══════════ */
+  .craft-section {
+    padding:3rem 1.2rem; background:#4A4A4A;
+    border-top:4px solid #555; border-bottom:4px solid #555;
+  }
+  .craft-section .container { max-width:600px; }
+
+  .craft-table {
+    margin:0 auto; padding:1.5rem;
+    background:#C6C6C6; border:4px solid;
+    border-color:#FFFFFF #555555 #555555 #FFFFFF;
+    text-align:center;
+  }
+  .craft-title { font-size:0.8rem; color:#3F3F3F; margin-bottom:1rem; }
+  .craft-grid {
+    display:inline-grid; grid-template-columns:repeat(3,56px);
+    gap:4px; margin-bottom:0.8rem;
+  }
+  .craft-slot {
+    width:56px; height:56px; background:#8B8B8B;
+    border:2px solid; border-color:#AAAAAA #555555 #555555 #AAAAAA;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.6rem;
+  }
+  .craft-arrow { font-size:1.5rem; color:#555; margin:0.5rem 0; }
+  .craft-result {
+    display:inline-flex; align-items:center; justify-content:center;
+    width:64px; height:64px; background:#8B8B8B;
+    border:3px solid; border-color:#FFAA00 #CC8800 #CC8800 #FFAA00;
+    font-size:2rem;
+  }
+  .craft-label { font-size:0.65rem; color:#555; margin-top:0.5rem; }
+
+  /* ══════════ INVENTORY (Footer) ══════════ */
+  .inventory-footer {
+    background:#2D2D2D; padding:3rem 1.5rem;
+    border-top:4px solid #555; text-align:center;
+  }
+  .inv-title { font-size:0.75rem; color:#AAAAAA; margin-bottom:1rem; }
+  .inv-grid {
+    display:flex; flex-wrap:wrap; justify-content:center;
+    gap:4px; max-width:500px; margin:0 auto 1.5rem;
+  }
+  .inv-slot {
+    width:44px; height:44px; background:#555;
+    border:2px solid; border-color:#8B8B8B #2D2D2D #2D2D2D #8B8B8B;
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.2rem; position:relative;
+    transition:all 0.15s;
+  }
+  .inv-slot:hover { border-color:#FFFF55; transform:scale(1.1); z-index:1; }
+  .inv-slot .count {
+    position:absolute; bottom:1px; right:3px;
+    font-size:0.45rem; color:#fff;
+    text-shadow:1px 1px 0 #000;
+  }
+
+  .footer-text { font-size:0.6rem; color:#555; margin-top:1rem; }
+  .footer-text .gold { color:#FFAA00; }
+
+  /* ══════════ Particles ══════════ */
+  .particle-container { position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:1; }
+  .snow-particle {
+    position:absolute; background:#fff; border-radius:0;
+    width:4px; height:4px; opacity:0;
+    animation:snow-fall linear infinite;
+  }
+  @keyframes snow-fall {
+    0% { transform:translateY(-5vh) translateX(0); opacity:0; }
+    10% { opacity:0.8; } 90% { opacity:0.6; }
+    100% { transform:translateY(105vh) translateX(30px); opacity:0; }
+  }
+
+  .cherry-particle {
+    position:absolute; background:#FFB7C5; border-radius:50% 0 50% 50%;
+    opacity:0; animation:cherry-fall linear infinite;
+  }
+  @keyframes cherry-fall {
+    0% { transform:translateY(-5vh) rotate(0deg); opacity:0; }
+    10% { opacity:0.6; } 90% { opacity:0.4; }
+    100% { transform:translateY(105vh) rotate(540deg); opacity:0; }
+  }
+
+  /* ══════════ Responsive ══════════ */
+  @media(max-width:480px) {
+    .city-section { padding:2.5rem 0.8rem; }
+    .tl-card { padding:1rem 1.2rem; }
+    .mc-menu { max-width:90%; }
+    .mc-menu-btn { font-size:0.7rem; padding:8px 0; }
+    .hud { font-size:0.55rem; gap:4px 8px; }
+    .mob-sprite { font-size:3.5rem; }
+    .mob-quote-box { padding:1rem 1.2rem; }
+    .craft-grid { grid-template-columns:repeat(3,44px); }
+    .craft-slot { width:44px; height:44px; font-size:1.2rem; }
+    .achievement { flex-direction:column; text-align:center; }
+  }
+
+  /* ══════════ Fade in ══════════ */
+  .mc-fade { opacity:0; transform:translateY(20px); transition:all 0.5s ease; }
+  .mc-fade.visible { opacity:1; transform:translateY(0); }
+
+  /* ══════════ Block break animation ══════════ */
+  @keyframes block-break {
+    0% { transform:scale(1); opacity:1; }
+    50% { transform:scale(1.05); }
+    100% { transform:scale(0.95); opacity:1; }
+  }
+  .tl-card:active { animation:block-break 0.15s ease; }
+
+  /* ══════════ Day/Night Section borders ══════════ */
+  .section-border-top {
+    height:16px; background:repeating-linear-gradient(90deg,
+      #5D9B37 0px, #5D9B37 16px,
+      #4A8B2A 16px, #4A8B2A 32px);
+    border-bottom:4px solid #8B6914;
+  }
+  .section-border-dirt {
+    height:32px;
+    background:
+      repeating-linear-gradient(90deg,
+        #8B6914 0px, #8B6914 16px,
+        #7B5F10 16px, #7B5F10 32px);
+    background-size:32px 32px;
+  }
+
+  .section-border-stone {
+    height:16px;
+    background:repeating-linear-gradient(90deg,
+      #8B8B8B 0px, #8B8B8B 16px,
+      #7B7B7B 16px, #7B7B7B 32px);
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ══════════ TITLE SCREEN ══════════════ -->
+<!-- ═══════════════════════════════════════ -->
+<section class="title-screen" id="title">
+  <!-- Panorama BG -->
+  <div class="panorama"></div>
+  <div class="panorama-vignette"></div>
+
+  <!-- Logo -->
+  <div class="mc-logo-wrap">
+    <div class="mc-logo-main" data-text="Family Travel">Family Travel</div>
+    <p class="mc-edition-label">Japan Edition</p>
+  </div>
+
+  <!-- Splash -->
+  <p class="mc-splash" id="splashText">우리 가족의 대모험!</p>
+
+  <!-- Menu Buttons -->
+  <div class="mc-menu">
+    <a class="mc-menu-btn" href="#sapporo">싱글플레이: 여행 시작</a>
+    <a class="mc-menu-btn disabled">멀티플레이 (가족 4인 접속 중)</a>
+    <div class="mc-menu-row">
+      <a class="mc-menu-btn" href="#fukuoka" style="font-size:0.7rem;">월드 목록</a>
+      <a class="mc-menu-btn disabled" style="font-size:0.7rem;">스킨 변경</a>
+    </div>
+    <div class="mc-menu-row">
+      <a class="mc-menu-btn" href="#hud" style="font-size:0.7rem;">설정...</a>
+      <a class="mc-menu-btn disabled" style="font-size:0.7rem;">나가기</a>
+    </div>
+  </div>
+
+  <!-- Bottom info -->
+  <div class="mc-bottom-left">
+    Family Travel v2026.4.27<br>
+    Japan Edition (4 players)
+  </div>
+  <div class="mc-bottom-right">
+    Copyright KAI Family.<br>
+    Do not distribute!
+  </div>
+</section>
+
+<!-- ═══ HUD (sticky) ═══ -->
+<nav class="hud" id="hud">
+  <div class="hud-hearts" title="체력">❤️❤️❤️❤️❤️❤️❤️❤️❤️❤️</div>
+  <div class="hud-xp">
+    <div class="xp-bar-outer"><div class="xp-bar-inner" id="xpBar"></div></div>
+    <span class="xp-level" id="xpLevel">Lv.0</span>
+  </div>
+  <div class="hud-hunger" title="배고픔">🍗🍗🍗🍗🍗🍗🍗🍗🍗🍗</div>
+  <div class="hud-nav">
+    <a href="#sapporo">삿포로</a>
+    <a href="#tokyo">도쿄</a>
+    <a href="#nara">나라</a>
+    <a href="#kyoto">교토</a>
+    <a href="#fukuoka">후쿠오카</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ══════════ ACHIEVEMENT — 모험 시작 ════ -->
+<!-- ═══════════════════════════════════════ -->
+<div style="padding:1rem 1rem; background:#2D2D2D;">
+  <div class="achievement mc-fade">
+    <div class="achievement-icon">🗺</div>
+    <div class="achievement-text">
+      <div class="achievement-label">도전 과제 달성!</div>
+      <div class="achievement-title">모험의 시작</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ══════════ SAPPORO — 눈 바이옴 ═══════ -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section-border-top"></div>
+<div class="city-section biome-snow" id="sapporo">
+  <div class="particle-container" id="snowContainer"></div>
+  <div class="container">
+    <div class="day-tag mc-fade">Day 1-3 &middot; 4/27 — 29</div>
+    <div class="sec-header mc-fade">
+      <h2>삿포로</h2>
+      <p>바이옴: 눈 덮인 타이가 &middot; 홋카이도의 수도</p>
+    </div>
+
+    <div class="tl-card mc-fade">
+      <div class="tl-time-badge">12:00</div>
+      <h4>니조 시장 점심</h4>
+      <p>삿포로 시민의 부엌. 하나마루스시, 기타노구루메테이, 오이소 — 셋 중 하나를 골라보세요.</p>
+      <div class="item-tags">
+        <span class="item-tag food">맛집</span>
+        <span class="item-tag spot">니조 시장</span>
+      </div>
+    </div>
+
+    <div class="tl-card mc-fade">
+      <div class="tl-time-badge">14:00</div>
+      <h4>삿포로 시계탑</h4>
+      <p>1878년에 지어진 삿포로의 상징. 구 홋카이도청의 붉은 벽돌 건물도 도보 10분 거리.</p>
+      <div class="item-tags">
+        <span class="item-tag spot">관광명소</span>
+      </div>
+    </div>
+
+    <div class="tl-card mc-fade">
+      <div class="tl-time-badge">18:30</div>
+      <h4>히라쓰카 징기스칸</h4>
+      <p>홋카이도 명물. 부드러운 양고기를 돔형 철판 위에서. 히라쓰카 본점에서만 느낄 수 있는 맛.</p>
+      <div class="item-tags">
+        <span class="item-tag food">징기스칸</span>
+      </div>
+    </div>
+
+    <div class="chat-msg whisper mc-fade">홋카이도는 4월 말에도 10~15°C. 가죽 갑옷(얇은 겉옷) 필수!</div>
+  </div>
+</div>
+
+<!-- ═══ Interlude: 미스터 초밥왕 ═══ -->
+<div class="mob-interlude" data-xp="15">
+  <div class="mob-card">
+    <div class="mob-sprite">🍣</div>
+    <div class="mob-name-tag">세키구치 쇼타</div>
+    <div class="mob-quote-box">
+      <p class="mob-quote">"진심을 담아 쥔 초밥은<br>반드시 전해진다."</p>
+    </div>
+    <p class="mob-source"><strong>미스터 초밥왕</strong> — 将太の寿司</p>
+    <p class="mob-context">니조 시장의 신선한 해산물에 경의를</p>
+  </div>
+</div>
+
+<!-- ═══ Achievement ═══ -->
+<div style="padding:1rem 1rem; background:#2D2D2D;">
+  <div class="achievement mc-fade">
+    <div class="achievement-icon">❄️</div>
+    <div class="achievement-text">
+      <div class="achievement-label">도전 과제 달성!</div>
+      <div class="achievement-title">눈 바이옴 탈출</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ══════════ TOKYO — 평원 바이옴 ═══════ -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section-border-top"></div>
+<div class="city-section biome-plains" id="tokyo">
+  <div class="container">
+    <div class="day-tag mc-fade">Day 4-7 &middot; 4/30 — 5/3</div>
+    <div class="sec-header mc-fade">
+      <h2>도쿄</h2>
+      <p>바이옴: 평원 &middot; 전통과 초현대가 공존하는 메트로폴리스</p>
+    </div>
+
+    <div class="tl-card mc-fade">
+      <div class="tl-time-badge">09:00</div>
+      <h4>센소지</h4>
+      <p>도쿄에서 가장 오래된 사원. 카미나리몬을 지나 나카미세 상점가에서 전통 간식을 맛보세요.</p>
+      <div class="item-tags">
+        <span class="item-tag spot">아사쿠사</span>
+        <span class="item-tag food">나카미세</span>
+      </div>
+    </div>
+
+    <div class="tl-card mc-fade">
+      <div class="tl-time-badge">17:00</div>
+      <h4>도쿄 스카이트리</h4>
+      <p>높이 634m. 석양이 물드는 도쿄의 파노라마를 전망대에서 감상하세요.</p>
+      <div class="item-tags">
+        <span class="item-tag spot">전망</span>
+        <span class="item-tag exp">+200 XP</span>
+      </div>
+    </div>
+
+    <div class="chat-msg whisper mc-fade">도쿄 메트로 72시간 패스(1,500엔)로 지하철 무제한 이용. 팀랩은 사전 예약 필수!</div>
+  </div>
+</div>
+
+<!-- ═══ Interlude: 나루토 ═══ -->
+<div class="mob-interlude" data-xp="30">
+  <div class="mob-card">
+    <div class="mob-sprite">🍥</div>
+    <div class="mob-name-tag">우즈마키 나루토</div>
+    <div class="mob-quote-box">
+      <p class="mob-quote">"포기하지 않는 것.<br>그게 내 닌자도야."</p>
+    </div>
+    <p class="mob-source"><strong>나루토</strong> — NARUTO</p>
+    <p class="mob-context">긴 여정도 포기하지 않고 끝까지!</p>
+  </div>
+</div>
+
+<!-- ═══ Achievement ═══ -->
+<div style="padding:1rem 1rem; background:#2D2D2D;">
+  <div class="achievement mc-fade">
+    <div class="achievement-icon">🗼</div>
+    <div class="achievement-text">
+      <div class="achievement-label">도전 과제 달성!</div>
+      <div class="achievement-title">높은 곳 탐험가</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ══════════ NARA — 벚꽃 바이옴 ═══════ -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section-border-top"></div>
+<div class="city-section biome-cherry" id="nara">
+  <div class="particle-container" id="cherryContainer"></div>
+  <div class="container">
+    <div class="day-tag mc-fade">Day 8-9 &middot; 5/4 — 5</div>
+    <div class="sec-header mc-fade">
+      <h2>나라</h2>
+      <p>바이옴: 벚꽃 숲 &middot; 천년 고도, 사슴과 대불의 도시</p>
+    </div>
+
+    <div class="tl-card mc-fade">
+      <div class="tl-time-badge">08:30</div>
+      <h4>나라 공원 &amp; 사슴</h4>
+      <p>약 1,200마리의 야생 사슴이 자유롭게 돌아다니는 공원. 센베이로 먹이주기 체험.</p>
+      <div class="item-tags">
+        <span class="item-tag spot">나라 공원</span>
+        <span class="item-tag exp">+100 XP</span>
+      </div>
+    </div>
+
+    <div class="tl-card mc-fade">
+      <div class="tl-time-badge">10:00</div>
+      <h4>도다이지</h4>
+      <p>세계 최대 목조 건물 안의 높이 15m 대불. 기둥 구멍 통과에 도전해보세요.</p>
+      <div class="item-tags">
+        <span class="item-tag spot">세계유산</span>
+      </div>
+    </div>
+
+    <div class="chat-msg mc-fade"><span style="color:#FF5555;">경고:</span> 사슴에게 센베이를 한 번에 다 보여주지 마세요. 적대적 몹으로 변합니다!</div>
+  </div>
+</div>
+
+<!-- ═══ Interlude: 베가본드 ═══ -->
+<div class="mob-interlude" data-xp="45">
+  <div class="mob-card">
+    <div class="mob-sprite">⚔️</div>
+    <div class="mob-name-tag">미야모토 무사시</div>
+    <div class="mob-quote-box">
+      <p class="mob-quote">"강해져라.<br>그래야 소중한 것을<br>지킬 수 있다."</p>
+    </div>
+    <p class="mob-source"><strong>베가본드</strong> — バガボンド</p>
+    <p class="mob-context">교토, 사무라이 정신의 고향으로</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ══════════ KYOTO — 벚꽃 바이옴 ═══════ -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section-border-top"></div>
+<div class="city-section biome-cherry" id="kyoto">
+  <div class="particle-container" id="cherryContainer2"></div>
+  <div class="container">
+    <div class="day-tag mc-fade">Day 10-12 &middot; 5/6 — 8</div>
+    <div class="sec-header mc-fade">
+      <h2>교토</h2>
+      <p>바이옴: 벚꽃 숲 &middot; 천년의 수도, 일본 전통의 정수</p>
+    </div>
+
+    <div class="tl-card mc-fade">
+      <div class="tl-time-badge">07:00</div>
+      <h4>후시미 이나리 대사</h4>
+      <p>천 개의 붉은 도리이가 터널을 이루는 장관. 이른 아침이 포인트.</p>
+      <div class="item-tags">
+        <span class="item-tag spot">후시미 이나리</span>
+        <span class="item-tag exp">+300 XP</span>
+      </div>
+    </div>
+
+    <div class="tl-card mc-fade">
+      <div class="tl-time-badge">14:00</div>
+      <h4>킨카쿠지</h4>
+      <p>황금빛 금각사와 거울 연못의 완벽한 반영. 교토의 아이콘.</p>
+      <div class="item-tags">
+        <span class="item-tag spot">세계유산</span>
+      </div>
+    </div>
+
+    <div class="chat-msg whisper mc-fade">교토 버스 1일권(700엔)이면 시내 대부분 커버. 기모노 대여는 사전 예약 시 할인.</div>
+  </div>
+</div>
+
+<!-- ═══ Interlude: 귀멸의 칼날 ═══ -->
+<div class="mob-interlude" data-xp="60">
+  <div class="mob-card">
+    <div class="mob-sprite">🔥</div>
+    <div class="mob-name-tag">카마도 탄지로</div>
+    <div class="mob-quote-box">
+      <p class="mob-quote">"흐르는 물처럼,<br>어떤 형태에도<br>맞출 수 있게."</p>
+    </div>
+    <p class="mob-source"><strong>귀멸의 칼날</strong> — 鬼滅の刃</p>
+    <p class="mob-context">여행의 마지막까지 유연하게!</p>
+  </div>
+</div>
+
+<!-- ═══ Achievement ═══ -->
+<div style="padding:1rem 1rem; background:#2D2D2D;">
+  <div class="achievement mc-fade">
+    <div class="achievement-icon">⛩</div>
+    <div class="achievement-text">
+      <div class="achievement-label">도전 과제 달성!</div>
+      <div class="achievement-title">천 개의 토리이</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ══════════ FUKUOKA — 네더 바이옴 ═════ -->
+<!-- ═══════════════════════════════════════ -->
+<div class="section-border-stone"></div>
+<div class="city-section biome-nether" id="fukuoka">
+  <div class="container">
+    <div class="day-tag mc-fade">Day 13-14 &middot; 5/9 — 10</div>
+    <div class="sec-header mc-fade">
+      <h2>후쿠오카</h2>
+      <p>바이옴: 네더 &middot; 뜨거운 라멘과 야타이의 도시</p>
+    </div>
+
+    <div class="tl-card mc-fade">
+      <div class="tl-time-badge">12:00</div>
+      <h4>하카타 라멘</h4>
+      <p>이치란 라멘 본점에서 정통 하카타 돈코츠. 카에다마(면 추가) 필수.</p>
+      <div class="item-tags">
+        <span class="item-tag food">맛집</span>
+        <span class="item-tag spot">하카타</span>
+      </div>
+    </div>
+
+    <div class="tl-card mc-fade">
+      <div class="tl-time-badge">18:30</div>
+      <h4>나카스 야타이</h4>
+      <p>후쿠오카의 상징. 강변 포장마차에서 라멘, 꼬치구이, 교자를 즐기는 특별한 저녁.</p>
+      <div class="item-tags">
+        <span class="item-tag food">야타이</span>
+        <span class="item-tag spot">나카스</span>
+      </div>
+    </div>
+
+    <div class="chat-msg mc-fade" style="border-left-color:#FF5555; color:#FF9955;">후쿠오카 공항은 시내에서 지하철 5분. 네더 포탈(귀국편) 가까움!</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ══════════ CRAFTING — 여행 레시피 ═════ -->
+<!-- ═══════════════════════════════════════ -->
+<div class="craft-section">
+  <div class="container">
+    <div class="craft-table mc-fade">
+      <p class="craft-title">조합법: 최고의 가족 여행</p>
+      <div class="craft-grid">
+        <div class="craft-slot">❄️</div>
+        <div class="craft-slot">🗼</div>
+        <div class="craft-slot">🦌</div>
+        <div class="craft-slot">⛩</div>
+        <div class="craft-slot">🍜</div>
+        <div class="craft-slot">❤️</div>
+        <div class="craft-slot">👨‍👩‍👧‍👦</div>
+        <div class="craft-slot">✈️</div>
+        <div class="craft-slot">🗾</div>
+      </div>
+      <div class="craft-arrow">▼</div>
+      <div class="craft-result">💎</div>
+      <p class="craft-label">다이아몬드급 추억 x 1</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Final Achievement ═══ -->
+<div style="padding:1rem 1rem; background:#2D2D2D;">
+  <div class="achievement mc-fade">
+    <div class="achievement-icon">🏆</div>
+    <div class="achievement-text">
+      <div class="achievement-label">모든 도전 과제 달성!</div>
+      <div class="achievement-title">일본 정복자 — 14일 완주</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Ending Interlude ═══ -->
+<div class="mob-interlude" style="min-height:40vh; border-bottom:none;">
+  <div class="mob-card" style="opacity:1; transform:none;">
+    <div class="mob-sprite" style="font-size:4rem;">👨‍👩‍👧‍👦</div>
+    <div class="mob-name-tag" style="border-color:var(--gold);">우리 가족</div>
+    <div class="mob-quote-box" style="border-color:#FFAA00 #CC8800 #CC8800 #FFAA00;">
+      <p class="mob-quote" style="color:#FFAA00;">"함께라서<br>즐거웠어."</p>
+    </div>
+    <p class="mob-source"><strong style="color:#FFFF55;">일본 여행 2026</strong> — 14일간의 모험</p>
+    <p class="mob-context">게임 오버... 가 아니라, 새로운 시작!</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ══════════ INVENTORY FOOTER ══════════ -->
+<!-- ═══════════════════════════════════════ -->
+<footer class="inventory-footer">
+  <p class="inv-title">인벤토리 — 여행에서 얻은 아이템</p>
+  <div class="inv-grid">
+    <div class="inv-slot">🍣<span class="count">x3</span></div>
+    <div class="inv-slot">🍜<span class="count">x5</span></div>
+    <div class="inv-slot">🍶<span class="count">x2</span></div>
+    <div class="inv-slot">📸<span class="count">x99</span></div>
+    <div class="inv-slot">🎌</div>
+    <div class="inv-slot">🗾</div>
+    <div class="inv-slot">🎋</div>
+    <div class="inv-slot">⛩</div>
+    <div class="inv-slot">🦌</div>
+    <div class="inv-slot">🌸<span class="count">x∞</span></div>
+    <div class="inv-slot">🎎</div>
+    <div class="inv-slot">💎</div>
+    <div class="inv-slot">🍡<span class="count">x4</span></div>
+    <div class="inv-slot">🏯</div>
+    <div class="inv-slot">🗼</div>
+    <div class="inv-slot">🍱<span class="count">x7</span></div>
+    <div class="inv-slot">🎫<span class="count">x14</span></div>
+    <div class="inv-slot">❤️<span class="count">x∞</span></div>
+  </div>
+  <p class="footer-text">
+    <span class="gold">Minecraft Edition</span> &middot; 마인크래프트 풍 프리뷰<br>
+    Designed for our family.
+  </p>
+</footer>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- ══════════ SCRIPTS ═══════════════════ -->
+<!-- ═══════════════════════════════════════ -->
+<script>
+(function() {
+  // ── Snow particles for Sapporo ──
+  const snowC = document.getElementById('snowContainer');
+  if (snowC) {
+    for (let i = 0; i < 40; i++) {
+      const s = document.createElement('div');
+      s.className = 'snow-particle';
+      s.style.left = Math.random() * 100 + '%';
+      s.style.animationDuration = (4 + Math.random() * 6) + 's';
+      s.style.animationDelay = Math.random() * 8 + 's';
+      const sz = (2 + Math.random() * 4) + 'px';
+      s.style.width = sz; s.style.height = sz;
+      snowC.appendChild(s);
+    }
+  }
+
+  // ── Cherry particles for Nara / Kyoto ──
+  ['cherryContainer', 'cherryContainer2'].forEach(id => {
+    const c = document.getElementById(id);
+    if (!c) return;
+    for (let i = 0; i < 20; i++) {
+      const p = document.createElement('div');
+      p.className = 'cherry-particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDuration = (5 + Math.random() * 8) + 's';
+      p.style.animationDelay = Math.random() * 10 + 's';
+      const sz = (6 + Math.random() * 8) + 'px';
+      p.style.width = sz; p.style.height = sz;
+      c.appendChild(p);
+    }
+  });
+
+  // ── Splash texts ──
+  const splashes = [
+    '우리 가족의 대모험!',
+    '14일간의 서바이벌!',
+    '일본은 넓다!',
+    '다이아몬드급 여행!',
+    '크리퍼? 아니, 사슴!',
+    '인벤토리가 가득!',
+    'Also try 한국 여행!',
+    '100% 가족 멀티플레이!',
+    '엔더 드래곤 대신 신칸센!',
+    '네더 포탈 = 후쿠오카 공항!'
+  ];
+  const splashEl = document.getElementById('splashText');
+  if (splashEl) {
+    splashEl.textContent = splashes[Math.floor(Math.random() * splashes.length)];
+  }
+
+  // ── XP bar logic ──
+  let totalXP = 0;
+  const maxXP = 100;
+  const xpBar = document.getElementById('xpBar');
+  const xpLevel = document.getElementById('xpLevel');
+  let level = 0;
+
+  function addXP(amount) {
+    totalXP += amount;
+    while (totalXP >= maxXP) {
+      totalXP -= maxXP;
+      level++;
+    }
+    if (xpBar) xpBar.style.width = totalXP + '%';
+    if (xpLevel) xpLevel.textContent = 'Lv.' + level;
+  }
+
+  // ── Intersection Observer ──
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+
+      // Mob interlude reveal
+      if (el.classList.contains('mob-interlude')) {
+        if (el.dataset.revealed) return;
+        el.dataset.revealed = '1';
+        el.classList.add('visible');
+
+        // Damage flash effect
+        setTimeout(() => {
+          el.classList.add('damage-flash');
+          setTimeout(() => el.classList.remove('damage-flash'), 400);
+        }, 200);
+
+        // XP gain
+        const xp = parseInt(el.dataset.xp) || 0;
+        if (xp) setTimeout(() => addXP(xp), 600);
+      }
+
+      // General fade-in
+      if (el.classList.contains('mc-fade')) {
+        el.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.mob-interlude, .mc-fade').forEach(el => obs.observe(el));
+
+  // ── Initial XP ──
+  setTimeout(() => addXP(5), 1000);
+})();
+</script>
+</body>
+</html>
