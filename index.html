@@ -188,6 +188,14 @@
   .tip-card h4{font-size:.85rem;font-weight:700;margin-bottom:.3rem;color:#FF9F0A}
   .tip-card p{font-size:.85rem;font-weight:300;color:#86868B;line-height:1.7}
 
+  /* ── Luffy Evolution Scroll ── */
+  .luffy-evolution{height:700vh;position:relative;background:#080808}
+  .luffy-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .luffy-slide{position:absolute;max-height:55vh;max-width:85%;object-fit:contain;opacity:0;transition:opacity .8s ease;z-index:1}
+  .luffy-slide.active{opacity:1}
+  .luffy-quote{position:absolute;bottom:4rem;left:50%;transform:translateX(-50%);text-align:center;z-index:3;opacity:0;transition:opacity .8s ease .2s;max-width:700px;width:100%;padding:0 2rem}
+  .luffy-quote.active{opacity:1}
+
   /* ── Anime Interlude ── */
   .anime-interlude{position:relative;overflow:hidden;min-height:85vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;background:#080808;padding-bottom:4rem}
 
@@ -264,6 +272,8 @@
     .hero h1{font-size:2.5rem}
     .hero-sub{font-size:1rem}
     .city-section{padding:3.5rem 1rem}
+    .luffy-evolution{height:600vh}
+    .luffy-slide{max-height:42vh!important}
     .anime-interlude{min-height:70vh;padding-bottom:3rem}
     .anime-char img{max-height:42vh!important}
     .tl-card{padding:1.1rem 1.2rem;border-radius:12px}
@@ -429,83 +439,21 @@
   </div>
 </div>
 
-<!-- ═══ Anime: 루피 이스트블루 ═══ -->
-<div class="anime-interlude" data-char="luffy" data-shake="1">
-  <div class="anime-char"><img src="img/luffy/eastblue_5.png" alt="Luffy East Blue"></div>
-  <div class="anime-bottom">
-    <p class="quote-text">"해적왕이 될 거야!!"</p>
-    <p class="quote-source"><strong>몽키 D. 루피</strong> <span class="work">— 원피스 ONE PIECE · 이스트블루 편</span></p>
-    <p class="quote-context">우리 가족의 대모험이 시작됩니다</p>
-  </div>
-</div>
-
-<!-- ═══ Anime: 루피 기어2 ═══ -->
-<div class="anime-interlude" data-char="luffy" data-shake="1">
-  <div class="anime-char"><img src="img/luffy/gear2_c.png" alt="Luffy Gear 2"></div>
-  <div class="anime-bottom">
-    <p class="quote-text">"아직… 할 수 있어!!"</p>
-    <p class="quote-source"><strong>몽키 D. 루피</strong> <span class="work">— 원피스 ONE PIECE · 기어 세컨드</span></p>
-    <p class="quote-context">한계를 넘어, 더 빠르게</p>
-  </div>
-</div>
-
-<!-- ═══ Anime: 루피 기어3 ═══ -->
-<div class="anime-interlude" data-char="luffy" data-shake="1">
-  <div class="anime-char"><img src="img/luffy/gear3.png" alt="Luffy Gear 3"></div>
-  <div class="anime-bottom">
-    <p class="quote-text">"동료를 지키기 위해서라면<br>더 강해질 수 있어."</p>
-    <p class="quote-source"><strong>몽키 D. 루피</strong> <span class="work">— 원피스 ONE PIECE · 기어 서드</span></p>
-    <p class="quote-context">더 큰 세계를 향해</p>
-  </div>
-</div>
-
-<!-- ═══ Anime: 루피 기어4 ═══ -->
-<div class="anime-interlude" data-char="luffy" data-shake="1">
-  <div class="anime-char"><img src="img/luffy/gear4.png" alt="Luffy Gear 4"></div>
-  <div class="anime-bottom">
-    <p class="quote-text">"내 동료들의 꿈을<br>웃기다고 하는 놈은<br>절대 용서 못 해!!"</p>
-    <p class="quote-source"><strong>몽키 D. 루피</strong> <span class="work">— 원피스 ONE PIECE · 기어 포스 바운드맨</span></p>
-    <p class="quote-context">압도적인 힘으로</p>
-  </div>
-</div>
-
-<!-- ═══ Anime: 루피 바운드맨 ═══ -->
-<div class="anime-interlude" data-char="luffy" data-shake="1">
-  <div class="anime-char"><img src="img/luffy/luffy.png" alt="Luffy Boundman"></div>
-  <div class="anime-bottom">
-    <p class="quote-text">"다시 만나러 갈게.<br>꼭!!"</p>
-    <p class="quote-source"><strong>몽키 D. 루피</strong> <span class="work">— 원피스 ONE PIECE · 드레스로자</span></p>
-    <p class="quote-context">전력 질주!</p>
-  </div>
-</div>
-
-<!-- ═══ Anime: 루피 니카 1 ═══ -->
-<div class="anime-interlude" data-char="luffy" data-shake="1">
-  <div class="anime-char"><img src="img/luffy/nika_1.png" alt="Luffy Nika"></div>
-  <div class="anime-bottom">
-    <p class="quote-text">"아하하하하!!<br>왜 이렇게 자유로운 거야!!"</p>
-    <p class="quote-source"><strong>몽키 D. 루피</strong> <span class="work">— 원피스 ONE PIECE · 기어 피프스 · 태양신 니카</span></p>
-    <p class="quote-context">해방의 전사, 모든 한계를 초월하다</p>
-  </div>
-</div>
-
-<!-- ═══ Anime: 루피 니카 2 ═══ -->
-<div class="anime-interlude" data-char="luffy" data-shake="1">
-  <div class="anime-char"><img src="img/luffy/nika_2.png" alt="Luffy Nika Joy"></div>
-  <div class="anime-bottom">
-    <p class="quote-text">"세상에서 가장 자유로운 놈.<br>그게 해적왕이다!!"</p>
-    <p class="quote-source"><strong>태양신 니카</strong> <span class="work">— 원피스 ONE PIECE · 히토히토 열매 환수종</span></p>
-    <p class="quote-context">자유, 그 자체</p>
-  </div>
-</div>
-
-<!-- ═══ Anime: 밀짚모자 해적단 ═══ -->
-<div class="anime-interlude" data-char="luffy" data-shake="1">
-  <div class="anime-char"><img src="img/luffy/last.png" alt="Straw Hat Pirates" style="max-height:65vh;max-width:95%"></div>
-  <div class="anime-bottom">
-    <p class="quote-text">"함께라서 즐거웠다!!"</p>
-    <p class="quote-source"><strong>밀짚모자 해적단</strong> <span class="work">— 원피스 ONE PIECE</span></p>
-    <p class="quote-context">우리 가족도 해적단처럼,<br>함께여서 최고의 모험이었습니다</p>
+<!-- ═══ Luffy Evolution Scroll ═══ -->
+<div class="luffy-evolution" id="luffyEvolution">
+  <div class="luffy-sticky">
+    <img class="luffy-slide active" src="img/luffy/eastblue_5.png" alt="East Blue" data-idx="0">
+    <img class="luffy-slide" src="img/luffy/gear2_c.png" alt="Gear 2" data-idx="1">
+    <img class="luffy-slide" src="img/luffy/gear3.png" alt="Gear 3" data-idx="2">
+    <img class="luffy-slide" src="img/luffy/gear4.png" alt="Gear 4" data-idx="3">
+    <img class="luffy-slide" src="img/luffy/luffy.png" alt="Boundman" data-idx="4">
+    <img class="luffy-slide" src="img/luffy/nika_1.png" alt="Nika" data-idx="5">
+    <img class="luffy-slide" src="img/luffy/nika_2.png" alt="Nika Joy" data-idx="6">
+    <img class="luffy-slide" src="img/luffy/last.png" alt="Straw Hat Pirates" data-idx="7" style="max-height:65vh;max-width:95%">
+    <div class="luffy-quote" id="luffyQuote">
+      <p class="quote-text">"얘들아, 출항이다!!"</p>
+      <p class="quote-source"><strong>몽키 D. 루피</strong> <span class="work">— 원피스 ONE PIECE</span></p>
+    </div>
   </div>
 </div>
 
@@ -865,6 +813,31 @@
   const jwDict=[['미소 라멘','味噌ラーメン — 일본 된장으로 맛을 낸 라멘'],['돈코츠','豚骨 — 돼지뼈를 푹 고은 국물'],['카에다마','替え玉 — 라멘 면 추가'],['센베이','せんべい — 쌀로 만든 과자, 사슴도 좋아해요'],['징기스칸','ジンギスカン — 양고기 BBQ'],['신칸센','新幹線 — 일본 초고속 열차, 최대 시속 320km!'],['노조미','のぞみ — "희망", 신칸센 중 가장 빠른 열차'],['센소지','浅草寺 — 도쿄에서 가장 오래된 절'],['카미나리몬','雷門 — "번개문", 거대한 빨간 등이 유명'],['나카미세','仲見世 — 절로 가는 상점가'],['아메요코','アメ横 — 미국 물건을 팔던 골목'],['가부키초','歌舞伎町 — 가부키 극장이 있던 번화가'],['오모이데 요코초','思い出横丁 — "추억의 골목"'],['도다이지','東大寺 — "동쪽의 큰 절"'],['가스가타이샤','春日大社 — "봄날의 큰 신사"'],['호류지','法隆寺 — 세계에서 가장 오래된 목조 건물'],['후시미 이나리','伏見稲荷 — 여우신을 모신 신사'],['도리이','鳥居 — 신사 입구의 기둥문'],['기요미즈데라','清水寺 — "맑은 물의 절"'],['킨카쿠지','金閣寺 — "금빛 누각의 절"'],['기온','祇園 — 게이샤를 만날 수 있는 거리'],['가모가와','鴨川 — "오리 강", 교토를 흐르는 강'],['니시키 시장','錦市場 — "비단 시장", 교토의 부엌'],['뵤도인','平等院 — 10엔 동전 뒷면 그림'],['하카타','博多 — 후쿠오카의 옛 이름'],['야타이','屋台 — 길가의 포장마차'],['다마고야키','卵焼き — 달콤한 일본식 계란말이'],['야키토리','焼き鳥 — 닭꼬치구이'],['유바','湯葉 — 두유를 끓여 건져낸 껍질'],['와가시','和菓子 — 일본 전통 과자'],['말차','抹茶 — 녹차 잎을 갈아 만든 가루 차'],['기모노','着物 — 일본 전통 옷'],['이자카야','居酒屋 — 일본식 술집'],['우메가에모치','梅ヶ枝餅 — 매화가지 떡, 다자이후 명물'],['가마메시','釜飯 — 작은 솥에 지은 밥'],['시라스동','しらす丼 — 잔멸치 덮밥'],['에노덴','江ノ電 — 바닷가를 달리는 작은 전차']];
 
   (function(){const targets=document.querySelectorAll('.tl-card p,.tip-card p,.sec-sub');const sorted=[...jwDict].sort((a,b)=>b[0].length-a[0].length);targets.forEach(el=>{let html=el.innerHTML;sorted.forEach(([term,tip])=>{const re=new RegExp(`(?<![<\\w])${term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}(?![\\w>])`,'');if(re.test(html))html=html.replace(re,`<span class="jw" data-t="${tip.replace(/"/g,'&quot;')}">${term}</span>`)});el.innerHTML=html})})();
+
+  // ── Luffy Evolution Scroll ──
+  (function(){
+    const evo=document.getElementById('luffyEvolution');
+    if(!evo)return;
+    const slides=evo.querySelectorAll('.luffy-slide');
+    const quote=document.getElementById('luffyQuote');
+    const total=slides.length;
+    let prev=-1;
+    function onScroll(){
+      const rect=evo.getBoundingClientRect();
+      const scrolled=-rect.top;
+      const scrollH=evo.offsetHeight-window.innerHeight;
+      if(scrolled<0||scrolled>scrollH)return;
+      const progress=scrolled/scrollH;
+      const idx=Math.min(Math.floor(progress*total),total-1);
+      if(idx===prev)return;
+      slides.forEach((s,i)=>{s.classList.toggle('active',i===idx)});
+      // Show quote only on last slide
+      quote.classList.toggle('active',idx===total-1);
+      prev=idx;
+    }
+    window.addEventListener('scroll',onScroll,{passive:true});
+    onScroll();
+  })();
 
   // ── Map Sequence: video play → freeze → zoom → route animation ──
   function startMapSequence(){
