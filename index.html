@@ -423,6 +423,9 @@
     .city-section{padding:3.5rem 1rem}
     .luffy-evolution{height:500vh}
     .luffy-slide{max-height:42vh!important}
+    .goku-evolution{height:750vh}
+    .goku-slide{max-height:42vh!important}
+    .goku-label{top:1.5rem}
     .anime-interlude{min-height:70vh;padding-bottom:3rem}
     .anime-char img{max-height:42vh!important}
     .tl-card{padding:1.1rem 1.2rem;border-radius:12px}
@@ -649,13 +652,45 @@
   </div>
 </div>
 
-<!-- ═══ Anime: 드래곤볼 (삿포로→도쿄) ═══ -->
-<div class="anime-interlude" data-char="goku" data-shake="1">
-  <div class="anime-char"><img src="img/goku/goku.png" alt="Goku"></div>
-  <div class="anime-bottom">
-    <p class="quote-text">"한계를 넘어서는 것.<br>그게 수행이다."</p>
-    <p class="quote-source"><strong>손오공</strong> <span class="work">— 드래곤볼 ドラゴンボール</span></p>
-    <p class="quote-context">삿포로의 추위를 넘어, 도쿄로</p>
+<!-- ═══ Goku Evolution Scroll (삿포로→도쿄) ═══ -->
+<div class="goku-evolution" id="gokuEvolution">
+  <div class="goku-sticky">
+    <div class="goku-flash" id="gokuFlash"></div>
+
+    <div class="goku-label" id="gokuLabel">
+      <div class="form-name" id="gokuFormName"></div>
+      <div class="form-arc" id="gokuFormArc"></div>
+    </div>
+
+    <img class="goku-slide active" src="img/goku/kid_goku.png" alt="Kid Goku" data-idx="0"
+         data-name="소년 오공" data-arc="드래곤볼 · 여의봉과 근두운">
+    <img class="goku-slide" src="img/goku/teen_goku.png" alt="Teen Goku" data-idx="1" data-anim="grow" data-flash="gold"
+         data-name="청년 오공" data-arc="천하제일무도회 · 첫 성인 등장">
+    <img class="goku-slide" src="img/goku/saiyan_saga.png" alt="Saiyan Saga" data-idx="2" data-anim="powerup" data-flash="gold"
+         data-name="사이어인편 오공" data-arc="드래곤볼Z · 계왕권 수련">
+    <img class="goku-slide" src="img/goku/ssj1.png" alt="Super Saiyan" data-idx="3" data-anim="burst" data-flash="gold"
+         data-name="슈퍼사이어인" data-arc="나메크성 · 전설의 각성">
+    <img class="goku-slide" src="img/goku/ssj2.png" alt="SSJ2" data-idx="4" data-anim="powerup" data-flash="gold"
+         data-name="슈퍼사이어인 2" data-arc="부우편 · 번개를 두른 전사">
+    <img class="goku-slide" src="img/goku/ssj3.png" alt="SSJ3" data-idx="5" data-anim="burst" data-flash="gold"
+         data-name="슈퍼사이어인 3" data-arc="부우편 · 한계를 넘은 장발">
+    <img class="goku-slide" src="img/goku/ssg.png" alt="SSG" data-idx="6" data-anim="divine" data-flash="red"
+         data-name="슈퍼사이어인 갓" data-arc="신과 신 · 신의 영역에 도달">
+    <img class="goku-slide" src="img/goku/ssb.png" alt="SSB" data-idx="7" data-anim="ascend" data-flash="blue"
+         data-name="슈퍼사이어인 블루" data-arc="부활의 F · 신의 기운 + 사이어인">
+    <img class="goku-slide" src="img/goku/ssb_kaioken.png" alt="SSBKK" data-idx="8" data-anim="burst" data-flash="red"
+         data-name="SSB 계왕권" data-arc="제6우주편 · 이중 오라의 폭발">
+    <img class="goku-slide" src="img/goku/ui_sign.png" alt="UI Sign" data-idx="9" data-anim="ultra" data-flash="silver"
+         data-name="울트라 인스팅트 조짐" data-arc="우주서바이벌 · 무의식의 시작">
+    <img class="goku-slide" src="img/goku/mui.png" alt="MUI" data-idx="10" data-anim="awaken" data-flash="silver"
+         data-name="울트라 인스팅트 완성" data-arc="우주서바이벌 최종전 · 은빛 각성">
+    <img class="goku-slide" src="img/goku/true_ui.png" alt="True UI" data-idx="11" data-anim="ultra" data-flash="silver"
+         data-name="트루 울트라 인스팅트" data-arc="그래놀라편 · 감정을 품은 극의">
+
+    <div class="goku-quote" id="gokuQuote">
+      <p class="quote-text">"한계를 넘어서는 것.<br>그게 수행이다."</p>
+      <p class="quote-source"><strong>손오공</strong> <span class="work">— 드래곤볼 ドラゴンボール</span></p>
+    </div>
   </div>
 </div>
 
@@ -1009,6 +1044,58 @@
       }else{
         quote.classList.remove('active');
         if(lastSlide.tagName==='VIDEO'){clearTimeout(lastSlide._playTimer);lastSlide.pause()}
+      }
+      prev=idx;
+    }
+    window.addEventListener('scroll',onScroll,{passive:true});
+    onScroll();
+  })();
+
+  // ── Goku Evolution Scroll ──
+  (function(){
+    const evo=document.getElementById('gokuEvolution');
+    if(!evo)return;
+    const slides=evo.querySelectorAll('.goku-slide');
+    const quote=document.getElementById('gokuQuote');
+    const flash=document.getElementById('gokuFlash');
+    const label=document.getElementById('gokuLabel');
+    const formName=document.getElementById('gokuFormName');
+    const formArc=document.getElementById('gokuFormArc');
+    const total=slides.length;
+    let prev=-1;
+    function fireFlash(type){
+      flash.className='goku-flash';
+      void flash.offsetWidth;
+      flash.classList.add('flash-'+type);
+    }
+    function onScroll(){
+      const rect=evo.getBoundingClientRect();
+      const scrolled=-rect.top;
+      const scrollH=evo.offsetHeight-window.innerHeight;
+      if(scrolled<0||scrolled>scrollH)return;
+      const progress=scrolled/scrollH;
+      const idx=Math.min(Math.floor(progress*total),total-1);
+      if(idx===prev)return;
+      slides.forEach((s,i)=>{
+        s.classList.remove('active','leaving');
+        if(i===idx) s.classList.add('active');
+        else if(i<idx) s.classList.add('leaving');
+      });
+      if(prev!==-1&&idx>prev){
+        const incoming=slides[idx];
+        const flashType=incoming.dataset.flash;
+        if(flashType) fireFlash(flashType);
+      }
+      // update label
+      const cur=slides[idx];
+      formName.textContent=cur.dataset.name||'';
+      formArc.textContent=cur.dataset.arc||'';
+      label.classList.add('active');
+      // show quote on last slide
+      if(idx===total-1){
+        quote.classList.add('active');
+      }else{
+        quote.classList.remove('active');
       }
       prev=idx;
     }
