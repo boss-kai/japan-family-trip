@@ -248,9 +248,18 @@
   .luffy-slide[data-anim="flash"].active{transform:scale(1);filter:brightness(1) saturate(1)}
   .luffy-slide[data-anim="flash"].leaving{transform:scale(1.1);opacity:0;filter:brightness(2)}
 
-  .luffy-slide[data-anim="gather"]{transform:scale(.6);opacity:0;transition:opacity 1.2s ease,transform 1.2s cubic-bezier(.25,.46,.45,.94)}
-  .luffy-slide[data-anim="gather"].active{transform:scale(1);opacity:1}
+  .luffy-slide[data-anim="gather"]{transform:scale(.4);opacity:0;transition:opacity 1s ease,transform 1s ease}
+  .luffy-slide[data-anim="gather"].active{opacity:1;animation:awaken 2s cubic-bezier(.25,.46,.45,.94) forwards}
   .luffy-slide[data-anim="gather"].leaving{transform:scale(1.05);opacity:0}
+  @keyframes awaken{
+    0%{transform:scale(.4);filter:brightness(0)}
+    20%{transform:scale(.6);filter:brightness(.3)}
+    40%{transform:scale(.55);filter:brightness(.15)}
+    55%{transform:scale(.75);filter:brightness(.5)}
+    70%{transform:scale(.7);filter:brightness(.35)}
+    85%{transform:scale(.95);filter:brightness(.8)}
+    100%{transform:scale(1);filter:brightness(1)}
+  }
 
   .luffy-quote{position:absolute;bottom:4rem;left:50%;transform:translateX(-50%) translateY(30px);text-align:center;z-index:3;opacity:0;transition:opacity 1s ease .3s,transform 1s ease .3s;max-width:700px;width:100%;padding:0 2rem}
   .luffy-quote.active{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -914,10 +923,14 @@
       const lastSlide=slides[total-1];
       if(idx===total-1){
         quote.classList.add('active');
-        if(lastSlide.tagName==='VIDEO'){lastSlide.currentTime=0;lastSlide.play().catch(()=>{})}
+        if(lastSlide.tagName==='VIDEO'){
+          lastSlide.currentTime=0;
+          clearTimeout(lastSlide._playTimer);
+          lastSlide._playTimer=setTimeout(()=>{lastSlide.play().catch(()=>{})},2000);
+        }
       }else{
         quote.classList.remove('active');
-        if(lastSlide.tagName==='VIDEO')lastSlide.pause();
+        if(lastSlide.tagName==='VIDEO'){clearTimeout(lastSlide._playTimer);lastSlide.pause()}
       }
       prev=idx;
     }
