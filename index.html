@@ -602,7 +602,7 @@
     <img class="luffy-slide" src="img/luffy/gear4.png" alt="Gear 4" data-idx="2" data-anim="zoom" data-slash="right">
     <img class="luffy-slide" src="img/luffy/luffy.png" alt="Boundman" data-idx="3" data-anim="slam" data-slash="cross">
     <img class="luffy-slide" src="img/luffy/nika_2.png" alt="Nika Joy" data-idx="4" data-anim="flash" data-slash="left">
-    <video class="luffy-slide" data-idx="5" data-anim="gather" muted loop playsinline style="max-height:75vh;max-width:95%" poster="img/luffy/last.png">
+    <video class="luffy-slide" data-idx="5" data-anim="gather" muted playsinline style="max-height:75vh;max-width:95%" poster="img/luffy/last.png">
       <source src="img/luffy/last.mp4" type="video/mp4">
     </video>
     <div class="luffy-quote" id="luffyQuote">
@@ -1046,11 +1046,12 @@
           lastSlide._playTimer=setTimeout(()=>{
             lastSlide.play().catch(()=>{});
           },2000);
-          // unlock after video ends once
+          // unlock after video ends once, then enable loop
           lastSlide.addEventListener('ended',function onEnd(){
             lockScroll=false;
             lastSlide._played=true;
-            lastSlide.removeEventListener('ended',onEnd);
+            lastSlide.loop=true;
+            lastSlide.play().catch(()=>{});
           },{once:true});
         }
       }else{
