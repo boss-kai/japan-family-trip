@@ -1144,28 +1144,29 @@
       // Phase 2: Video freezes on last frame → zoom into archipelago
       vid.classList.add('zoomed');
 
-      // Phase 3: After zoom transition, show route overlay
+      // Phase 3: After zoom, show route + cities together
       setTimeout(()=>{
         overlay.classList.add('show');
 
-        // Draw brush route lines
+        // Draw route lines + first city dot simultaneously
         setTimeout(()=>{
           line.classList.add('animate');
           if(line2) line2.classList.add('animate');
-        }, 300);
+          dots[0].classList.add('show');
 
-        // Pop in city dots
-        dots.forEach((d,i)=>{
-          setTimeout(()=>d.classList.add('show'), 2000 + i*500);
-        });
+          // Remaining cities pop in rapidly as route draws
+          dots.forEach((d,i)=>{
+            if(i>0) setTimeout(()=>d.classList.add('show'), i*400);
+          });
 
-        // Fly plane after all dots
-        setTimeout(()=>{
-          plane.classList.add('show');
-          planeAnim.beginElement();
-        }, 2000 + dots.length*500 + 400);
+          // Fly plane after all dots
+          setTimeout(()=>{
+            plane.classList.add('show');
+            planeAnim.beginElement();
+          }, dots.length*400 + 300);
+        }, 200);
 
-      }, 1400); // wait for zoom transition complete
+      }, 1400);
     });
   }
 
