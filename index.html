@@ -196,7 +196,7 @@
   .anime-interlude.visible .anime-char img{opacity:1}
 
   /* Musashi wallpaper style */
-  .anime-interlude[data-char="musashi"]{background:url('img/musashi.jpg') center center/cover no-repeat}
+  .anime-interlude[data-char="musashi"]{background:url('img/musashi/musashi.jpg') center center/cover no-repeat}
   .anime-interlude[data-char="musashi"]::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,.45)}
   .anime-interlude[data-char="musashi"]{background-size:120%;transition:background-size 2s ease}
   .anime-interlude[data-char="musashi"].visible{background-size:100%}
@@ -372,9 +372,9 @@
 
   <div class="map-stage" id="mapStage">
     <!-- Phase 1: GIF plays -->
-    <img class="map-gif" id="mapGif" src="img/japan-map.gif" alt="일본 지도">
+    <img class="map-gif" id="mapGif" src="img/map/japan-map.gif" alt="일본 지도">
     <!-- Phase 2: Cropped map (user-provided) -->
-    <img class="map-crop" id="mapCrop" src="img/image.png" alt="일본 지도 확대">
+    <img class="map-crop" id="mapCrop" src="img/map/image.png" alt="일본 지도 확대">
     <!-- Phase 3: Route overlay -->
     <div class="map-overlay" id="mapOverlay">
       <svg viewBox="0 0 544 606" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
@@ -435,7 +435,7 @@
 
 <!-- ═══ Anime: 루피 (출발) ═══ -->
 <div class="anime-interlude" data-char="luffy" data-shake="1">
-  <div class="anime-char"><img src="img/luffy.png" alt="Luffy"></div>
+  <div class="anime-char"><img src="img/luffy/luffy.png" alt="Luffy"></div>
   <div class="anime-bottom">
     <p class="quote-text">"해적왕이 될 거야!!"</p>
     <p class="quote-source"><strong>몽키 D. 루피</strong> <span class="work">— 원피스 ONE PIECE</span></p>
@@ -487,7 +487,7 @@
 
 <!-- ═══ Anime: 드래곤볼 (삿포로→도쿄) ═══ -->
 <div class="anime-interlude" data-char="goku" data-shake="1">
-  <div class="anime-char"><img src="img/goku.png" alt="Goku"></div>
+  <div class="anime-char"><img src="img/goku/goku.png" alt="Goku"></div>
   <div class="anime-bottom">
     <p class="quote-text">"한계를 넘어서는 것.<br>그게 수행이다."</p>
     <p class="quote-source"><strong>손오공</strong> <span class="work">— 드래곤볼 ドラゴンボール</span></p>
@@ -536,7 +536,7 @@
 
 <!-- ═══ Anime: 나루토 (도쿄→나라) ═══ -->
 <div class="anime-interlude" data-char="naruto" data-shake="1">
-  <div class="anime-char"><img src="img/naruto.png" alt="Naruto"></div>
+  <div class="anime-char"><img src="img/naruto/naruto.png" alt="Naruto"></div>
   <div class="anime-bottom">
     <p class="quote-text">"포기하지 않는 것.<br>그게 내 닌자도야."</p>
     <p class="quote-source"><strong>우즈마키 나루토</strong> <span class="work">— 나루토 NARUTO</span></p>
@@ -618,7 +618,7 @@
 <!-- ═══ Anime: 귀멸의 칼날 (교토→후쿠오카) ═══ -->
 <div class="anime-interlude" data-char="tanjiro" data-shake="1">
   <div class="slash-fx"></div>
-  <div class="anime-char"><img src="img/tanjiro.png" alt="Tanjiro"></div>
+  <div class="anime-char"><img src="img/tanjiro/tanjiro.png" alt="Tanjiro"></div>
   <div class="anime-bottom">
     <p class="quote-text">"흐르는 물처럼,<br>어떤 형태에도<br>맞출 수 있게."</p>
     <p class="quote-source"><strong>카마도 탄지로</strong> <span class="work">— 귀멸의 칼날 鬼滅の刃</span></p>
@@ -816,7 +816,7 @@
     // Phase 1: GIF plays, then freeze by replacing src with static image
     setTimeout(()=>{
       // Freeze GIF: replace with last-frame static PNG
-      gif.src = 'img/japan-map-last.png';
+      gif.src = 'img/map/japan-map-last.png';
 
       // Phase 2: After brief pause, crossfade to cropped map
       setTimeout(()=>{
