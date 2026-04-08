@@ -280,6 +280,43 @@
     .tip-card p,.tip-card h4{word-break:keep-all}
   }
 
+  /* ── Japan Map Route ── */
+  .map-section{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#050505;padding:4rem 1.5rem;position:relative;overflow:hidden}
+  .map-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(255,55,95,.04),transparent 70%)}
+  .map-eyebrow{font-size:.85rem;font-weight:600;color:#FF375F;margin-bottom:.5rem;position:relative;z-index:2}
+  .map-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:#F5F5F7;margin-bottom:.5rem;text-align:center;position:relative;z-index:2}
+  .map-sub{font-size:1rem;font-weight:300;color:#86868B;margin-bottom:2.5rem;text-align:center;position:relative;z-index:2}
+  .japan-map-wrap{position:relative;z-index:2;width:100%;max-width:500px}
+  .japan-map-wrap svg{width:100%;height:auto;display:block}
+
+  /* Route line animation */
+  .route-line{stroke-dasharray:1200;stroke-dashoffset:1200;transition:stroke-dashoffset 3s ease}
+  .map-section.visible .route-line{stroke-dashoffset:0}
+
+  /* City dots pulse */
+  .city-dot{opacity:0;transform:scale(0);transition:all .5s cubic-bezier(.34,1.56,.64,1)}
+  .map-section.visible .city-dot{opacity:1;transform:scale(1)}
+  .map-section.visible .city-dot:nth-child(2){transition-delay:.6s}
+  .map-section.visible .city-dot:nth-child(3){transition-delay:1.2s}
+  .map-section.visible .city-dot:nth-child(4){transition-delay:1.8s}
+  .map-section.visible .city-dot:nth-child(5){transition-delay:2.4s}
+
+  /* Animated plane along route */
+  .route-plane{opacity:0}
+  .map-section.visible .route-plane{opacity:1;animation:fly-route 4s ease-in-out 1s forwards}
+
+  /* City labels */
+  .map-city-label{font-size:11px;font-weight:700;fill:#F5F5F7;opacity:0;transition:opacity .5s ease}
+  .map-city-jp{font-size:8px;font-weight:400;fill:#86868B;opacity:0;transition:opacity .5s ease}
+  .map-section.visible .map-city-label,.map-section.visible .map-city-jp{opacity:1}
+  .map-city-days{font-size:7.5px;font-weight:600;fill:#FF375F;opacity:0;transition:opacity .5s ease}
+  .map-section.visible .map-city-days{opacity:1}
+
+  @media(max-width:430px){
+    .map-section{min-height:80vh;padding:3rem 1rem}
+    .japan-map-wrap{max-width:100%}
+  }
+
   .fade-in{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.25,.46,.45,.94)}
   .fade-in.visible{opacity:1;transform:translateY(0)}
 </style>
@@ -295,15 +332,15 @@
   <p class="hero-date">2026. 4. 27 — 5. 10</p>
   <div class="dday-box" id="ddayBox"></div>
   <div class="hero-cities">
-    <div class="hero-city"><div class="icon">⛰</div><span class="name">삿포로</span><span class="days">3일</span></div>
+    <div class="hero-city" onclick="document.getElementById('sapporo').scrollIntoView({behavior:'smooth'})" style="cursor:pointer"><div class="icon">⛰</div><span class="name">삿포로</span><span class="days" style="font-size:.6rem;opacity:.5;">札幌</span><span class="days">3일</span></div>
     <span class="connector">—</span>
-    <div class="hero-city"><div class="icon">🗼</div><span class="name">도쿄</span><span class="days">4일</span></div>
+    <div class="hero-city" onclick="document.getElementById('tokyo').scrollIntoView({behavior:'smooth'})" style="cursor:pointer"><div class="icon">🗼</div><span class="name">도쿄</span><span class="days" style="font-size:.6rem;opacity:.5;">東京</span><span class="days">4일</span></div>
     <span class="connector">—</span>
-    <div class="hero-city"><div class="icon">🦌</div><span class="name">나라</span><span class="days">2일</span></div>
+    <div class="hero-city" onclick="document.getElementById('nara').scrollIntoView({behavior:'smooth'})" style="cursor:pointer"><div class="icon">🦌</div><span class="name">나라</span><span class="days" style="font-size:.6rem;opacity:.5;">奈良</span><span class="days">2일</span></div>
     <span class="connector">—</span>
-    <div class="hero-city"><div class="icon">⛩</div><span class="name">교토</span><span class="days">3일</span></div>
+    <div class="hero-city" onclick="document.getElementById('kyoto').scrollIntoView({behavior:'smooth'})" style="cursor:pointer"><div class="icon">⛩</div><span class="name">교토</span><span class="days" style="font-size:.6rem;opacity:.5;">京都</span><span class="days">3일</span></div>
     <span class="connector">—</span>
-    <div class="hero-city"><div class="icon">🍜</div><span class="name">후쿠오카</span><span class="days">2일</span></div>
+    <div class="hero-city" onclick="document.getElementById('fukuoka').scrollIntoView({behavior:'smooth'})" style="cursor:pointer"><div class="icon">🍜</div><span class="name">후쿠오카</span><span class="days" style="font-size:.6rem;opacity:.5;">福岡</span><span class="days">2일</span></div>
   </div>
   <div class="scroll-cue"><span>스크롤</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
 </section>
@@ -322,6 +359,103 @@
     <div class="nav-item" data-target="comments"><span class="nav-emoji">💬</span> 의견</div>
   </div>
 </nav>
+
+<!-- ═══ Japan Route Map ═══ -->
+<div class="map-section" id="routeMap">
+  <p class="map-eyebrow">OUR ROUTE</p>
+  <h2 class="map-title">14일간의 여정.</h2>
+  <p class="map-sub">인천에서 출발, 일본 열도를 종단합니다.</p>
+  <div class="japan-map-wrap">
+    <svg viewBox="0 0 500 700" xmlns="http://www.w3.org/2000/svg">
+      <!-- Japan outline (simplified) -->
+      <!-- Hokkaido -->
+      <path d="M320,80 Q340,50 370,55 Q400,60 410,80 Q415,100 400,115 Q385,130 365,125 Q345,120 335,105 Q325,95 320,80Z" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
+      <!-- Honshu -->
+      <path d="M230,160 Q260,140 290,145 Q320,150 340,165 Q355,175 350,195 Q345,215 330,230 Q315,245 300,255 Q285,265 270,280 Q255,295 240,310 Q225,325 215,340 Q205,355 200,365 Q195,375 190,380" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
+      <path d="M190,380 Q185,370 175,365 Q165,360 155,365 Q145,370 140,380" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
+      <!-- Shikoku -->
+      <path d="M195,395 Q210,385 225,390 Q240,395 245,410 Q240,420 225,420 Q210,415 200,405Z" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+      <!-- Kyushu -->
+      <path d="M120,390 Q135,375 155,380 Q170,385 175,400 Q178,415 170,430 Q160,445 145,445 Q130,440 122,425 Q115,410 120,390Z" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1.5"/>
+
+      <!-- Animated route line -->
+      <path class="route-line" d="M370,80 L370,80 L310,195 L310,195 L235,320 L235,320 L210,355 L210,355 L150,415"
+        fill="none" stroke="#FF375F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- Dashed flight lines -->
+      <line x1="90" y1="480" x2="370" y2="80" stroke="rgba(255,55,95,.3)" stroke-width="1" stroke-dasharray="4,6"/>
+      <line x1="150" y1="415" x2="90" y2="480" stroke="rgba(255,55,95,.3)" stroke-width="1" stroke-dasharray="4,6"/>
+
+      <!-- Incheon (Korea) -->
+      <circle cx="90" cy="480" r="4" fill="#86868B"/>
+      <text x="90" y="500" text-anchor="middle" class="map-city-label" style="font-size:9px;fill:#86868B">인천</text>
+      <text x="90" y="510" text-anchor="middle" class="map-city-jp" style="font-size:7px">仁川 · 출발/귀국</text>
+
+      <!-- City dots with staggered animation -->
+      <g class="city-dot" style="transition-delay:0s">
+        <circle cx="370" cy="80" r="8" fill="rgba(255,55,95,.2)">
+          <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="370" cy="80" r="5" fill="#FF375F"/>
+        <text x="388" y="70" class="map-city-label">삿포로</text>
+        <text x="388" y="80" class="map-city-jp">札幌 Sapporo</text>
+        <text x="388" y="90" class="map-city-days">Day 1-3</text>
+      </g>
+
+      <g class="city-dot" style="transition-delay:.8s">
+        <circle cx="310" cy="195" r="8" fill="rgba(255,55,95,.2)">
+          <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" begin=".5s"/>
+        </circle>
+        <circle cx="310" cy="195" r="5" fill="#FF375F"/>
+        <text x="328" y="188" class="map-city-label">도쿄</text>
+        <text x="328" y="198" class="map-city-jp">東京 Tokyo</text>
+        <text x="328" y="208" class="map-city-days">Day 4-7</text>
+      </g>
+
+      <g class="city-dot" style="transition-delay:1.6s">
+        <circle cx="235" cy="320" r="8" fill="rgba(255,55,95,.2)">
+          <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" begin="1s"/>
+        </circle>
+        <circle cx="235" cy="320" r="5" fill="#FF375F"/>
+        <text x="253" y="313" class="map-city-label">나라</text>
+        <text x="253" y="323" class="map-city-jp">奈良 Nara</text>
+        <text x="253" y="333" class="map-city-days">Day 8-9</text>
+      </g>
+
+      <g class="city-dot" style="transition-delay:2.2s">
+        <circle cx="210" cy="355" r="8" fill="rgba(255,55,95,.2)">
+          <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" begin="1.5s"/>
+        </circle>
+        <circle cx="210" cy="355" r="5" fill="#FF375F"/>
+        <text x="160" y="348" text-anchor="end" class="map-city-label">교토</text>
+        <text x="160" y="358" text-anchor="end" class="map-city-jp">京都 Kyoto</text>
+        <text x="160" y="368" text-anchor="end" class="map-city-days">Day 10-12</text>
+      </g>
+
+      <g class="city-dot" style="transition-delay:2.8s">
+        <circle cx="150" cy="415" r="8" fill="rgba(255,55,95,.2)">
+          <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite" begin="2s"/>
+        </circle>
+        <circle cx="150" cy="415" r="5" fill="#FF375F"/>
+        <text x="108" y="408" text-anchor="end" class="map-city-label">후쿠오카</text>
+        <text x="108" y="418" text-anchor="end" class="map-city-jp">福岡 Fukuoka</text>
+        <text x="108" y="428" text-anchor="end" class="map-city-days">Day 13-14</text>
+      </g>
+
+      <!-- Animated plane -->
+      <g class="route-plane">
+        <animateMotion dur="5s" begin="1s" fill="freeze" path="M90,480 Q230,280 370,80 L310,195 L235,320 L210,355 L150,415"/>
+        <text font-size="18" text-anchor="middle" dy="6">✈</text>
+      </g>
+
+      <!-- Transport labels on route -->
+      <text x="345" y="140" font-size="7" fill="#86868B" text-anchor="middle" transform="rotate(-50,345,140)" class="map-city-jp">✈ 국내선</text>
+      <text x="320" y="255" font-size="7" fill="#86868B" text-anchor="middle" transform="rotate(-40,320,255)" class="map-city-jp">🚅 신칸센</text>
+      <text x="222" y="340" font-size="7" fill="#86868B" text-anchor="middle" class="map-city-jp">🚅</text>
+      <text x="178" y="390" font-size="7" fill="#86868B" text-anchor="middle" transform="rotate(-30,178,390)" class="map-city-jp">🚅 신칸센</text>
+    </svg>
+  </div>
+</div>
 
 <!-- ═══ Anime: 루피 (출발) ═══ -->
 <div class="anime-interlude" data-char="luffy" data-shake="1">
@@ -682,8 +816,8 @@
   window.addEventListener('scroll',()=>{let c='';allSections.forEach(s=>{if(s.id&&scrollY>=s.offsetTop-120)c=s.id});navItems.forEach(i=>i.classList.toggle('active',i.dataset.target===c))});
 
   // ── Observer (fade-in + anime interlude) ──
-  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;if(el.classList.contains('anime-interlude')&&!el.dataset.revealed){el.dataset.revealed='1';el.classList.add('visible');if(el.dataset.shake==='1')setTimeout(()=>{el.classList.add('shake-active');setTimeout(()=>el.classList.remove('shake-active'),400)},400)}if(el.classList.contains('fade-in'))el.classList.add('visible')})},{threshold:.15});
-  document.querySelectorAll('.anime-interlude,.fade-in').forEach(el=>obs.observe(el));
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;if(el.classList.contains('anime-interlude')&&!el.dataset.revealed){el.dataset.revealed='1';el.classList.add('visible');if(el.dataset.shake==='1')setTimeout(()=>{el.classList.add('shake-active');setTimeout(()=>el.classList.remove('shake-active'),400)},400)}if(el.classList.contains('fade-in'))el.classList.add('visible');if(el.classList.contains('map-section')&&!el.dataset.revealed){el.dataset.revealed='1';el.classList.add('visible')}})},{threshold:.15});
+  document.querySelectorAll('.anime-interlude,.fade-in,.map-section').forEach(el=>obs.observe(el));
 
   // ── Japanese word tooltips ──
   const jwDict=[['미소 라멘','味噌ラーメン — 일본 된장으로 맛을 낸 라멘'],['돈코츠','豚骨 — 돼지뼈를 푹 고은 국물'],['카에다마','替え玉 — 라멘 면 추가'],['센베이','せんべい — 쌀로 만든 과자, 사슴도 좋아해요'],['징기스칸','ジンギスカン — 양고기 BBQ'],['신칸센','新幹線 — 일본 초고속 열차, 최대 시속 320km!'],['노조미','のぞみ — "희망", 신칸센 중 가장 빠른 열차'],['센소지','浅草寺 — 도쿄에서 가장 오래된 절'],['카미나리몬','雷門 — "번개문", 거대한 빨간 등이 유명'],['나카미세','仲見世 — 절로 가는 상점가'],['아메요코','アメ横 — 미국 물건을 팔던 골목'],['가부키초','歌舞伎町 — 가부키 극장이 있던 번화가'],['오모이데 요코초','思い出横丁 — "추억의 골목"'],['도다이지','東大寺 — "동쪽의 큰 절"'],['가스가타이샤','春日大社 — "봄날의 큰 신사"'],['호류지','法隆寺 — 세계에서 가장 오래된 목조 건물'],['후시미 이나리','伏見稲荷 — 여우신을 모신 신사'],['도리이','鳥居 — 신사 입구의 기둥문'],['기요미즈데라','清水寺 — "맑은 물의 절"'],['킨카쿠지','金閣寺 — "금빛 누각의 절"'],['기온','祇園 — 게이샤를 만날 수 있는 거리'],['가모가와','鴨川 — "오리 강", 교토를 흐르는 강'],['니시키 시장','錦市場 — "비단 시장", 교토의 부엌'],['뵤도인','平等院 — 10엔 동전 뒷면 그림'],['하카타','博多 — 후쿠오카의 옛 이름'],['야타이','屋台 — 길가의 포장마차'],['다마고야키','卵焼き — 달콤한 일본식 계란말이'],['야키토리','焼き鳥 — 닭꼬치구이'],['유바','湯葉 — 두유를 끓여 건져낸 껍질'],['와가시','和菓子 — 일본 전통 과자'],['말차','抹茶 — 녹차 잎을 갈아 만든 가루 차'],['기모노','着物 — 일본 전통 옷'],['이자카야','居酒屋 — 일본식 술집'],['우메가에모치','梅ヶ枝餅 — 매화가지 떡, 다자이후 명물'],['가마메시','釜飯 — 작은 솥에 지은 밥'],['시라스동','しらす丼 — 잔멸치 덮밥'],['에노덴','江ノ電 — 바닷가를 달리는 작은 전차']];
