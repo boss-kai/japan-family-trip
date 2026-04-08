@@ -189,8 +189,32 @@
   .tip-card p{font-size:.85rem;font-weight:300;color:#86868B;line-height:1.7}
 
   /* ── Luffy Evolution Scroll ── */
-  .luffy-evolution{height:600vh;position:relative;background:#080808}
+  .luffy-evolution{height:550vh;position:relative;background:#080808}
   .luffy-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+
+  /* diagonal slash transition overlay */
+  .luffy-slash{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0}
+  .luffy-slash.slash-left{animation:slashLeft .6s ease forwards}
+  .luffy-slash.slash-right{animation:slashRight .6s ease forwards}
+  .luffy-slash.slash-cross{animation:slashCross .7s ease forwards}
+  @keyframes slashLeft{
+    0%{opacity:1;background:linear-gradient(135deg,transparent 0%,transparent 49%,rgba(255,255,255,.9) 49.5%,rgba(255,255,255,.9) 50.5%,transparent 51%,transparent 100%);background-size:200% 200%;background-position:100% 100%}
+    50%{opacity:1;background:linear-gradient(135deg,transparent 0%,transparent 49%,rgba(255,255,255,.7) 49.5%,rgba(255,255,255,.7) 50.5%,transparent 51%,transparent 100%);background-size:200% 200%;background-position:0% 0%}
+    100%{opacity:0}
+  }
+  @keyframes slashRight{
+    0%{opacity:1;background:linear-gradient(-135deg,transparent 0%,transparent 49%,rgba(255,200,0,.9) 49.5%,rgba(255,200,0,.9) 50.5%,transparent 51%,transparent 100%);background-size:200% 200%;background-position:0% 100%}
+    50%{opacity:1;background:linear-gradient(-135deg,transparent 0%,transparent 49%,rgba(255,200,0,.7) 49.5%,rgba(255,200,0,.7) 50.5%,transparent 51%,transparent 100%);background-size:200% 200%;background-position:100% 0%}
+    100%{opacity:0}
+  }
+  @keyframes slashCross{
+    0%{opacity:1;background:
+      linear-gradient(135deg,transparent 48%,rgba(255,55,95,.9) 49.5%,rgba(255,55,95,.9) 50.5%,transparent 52%),
+      linear-gradient(-135deg,transparent 48%,rgba(255,55,95,.9) 49.5%,rgba(255,55,95,.9) 50.5%,transparent 52%);
+    }
+    60%{opacity:1}
+    100%{opacity:0}
+  }
   .luffy-slide{position:absolute;max-height:55vh;max-width:85%;object-fit:contain;z-index:1;
     opacity:0;transform:translateY(60px) scale(.92);
     transition:opacity 1s cubic-bezier(.25,.46,.45,.94),transform 1s cubic-bezier(.25,.46,.45,.94);will-change:opacity,transform}
@@ -348,9 +372,9 @@
   .city-dot.show{opacity:1;transition:opacity .5s ease}
 
   /* Labels */
-  .map-city-label{font-family:'Noto Sans KR',sans-serif;font-size:15px;font-weight:900;fill:#fff}
-  .map-city-jp{font-family:'Noto Sans KR',sans-serif;font-size:10px;font-weight:600;fill:rgba(255,255,255,.9)}
-  .label-bg{fill:rgba(0,0,0,.7);rx:5;ry:5}
+  .map-city-label{font-family:'Noto Sans KR',sans-serif;font-size:24px;font-weight:900;fill:#fff}
+  .map-city-jp{font-family:'Noto Sans KR',sans-serif;font-size:16px;font-weight:600;fill:rgba(255,255,255,.9)}
+  .label-bg{fill:rgba(0,0,0,.75);rx:8;ry:8}
 
   .route-plane{opacity:0}
   .route-plane.show{opacity:1}
@@ -358,8 +382,8 @@
   @media(max-width:430px){
     .map-section{min-height:auto;padding:3rem 1rem}
     .map-stage{border-radius:8px}
-    .map-city-label{font-size:12px}
-    .map-city-jp{font-size:8px}
+    .map-city-label{font-size:18px}
+    .map-city-jp{font-size:12px}
   }
 
   .fade-in{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.25,.46,.45,.94)}
@@ -477,13 +501,13 @@
 <!-- ═══ Luffy Evolution Scroll ═══ -->
 <div class="luffy-evolution" id="luffyEvolution">
   <div class="luffy-sticky">
+    <div class="luffy-slash" id="luffySlash"></div>
     <img class="luffy-slide active" src="img/luffy/eastblue_5.png" alt="East Blue" data-idx="0">
-    <img class="luffy-slide" src="img/luffy/gear3.png" alt="Gear 3" data-idx="1" data-anim="punch">
-    <img class="luffy-slide" src="img/luffy/gear4.png" alt="Gear 4" data-idx="2" data-anim="zoom">
-    <img class="luffy-slide" src="img/luffy/luffy.png" alt="Boundman" data-idx="3" data-anim="slam">
-    <img class="luffy-slide" src="img/luffy/nika_1.png" alt="Nika" data-idx="4" data-anim="flash">
-    <img class="luffy-slide" src="img/luffy/nika_2.png" alt="Nika Joy" data-idx="5" data-anim="spin">
-    <img class="luffy-slide" src="img/luffy/last.png" alt="Straw Hat Pirates" data-idx="6" data-anim="gather" style="max-height:65vh;max-width:95%">
+    <img class="luffy-slide" src="img/luffy/gear3.png" alt="Gear 3" data-idx="1" data-anim="punch" data-slash="left">
+    <img class="luffy-slide" src="img/luffy/gear4.png" alt="Gear 4" data-idx="2" data-anim="zoom" data-slash="right">
+    <img class="luffy-slide" src="img/luffy/luffy.png" alt="Boundman" data-idx="3" data-anim="slam" data-slash="cross">
+    <img class="luffy-slide" src="img/luffy/nika_2.png" alt="Nika Joy" data-idx="4" data-anim="flash" data-slash="left">
+    <img class="luffy-slide" src="img/luffy/last.png" alt="Straw Hat Pirates" data-idx="5" data-anim="gather" style="max-height:65vh;max-width:95%">
     <div class="luffy-quote" id="luffyQuote">
       <p class="quote-text">"얘들아, 출항이다!!"</p>
       <p class="quote-source"><strong>몽키 D. 루피</strong> <span class="work">— 원피스 ONE PIECE</span></p>
@@ -855,7 +879,13 @@
     const slides=evo.querySelectorAll('.luffy-slide');
     const quote=document.getElementById('luffyQuote');
     const total=slides.length;
+    const slash=document.getElementById('luffySlash');
     let prev=-1;
+    function fireSlash(type){
+      slash.className='luffy-slash';
+      void slash.offsetWidth; // reflow
+      slash.classList.add('slash-'+type);
+    }
     function onScroll(){
       const rect=evo.getBoundingClientRect();
       const scrolled=-rect.top;
@@ -869,6 +899,12 @@
         if(i===idx) s.classList.add('active');
         else if(i<idx) s.classList.add('leaving');
       });
+      // fire slash effect on transition
+      if(prev!==-1&&idx>prev){
+        const incoming=slides[idx];
+        const slashType=incoming.dataset.slash;
+        if(slashType) fireSlash(slashType);
+      }
       quote.classList.toggle('active',idx===total-1);
       prev=idx;
     }
