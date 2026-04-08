@@ -294,7 +294,7 @@
   .map-overlay svg{width:100%;height:100%}
 
   .route-line{stroke-dasharray:800;stroke-dashoffset:800}
-  .map-section.visible .route-line{stroke-dashoffset:0;transition:stroke-dashoffset 3s ease .5s}
+  .map-section.visible .route-line{stroke-dashoffset:0;transition:stroke-dashoffset 3s ease 2s}
 
   .city-dot{opacity:0;transform-origin:center}
   .map-section.visible .city-dot{opacity:1;transition:opacity .5s ease}
@@ -304,10 +304,10 @@
   .map-section.visible .city-dot:nth-of-type(4){transition-delay:2.6s}
   .map-section.visible .city-dot:nth-of-type(5){transition-delay:3s}
 
-  .map-city-label{font-family:'Noto Sans KR',sans-serif;font-size:10px;font-weight:700;fill:#fff;opacity:0;filter:drop-shadow(0 1px 3px rgba(0,0,0,.8))}
-  .map-city-jp{font-family:'Noto Sans KR',sans-serif;font-size:7px;fill:rgba(255,255,255,.7);opacity:0;filter:drop-shadow(0 1px 2px rgba(0,0,0,.8))}
-  .map-city-days{font-family:'Noto Sans KR',sans-serif;font-size:7px;font-weight:700;fill:#FF375F;opacity:0;filter:drop-shadow(0 1px 2px rgba(0,0,0,.8))}
-  .map-section.visible .map-city-label,.map-section.visible .map-city-jp,.map-section.visible .map-city-days{opacity:1;transition:opacity .5s ease 2s}
+  .map-city-label{font-family:'Noto Sans KR',sans-serif;font-size:13px;font-weight:900;fill:#fff;opacity:0;filter:drop-shadow(0 2px 4px rgba(0,0,0,.9))}
+  .map-city-jp{font-family:'Noto Sans KR',sans-serif;font-size:9px;font-weight:600;fill:rgba(255,255,255,.8);opacity:0;filter:drop-shadow(0 1px 3px rgba(0,0,0,.9))}
+  .map-city-days{font-family:'Noto Sans KR',sans-serif;font-size:8px;font-weight:700;fill:#D4A853;opacity:0;filter:drop-shadow(0 1px 3px rgba(0,0,0,.9))}
+  .map-section.visible .map-city-label,.map-section.visible .map-city-jp,.map-section.visible .map-city-days{opacity:1;transition:opacity .5s ease 3.5s}
 
   .route-plane{opacity:0}
   .map-section.visible .route-plane{opacity:1}
@@ -370,52 +370,52 @@
     <img src="img/japan-map.gif" alt="일본 지도">
     <!-- SVG route overlay on top of GIF -->
     <div class="map-overlay">
-      <svg viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-        <!-- Route line (animated draw) -->
-        <path class="route-line" d="M460,82 Q430,145 400,178 L400,178 Q370,210 340,235 L295,270 L278,282 L215,310"
-          fill="none" stroke="#FF375F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/>
+      <svg viewBox="0 0 480 270" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <!-- Gold route line (animated draw) -->
+        <path class="route-line" d="M355,75 Q348,115 345,155 L345,155 Q310,185 270,210 L255,215 L200,250"
+          fill="none" stroke="#D4A853" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
 
-        <!-- City dots -->
+        <!-- City dots (gold glow) -->
         <g class="city-dot">
-          <circle cx="460" cy="82" r="7" fill="rgba(255,55,95,.25)"><animate attributeName="r" values="7;11;7" dur="2s" repeatCount="indefinite"/></circle>
-          <circle cx="460" cy="82" r="4" fill="#FF375F"/>
-          <text x="475" y="74" class="map-city-label">삿포로</text>
-          <text x="475" y="84" class="map-city-jp">札幌</text>
-          <text x="475" y="93" class="map-city-days">Day 1-3</text>
+          <circle cx="355" cy="75" r="8" fill="rgba(212,168,83,.2)"><animate attributeName="r" values="8;13;8" dur="2s" repeatCount="indefinite"/></circle>
+          <circle cx="355" cy="75" r="4" fill="#D4A853"/>
+          <text x="370" y="68" class="map-city-label">삿포로</text>
+          <text x="370" y="80" class="map-city-jp">札幌 Sapporo</text>
+          <text x="370" y="91" class="map-city-days">Day 1-3</text>
         </g>
         <g class="city-dot">
-          <circle cx="400" cy="178" r="7" fill="rgba(255,55,95,.25)"><animate attributeName="r" values="7;11;7" dur="2s" repeatCount="indefinite" begin=".4s"/></circle>
-          <circle cx="400" cy="178" r="4" fill="#FF375F"/>
-          <text x="415" y="172" class="map-city-label">도쿄</text>
-          <text x="415" y="182" class="map-city-jp">東京</text>
-          <text x="415" y="191" class="map-city-days">Day 4-7</text>
+          <circle cx="345" cy="155" r="8" fill="rgba(212,168,83,.2)"><animate attributeName="r" values="8;13;8" dur="2s" repeatCount="indefinite" begin=".4s"/></circle>
+          <circle cx="345" cy="155" r="4" fill="#D4A853"/>
+          <text x="360" y="148" class="map-city-label">도쿄</text>
+          <text x="360" y="160" class="map-city-jp">東京 Tokyo</text>
+          <text x="360" y="171" class="map-city-days">Day 4-7</text>
         </g>
         <g class="city-dot">
-          <circle cx="295" cy="270" r="7" fill="rgba(255,55,95,.25)"><animate attributeName="r" values="7;11;7" dur="2s" repeatCount="indefinite" begin=".8s"/></circle>
-          <circle cx="295" cy="270" r="4" fill="#FF375F"/>
-          <text x="310" y="265" class="map-city-label">나라</text>
-          <text x="310" y="275" class="map-city-jp">奈良</text>
-          <text x="310" y="284" class="map-city-days">Day 8-9</text>
+          <circle cx="270" cy="210" r="8" fill="rgba(212,168,83,.2)"><animate attributeName="r" values="8;13;8" dur="2s" repeatCount="indefinite" begin=".8s"/></circle>
+          <circle cx="270" cy="210" r="4" fill="#D4A853"/>
+          <text x="285" y="204" class="map-city-label">나라</text>
+          <text x="285" y="216" class="map-city-jp">奈良 Nara</text>
+          <text x="285" y="227" class="map-city-days">Day 8-9</text>
         </g>
         <g class="city-dot">
-          <circle cx="278" cy="282" r="7" fill="rgba(255,55,95,.25)"><animate attributeName="r" values="7;11;7" dur="2s" repeatCount="indefinite" begin="1.2s"/></circle>
-          <circle cx="278" cy="282" r="4" fill="#FF375F"/>
-          <text x="238" y="278" text-anchor="end" class="map-city-label">교토</text>
-          <text x="238" y="288" text-anchor="end" class="map-city-jp">京都</text>
-          <text x="238" y="297" text-anchor="end" class="map-city-days">Day 10-12</text>
+          <circle cx="255" cy="215" r="8" fill="rgba(212,168,83,.2)"><animate attributeName="r" values="8;13;8" dur="2s" repeatCount="indefinite" begin="1.2s"/></circle>
+          <circle cx="255" cy="215" r="4" fill="#D4A853"/>
+          <text x="210" y="210" text-anchor="end" class="map-city-label">교토</text>
+          <text x="210" y="222" text-anchor="end" class="map-city-jp">京都 Kyoto</text>
+          <text x="210" y="233" text-anchor="end" class="map-city-days">Day 10-12</text>
         </g>
         <g class="city-dot">
-          <circle cx="215" cy="310" r="7" fill="rgba(255,55,95,.25)"><animate attributeName="r" values="7;11;7" dur="2s" repeatCount="indefinite" begin="1.6s"/></circle>
-          <circle cx="215" cy="310" r="4" fill="#FF375F"/>
-          <text x="175" y="306" text-anchor="end" class="map-city-label">후쿠오카</text>
-          <text x="175" y="316" text-anchor="end" class="map-city-jp">福岡</text>
-          <text x="175" y="325" text-anchor="end" class="map-city-days">Day 13-14</text>
+          <circle cx="200" cy="250" r="8" fill="rgba(212,168,83,.2)"><animate attributeName="r" values="8;13;8" dur="2s" repeatCount="indefinite" begin="1.6s"/></circle>
+          <circle cx="200" cy="250" r="4" fill="#D4A853"/>
+          <text x="158" y="244" text-anchor="end" class="map-city-label">후쿠오카</text>
+          <text x="158" y="256" text-anchor="end" class="map-city-jp">福岡 Fukuoka</text>
+          <text x="158" y="267" text-anchor="end" class="map-city-days">Day 13-14</text>
         </g>
 
-        <!-- Animated plane -->
+        <!-- Animated plane (gold) -->
         <g class="route-plane">
-          <animateMotion dur="4s" begin="1.5s" fill="freeze" path="M460,82 L400,178 L295,270 L278,282 L215,310"/>
-          <text font-size="14" text-anchor="middle" dy="4">✈</text>
+          <animateMotion dur="4s" begin="3s" fill="freeze" path="M355,75 L345,155 L270,210 L255,215 L200,250"/>
+          <text font-size="14" text-anchor="middle" dy="4" fill="#D4A853">✈</text>
         </g>
       </svg>
     </div>
