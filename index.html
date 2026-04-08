@@ -288,8 +288,8 @@
 
   .map-stage{position:relative;z-index:2;width:100%;max-width:640px;border-radius:12px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.5)}
 
-  .map-gif{width:100%;display:block;transition:opacity 1s ease}
-  .map-gif.hidden{opacity:0;position:absolute;top:0;left:0}
+  .map-video{width:100%;display:block;transition:opacity 1s ease}
+  .map-video.hidden{opacity:0;position:absolute;top:0;left:0}
 
   .map-crop{width:100%;display:block;opacity:0;transition:opacity 1.2s ease}
   .map-crop.show{opacity:1}
@@ -372,8 +372,8 @@
   <p class="map-sub">인천에서 출발, 일본 열도를 종단합니다.</p>
 
   <div class="map-stage" id="mapStage">
-    <!-- Phase 1: GIF plays -->
-    <img class="map-gif" id="mapGif" src="img/0_map/japan-map.gif" alt="일본 지도">
+    <!-- Phase 1: MP4 video plays -->
+    <video class="map-video" id="mapVideo" src="img/0_map/영상_지도_평면화_요청.mp4" muted playsinline preload="auto" poster="img/0_map/japan-map-last.png" alt="일본 지도"></video>
     <!-- Phase 2: Cropped map -->
     <img class="map-crop" id="mapCrop" src="img/0_map/crop.png" alt="일본 지도 확대">
     <!-- Phase 3: Route overlay -->
@@ -811,7 +811,7 @@
 
   // ── Map Sequence: GIF → freeze → zoom to map → route animation ──
   function startMapSequence(){
-    const gif=document.getElementById('mapGif');
+    const vid=document.getElementById('mapVideo');
     const crop=document.getElementById('mapCrop');
     const overlay=document.getElementById('mapOverlay');
     const line=document.getElementById('routeLine');
@@ -820,16 +820,12 @@
     const plane=document.getElementById('routePlane');
     const planeAnim=document.getElementById('planeAnim');
 
-    const GIF_DURATION = 5200; // 24 frames × 200ms + buffer
-
-    // Phase 1: GIF plays for ~5s
-    setTimeout(()=>{
-      // Freeze GIF: swap src to last frame PNG
-      gif.src = 'img/0_map/japan-map-last.png';
-
-      // Phase 2: Smooth crossfade GIF → cropped map (zoom effect)
+    // Phase 1: MP4 plays, then transition
+    vid.play();
+    vid.addEventListener('ended', ()=>{
+      // Phase 2: Smooth crossfade video → cropped map (zoom effect)
       setTimeout(()=>{
-        gif.classList.add('hidden');
+        vid.classList.add('hidden');
         crop.classList.add('show');
 
         // Phase 3: After zoom complete, show overlay
@@ -854,8 +850,8 @@
           }, 4000 + dots.length*800 + 600);
 
         }, 1200); // wait for crop fade-in
-      }, 600); // brief pause after freeze
-    }, GIF_DURATION);
+      }, 600); // brief pause after video ends
+    });
   }
 
   // ── Utils ──
