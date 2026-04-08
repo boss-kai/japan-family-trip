@@ -534,6 +534,7 @@
     <!-- Phase 2: Route overlay (zooms together with video) -->
     <div class="map-overlay" id="mapOverlay">
       <svg viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(20,15)">
         <!-- Brush-style route along glowing coastline -->
         <path class="route-line" id="routeLine" d="M790,128 Q724,204 725,320 Q680,370 635,418 L618,400 L525,492"
           fill="none" stroke="#111" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
@@ -586,6 +587,7 @@
           <animateMotion id="planeAnim" dur="4s" fill="freeze" begin="indefinite" path="M790,128 L725,320 L635,418 L618,400 L525,492"/>
           <text font-size="36" text-anchor="middle" dy="10">✈</text>
         </g>
+      </g>
       </svg>
     </div>
   </div>
