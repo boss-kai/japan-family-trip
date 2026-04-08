@@ -519,7 +519,9 @@
     <img class="luffy-slide" src="img/luffy/gear4.png" alt="Gear 4" data-idx="2" data-anim="zoom" data-slash="right">
     <img class="luffy-slide" src="img/luffy/luffy.png" alt="Boundman" data-idx="3" data-anim="slam" data-slash="cross">
     <img class="luffy-slide" src="img/luffy/nika_2.png" alt="Nika Joy" data-idx="4" data-anim="flash" data-slash="left">
-    <img class="luffy-slide" src="img/luffy/last.png" alt="Straw Hat Pirates" data-idx="5" data-anim="gather" style="max-height:65vh;max-width:95%">
+    <video class="luffy-slide" data-idx="5" data-anim="gather" muted playsinline style="max-height:75vh;max-width:95%" poster="img/luffy/last.png">
+      <source src="img/luffy/last.mp4" type="video/mp4">
+    </video>
     <div class="luffy-quote" id="luffyQuote">
       <p class="quote-text">"얘들아, 출항이다!!"</p>
       <p class="quote-source"><strong>몽키 D. 루피</strong> <span class="work">— 원피스 ONE PIECE</span></p>
@@ -917,7 +919,15 @@
         const slashType=incoming.dataset.slash;
         if(slashType) fireSlash(slashType);
       }
-      quote.classList.toggle('active',idx===total-1);
+      // play/pause last video
+      const lastSlide=slides[total-1];
+      if(idx===total-1){
+        quote.classList.add('active');
+        if(lastSlide.tagName==='VIDEO'){lastSlide.currentTime=0;lastSlide.play().catch(()=>{})}
+      }else{
+        quote.classList.remove('active');
+        if(lastSlide.tagName==='VIDEO')lastSlide.pause();
+      }
       prev=idx;
     }
     window.addEventListener('scroll',onScroll,{passive:true});
