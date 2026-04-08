@@ -674,25 +674,7 @@
 
     .scroll-btn:hover { background: var(--indigo); transform: scale(1.1); }
 
-    /* ── Mobile sticky nav (touch top to reveal) ── */
-    .nav-bar {
-      transition: transform 0.35s ease, opacity 0.35s ease;
-    }
-
-    .nav-bar.nav-hidden {
-      transform: translateY(-100%);
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .nav-touch-zone {
-      display: none;
-      position: fixed; top: 0; left: 0; right: 0;
-      height: 18px; z-index: 99;
-    }
-
     @media (max-width: 768px) {
-      .nav-touch-zone { display: block; }
       .scroll-btns { right: 0.8rem; bottom: 1rem; }
       .scroll-btn { width: 40px; height: 40px; font-size: 1.1rem; }
     }
@@ -1668,10 +1650,10 @@
     <div class="section-header fade-up">
       <div class="day-badge">BUDGET</div>
       <h2>&#x1f4b0; 여행 경비 요약</h2>
-      <p>도시별 / 항목별 예상 경비 (1인 기준, 한화 환산)</p>
+      <p>가족 4인 기준 (어른 2 + 아이 2) &middot; 1엔 ≈ 9.4원 (2026.4 기준) &middot; 넉넉하게 산정</p>
     </div>
 
-    <!-- 데스크톱: 테이블 / 모바일: 카드 -->
+    <!-- 데스크톱: 테이블 -->
     <div class="overview-section fade-up budget-desktop">
       <table class="budget-table">
         <thead>
@@ -1687,106 +1669,121 @@
         </thead>
         <tbody>
           <tr>
-            <td>&#x1f3e8; 숙소</td><td>30만</td><td>56만</td><td>16만</td><td>30만</td><td>16만</td><td class="budget-total">148만</td>
+            <td>&#x1f3e8; 숙소</td><td>60만</td><td>100만</td><td>30만</td><td>65만</td><td>30만</td><td class="budget-total">285만</td>
           </tr>
           <tr>
-            <td>&#x1f35c; 식비</td><td>15만</td><td>24만</td><td>8만</td><td>15만</td><td>10만</td><td class="budget-total">72만</td>
+            <td>&#x1f35c; 식비</td><td>55만</td><td>75만</td><td>36만</td><td>55만</td><td>36만</td><td class="budget-total">257만</td>
           </tr>
           <tr>
-            <td>&#x1f685; 교통</td><td>5만</td><td>8만</td><td>3만</td><td>5만</td><td>3만</td><td class="budget-total">24만</td>
+            <td>&#x1f685; 시내교통</td><td>8만</td><td>25만</td><td>5만</td><td>15만</td><td>6만</td><td class="budget-total">59만</td>
           </tr>
           <tr>
-            <td>&#x1f3ab; 입장/체험</td><td>3만</td><td>8만</td><td>2만</td><td>5만</td><td>2만</td><td class="budget-total">20만</td>
+            <td>&#x1f3ab; 입장/체험</td><td>10만</td><td>30만</td><td>5만</td><td>25만</td><td>5만</td><td class="budget-total">75만</td>
           </tr>
           <tr>
-            <td>&#x1f6cd; 쇼핑/기타</td><td>5만</td><td>10만</td><td>3만</td><td>5만</td><td>5만</td><td class="budget-total">28만</td>
+            <td>&#x1f6cd; 쇼핑/기타</td><td>15만</td><td>25만</td><td>5만</td><td>15만</td><td>10만</td><td class="budget-total">70만</td>
           </tr>
           <tr class="budget-row-total">
-            <td>도시별 소계</td><td>58만</td><td>106만</td><td>32만</td><td>60만</td><td>36만</td><td class="budget-grand">292만</td>
+            <td>도시별 소계</td><td>148만</td><td>255만</td><td>81만</td><td>175만</td><td>87만</td><td class="budget-grand">746만</td>
           </tr>
         </tbody>
       </table>
     </div>
 
+    <!-- 모바일: 카드 -->
     <div class="budget-mobile fade-up">
       <div class="budget-card">
         <div class="budget-card-header" style="background:linear-gradient(135deg,#4FC3F7,#039BE5);">&#x1f3d4; 삿포로 <small>3일</small></div>
         <div class="budget-card-body">
-          <div class="budget-card-row"><span>&#x1f3e8; 숙소</span><span>30만</span></div>
-          <div class="budget-card-row"><span>&#x1f35c; 식비</span><span>15만</span></div>
-          <div class="budget-card-row"><span>&#x1f685; 교통</span><span>5만</span></div>
-          <div class="budget-card-row"><span>&#x1f3ab; 입장/체험</span><span>3만</span></div>
-          <div class="budget-card-row"><span>&#x1f6cd; 쇼핑/기타</span><span>5만</span></div>
-          <div class="budget-card-row total"><span>소계</span><span>58만</span></div>
+          <div class="budget-card-row"><span>&#x1f3e8; 숙소</span><span>60만</span></div>
+          <div class="budget-card-row"><span>&#x1f35c; 식비</span><span>55만</span></div>
+          <div class="budget-card-row"><span>&#x1f685; 시내교통</span><span>8만</span></div>
+          <div class="budget-card-row"><span>&#x1f3ab; 입장/체험</span><span>10만</span></div>
+          <div class="budget-card-row"><span>&#x1f6cd; 쇼핑/기타</span><span>15만</span></div>
+          <div class="budget-card-row total"><span>소계</span><span>148만</span></div>
         </div>
       </div>
       <div class="budget-card">
         <div class="budget-card-header" style="background:linear-gradient(135deg,#FF7043,#E64A19);">&#x1f5fc; 도쿄 <small>4일</small></div>
         <div class="budget-card-body">
-          <div class="budget-card-row"><span>&#x1f3e8; 숙소</span><span>56만</span></div>
-          <div class="budget-card-row"><span>&#x1f35c; 식비</span><span>24만</span></div>
-          <div class="budget-card-row"><span>&#x1f685; 교통</span><span>8만</span></div>
-          <div class="budget-card-row"><span>&#x1f3ab; 입장/체험</span><span>8만</span></div>
-          <div class="budget-card-row"><span>&#x1f6cd; 쇼핑/기타</span><span>10만</span></div>
-          <div class="budget-card-row total"><span>소계</span><span>106만</span></div>
+          <div class="budget-card-row"><span>&#x1f3e8; 숙소</span><span>100만</span></div>
+          <div class="budget-card-row"><span>&#x1f35c; 식비</span><span>75만</span></div>
+          <div class="budget-card-row"><span>&#x1f685; 시내교통</span><span>25만</span></div>
+          <div class="budget-card-row"><span>&#x1f3ab; 입장/체험</span><span>30만</span></div>
+          <div class="budget-card-row"><span>&#x1f6cd; 쇼핑/기타</span><span>25만</span></div>
+          <div class="budget-card-row total"><span>소계</span><span>255만</span></div>
         </div>
       </div>
       <div class="budget-card">
         <div class="budget-card-header" style="background:linear-gradient(135deg,#81C784,#388E3C);">&#x1f98c; 나라 <small>2일</small></div>
         <div class="budget-card-body">
-          <div class="budget-card-row"><span>&#x1f3e8; 숙소</span><span>16만</span></div>
-          <div class="budget-card-row"><span>&#x1f35c; 식비</span><span>8만</span></div>
-          <div class="budget-card-row"><span>&#x1f685; 교통</span><span>3만</span></div>
-          <div class="budget-card-row"><span>&#x1f3ab; 입장/체험</span><span>2만</span></div>
-          <div class="budget-card-row"><span>&#x1f6cd; 쇼핑/기타</span><span>3만</span></div>
-          <div class="budget-card-row total"><span>소계</span><span>32만</span></div>
+          <div class="budget-card-row"><span>&#x1f3e8; 숙소</span><span>30만</span></div>
+          <div class="budget-card-row"><span>&#x1f35c; 식비</span><span>36만</span></div>
+          <div class="budget-card-row"><span>&#x1f685; 시내교통</span><span>5만</span></div>
+          <div class="budget-card-row"><span>&#x1f3ab; 입장/체험</span><span>5만</span></div>
+          <div class="budget-card-row"><span>&#x1f6cd; 쇼핑/기타</span><span>5만</span></div>
+          <div class="budget-card-row total"><span>소계</span><span>81만</span></div>
         </div>
       </div>
       <div class="budget-card">
         <div class="budget-card-header" style="background:linear-gradient(135deg,#CE93D8,#8E24AA);">&#x26e9; 교토 <small>3일</small></div>
         <div class="budget-card-body">
-          <div class="budget-card-row"><span>&#x1f3e8; 숙소</span><span>30만</span></div>
-          <div class="budget-card-row"><span>&#x1f35c; 식비</span><span>15만</span></div>
-          <div class="budget-card-row"><span>&#x1f685; 교통</span><span>5만</span></div>
-          <div class="budget-card-row"><span>&#x1f3ab; 입장/체험</span><span>5만</span></div>
-          <div class="budget-card-row"><span>&#x1f6cd; 쇼핑/기타</span><span>5만</span></div>
-          <div class="budget-card-row total"><span>소계</span><span>60만</span></div>
+          <div class="budget-card-row"><span>&#x1f3e8; 숙소</span><span>65만</span></div>
+          <div class="budget-card-row"><span>&#x1f35c; 식비</span><span>55만</span></div>
+          <div class="budget-card-row"><span>&#x1f685; 시내교통</span><span>15만</span></div>
+          <div class="budget-card-row"><span>&#x1f3ab; 입장/체험</span><span>25만</span></div>
+          <div class="budget-card-row"><span>&#x1f6cd; 쇼핑/기타</span><span>15만</span></div>
+          <div class="budget-card-row total"><span>소계</span><span>175만</span></div>
         </div>
       </div>
       <div class="budget-card">
         <div class="budget-card-header" style="background:linear-gradient(135deg,#FFD54F,#F9A825);">&#x1f35c; 후쿠오카 <small>2일</small></div>
         <div class="budget-card-body">
-          <div class="budget-card-row"><span>&#x1f3e8; 숙소</span><span>16만</span></div>
-          <div class="budget-card-row"><span>&#x1f35c; 식비</span><span>10만</span></div>
-          <div class="budget-card-row"><span>&#x1f685; 교통</span><span>3만</span></div>
-          <div class="budget-card-row"><span>&#x1f3ab; 입장/체험</span><span>2만</span></div>
-          <div class="budget-card-row"><span>&#x1f6cd; 쇼핑/기타</span><span>5만</span></div>
-          <div class="budget-card-row total"><span>소계</span><span>36만</span></div>
+          <div class="budget-card-row"><span>&#x1f3e8; 숙소</span><span>30만</span></div>
+          <div class="budget-card-row"><span>&#x1f35c; 식비</span><span>36만</span></div>
+          <div class="budget-card-row"><span>&#x1f685; 시내교통</span><span>6만</span></div>
+          <div class="budget-card-row"><span>&#x1f3ab; 입장/체험</span><span>5만</span></div>
+          <div class="budget-card-row"><span>&#x1f6cd; 쇼핑/기타</span><span>10만</span></div>
+          <div class="budget-card-row total"><span>소계</span><span>87만</span></div>
         </div>
       </div>
       <div class="budget-card">
-        <div class="budget-card-header" style="background:linear-gradient(135deg,var(--indigo),#5B4A8C);">&#x1f4b0; 1인 총 예상 경비</div>
+        <div class="budget-card-header" style="background:linear-gradient(135deg,var(--indigo),#5B4A8C);">&#x1f4b0; 현지 경비 합계 (4인)</div>
         <div class="budget-card-body">
-          <div class="budget-card-row total" style="border:none; padding-top:0;"><span>도시별 합계</span><span>292만</span></div>
+          <div class="budget-card-row total" style="border:none; padding-top:0;"><span>도시별 합계</span><span>746만</span></div>
         </div>
       </div>
     </div>
 
     <div class="overview-section fade-up">
-      <h4 style="font-weight:700; color:var(--deep-navy); margin-bottom:1rem;">&#x2708; 별도 경비 (가족 전체)</h4>
+      <h4 style="font-weight:700; color:var(--deep-navy); margin-bottom:1rem;">&#x2708; 별도 경비 (가족 4인)</h4>
       <div class="budget-extra">
-        <div class="budget-extra-item"><span>인천↔삿포로 항공</span><span>약 120만</span></div>
-        <div class="budget-extra-item"><span>후쿠오카→인천 항공</span><span>약 60만</span></div>
-        <div class="budget-extra-item"><span>삿포로→도쿄 국내선</span><span>약 40만</span></div>
-        <div class="budget-extra-item"><span>JR패스 / 신칸센</span><span>약 80만</span></div>
-        <div class="budget-extra-item"><span>여행자보험 (4인)</span><span>약 12만</span></div>
-        <div class="budget-extra-item total"><span>별도 경비 합계</span><span>약 312만</span></div>
+        <div class="budget-extra-item"><span>인천→삿포로 항공 (4인)</span><span>약 150만</span></div>
+        <div class="budget-extra-item"><span>삿포로→도쿄 국내선 (4인)</span><span>약 50만</span></div>
+        <div class="budget-extra-item"><span>후쿠오카→인천 항공 (4인)</span><span>약 70만</span></div>
+        <div class="budget-extra-item"><span>JR패스 7일 (어른2+어린이2)</span><span>약 150만</span></div>
+        <div class="budget-extra-item"><span>여행자보험 (4인/14일)</span><span>약 15만</span></div>
+        <div class="budget-extra-item"><span>포켓와이파이 / 유심</span><span>약 5만</span></div>
+        <div class="budget-extra-item total"><span>별도 경비 합계</span><span>약 440만</span></div>
       </div>
     </div>
 
+    <div class="overview-section fade-up" style="text-align:center;">
+      <h3 style="font-weight:900; color:var(--deep-navy); margin-bottom:0.5rem;">&#x1f4b3; 총 예상 경비</h3>
+      <p style="font-size:2rem; font-weight:900; color:var(--sakura-dark); margin-bottom:0.3rem;">약 1,200만원</p>
+      <p style="color:var(--text-light); font-size:0.9rem;">현지 746만 + 별도 440만 = 1,186만원 (넉넉하게 약 1,200만원)</p>
+    </div>
+
+    <div class="overview-section fade-up" style="text-align:center;" id="exchangeRateBox">
+      <h4 style="font-weight:700; color:var(--deep-navy); margin-bottom:0.3rem;">&#x1f4b1; 한눈에 보는 환율표</h4>
+      <p id="rateSubtitle" style="font-size:0.8rem; color:var(--text-light); margin-bottom:1rem;">실시간 환율 불러오는 중...</p>
+      <div id="rateCards" style="display:flex; justify-content:center; flex-wrap:wrap; gap:0.8rem;"></div>
+      <p id="rateTip" style="margin-top:1rem; font-size:0.82rem; color:var(--text-light);"></p>
+    </div>
+
     <div class="tip-box fade-up">
-      <h4>&#x1f4a1; 경비 팁</h4>
-      <p>위 금액은 예상치이며 실제와 다를 수 있어요. 환율 변동에 유의하세요. 편의점(세븐일레븐, 패밀리마트) 식사를 적절히 섞으면 식비를 절약할 수 있습니다. 돈키호테에서는 면세 혜택도 챙기세요!</p>
+      <h4>&#x1f4a1; 경비 절약 팁</h4>
+      <p>숙소는 Airbnb/패밀리룸이면 호텔보다 30% 절약 가능. 식비는 편의점 아침(4인 1만원 이내), 점심 맛집, 저녁 레스토랑 조합이 효율적. 돈키호테 면세(5,000엔 이상), JR패스는 출발 전 온라인 구매가 더 저렴합니다. 1엔 = 약 9.4원 기준이며, 환율 변동에 따라 ±10% 차이날 수 있어요.</p>
     </div>
   </section>
 
@@ -1943,8 +1940,6 @@
     <button class="scroll-btn" onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})" title="맨 아래로">&#x2193;</button>
   </div>
 
-  <!-- Touch zone for revealing nav on mobile -->
-  <div class="nav-touch-zone" id="navTouchZone"></div>
 
   <script>
     // ── Scroll buttons (show after scrolling 400px) ──
@@ -1953,49 +1948,6 @@
       scrollBtns.classList.toggle('show', scrollY > 400);
     });
 
-    // ── Mobile nav: auto-hide on scroll down, reveal on touch top zone ──
-    (function() {
-      const nav = document.querySelector('.nav-bar');
-      const zone = document.getElementById('navTouchZone');
-      if (!nav || !zone) return;
-      let lastY = 0, hideTimer = null;
-
-      // Only activate on mobile
-      function isMobile() { return window.innerWidth <= 768; }
-
-      window.addEventListener('scroll', () => {
-        if (!isMobile()) { nav.classList.remove('nav-hidden'); return; }
-        const y = scrollY;
-        if (y > 200 && y > lastY) {
-          nav.classList.add('nav-hidden');
-        }
-        lastY = y;
-      });
-
-      // Touch/hover top zone to reveal
-      function revealNav() {
-        nav.classList.remove('nav-hidden');
-        clearTimeout(hideTimer);
-        hideTimer = setTimeout(() => {
-          if (scrollY > 200) nav.classList.add('nav-hidden');
-        }, 3000);
-      }
-
-      zone.addEventListener('touchstart', revealNav);
-      zone.addEventListener('mouseenter', revealNav);
-
-      // Also reveal on scroll up
-      window.addEventListener('scroll', () => {
-        if (!isMobile()) return;
-        if (scrollY < lastY - 30) {
-          nav.classList.remove('nav-hidden');
-          clearTimeout(hideTimer);
-          hideTimer = setTimeout(() => {
-            if (scrollY > 200) nav.classList.add('nav-hidden');
-          }, 2500);
-        }
-      });
-    })();
 
     // ── D-Day Countdown ──
     (function updateDday() {
@@ -2588,6 +2540,52 @@
         jwTip.classList.remove('show');
       }
     });
+
+    // ── Real-time Exchange Rate ──
+    function renderExchangeRate(rate, live) {
+      const r = rate; // KRW per 1 JPY
+      const subtitle = document.getElementById('rateSubtitle');
+      const cards = document.getElementById('rateCards');
+      const tip = document.getElementById('rateTip');
+      const mult = Math.round(r);
+
+      subtitle.textContent = live
+        ? `1엔 = ${r.toFixed(1)}원 (실시간 환율)`
+        : `1엔 ≈ ${r.toFixed(1)}원 (기본값)`;
+
+      const data = [
+        { krw: 10, label: '자판기 음료 1캔', jpy: 140 },
+        { krw: 100, label: '편의점 삼각김밥', jpy: 160 },
+        { krw: 1000, label: '라멘 한 그릇', jpy: 950 },
+        { krw: 10000, label: '회전초밥 10접시', jpy: 1600 },
+      ];
+
+      cards.innerHTML = data.map(d => {
+        const jpy = Math.round(d.krw / r);
+        const krwPrice = Math.round(d.jpy * r / 100) * 100;
+        const krwStr = krwPrice >= 10000 ? (krwPrice/10000).toFixed(1).replace('.0','') + '만' : krwPrice.toLocaleString();
+        return `<div style="background:var(--light-gray); border-radius:12px; padding:1rem 1.5rem; min-width:130px; flex:1; max-width:180px;">
+          <div style="font-size:0.8rem; color:var(--text-light);">&#x1f1f0;&#x1f1f7; ${d.krw.toLocaleString()}원</div>
+          <div style="font-size:1.4rem; font-weight:900; color:var(--indigo);">≈ ${jpy.toLocaleString()}엔</div>
+          <div style="font-size:0.75rem; color:var(--text-light);">${d.label} = 약 ${krwStr}원</div>
+        </div>`;
+      }).join('');
+
+      tip.innerHTML = `쉽게 외우기: <strong>일본 가격 × ${mult}</strong> 하면 대충 한국 원화!`;
+    }
+
+    // 기본값으로 먼저 렌더
+    renderExchangeRate(9.4, false);
+
+    // API 호출
+    fetch('https://open.er-api.com/v6/latest/JPY')
+      .then(r => r.json())
+      .then(data => {
+        if (data.result === 'success' && data.rates && data.rates.KRW) {
+          renderExchangeRate(data.rates.KRW, true);
+        }
+      })
+      .catch(() => {});
 
     // Init
     renderComments();
