@@ -249,17 +249,8 @@
   .luffy-slide[data-anim="flash"].leaving{transform:scale(1.1);opacity:0;filter:brightness(2)}
 
   .luffy-slide[data-anim="gather"]{transform:scale(.6);opacity:0;transition:opacity 1.2s ease,transform 1.2s cubic-bezier(.25,.46,.45,.94)}
-  .luffy-slide[data-anim="gather"].active{opacity:1;animation:heartbeat 1.8s cubic-bezier(.25,.46,.45,.94) forwards}
+  .luffy-slide[data-anim="gather"].active{transform:scale(1);opacity:1}
   .luffy-slide[data-anim="gather"].leaving{transform:scale(1.05);opacity:0}
-  @keyframes heartbeat{
-    0%{transform:scale(.5)}
-    25%{transform:scale(1.08)}
-    35%{transform:scale(.92)}
-    50%{transform:scale(1.15)}
-    65%{transform:scale(.97)}
-    80%{transform:scale(1.1)}
-    100%{transform:scale(1.1)}
-  }
 
   .luffy-quote{position:absolute;bottom:4rem;left:50%;transform:translateX(-50%) translateY(30px);text-align:center;z-index:3;opacity:0;transition:opacity 1s ease .3s,transform 1s ease .3s;max-width:700px;width:100%;padding:0 2rem}
   .luffy-quote.active{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -519,7 +510,7 @@
     <img class="luffy-slide" src="img/luffy/gear4.png" alt="Gear 4" data-idx="2" data-anim="zoom" data-slash="right">
     <img class="luffy-slide" src="img/luffy/luffy.png" alt="Boundman" data-idx="3" data-anim="slam" data-slash="cross">
     <img class="luffy-slide" src="img/luffy/nika_2.png" alt="Nika Joy" data-idx="4" data-anim="flash" data-slash="left">
-    <video class="luffy-slide" data-idx="5" data-anim="gather" muted playsinline style="max-height:75vh;max-width:95%" poster="img/luffy/last.png">
+    <video class="luffy-slide" data-idx="5" data-anim="gather" muted loop playsinline style="max-height:75vh;max-width:95%" poster="img/luffy/last.png">
       <source src="img/luffy/last.mp4" type="video/mp4">
     </video>
     <div class="luffy-quote" id="luffyQuote">
