@@ -267,6 +267,84 @@
   .luffy-quote .quote-source strong{color:#F5F5F7}
   .luffy-quote .quote-source .work{opacity:1;color:#F5F5F7;font-size:.9rem}
 
+  /* ── Goku Evolution Scroll ── */
+  .goku-evolution{height:900vh;position:relative;background:#080808}
+  .goku-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .goku-flash{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0}
+  .goku-flash.flash-gold{animation:gokuFlashGold .5s ease forwards}
+  .goku-flash.flash-red{animation:gokuFlashRed .5s ease forwards}
+  .goku-flash.flash-blue{animation:gokuFlashBlue .5s ease forwards}
+  .goku-flash.flash-silver{animation:gokuFlashSilver .6s ease forwards}
+  @keyframes gokuFlashGold{
+    0%{opacity:1;background:radial-gradient(circle,rgba(255,200,0,.8),transparent 70%)}
+    100%{opacity:0}
+  }
+  @keyframes gokuFlashRed{
+    0%{opacity:1;background:radial-gradient(circle,rgba(255,50,50,.8),transparent 70%)}
+    100%{opacity:0}
+  }
+  @keyframes gokuFlashBlue{
+    0%{opacity:1;background:radial-gradient(circle,rgba(50,150,255,.8),transparent 70%)}
+    100%{opacity:0}
+  }
+  @keyframes gokuFlashSilver{
+    0%{opacity:1;background:radial-gradient(circle,rgba(220,220,240,.9),transparent 70%)}
+    100%{opacity:0}
+  }
+  .goku-slide{position:absolute;max-height:55vh;max-width:85%;object-fit:contain;z-index:1;
+    opacity:0;transform:translateY(60px) scale(.92);
+    transition:opacity 1s cubic-bezier(.25,.46,.45,.94),transform 1s cubic-bezier(.25,.46,.45,.94);will-change:opacity,transform}
+  .goku-slide.active{opacity:1;transform:translateY(0) scale(1)}
+  .goku-slide.leaving{opacity:0;transform:translateY(-80px) scale(.95)}
+
+  .goku-slide[data-anim="grow"]{transform:scale(.3);transition:opacity .8s,transform .8s cubic-bezier(.34,1.56,.64,1)}
+  .goku-slide[data-anim="grow"].active{transform:scale(1)}
+  .goku-slide[data-anim="grow"].leaving{transform:scale(1.15);opacity:0}
+
+  .goku-slide[data-anim="powerup"]{transform:scale(.5);filter:brightness(2) saturate(2);transition:opacity .7s,transform .8s cubic-bezier(.34,1.56,.64,1),filter .8s ease}
+  .goku-slide[data-anim="powerup"].active{transform:scale(1);filter:brightness(1) saturate(1)}
+  .goku-slide[data-anim="powerup"].leaving{transform:scale(.9);opacity:0;filter:brightness(1.5)}
+
+  .goku-slide[data-anim="burst"]{transform:scale(.2);filter:brightness(3) saturate(0);transition:opacity .9s,transform .9s cubic-bezier(.34,1.56,.64,1),filter 1s ease}
+  .goku-slide[data-anim="burst"].active{transform:scale(1);filter:brightness(1) saturate(1)}
+  .goku-slide[data-anim="burst"].leaving{transform:scale(1.1);opacity:0;filter:brightness(2)}
+
+  .goku-slide[data-anim="ascend"]{transform:translateY(100px) scale(.6);filter:brightness(1.5);transition:opacity .8s,transform .8s cubic-bezier(.22,1,.36,1),filter .8s ease}
+  .goku-slide[data-anim="ascend"].active{transform:translateY(0) scale(1);filter:brightness(1)}
+  .goku-slide[data-anim="ascend"].leaving{transform:translateY(-80px) scale(.9);opacity:0}
+
+  .goku-slide[data-anim="divine"]{transform:scale(.4) rotate(-5deg);filter:hue-rotate(30deg) brightness(1.5);transition:opacity 1s,transform 1s cubic-bezier(.34,1.56,.64,1),filter 1s ease}
+  .goku-slide[data-anim="divine"].active{transform:scale(1) rotate(0deg);filter:hue-rotate(0deg) brightness(1)}
+  .goku-slide[data-anim="divine"].leaving{transform:scale(.95) rotate(3deg);opacity:0}
+
+  .goku-slide[data-anim="ultra"]{transform:scale(.3);filter:brightness(0);transition:opacity 1.2s,transform 1.2s cubic-bezier(.25,.46,.45,.94),filter 1.5s ease}
+  .goku-slide[data-anim="ultra"].active{transform:scale(1);filter:brightness(1)}
+  .goku-slide[data-anim="ultra"].leaving{transform:scale(1.05);opacity:0;filter:brightness(1.5)}
+
+  .goku-slide[data-anim="awaken"]{transform:scale(.4);opacity:0;transition:opacity 1s ease,transform 1s ease}
+  .goku-slide[data-anim="awaken"].active{opacity:1;animation:gokuAwaken 2.5s cubic-bezier(.25,.46,.45,.94) forwards}
+  .goku-slide[data-anim="awaken"].leaving{transform:scale(1.05);opacity:0}
+  @keyframes gokuAwaken{
+    0%{transform:scale(.4);filter:brightness(0)}
+    15%{transform:scale(.5);filter:brightness(.2) saturate(0)}
+    30%{transform:scale(.45);filter:brightness(.1)}
+    50%{transform:scale(.7);filter:brightness(.5) saturate(.5)}
+    65%{transform:scale(.65);filter:brightness(.3)}
+    80%{transform:scale(.9);filter:brightness(.8) saturate(1)}
+    100%{transform:scale(1);filter:brightness(1) saturate(1)}
+  }
+
+  .goku-label{position:absolute;top:2.5rem;left:50%;transform:translateX(-50%);z-index:3;text-align:center;opacity:0;transition:opacity .8s ease .2s;pointer-events:none}
+  .goku-label.active{opacity:1}
+  .goku-label .form-name{font-size:clamp(.85rem,2vw,1.1rem);font-weight:700;color:#F5F5F7;letter-spacing:.05em}
+  .goku-label .form-arc{font-size:clamp(.7rem,1.5vw,.85rem);font-weight:300;color:#86868B;margin-top:.3rem}
+
+  .goku-quote{position:absolute;bottom:4rem;left:50%;transform:translateX(-50%) translateY(30px);text-align:center;z-index:3;opacity:0;transition:opacity 1s ease .3s,transform 1s ease .3s;max-width:700px;width:100%;padding:0 2rem}
+  .goku-quote.active{opacity:1;transform:translateX(-50%) translateY(0)}
+  .goku-quote .quote-source{color:#ccc;font-size:1rem}
+  .goku-quote .quote-source strong{color:#F5F5F7}
+  .goku-quote .quote-source .work{opacity:1;color:#F5F5F7;font-size:.9rem}
+
   /* ── Anime Interlude ── */
   .anime-interlude{position:relative;overflow:hidden;min-height:85vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;background:#080808;padding-bottom:4rem}
 
@@ -454,18 +532,18 @@
     <div class="map-overlay" id="mapOverlay">
       <svg viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
         <!-- Brush-style route along glowing coastline -->
-        <path class="route-line" id="routeLine" d="M775,115 Q724,204 725,320 Q680,370 635,418 L618,400 L525,492"
+        <path class="route-line" id="routeLine" d="M790,128 Q724,204 725,320 Q680,370 635,418 L618,400 L525,492"
           fill="none" stroke="#111" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
-        <path class="route-line" id="routeLine2" d="M775,115 Q724,204 725,320 Q680,370 635,418 L618,400 L525,492"
+        <path class="route-line" id="routeLine2" d="M790,128 Q724,204 725,320 Q680,370 635,418 L618,400 L525,492"
           fill="none" stroke="rgba(255,255,255,.35)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 
         <!-- Sapporo (홋카이도) -->
         <g class="city-dot" id="dot0">
-          <circle cx="775" cy="115" r="15" fill="rgba(0,0,0,.5)"><animate attributeName="r" values="15;22;15" dur="2s" repeatCount="indefinite"/></circle>
-          <circle cx="775" cy="115" r="8" fill="#fff"/>
-          <rect x="600" y="83" width="165" height="70" class="label-bg"/>
-          <text x="614" y="111" class="map-city-label">삿포로</text>
-          <text x="614" y="135" class="map-city-jp">札幌 · Day 1-3</text>
+          <circle cx="790" cy="128" r="15" fill="rgba(0,0,0,.5)"><animate attributeName="r" values="15;22;15" dur="2s" repeatCount="indefinite"/></circle>
+          <circle cx="790" cy="128" r="8" fill="#fff"/>
+          <rect x="615" y="96" width="165" height="70" class="label-bg"/>
+          <text x="629" y="124" class="map-city-label">삿포로</text>
+          <text x="629" y="148" class="map-city-jp">札幌 · Day 1-3</text>
         </g>
         <!-- Tokyo (혼슈 동해안) -->
         <g class="city-dot" id="dot1">
@@ -502,7 +580,7 @@
 
         <!-- Animated plane -->
         <g class="route-plane" id="routePlane">
-          <animateMotion id="planeAnim" dur="4s" fill="freeze" begin="indefinite" path="M775,115 L725,320 L635,418 L618,400 L525,492"/>
+          <animateMotion id="planeAnim" dur="4s" fill="freeze" begin="indefinite" path="M790,128 L725,320 L635,418 L618,400 L525,492"/>
           <text font-size="36" text-anchor="middle" dy="10">✈</text>
         </g>
       </svg>
