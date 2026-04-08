@@ -1,0 +1,2503 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>우리 가족 일본 여행 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+    :root {
+      --sakura: #FFB7C5;
+      --sakura-dark: #E8829B;
+      --indigo: #3F4B8C;
+      --deep-navy: #1A1F3D;
+      --gold: #D4A853;
+      --cream: #FFF9F0;
+      --light-gray: #F5F0EB;
+      --text: #2D2D2D;
+      --text-light: #6B6B6B;
+      --white: #FFFFFF;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+      --shadow-hover: 0 8px 40px rgba(0,0,0,0.12);
+      --radius: 16px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(135deg, var(--deep-navy) 0%, var(--indigo) 50%, #5B4A8C 100%);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 80%, rgba(255,183,197,0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(212,168,83,0.1) 0%, transparent 50%);
+    }
+
+    .sakura-fall { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+
+    .petal {
+      position: absolute;
+      width: 12px; height: 12px;
+      background: var(--sakura);
+      border-radius: 50% 0 50% 50%;
+      opacity: 0.6;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+      10% { opacity: 0.6; } 90% { opacity: 0.6; }
+      100% { transform: translateY(110vh) rotate(720deg) translateX(80px); opacity: 0; }
+    }
+
+    .hero-content { position: relative; z-index: 2; padding: 2rem; }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      color: var(--sakura);
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      letter-spacing: 2px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 900; color: var(--white);
+      margin-bottom: 1rem; line-height: 1.2;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--sakura), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .hero-sub { font-size: 1.2rem; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem; font-weight: 300; }
+    .hero-dates { font-size: 1rem; color: rgba(255,255,255,0.5); margin-bottom: 1rem; font-weight: 400; }
+
+    .dday-box {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      background: rgba(255,255,255,0.08); backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 0.6rem 1.5rem; border-radius: 14px;
+      margin-bottom: 2rem;
+    }
+
+    .dday-box .dday-unit {
+      display: flex; flex-direction: column; align-items: center; min-width: 44px;
+    }
+
+    .dday-box .dday-num {
+      font-size: 1.6rem; font-weight: 900; color: var(--white); line-height: 1.2;
+    }
+
+    .dday-box .dday-label {
+      font-size: 0.7rem; color: rgba(255,255,255,0.5); font-weight: 500; letter-spacing: 1px;
+    }
+
+    .dday-box .dday-sep {
+      font-size: 1.2rem; color: var(--sakura); font-weight: 300;
+    }
+
+    .dday-box.traveling {
+      border-color: var(--sakura);
+      background: rgba(232,130,155,0.15);
+    }
+
+    .dday-box.traveling .dday-num { color: var(--sakura); }
+
+    .dday-box.ended .dday-num { color: var(--gold); }
+
+    .hero-route {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.5rem; margin-bottom: 3rem;
+    }
+
+    .hero-route-row {
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+
+    .hero-route .city {
+      background: rgba(255,255,255,0.1); backdrop-filter: blur(5px);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 0.4rem 1rem; border-radius: 50px;
+      color: var(--white); font-size: 0.95rem; font-weight: 500;
+    }
+
+    .hero-route .arrow { color: var(--sakura); font-size: 1.2rem; }
+
+    @media (max-width: 480px) {
+      .hero-route { gap: 0.4rem; }
+      .hero-route-row { gap: 0.3rem; }
+      .hero-route .city { font-size: 0.8rem; padding: 0.25rem 0.6rem; }
+      .hero-route .arrow { font-size: 0.85rem; }
+    }
+
+    .scroll-indicator {
+      position: absolute; bottom: 2rem; left: 50%;
+      transform: translateX(-50%); color: rgba(255,255,255,0.5);
+      animation: bounce 2s infinite; cursor: pointer; z-index: 2;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    /* ── Navigation ── */
+    .nav-bar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,249,240,0.95); backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      padding: 0; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    }
+    .nav-bar::-webkit-scrollbar { display: none; }
+
+    .nav-inner {
+      display: flex; align-items: center; justify-content: center; gap: 0;
+      max-width: 1200px; margin: 0 auto; min-width: max-content;
+    }
+
+    .nav-item {
+      padding: 1rem 1.5rem; font-size: 0.9rem; font-weight: 500;
+      color: var(--text-light); cursor: pointer; white-space: nowrap;
+      border-bottom: 3px solid transparent; transition: all 0.3s;
+    }
+
+    .nav-item:hover, .nav-item.active { color: var(--indigo); border-bottom-color: var(--sakura-dark); }
+    .nav-item .nav-emoji { margin-right: 0.3rem; }
+
+    /* ── Sections ── */
+    .section { max-width: 1100px; margin: 0 auto; padding: 4rem 1.5rem; }
+    .section-header { text-align: center; margin-bottom: 3rem; }
+
+    .section-header .day-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--indigo), #5B4A8C);
+      color: var(--white); padding: 0.3rem 1.2rem; border-radius: 50px;
+      font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; letter-spacing: 1px;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900; margin-bottom: 0.5rem; color: var(--deep-navy);
+    }
+
+    .section-header h2 .jp { font-weight: 300; color: var(--text-light); font-size: 0.6em; }
+    .section-header p { color: var(--text-light); font-size: 1.05rem; }
+
+    /* ── Overview ── */
+    .overview-section {
+      background: var(--white); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 3rem; margin-bottom: 2rem;
+    }
+
+    .overview-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem; margin-top: 2rem;
+    }
+
+    .overview-card { text-align: center; padding: 1.5rem; border-radius: 12px; background: var(--light-gray); }
+    .overview-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .overview-card h4 { font-size: 0.85rem; color: var(--text-light); font-weight: 500; margin-bottom: 0.3rem; }
+    .overview-card p { font-weight: 700; font-size: 1.1rem; color: var(--deep-navy); }
+
+    /* ── City / Timeline ── */
+    .city-section { padding-top: 2rem; }
+
+    .city-divider {
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--sakura), var(--gold), transparent);
+      border-radius: 2px; margin: 1rem auto 4rem; max-width: 200px;
+    }
+
+    .schedule-timeline { position: relative; padding-left: 2.5rem; }
+
+    .schedule-timeline::before {
+      content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
+      width: 2px; background: linear-gradient(to bottom, var(--sakura), var(--gold));
+    }
+
+    .timeline-item {
+      position: relative; margin-bottom: 2rem;
+      background: var(--white); border-radius: var(--radius);
+      padding: 1.5rem 2rem; box-shadow: var(--shadow); transition: all 0.3s;
+    }
+
+    .timeline-item:hover { box-shadow: var(--shadow-hover); }
+
+    .timeline-item::before {
+      content: ''; position: absolute; left: -2.15rem; top: 1.8rem;
+      width: 14px; height: 14px; border-radius: 50%;
+      background: var(--sakura-dark); border: 3px solid var(--cream);
+    }
+
+    .timeline-time {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--indigo), #5B4A8C);
+      color: var(--white); padding: 0.2rem 0.8rem; border-radius: 6px;
+      font-size: 0.8rem; font-weight: 700; margin-bottom: 0.5rem;
+    }
+
+    .timeline-item h4 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.3rem; color: var(--deep-navy); }
+    .timeline-item p { color: var(--text-light); font-size: 0.95rem; line-height: 1.6; }
+
+    .timeline-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+
+    .tag {
+      background: var(--light-gray); padding: 0.2rem 0.7rem; border-radius: 50px;
+      font-size: 0.78rem; color: var(--text-light); font-weight: 500;
+    }
+    .tag.food { background: #FFF3E0; color: #E65100; }
+    .tag.spot { background: #E8F5E9; color: #2E7D32; }
+    .tag.activity { background: #E3F2FD; color: #1565C0; }
+    .tag.transport { background: #F3E5F5; color: #7B1FA2; }
+
+    /* ── Tips ── */
+    .tip-box {
+      background: linear-gradient(135deg, #FFF9E6, #FFF3CC);
+      border-left: 4px solid var(--gold);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.5rem 2rem; margin-top: 2rem;
+    }
+    .tip-box h4 { color: var(--gold); font-weight: 700; margin-bottom: 0.5rem; }
+    .tip-box p { color: var(--text); font-size: 0.95rem; }
+
+    /* ── Comments ── */
+    .comments-section {
+      background: var(--white); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 2.5rem; margin-top: 3rem;
+    }
+    .comments-section h3 { font-size: 1.4rem; font-weight: 700; color: var(--deep-navy); margin-bottom: 0.3rem; }
+    .comments-section > p { color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+    .comment-form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+    .comment-form .full { grid-column: 1 / -1; }
+    .comment-form label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 0.3rem; }
+
+    .member-picker { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+    .member-btn {
+      flex: 1; min-width: 70px;
+      padding: 0.6rem 0.5rem;
+      border: 2px solid #E8E4DF;
+      border-radius: 12px;
+      background: var(--cream);
+      font-family: inherit;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: all 0.25s;
+      text-align: center;
+    }
+
+    .member-btn:hover { border-color: var(--sakura); }
+
+    .member-btn.selected {
+      border-color: var(--indigo);
+      background: linear-gradient(135deg, var(--indigo), #5B4A8C);
+      color: var(--white);
+      box-shadow: 0 2px 12px rgba(63,75,140,0.25);
+    }
+
+    .comment-form input,
+    .comment-form textarea,
+    .comment-form select {
+      width: 100%; padding: 0.75rem 1rem; border: 2px solid #E8E4DF;
+      border-radius: 10px; font-family: inherit; font-size: 0.95rem;
+      transition: border-color 0.3s; background: var(--cream);
+    }
+    .comment-form input:focus, .comment-form textarea:focus, .comment-form select:focus {
+      outline: none; border-color: var(--sakura-dark);
+    }
+    .comment-form textarea { resize: vertical; min-height: 100px; }
+
+    .comment-submit {
+      background: linear-gradient(135deg, var(--indigo), #5B4A8C);
+      color: var(--white); border: none; padding: 0.85rem 2.5rem;
+      border-radius: 50px; font-family: inherit; font-size: 1rem;
+      font-weight: 700; cursor: pointer; transition: all 0.3s;
+    }
+    .comment-submit:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(63,75,140,0.3); }
+
+    .comment-list { margin-top: 2rem; }
+
+    .comment-item {
+      padding: 1.2rem 1.5rem; background: var(--light-gray);
+      border-radius: 12px; margin-bottom: 1rem; position: relative;
+    }
+    .comment-item .comment-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+    .comment-item .comment-author { font-weight: 700; color: var(--indigo); }
+    .comment-item .comment-city-tag { font-size: 0.78rem; padding: 0.15rem 0.6rem; border-radius: 50px; background: var(--indigo); color: var(--white); font-weight: 600; }
+    .comment-item .comment-emoji { font-size: 0.85rem; padding: 0.15rem 0.6rem; border-radius: 50px; background: rgba(255,183,197,0.3); margin-left: 0.3rem; }
+    .comment-item .comment-text { color: var(--text); font-size: 0.95rem; line-height: 1.6; }
+    .comment-item .comment-date { font-size: 0.8rem; color: var(--text-light); margin-top: 0.5rem; }
+    .comment-item .comment-delete { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: #ccc; cursor: pointer; font-size: 1.1rem; transition: color 0.3s; padding: 0.2rem; }
+    .comment-item .comment-delete:hover { color: #e74c3c; }
+
+    .no-comments { text-align: center; color: var(--text-light); padding: 2rem; font-style: italic; }
+
+    /* ── Footer ── */
+    .footer { text-align: center; padding: 3rem 1.5rem; background: var(--deep-navy); color: rgba(255,255,255,0.5); font-size: 0.9rem; }
+    .footer .footer-title { font-size: 1.3rem; color: var(--white); font-weight: 700; margin-bottom: 0.5rem; }
+
+    /* ── Modal ── */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(5px); z-index: 1000; align-items: center; justify-content: center; }
+    .modal-overlay.show { display: flex; }
+    .modal { background: var(--white); border-radius: var(--radius); padding: 2rem; max-width: 400px; width: 90%; text-align: center; }
+    .modal h3 { margin-bottom: 1rem; color: var(--deep-navy); }
+    .modal p { margin-bottom: 1.5rem; color: var(--text-light); font-size: 0.95rem; }
+    .modal input { width: 100%; padding: 0.75rem 1rem; border: 2px solid #E8E4DF; border-radius: 10px; font-family: inherit; font-size: 0.95rem; margin-bottom: 1rem; background: var(--cream); }
+    .modal input:focus { outline: none; border-color: var(--sakura-dark); }
+    .modal-btns { display: flex; gap: 0.8rem; justify-content: center; }
+    .modal-btns button { padding: 0.6rem 1.5rem; border-radius: 50px; font-family: inherit; font-weight: 600; cursor: pointer; font-size: 0.9rem; border: none; }
+    .btn-confirm { background: linear-gradient(135deg, var(--indigo), #5B4A8C); color: var(--white); }
+    .btn-cancel { background: var(--light-gray); color: var(--text); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .comment-form { grid-template-columns: 1fr; }
+      .section { padding: 3rem 1rem; }
+      .overview-section, .comments-section { padding: 1.5rem; }
+      .timeline-item { padding: 1.2rem 1.2rem; }
+
+      .nav-bar {
+        -webkit-mask-image: linear-gradient(to right, transparent, black 1rem, black calc(100% - 1rem), transparent);
+        mask-image: linear-gradient(to right, transparent, black 1rem, black calc(100% - 1rem), transparent);
+      }
+      .nav-item { padding: 0.8rem 1.1rem; font-size: 0.85rem; }
+    }
+
+    /* ── iPhone 17 Pro (393px) 모바일 최적화 ── */
+    @media (max-width: 430px) {
+      /* Hero */
+      .hero { min-height: 100svh; }
+      .hero-content { padding: 1.2rem; }
+      .hero-badge { font-size: 0.78rem; padding: 0.4rem 1.2rem; margin-bottom: 1rem; letter-spacing: 1.5px; }
+      .hero h1 { font-size: 2.2rem; margin-bottom: 0.6rem; }
+      .hero-sub { font-size: 0.95rem; margin-bottom: 0.3rem; line-height: 1.5; word-break: keep-all; }
+      .hero-dates { font-size: 0.88rem; margin-bottom: 1.8rem; }
+
+      /* Sections */
+      .section { padding: 2.5rem 0.85rem; }
+      .section-header { margin-bottom: 2rem; }
+      .section-header .day-badge { font-size: 0.78rem; padding: 0.25rem 1rem; }
+      .section-header h2 { font-size: 1.6rem; word-break: keep-all; }
+      .section-header h2 .jp { display: block; margin-top: 0.2rem; }
+      .section-header p { font-size: 0.92rem; line-height: 1.6; word-break: keep-all; }
+
+      /* Day headers */
+      .city-section h3 { font-size: 1rem !important; line-height: 1.5 !important; word-break: keep-all; }
+
+      /* Overview */
+      .overview-section { padding: 1.2rem; margin-bottom: 1rem; }
+      .overview-grid { gap: 1rem; grid-template-columns: repeat(2, 1fr); }
+      .overview-card { padding: 1rem; }
+      .overview-card .icon { font-size: 1.6rem; }
+      .overview-card h4 { font-size: 0.78rem; }
+      .overview-card p { font-size: 0.95rem; }
+
+      /* Route map */
+      .overview-section div[style*="display:flex"][style*="align-items:center"][style*="flex-wrap:wrap"] {
+        gap: 0.6rem !important;
+      }
+      .overview-section div[style*="width:60px"] {
+        width: 46px !important; height: 46px !important; font-size: 1.2rem !important;
+      }
+      .overview-section small { font-size: 0.72rem !important; }
+
+      /* Timeline */
+      .city-divider { margin: 0.8rem auto 2.5rem; }
+      .schedule-timeline { padding-left: 2rem; }
+      .timeline-item { padding: 1rem; margin-bottom: 1.5rem; border-radius: 12px; }
+      .timeline-item::before { left: -1.72rem; top: 1.4rem; width: 12px; height: 12px; }
+      .timeline-time { font-size: 0.75rem; padding: 0.15rem 0.6rem; margin-bottom: 0.3rem; }
+      .timeline-item h4 { font-size: 1rem; line-height: 1.4; word-break: keep-all; }
+      .timeline-item p {
+        font-size: 0.88rem; line-height: 1.65;
+        word-break: keep-all;
+        overflow-wrap: break-word;
+      }
+      .timeline-tags { gap: 0.3rem; margin-top: 0.6rem; }
+      .tag { font-size: 0.72rem; padding: 0.15rem 0.55rem; }
+
+      /* Tip box */
+      .tip-box { padding: 1rem 1.2rem; margin-top: 1.5rem; }
+      .tip-box h4 { font-size: 0.9rem; }
+      .tip-box p { font-size: 0.88rem; line-height: 1.65; word-break: keep-all; }
+
+      /* Comments */
+      .comments-section { padding: 1.2rem; margin-top: 2rem; }
+      .comments-section h3 { font-size: 1.15rem; }
+      .comment-form input, .comment-form textarea, .comment-form select { font-size: 16px; padding: 0.65rem 0.8rem; }
+      .comment-submit { font-size: 0.92rem; padding: 0.75rem 2rem; width: 100%; }
+      .comment-item { padding: 1rem; }
+      .comment-item .comment-author { font-size: 0.9rem; }
+      .comment-item .comment-text { font-size: 0.88rem; }
+
+      /* Inline schedule comments */
+      .tl-comment-toggle { font-size: 0.75rem; padding: 0.3rem 0.7rem; }
+      .tl-mini-form input, .tl-mini-form textarea { font-size: 16px; }
+      .tl-mini-form .tl-mini-submit { width: 100%; padding: 0.5rem; }
+      .tl-c-item { font-size: 0.85rem; padding: 0.6rem 0.8rem; }
+
+      /* Footer */
+      .footer { padding: 2rem 1rem; }
+      .footer .footer-title { font-size: 1.1rem; }
+      .footer p { font-size: 0.82rem; }
+
+      /* Nav */
+      .nav-item { padding: 0.7rem 0.9rem; font-size: 0.8rem; }
+      .nav-item .nav-emoji { font-size: 0.85rem; }
+
+      /* Tooltip */
+      .jw-tip { bottom: 4rem; font-size: 0.84rem; padding: 0.6rem 1rem; }
+
+      /* Legend */
+      .jw-legend { font-size: 0.75rem; padding: 0.25rem 0.7rem; }
+    }
+
+    /* ── Animations ── */
+    .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.6s ease-out; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    .toast {
+      position: fixed; bottom: 2rem; left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--deep-navy); color: var(--white);
+      padding: 1rem 2rem; border-radius: 50px;
+      font-size: 0.95rem; font-weight: 500; z-index: 2000;
+      transition: transform 0.4s ease; white-space: nowrap;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── Packing Checklist ── */
+    .packing-tabs {
+      display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; justify-content: center;
+    }
+
+    .packing-tab {
+      padding: 0.5rem 1.2rem; border: 2px solid #E8E4DF; border-radius: 50px;
+      background: var(--white); font-family: inherit; font-size: 0.9rem;
+      font-weight: 600; color: var(--text-light); cursor: pointer; transition: all 0.25s;
+    }
+
+    .packing-tab:hover { border-color: var(--sakura); }
+    .packing-tab.active {
+      background: linear-gradient(135deg, var(--indigo), #5B4A8C);
+      color: var(--white); border-color: var(--indigo);
+    }
+
+    .packing-list {
+      background: var(--white); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 1.5rem;
+    }
+
+    .packing-category { margin-bottom: 1.2rem; }
+    .packing-category h4 { font-size: 0.95rem; font-weight: 700; color: var(--deep-navy); margin-bottom: 0.6rem; }
+
+    .packing-item {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.5rem 0; border-bottom: 1px solid rgba(0,0,0,0.04);
+      cursor: pointer; transition: opacity 0.2s;
+    }
+
+    .packing-item input[type="checkbox"] {
+      width: 20px; height: 20px; accent-color: var(--indigo); cursor: pointer; flex-shrink: 0;
+    }
+
+    .packing-item label { cursor: pointer; font-size: 0.92rem; flex: 1; }
+    .packing-item.checked label { text-decoration: line-through; color: var(--text-light); }
+
+    .packing-progress {
+      text-align: center; margin-top: 1rem; font-size: 0.88rem; color: var(--text-light);
+    }
+
+    .packing-bar {
+      height: 8px; background: #E8E4DF; border-radius: 4px; margin: 0.5rem auto; max-width: 300px; overflow: hidden;
+    }
+
+    .packing-bar-fill {
+      height: 100%; background: linear-gradient(90deg, var(--sakura-dark), var(--indigo));
+      border-radius: 4px; transition: width 0.4s ease;
+    }
+
+    /* ── Budget Table ── */
+    .budget-table {
+      width: 100%; border-collapse: collapse; font-size: 0.88rem; text-align: center;
+    }
+
+    .budget-table th {
+      background: var(--deep-navy); color: var(--white);
+      padding: 0.7rem 0.5rem; font-weight: 600; font-size: 0.82rem;
+    }
+
+    .budget-table th small { font-weight: 400; opacity: 0.7; }
+    .budget-table th:first-child { border-radius: 8px 0 0 0; }
+    .budget-table th:last-child { border-radius: 0 8px 0 0; }
+
+    .budget-table td {
+      padding: 0.6rem 0.5rem; border-bottom: 1px solid #E8E4DF;
+    }
+
+    .budget-table td:first-child { text-align: left; font-weight: 600; white-space: nowrap; }
+    .budget-total { font-weight: 700; color: var(--indigo); }
+
+    .budget-row-total td {
+      font-weight: 700; background: var(--light-gray);
+      border-top: 2px solid var(--indigo);
+    }
+
+    .budget-grand { color: var(--sakura-dark); font-size: 1rem; }
+
+    /* Budget: desktop table / mobile cards toggle */
+    .budget-mobile { display: none; }
+
+    .budget-card {
+      background: var(--white); border-radius: var(--radius);
+      box-shadow: var(--shadow); overflow: hidden; margin-bottom: 1rem;
+    }
+
+    .budget-card-header {
+      padding: 0.7rem 1.2rem; color: var(--white);
+      font-weight: 700; font-size: 1rem;
+    }
+
+    .budget-card-header small { opacity: 0.8; font-weight: 400; margin-left: 0.3rem; }
+
+    .budget-card-body { padding: 0.5rem 1.2rem; }
+
+    .budget-card-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.45rem 0; border-bottom: 1px solid rgba(0,0,0,0.04);
+      font-size: 0.92rem;
+    }
+
+    .budget-card-row.total {
+      border-top: 2px solid var(--indigo); border-bottom: none;
+      font-weight: 700; color: var(--indigo); padding-top: 0.6rem; margin-top: 0.2rem;
+    }
+
+    @media (max-width: 640px) {
+      .budget-desktop { display: none; }
+      .budget-mobile { display: block; }
+    }
+
+    .budget-extra { display: flex; flex-direction: column; gap: 0.4rem; }
+
+    .budget-extra-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.5rem 0.8rem; font-size: 0.92rem;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .budget-extra-item.total {
+      border-top: 2px solid var(--indigo); border-bottom: none;
+      font-weight: 700; color: var(--indigo); margin-top: 0.3rem; padding-top: 0.8rem;
+    }
+
+    /* ── Emergency ── */
+    .emergency-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .emergency-card {
+      background: var(--white); border-radius: var(--radius); padding: 1.5rem;
+      box-shadow: var(--shadow); transition: all 0.3s;
+    }
+
+    .emergency-card:hover { box-shadow: var(--shadow-hover); }
+    .emergency-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .emergency-card h4 { font-size: 1rem; font-weight: 700; color: var(--deep-navy); margin-bottom: 0.6rem; }
+
+    .emergency-num {
+      font-size: 0.95rem; margin-bottom: 0.3rem; color: var(--text);
+    }
+
+    .emergency-num strong { color: var(--indigo); font-size: 1.05rem; }
+
+    .emergency-detail {
+      font-size: 0.88rem; color: var(--text-light); margin-bottom: 0.2rem; line-height: 1.5;
+    }
+
+    .emergency-detail strong { color: var(--text); }
+
+    /* ── Scroll-to-top / bottom buttons ── */
+    .scroll-btns {
+      position: fixed; right: 1.2rem; bottom: 1.5rem;
+      display: flex; flex-direction: column; gap: 0.5rem; z-index: 200;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+
+    .scroll-btns.show { opacity: 1; pointer-events: auto; }
+
+    .scroll-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--deep-navy); color: var(--white);
+      border: none; font-size: 1.2rem; cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.25s, transform 0.25s;
+    }
+
+    .scroll-btn:hover { background: var(--indigo); transform: scale(1.1); }
+
+    /* ── Mobile sticky nav (touch top to reveal) ── */
+    .nav-bar {
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+
+    .nav-bar.nav-hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .nav-touch-zone {
+      display: none;
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 18px; z-index: 99;
+    }
+
+    @media (max-width: 768px) {
+      .nav-touch-zone { display: block; }
+      .scroll-btns { right: 0.8rem; bottom: 1rem; }
+      .scroll-btn { width: 40px; height: 40px; font-size: 1.1rem; }
+    }
+
+    /* ── Inline Schedule Comments ── */
+    .tl-comment-toggle {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      margin-top: 0.8rem; padding: 0.35rem 0.9rem;
+      background: none; border: 1.5px solid #E8E4DF; border-radius: 50px;
+      font-family: inherit; font-size: 0.8rem; color: var(--text-light);
+      cursor: pointer; transition: all 0.25s;
+    }
+    .tl-comment-toggle:hover { border-color: var(--sakura-dark); color: var(--sakura-dark); }
+    .tl-comment-toggle .cnt { font-weight: 700; }
+
+    .tl-comment-panel { display: none; margin-top: 1rem; padding-top: 1rem; border-top: 1px dashed #E8E4DF; }
+    .tl-comment-panel.open { display: block; }
+
+    .tl-comment-panel .tl-mini-form { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+
+    .tl-mini-form input, .tl-mini-form textarea {
+      padding: 0.5rem 0.75rem; border: 1.5px solid #E8E4DF; border-radius: 8px;
+      font-family: inherit; font-size: 0.85rem; background: var(--cream); transition: border-color 0.3s;
+    }
+    .tl-mini-form input:focus, .tl-mini-form textarea:focus { outline: none; border-color: var(--sakura-dark); }
+    .tl-mini-form .tl-input-name { flex: 1; min-width: 100px; }
+    .tl-mini-form .tl-input-pw { flex: 1; min-width: 100px; }
+    .tl-mini-form .tl-input-text { width: 100%; resize: vertical; min-height: 50px; }
+
+    .tl-mini-form .tl-mini-submit {
+      background: linear-gradient(135deg, var(--indigo), #5B4A8C);
+      color: var(--white); border: none; padding: 0.45rem 1.2rem; border-radius: 50px;
+      font-family: inherit; font-size: 0.82rem; font-weight: 600;
+      cursor: pointer; transition: all 0.25s;
+    }
+    .tl-mini-form .tl-mini-submit:hover { transform: translateY(-1px); box-shadow: 0 2px 10px rgba(63,75,140,0.25); }
+
+    .tl-inline-comments .tl-c-item {
+      padding: 0.7rem 1rem; background: var(--light-gray); border-radius: 10px;
+      margin-bottom: 0.5rem; position: relative; font-size: 0.9rem;
+    }
+    .tl-c-item .tl-c-author { font-weight: 700; color: var(--indigo); font-size: 0.85rem; }
+    .tl-c-item .tl-c-date { font-size: 0.75rem; color: var(--text-light); margin-left: 0.5rem; }
+    .tl-c-item .tl-c-text { color: var(--text); margin-top: 0.2rem; line-height: 1.5; }
+    .tl-c-item .tl-c-del { position: absolute; top: 0.5rem; right: 0.6rem; background: none; border: none; color: #ccc; cursor: pointer; font-size: 1rem; transition: color 0.3s; }
+    .tl-c-item .tl-c-del:hover { color: #e74c3c; }
+    .tl-no-comments { text-align: center; color: var(--text-light); padding: 0.8rem; font-size: 0.85rem; font-style: italic; }
+
+    /* ── Japanese Word Tooltips ── */
+    .jw {
+      position: static;
+      border-bottom: 1.5px dotted var(--sakura-dark);
+      cursor: help;
+    }
+
+    .jw-tip {
+      display: none;
+      position: fixed;
+      left: 50%;
+      bottom: 5rem;
+      transform: translateX(-50%);
+      background: var(--deep-navy);
+      color: var(--white);
+      font-size: 0.88rem;
+      font-weight: 400;
+      line-height: 1.6;
+      padding: 0.7rem 1.2rem;
+      border-radius: 12px;
+      width: max-content;
+      max-width: min(400px, 90vw);
+      text-align: center;
+      z-index: 9999;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      pointer-events: none;
+      animation: jwPop 0.2s ease;
+    }
+
+    .jw-tip.show { display: block; }
+
+    @keyframes jwPop {
+      from { opacity: 0; transform: translateX(-50%) translateY(8px); }
+      to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    .jw-legend {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(232,130,155,0.1);
+      border: 1px solid rgba(232,130,155,0.3);
+      padding: 0.3rem 0.9rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      color: var(--sakura-dark);
+      margin-bottom: 1.5rem;
+    }
+  </style>
+  <script>
+    // ╔══════════════════════════════════════════════════════════╗
+    // ║  jsonbin.io 설정 — 2가지만 채우면 가족 간 동기화 완료!  ║
+    // ║                                                         ║
+    // ║  1. jsonbin.io 가입 후 API Key 복사                     ║
+    // ║  2. 빈 Bin 하나 만들고 Bin ID 복사                      ║
+    // ╚══════════════════════════════════════════════════════════╝
+    const JSONBIN_API_KEY = '';  // ← '$2a...' 형태의 Access Key
+    const JSONBIN_BIN_ID  = '';  // ← '6...' 형태의 Bin ID
+
+    const SYNC_ENABLED = JSONBIN_API_KEY.length > 0 && JSONBIN_BIN_ID.length > 0;
+    const SYNC_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
+    const SYNC_HEADERS = { 'Content-Type': 'application/json', 'X-Access-Key': JSONBIN_API_KEY };
+    let _syncTimer = null;
+  </script>
+</head>
+<body>
+
+  <!-- ══ Hero ══ -->
+  <section class="hero" id="hero">
+    <div class="sakura-fall" id="sakuraFall"></div>
+    <div class="hero-content">
+      <div class="hero-badge">FAMILY TRIP 2026</div>
+      <h1>우리 가족<br><span>일본 여행</span></h1>
+      <p class="hero-sub">삿포로에서 후쿠오카까지, 일본 전국을 누비는 특별한 여행</p>
+      <p class="hero-dates">2026. 4. 27 (일) ~ 5. 10 (일) &middot; 14일</p>
+      <div class="dday-box" id="ddayBox"></div>
+      <div class="hero-route">
+        <div class="hero-route-row">
+          <span class="city">&#x1f3d4; 삿포로</span><span class="arrow">&#x2708;</span>
+          <span class="city">&#x1f5fc; 도쿄</span><span class="arrow">&#x1f685;</span>
+          <span class="city">&#x1f98c; 나라</span>
+        </div>
+        <div class="hero-route-row">
+          <span class="city">&#x26e9; 교토</span><span class="arrow">&#x1f685;</span>
+          <span class="city">&#x1f35c; 후쿠오카</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator" onclick="document.getElementById('overview').scrollIntoView()">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg>
+    </div>
+  </section>
+
+  <!-- ══ Nav ══ -->
+  <nav class="nav-bar">
+    <div class="nav-inner">
+      <div class="nav-item active" data-target="overview"><span class="nav-emoji">&#x1f4cb;</span> 전체 일정</div>
+      <div class="nav-item" data-target="sapporo"><span class="nav-emoji">&#x1f3d4;</span> 삿포로</div>
+      <div class="nav-item" data-target="tokyo"><span class="nav-emoji">&#x1f5fc;</span> 도쿄</div>
+      <div class="nav-item" data-target="nara"><span class="nav-emoji">&#x1f98c;</span> 나라</div>
+      <div class="nav-item" data-target="kyoto"><span class="nav-emoji">&#x26e9;</span> 교토</div>
+      <div class="nav-item" data-target="fukuoka"><span class="nav-emoji">&#x1f35c;</span> 후쿠오카</div>
+      <div class="nav-item" data-target="packing"><span class="nav-emoji">&#x1f9f3;</span> 짐싸기</div>
+      <div class="nav-item" data-target="budget"><span class="nav-emoji">&#x1f4b0;</span> 경비</div>
+      <div class="nav-item" data-target="emergency"><span class="nav-emoji">&#x1f6a8;</span> 긴급</div>
+      <div class="nav-item" data-target="comments"><span class="nav-emoji">&#x1f4ac;</span> 의견</div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════ OVERVIEW ══════════════════════════════ -->
+  <section class="section" id="overview">
+    <div class="section-header fade-up">
+      <div class="day-badge">OVERVIEW</div>
+      <h2>여행 전체 일정</h2>
+      <p>2026년 4월 27일 ~ 5월 10일, 총 14일간의 일본 종단 가족 여행</p>
+    </div>
+
+    <div class="overview-section fade-up">
+      <div class="overview-grid">
+        <div class="overview-card">
+          <div class="icon">&#x1f4c5;</div>
+          <h4>여행 기간</h4>
+          <p>4/27 ~ 5/10 (14일)</p>
+        </div>
+        <div class="overview-card">
+          <div class="icon">&#x1f3d9;</div>
+          <h4>방문 도시</h4>
+          <p>5개 도시</p>
+        </div>
+        <div class="overview-card">
+          <div class="icon">&#x1f685;</div>
+          <h4>이동 수단</h4>
+          <p>항공 + 신칸센</p>
+        </div>
+        <div class="overview-card">
+          <div class="icon">&#x1f3af;</div>
+          <h4>관광 명소</h4>
+          <p>30곳 이상</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="overview-section fade-up" style="text-align:center;">
+      <h3 style="font-weight:700; margin-bottom:1.5rem; color:var(--deep-navy);">&#x1f5fa; 여행 동선</h3>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:0.8rem; font-size:1rem;">
+        <!-- 1행: 삿포로 → 도쿄 → 나라 -->
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#4FC3F7,#039BE5);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;margin-bottom:0.3rem;">&#x1f3d4;</div>
+            <strong>삿포로</strong>
+            <small style="color:var(--text-light);">4/27~29 (3일)</small>
+            <small style="color:var(--sakura-dark); font-weight:600;">IN &#x2708;</small>
+          </div>
+          <div style="color:var(--sakura-dark); font-size:1.5rem;">&#x2192;</div>
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#FF7043,#E64A19);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;margin-bottom:0.3rem;">&#x1f5fc;</div>
+            <strong>도쿄</strong>
+            <small style="color:var(--text-light);">4/30~5/3 (4일)</small>
+          </div>
+          <div style="color:var(--sakura-dark); font-size:1.5rem;">&#x2192;</div>
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#81C784,#388E3C);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;margin-bottom:0.3rem;">&#x1f98c;</div>
+            <strong>나라</strong>
+            <small style="color:var(--text-light);">5/4~5 (2일)</small>
+          </div>
+        </div>
+        <!-- 2행: 교토 → 후쿠오카 -->
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#CE93D8,#8E24AA);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;margin-bottom:0.3rem;">&#x26e9;</div>
+            <strong>교토</strong>
+            <small style="color:var(--text-light);">5/6~8 (3일)</small>
+          </div>
+          <div style="color:var(--sakura-dark); font-size:1.5rem;">&#x2192;</div>
+          <div style="display:flex; flex-direction:column; align-items:center;">
+            <div style="width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#FFD54F,#F9A825);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;margin-bottom:0.3rem;">&#x1f35c;</div>
+            <strong>후쿠오카</strong>
+            <small style="color:var(--text-light);">5/9~10 (2일)</small>
+            <small style="color:var(--sakura-dark); font-weight:600;">OUT &#x2708;</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="max-width:1100px; margin:0 auto; padding:0 1.5rem; text-align:center;">
+    <div class="jw-legend">&#x1f4d6; <span class="jw" data-t="이렇게 뜻이 나와요!" style="border-bottom-color:var(--sakura-dark);">점선 밑줄 단어</span>를 누르면 일본어 뜻풀이를 볼 수 있어요!</div>
+  </div>
+
+  <!-- ══════════════════════════════ SAPPORO ══════════════════════════════ -->
+  <section class="section city-section" id="sapporo">
+    <div class="section-header fade-up">
+      <div class="day-badge">DAY 1-3 &middot; 4/27~29</div>
+      <h2>&#x1f3d4; 삿포로 <span class="jp">札幌</span></h2>
+      <p>홋카이도의 수도, 눈과 맥주와 라멘의 도시</p>
+    </div>
+    <div class="city-divider"></div>
+
+    <!-- Day 1 -->
+    <h3 class="fade-up" style="font-weight:700; color:var(--deep-navy); margin-bottom:1.5rem;">&#x1f4c6; Day 1 &middot; 4월 27일 (일) - 삿포로 도착 & 시내 관광</h3>
+    <div class="schedule-timeline fade-up">
+      <div class="timeline-item">
+        <span class="timeline-time">07:00</span>
+        <h4>&#x2708; 인천국제공항 출발</h4>
+        <p>인천공항에서 삿포로 신치토세 공항행 직항 탑승 (약 3시간)</p>
+        <div class="timeline-tags"><span class="tag transport">항공 이동</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">11:00</span>
+        <h4>&#x1f3d4; 삿포로 신치토세 공항 도착</h4>
+        <p>입국 수속 후 JR 쾌속 에어포트로 삿포로역 이동 (약 40분). 시차 없음!</p>
+        <div class="timeline-tags"><span class="tag transport">이동 40분</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">11:00</span>
+        <h4>&#x1f3e8; 호텔 체크인 & 짐 보관</h4>
+        <p>삿포로역 주변 호텔 체크인 후 가벼운 차림으로 출발</p>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">12:00</span>
+        <h4>&#x1f35c; 삿포로 라멘 골목 점심</h4>
+        <p>삿포로 라멘 요코초에서 정통 미소 라멘 맛보기. 겨자맛 미소라멘이 유명합니다.</p>
+        <div class="timeline-tags"><span class="tag food">맛집</span><span class="tag spot">라멘 요코초</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">14:00</span>
+        <h4>&#x1f3db; 삿포로 시계탑 & 구 홋카이도청</h4>
+        <p>삿포로의 상징인 시계탑과 붉은 벽돌의 구 홋카이도청 사적 방문</p>
+        <div class="timeline-tags"><span class="tag spot">관광명소</span><span class="tag activity">사진촬영</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">16:00</span>
+        <h4>&#x1f33f; 오도리 공원 산책</h4>
+        <p>도심을 가로지르는 1.5km의 녹지 공원. 삿포로 TV탑 전망대에서 시내 전경 감상</p>
+        <div class="timeline-tags"><span class="tag spot">오도리 공원</span><span class="tag spot">TV탑</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">18:00</span>
+        <h4>&#x1f37a; 삿포로 맥주 박물관 & 가든</h4>
+        <p>삿포로 맥주의 역사를 배우고, 비어 가든에서 징기스칸(양고기 구이)과 생맥주 즐기기</p>
+        <div class="timeline-tags"><span class="tag food">맛집</span><span class="tag spot">맥주 박물관</span><span class="tag activity">체험</span></div>
+      </div>
+    </div>
+
+    <!-- Day 2 -->
+    <h3 class="fade-up" style="font-weight:700; color:var(--deep-navy); margin:2.5rem 0 1.5rem;">&#x1f4c6; Day 2 &middot; 4월 28일 (월) - 오타루 당일치기</h3>
+    <div class="schedule-timeline fade-up">
+      <div class="timeline-item">
+        <span class="timeline-time">09:00</span>
+        <h4>&#x1f682; 오타루로 이동</h4>
+        <p>JR 삿포로역에서 오타루까지 약 30분. 해안선을 따라 달리는 차창 풍경이 아름답습니다.</p>
+        <div class="timeline-tags"><span class="tag transport">이동 30분</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">10:00</span>
+        <h4>&#x1f3de; 오타루 운하 산책</h4>
+        <p>레트로한 분위기의 오타루 운하와 석조 창고군. 가스등이 켜진 운하가 포토스팟.</p>
+        <div class="timeline-tags"><span class="tag spot">오타루 운하</span><span class="tag activity">사진촬영</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">11:30</span>
+        <h4>&#x1f363; 오타루 스시 거리 점심</h4>
+        <p>삿포로 근교 최고의 초밥 거리. 신선한 해산물로 유명한 오타루 스시야도코로</p>
+        <div class="timeline-tags"><span class="tag food">맛집</span><span class="tag spot">스시 거리</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">13:30</span>
+        <h4>&#x1f3b5; 오타루 오르골당 & 유리공예관</h4>
+        <p>메르헨 교차로 주변의 오르골당과 기타이치 유리공예관 방문. 기념품 쇼핑하기 좋아요.</p>
+        <div class="timeline-tags"><span class="tag spot">오르골당</span><span class="tag activity">쇼핑</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">15:30</span>
+        <h4>&#x1f36b; 르타오 본점</h4>
+        <p>오타루 명물 르타오 더블 프로마주 치즈케이크와 초콜릿. 본점 한정 메뉴 도전!</p>
+        <div class="timeline-tags"><span class="tag food">디저트</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">17:30</span>
+        <h4>&#x1f682; 삿포로 복귀</h4>
+        <p>JR로 삿포로역 복귀. 저녁은 스스키노 야키니쿠 거리에서 홋카이도산 소고기 구이</p>
+        <div class="timeline-tags"><span class="tag transport">이동</span><span class="tag food">야키니쿠</span></div>
+      </div>
+    </div>
+
+    <!-- Day 3 -->
+    <h3 class="fade-up" style="font-weight:700; color:var(--deep-navy); margin:2.5rem 0 1.5rem;">&#x1f4c6; Day 3 &middot; 4월 29일 (화) - 홋카이도 자연 & 도쿄 이동</h3>
+    <div class="schedule-timeline fade-up">
+      <div class="timeline-item">
+        <span class="timeline-time">08:30</span>
+        <h4>&#x1f3d4; 모이와야마 전망대</h4>
+        <p>로프웨이를 타고 올라가는 삿포로 야경 3대 명소. 낮에도 홋카이도 대자연 파노라마가 장관</p>
+        <div class="timeline-tags"><span class="tag spot">모이와야마</span><span class="tag activity">전망</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">10:30</span>
+        <h4>&#x1f33f; 홋카이도 대학 캠퍼스 산책</h4>
+        <p>은행나무 가로수길과 포플러 가로수길이 아름다운 캠퍼스. 학생식당에서 가성비 점심도 가능</p>
+        <div class="timeline-tags"><span class="tag spot">홋카이도 대학</span><span class="tag activity">산책</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">12:00</span>
+        <h4>&#x1f35b; 니조 시장 점심</h4>
+        <p>삿포로 시민의 부엌 니조 시장에서 카이센동(해산물 덮밥). 성게, 연어알, 게살 듬뿍!</p>
+        <div class="timeline-tags"><span class="tag food">맛집</span><span class="tag spot">니조 시장</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">13:30</span>
+        <h4>&#x1f6cd; 타누키코지 상점가 쇼핑</h4>
+        <p>삿포로 최대 아케이드 상점가. 약국, 기념품, 홋카이도 한정 과자 등 마지막 쇼핑</p>
+        <div class="timeline-tags"><span class="tag activity">쇼핑</span><span class="tag spot">타누키코지</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">16:00</span>
+        <h4>&#x2708; 삿포로 → 도쿄 이동</h4>
+        <p>신치토세 공항에서 하네다 공항행 국내선 탑승 (약 1시간 40분). 저녁 도쿄 도착</p>
+        <div class="timeline-tags"><span class="tag transport">항공 이동</span></div>
+      </div>
+    </div>
+
+    <div class="tip-box fade-up">
+      <h4>&#x1f4a1; 삿포로 여행 팁</h4>
+      <p>홋카이도는 다른 일본 지역보다 서늘합니다. 4월 말에도 겉옷이 필요할 수 있어요. 삿포로 지하철 1일권(830엔)을 구매하면 시내 이동이 편리합니다. IC 카드(Kitaca)도 사용 가능!</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════ TOKYO ══════════════════════════════ -->
+  <section class="section city-section" id="tokyo">
+    <div class="section-header fade-up">
+      <div class="day-badge">DAY 4-7 &middot; 4/30~5/3</div>
+      <h2>&#x1f5fc; 도쿄 <span class="jp">東京</span></h2>
+      <p>전통과 초현대가 공존하는 세계 최대의 메트로폴리스</p>
+    </div>
+    <div class="city-divider"></div>
+
+    <!-- Day 4 -->
+    <h3 class="fade-up" style="font-weight:700; color:var(--deep-navy); margin-bottom:1.5rem;">&#x1f4c6; Day 4 &middot; 4월 30일 (수) - 도쿄 클래식 코스</h3>
+    <div class="schedule-timeline fade-up">
+      <div class="timeline-item">
+        <span class="timeline-time">09:00</span>
+        <h4>&#x26e9; 센소지 (아사쿠사)</h4>
+        <p>도쿄에서 가장 오래된 사원. 카미나리몬(번개문)과 나카미세 상점가에서 전통 간식 맛보기</p>
+        <div class="timeline-tags"><span class="tag spot">센소지</span><span class="tag food">나카미세</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">11:30</span>
+        <h4>&#x1f332; 우에노 공원 & 아메요코</h4>
+        <p>우에노 공원 산책 후, 활기 넘치는 아메요코 시장에서 길거리 음식 즐기기</p>
+        <div class="timeline-tags"><span class="tag spot">우에노 공원</span><span class="tag food">아메요코</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">14:00</span>
+        <h4>&#x1f3ee; 아키하바라 전자상가</h4>
+        <p>전자제품, 애니메이션, 피규어의 성지. 가족 중 덕후가 있다면 필수 코스!</p>
+        <div class="timeline-tags"><span class="tag spot">아키하바라</span><span class="tag activity">쇼핑</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">17:00</span>
+        <h4>&#x1f307; 도쿄 스카이트리</h4>
+        <p>높이 634m의 세계 최고 전파탑. 전망대에서 석양이 물드는 도쿄 시내 파노라마 감상</p>
+        <div class="timeline-tags"><span class="tag spot">스카이트리</span><span class="tag activity">전망</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">19:00</span>
+        <h4>&#x1f363; 츠키지 장외시장 저녁</h4>
+        <p>신선한 해산물 덮밥과 다마고야키(계란말이). 활기 넘치는 시장 분위기를 즐기세요.</p>
+        <div class="timeline-tags"><span class="tag food">맛집</span><span class="tag spot">츠키지</span></div>
+      </div>
+    </div>
+
+    <!-- Day 5 -->
+    <h3 class="fade-up" style="font-weight:700; color:var(--deep-navy); margin:2.5rem 0 1.5rem;">&#x1f4c6; Day 5 &middot; 5월 1일 (목) - 시부야 & 하라주쿠 & 신주쿠</h3>
+    <div class="schedule-timeline fade-up">
+      <div class="timeline-item">
+        <span class="timeline-time">09:00</span>
+        <h4>&#x26e9; 메이지 신궁</h4>
+        <p>도심 속 울창한 숲에 자리한 메이지 신궁. 엄숙한 분위기 속 참배 체험</p>
+        <div class="timeline-tags"><span class="tag spot">메이지 신궁</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">11:00</span>
+        <h4>&#x1f308; 하라주쿠 & 다케시타 거리</h4>
+        <p>일본 스트릿 패션의 중심지. 크레페, 솜사탕 등 인스타그래머블한 간식들</p>
+        <div class="timeline-tags"><span class="tag spot">하라주쿠</span><span class="tag food">간식</span><span class="tag activity">쇼핑</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">13:00</span>
+        <h4>&#x1f3ac; 시부야 스크램블 교차로</h4>
+        <p>세계에서 가장 유명한 교차로. 시부야 스카이 전망대에서 내려다보는 것을 추천!</p>
+        <div class="timeline-tags"><span class="tag spot">시부야</span><span class="tag activity">전망</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">15:00</span>
+        <h4>&#x1f6cd; 오모테산도 & 아오야마</h4>
+        <p>도쿄의 샹젤리제. 건축 명소와 고급 브랜드 매장이 즐비한 세련된 거리</p>
+        <div class="timeline-tags"><span class="tag spot">오모테산도</span><span class="tag activity">쇼핑</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">18:00</span>
+        <h4>&#x1f303; 신주쿠 가부키초 & 오모이데 요코초</h4>
+        <p>네온사인 빛나는 가부키초 산책 후, 추억의 골목길 오모이데 요코초에서 야키토리 저녁</p>
+        <div class="timeline-tags"><span class="tag spot">신주쿠</span><span class="tag food">야키토리</span></div>
+      </div>
+    </div>
+
+    <!-- Day 6 -->
+    <h3 class="fade-up" style="font-weight:700; color:var(--deep-navy); margin:2.5rem 0 1.5rem;">&#x1f4c6; Day 6 &middot; 5월 2일 (금) - 오다이바 & 팀랩</h3>
+    <div class="schedule-timeline fade-up">
+      <div class="timeline-item">
+        <span class="timeline-time">10:00</span>
+        <h4>&#x1f3a8; 팀랩 보더리스 / 팀랩 플래닛</h4>
+        <p>몰입형 디지털 아트 체험. 가족 모두가 즐길 수 있는 환상적인 공간. 사전 예약 필수!</p>
+        <div class="timeline-tags"><span class="tag activity">체험</span><span class="tag spot">팀랩</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">13:00</span>
+        <h4>&#x1f354; 오다이바 다이버시티 점심</h4>
+        <p>실물 크기 건담 유니콘 앞에서 기념촬영 후, 푸드코트에서 점심</p>
+        <div class="timeline-tags"><span class="tag food">맛집</span><span class="tag spot">오다이바</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">15:00</span>
+        <h4>&#x1f6d2; 긴자 쇼핑</h4>
+        <p>도쿄 최고의 쇼핑 거리. 유니클로 긴자점, 이토야 문구점, 돈키호테 등</p>
+        <div class="timeline-tags"><span class="tag activity">쇼핑</span><span class="tag spot">긴자</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">18:00</span>
+        <h4>&#x1f5fc; 도쿄타워 야경</h4>
+        <p>도쿄의 클래식 랜드마크. 조명이 켜진 야경이 특히 아름다운 도쿄타워 전망대</p>
+        <div class="timeline-tags"><span class="tag spot">도쿄타워</span><span class="tag activity">야경</span></div>
+      </div>
+    </div>
+
+    <!-- Day 7 -->
+    <h3 class="fade-up" style="font-weight:700; color:var(--deep-navy); margin:2.5rem 0 1.5rem;">&#x1f4c6; Day 7 &middot; 5월 3일 (토) - 가마쿠라 당일치기 & 나라 이동</h3>
+    <div class="schedule-timeline fade-up">
+      <div class="timeline-item">
+        <span class="timeline-time">08:30</span>
+        <h4>&#x1f682; 가마쿠라로 이동</h4>
+        <p>JR 요코스카선으로 도쿄역에서 가마쿠라까지 약 1시간. 소도시 해변 감성 가득</p>
+        <div class="timeline-tags"><span class="tag transport">이동 1시간</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">10:00</span>
+        <h4>&#x1f30a; 고토쿠인 (대불)</h4>
+        <p>높이 13m의 청동 아미타불 대불상. 가마쿠라의 상징이자 일본 3대 대불 중 하나</p>
+        <div class="timeline-tags"><span class="tag spot">가마쿠라 대불</span><span class="tag activity">관광</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">11:30</span>
+        <h4>&#x26e9; 하세데라 & 쓰루가오카 하치만구</h4>
+        <p>수국과 바다 전망이 아름다운 하세데라, 가마쿠라 역사의 중심 하치만구 참배</p>
+        <div class="timeline-tags"><span class="tag spot">하세데라</span><span class="tag spot">하치만구</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">13:00</span>
+        <h4>&#x1f35c; 코마치도리 점심</h4>
+        <p>가마쿠라역 앞 코마치도리 상점가에서 시라스동(멸치 덮밥)과 말차 디저트</p>
+        <div class="timeline-tags"><span class="tag food">맛집</span><span class="tag spot">코마치도리</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">14:30</span>
+        <h4>&#x1f682; 에노시마 & 에노덴 열차</h4>
+        <p>바다를 달리는 에노덴 열차 탑승. 에노시마 해변에서 슬램덩크 건널목 성지순례!</p>
+        <div class="timeline-tags"><span class="tag spot">에노시마</span><span class="tag activity">성지순례</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">17:00</span>
+        <h4>&#x1f685; 도쿄 → 나라 이동</h4>
+        <p>도쿄역에서 신칸센 노조미로 교토역까지 (약 2시간 15분), JR 나라선으로 나라 이동</p>
+        <div class="timeline-tags"><span class="tag transport">신칸센</span></div>
+      </div>
+    </div>
+
+    <div class="tip-box fade-up">
+      <h4>&#x1f4a1; 도쿄 여행 팁</h4>
+      <p>도쿄 메트로 72시간 패스(1,500엔)를 구매하면 지하철 무제한 이용! 스이카(Suica) 카드를 공항에서 구입하면 편의점 결제도 가능합니다. 팀랩은 반드시 사전 예약하세요. GW(골든위크) 연휴 기간이라 인파에 유의!</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════ NARA ══════════════════════════════ -->
+  <section class="section city-section" id="nara">
+    <div class="section-header fade-up">
+      <div class="day-badge">DAY 8-9 &middot; 5/4~5</div>
+      <h2>&#x1f98c; 나라 <span class="jp">奈良</span></h2>
+      <p>천년 고도, 사슴과 대불이 반겨주는 평화로운 도시</p>
+    </div>
+    <div class="city-divider"></div>
+
+    <!-- Day 8 -->
+    <h3 class="fade-up" style="font-weight:700; color:var(--deep-navy); margin-bottom:1.5rem;">&#x1f4c6; Day 8 &middot; 5월 4일 (일) - 나라 핵심 관광</h3>
+    <div class="schedule-timeline fade-up">
+      <div class="timeline-item">
+        <span class="timeline-time">08:30</span>
+        <h4>&#x1f98c; 나라 공원 & 사슴</h4>
+        <p>약 1,200마리의 야생 사슴이 자유롭게 돌아다니는 나라 공원. 센베이(사슴 전병)로 먹이주기 체험!</p>
+        <div class="timeline-tags"><span class="tag spot">나라 공원</span><span class="tag activity">사슴 먹이주기</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">10:00</span>
+        <h4>&#x1f3db; 도다이지 (동대사)</h4>
+        <p>세계 최대 목조 건물에 안치된 높이 15m의 나라 대불. 기둥 구멍 통과 체험도 도전해보세요!</p>
+        <div class="timeline-tags"><span class="tag spot">도다이지</span><span class="tag activity">세계유산</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">12:00</span>
+        <h4>&#x1f35c; 나라마치 점심</h4>
+        <p>전통 마을 나라마치에서 가마메시(솥밥)나 카키노하즈시(감잎 초밥) 맛보기</p>
+        <div class="timeline-tags"><span class="tag food">맛집</span><span class="tag spot">나라마치</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">14:00</span>
+        <h4>&#x26e9; 가스가타이샤 (춘일대사)</h4>
+        <p>3,000개의 석등과 매달린 등롱이 신비로운 분위기를 자아내는 세계유산 신사</p>
+        <div class="timeline-tags"><span class="tag spot">가스가타이샤</span><span class="tag activity">세계유산</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">15:30</span>
+        <h4>&#x1f33f; 이스이엔 정원</h4>
+        <p>메이지 시대에 만들어진 아름다운 일본 정원. 도다이지 지붕을 배경으로 한 절경</p>
+        <div class="timeline-tags"><span class="tag spot">이스이엔</span><span class="tag activity">산책</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">18:00</span>
+        <h4>&#x1f3ee; 히가시무키 상점가 저녁</h4>
+        <p>긴테쓰나라역 앞 아케이드 상점가에서 저녁 식사 후 야경 산책</p>
+        <div class="timeline-tags"><span class="tag food">저녁</span><span class="tag activity">산책</span></div>
+      </div>
+    </div>
+
+    <!-- Day 9 -->
+    <h3 class="fade-up" style="font-weight:700; color:var(--deep-navy); margin:2.5rem 0 1.5rem;">&#x1f4c6; Day 9 &middot; 5월 5일 (월) - 나라 남부 & 교토 이동</h3>
+    <div class="schedule-timeline fade-up">
+      <div class="timeline-item">
+        <span class="timeline-time">09:00</span>
+        <h4>&#x1f3db; 호류지 (법륭사)</h4>
+        <p>세계 최고(最古)의 목조 건축물. 일본 최초의 유네스코 세계유산. 나라역에서 버스로 약 50분</p>
+        <div class="timeline-tags"><span class="tag spot">호류지</span><span class="tag activity">세계유산</span><span class="tag transport">버스 50분</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">11:30</span>
+        <h4>&#x26e9; 야쿠시지 & 도쇼다이지</h4>
+        <p>나라 니시노쿄 지역의 두 세계유산 사찰. 한적하고 아름다운 절경</p>
+        <div class="timeline-tags"><span class="tag spot">야쿠시지</span><span class="tag spot">도쇼다이지</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">13:00</span>
+        <h4>&#x1f35b; 점심 & 모치이도노 거리</h4>
+        <p>나라 중심부 모치이도노 상점가에서 우동이나 카레 점심. 나라 특산 미야게(기념품) 쇼핑</p>
+        <div class="timeline-tags"><span class="tag food">맛집</span><span class="tag activity">쇼핑</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">15:00</span>
+        <h4>&#x1f33f; 요시키엔 정원 & 나라 국립박물관</h4>
+        <p>무료 입장 가능한 요시키엔 일본정원. 시간 여유가 있으면 나라 국립박물관도 추천</p>
+        <div class="timeline-tags"><span class="tag spot">요시키엔</span><span class="tag activity">관람</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">17:00</span>
+        <h4>&#x1f685; 나라 → 교토 이동</h4>
+        <p>긴테쓰 나라선으로 교토까지 약 45분 이동. 교토역 주변 호텔 체크인</p>
+        <div class="timeline-tags"><span class="tag transport">이동 45분</span></div>
+      </div>
+    </div>
+
+    <div class="tip-box fade-up">
+      <h4>&#x1f4a1; 나라 여행 팁</h4>
+      <p>사슴에게 먹이를 줄 때는 센베이를 한 번에 다 보여주지 마세요! 사슴이 달려들 수 있습니다. 나라는 도보로 충분히 관광 가능하며, 걷기 편한 신발을 꼭 챙기세요. 5월 초는 날씨가 쾌적한 최적의 관광 시즌!</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════ KYOTO ══════════════════════════════ -->
+  <section class="section city-section" id="kyoto">
+    <div class="section-header fade-up">
+      <div class="day-badge">DAY 10-12 &middot; 5/6~8</div>
+      <h2>&#x26e9; 교토 <span class="jp">京都</span></h2>
+      <p>천년의 수도, 일본 전통 문화의 정수를 만나다</p>
+    </div>
+    <div class="city-divider"></div>
+
+    <!-- Day 10 -->
+    <h3 class="fade-up" style="font-weight:700; color:var(--deep-navy); margin-bottom:1.5rem;">&#x1f4c6; Day 10 &middot; 5월 6일 (화) - 교토 동부 코스</h3>
+    <div class="schedule-timeline fade-up">
+      <div class="timeline-item">
+        <span class="timeline-time">07:00</span>
+        <h4>&#x26e9; 후시미 이나리 대사</h4>
+        <p>천 개의 붉은 도리이가 터널을 이루는 장관! 이른 아침에 방문해야 한적하게 즐길 수 있어요.</p>
+        <div class="timeline-tags"><span class="tag spot">후시미 이나리</span><span class="tag activity">세계유산급</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">10:00</span>
+        <h4>&#x1f3db; 기요미즈데라 (청수사)</h4>
+        <p>교토 최고의 명소. 13m 높이의 무대에서 내려다보는 교토 시내 전경이 압권</p>
+        <div class="timeline-tags"><span class="tag spot">기요미즈데라</span><span class="tag activity">세계유산</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">12:00</span>
+        <h4>&#x1f3ee; 니넨자카 & 산넨자카 점심</h4>
+        <p>돌계단 골목의 전통 가옥 거리. 유바(두부 껍질) 요리나 말차 디저트로 점심</p>
+        <div class="timeline-tags"><span class="tag food">맛집</span><span class="tag spot">니넨자카</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">14:00</span>
+        <h4>&#x1f490; 기온 거리 산책</h4>
+        <p>전통 마치야(町家) 건물과 게이샤를 만날 수 있는 하나미코지 거리</p>
+        <div class="timeline-tags"><span class="tag spot">기온</span><span class="tag activity">산책</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">16:00</span>
+        <h4>&#x1f38b; 니시키 시장</h4>
+        <p>'교토의 부엌'이라 불리는 400년 역사의 시장. 교토 반찬, 말차 아이스크림 등 시식 천국</p>
+        <div class="timeline-tags"><span class="tag food">시장</span><span class="tag activity">시식</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">18:00</span>
+        <h4>&#x1f30a; 가모가와 강변 저녁</h4>
+        <p>가모가와 강변의 노려카(川床) 레스토랑에서 교토 가이세키 요리 즐기기</p>
+        <div class="timeline-tags"><span class="tag food">특별 저녁</span></div>
+      </div>
+    </div>
+
+    <!-- Day 11 -->
+    <h3 class="fade-up" style="font-weight:700; color:var(--deep-navy); margin:2.5rem 0 1.5rem;">&#x1f4c6; Day 11 &middot; 5월 7일 (수) - 아라시야마 코스</h3>
+    <div class="schedule-timeline fade-up">
+      <div class="timeline-item">
+        <span class="timeline-time">08:30</span>
+        <h4>&#x1f38b; 아라시야마 대나무 숲</h4>
+        <p>하늘 높이 솟은 대나무가 만들어내는 신비로운 터널. 아침 일찍 방문해야 사진 찍기 좋아요.</p>
+        <div class="timeline-tags"><span class="tag spot">대나무 숲</span><span class="tag activity">사진촬영</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">10:00</span>
+        <h4>&#x1f412; 이와타야마 원숭이 공원</h4>
+        <p>산 정상에서 야생 원숭이와 교토 시내 전경을 동시에 즐기는 특별한 경험</p>
+        <div class="timeline-tags"><span class="tag spot">원숭이 공원</span><span class="tag activity">체험</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">12:00</span>
+        <h4>&#x1f35c; 아라시야마 점심</h4>
+        <p>도게츠교 근처에서 교토식 두부 요리(유도후)나 소바 맛보기</p>
+        <div class="timeline-tags"><span class="tag food">맛집</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">14:00</span>
+        <h4>&#x2728; 킨카쿠지 (금각사)</h4>
+        <p>황금빛으로 빛나는 금각사와 거울 연못의 완벽한 반영. 교토의 아이콘</p>
+        <div class="timeline-tags"><span class="tag spot">킨카쿠지</span><span class="tag activity">세계유산</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">16:00</span>
+        <h4>&#x1f375; 말차 체험</h4>
+        <p>교토 전통 찻집에서 말차와 와가시(일본 전통 과자) 체험. 다도 문화 배우기</p>
+        <div class="timeline-tags"><span class="tag activity">체험</span><span class="tag food">말차</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">18:00</span>
+        <h4>&#x1f338; 교토역 주변 저녁</h4>
+        <p>교토역 빌딩의 공중정원에서 야경 감상 후, 라멘 코지에서 교토식 돈코츠 라멘</p>
+        <div class="timeline-tags"><span class="tag food">저녁</span><span class="tag spot">교토역</span></div>
+      </div>
+    </div>
+
+    <!-- Day 12 -->
+    <h3 class="fade-up" style="font-weight:700; color:var(--deep-navy); margin:2.5rem 0 1.5rem;">&#x1f4c6; Day 12 &middot; 5월 8일 (목) - 우지 & 교토 남부</h3>
+    <div class="schedule-timeline fade-up">
+      <div class="timeline-item">
+        <span class="timeline-time">09:00</span>
+        <h4>&#x1f685; 우지로 이동</h4>
+        <p>JR 나라선으로 교토역에서 약 20분. 일본 말차의 본고장 우지 도착</p>
+        <div class="timeline-tags"><span class="tag transport">이동 20분</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">09:30</span>
+        <h4>&#x26e9; 뵤도인 (평등원)</h4>
+        <p>10엔 동전에 그려진 봉황당이 있는 세계유산. 극락정토를 재현한 아름다운 정원</p>
+        <div class="timeline-tags"><span class="tag spot">뵤도인</span><span class="tag activity">세계유산</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">11:00</span>
+        <h4>&#x1f375; 우지 말차 거리</h4>
+        <p>말차 소바, 말차 파르페, 말차 아이스크림... 말차 덕후의 천국! 나카무라 토키치 본점 필수</p>
+        <div class="timeline-tags"><span class="tag food">말차 맛집</span><span class="tag spot">우지</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">13:00</span>
+        <h4>&#x1f682; 교토 복귀 & 니조성</h4>
+        <p>도쿠가와 이에야스가 지은 니조성. '나이팅게일 마루'(울음소리 나는 복도)가 인상적</p>
+        <div class="timeline-tags"><span class="tag spot">니조성</span><span class="tag activity">세계유산</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">15:00</span>
+        <h4>&#x1f33f; 철학의 길 산책</h4>
+        <p>은각사에서 난젠지까지 이어지는 2km의 운치 있는 산책로. 봄 벚꽃, 초여름 신록이 아름다움</p>
+        <div class="timeline-tags"><span class="tag spot">철학의 길</span><span class="tag activity">산책</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">17:00</span>
+        <h4>&#x1f490; 기모노 대여 체험 & 사진촬영</h4>
+        <p>온 가족이 기모노를 입고 교토 거리에서 기념 촬영. 2~3시간 대여가 일반적</p>
+        <div class="timeline-tags"><span class="tag activity">기모노 체험</span><span class="tag activity">사진촬영</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">19:30</span>
+        <h4>&#x1f363; 교토 마지막 저녁</h4>
+        <p>폰토초 골목의 분위기 있는 이자카야에서 교토의 마지막 밤을 즐기기</p>
+        <div class="timeline-tags"><span class="tag food">특별 저녁</span><span class="tag spot">폰토초</span></div>
+      </div>
+    </div>
+
+    <div class="tip-box fade-up">
+      <h4>&#x1f4a1; 교토 여행 팁</h4>
+      <p>교토 버스 1일권(700엔)이면 시내 대부분의 관광지를 커버합니다. 후시미 이나리와 대나무숲은 이른 아침에 방문하는 것을 강력 추천! 기모노 대여는 사전 예약하면 할인받을 수 있어요. 우지는 교토 근교 필수 코스!</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════ FUKUOKA ══════════════════════════════ -->
+  <section class="section city-section" id="fukuoka">
+    <div class="section-header fade-up">
+      <div class="day-badge">DAY 13-14 &middot; 5/9~10</div>
+      <h2>&#x1f35c; 후쿠오카 <span class="jp">福岡</span></h2>
+      <p>일본 최고의 먹거리 도시, 야타이 포장마차의 고향</p>
+    </div>
+    <div class="city-divider"></div>
+
+    <!-- Day 13 -->
+    <h3 class="fade-up" style="font-weight:700; color:var(--deep-navy); margin-bottom:1.5rem;">&#x1f4c6; Day 13 &middot; 5월 9일 (금) - 후쿠오카 도착 & 시내 관광</h3>
+    <div class="schedule-timeline fade-up">
+      <div class="timeline-item">
+        <span class="timeline-time">09:00</span>
+        <h4>&#x1f685; 교토 → 후쿠오카 이동</h4>
+        <p>교토역에서 신칸센 노조미로 하카타역까지 약 2시간 40분</p>
+        <div class="timeline-tags"><span class="tag transport">신칸센</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">12:00</span>
+        <h4>&#x1f35c; 하카타 라멘 점심</h4>
+        <p>이치란 라멘 본점 또는 신신라멘에서 정통 하카타 돈코츠 라멘. 카에다마(면 추가) 필수!</p>
+        <div class="timeline-tags"><span class="tag food">맛집</span><span class="tag spot">하카타</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">14:00</span>
+        <h4>&#x1f3ec; 캐널시티 하카타</h4>
+        <p>운하가 흐르는 대형 복합 쇼핑몰. 분수 쇼와 다양한 브랜드 매장</p>
+        <div class="timeline-tags"><span class="tag spot">캐널시티</span><span class="tag activity">쇼핑</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">16:00</span>
+        <h4>&#x1f33a; 오호리 공원</h4>
+        <p>후쿠오카 시민의 휴식처. 호수 주변 산책과 일본정원 방문. 스타벅스 오호리점도 유명!</p>
+        <div class="timeline-tags"><span class="tag spot">오호리 공원</span><span class="tag activity">산책</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">18:30</span>
+        <h4>&#x1f3ee; 나카스 야타이 (포장마차) 저녁</h4>
+        <p>후쿠오카의 상징! 나카스 강변의 포장마차에서 라멘, 꼬치구이, 교자를 즐기는 특별한 저녁</p>
+        <div class="timeline-tags"><span class="tag food">야타이</span><span class="tag spot">나카스</span><span class="tag activity">필수체험</span></div>
+      </div>
+    </div>
+
+    <!-- Day 14 -->
+    <h3 class="fade-up" style="font-weight:700; color:var(--deep-navy); margin:2.5rem 0 1.5rem;">&#x1f4c6; Day 14 &middot; 5월 10일 (토) - 다자이후 & 귀국</h3>
+    <div class="schedule-timeline fade-up">
+      <div class="timeline-item">
+        <span class="timeline-time">09:00</span>
+        <h4>&#x26e9; 다자이후 텐만구</h4>
+        <p>학문의 신 스가와라 미치자네를 모신 신사. 참배길의 스타벅스 컨셉매장도 필수 방문!</p>
+        <div class="timeline-tags"><span class="tag spot">다자이후</span><span class="tag activity">참배</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">10:30</span>
+        <h4>&#x1f3db; 규슈 국립박물관</h4>
+        <p>다자이후 텐만구 옆에 위치한 국립박물관. 규슈의 아시아 교류 역사를 한눈에</p>
+        <div class="timeline-tags"><span class="tag spot">박물관</span><span class="tag activity">관람</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">12:00</span>
+        <h4>&#x1f362; 다자이후 참배길 점심</h4>
+        <p>우메가에모치(매실떡) 필수! 참배길에서 맛볼 수 있는 다양한 일본 간식들</p>
+        <div class="timeline-tags"><span class="tag food">맛집</span><span class="tag food">우메가에모치</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">14:00</span>
+        <h4>&#x1f6d2; 하카타역 & 텐진 마지막 쇼핑</h4>
+        <p>하카타역 빌딩과 텐진 지하상가에서 마지막 기념품 쇼핑. 토오카에비센, 히요코 만주 등</p>
+        <div class="timeline-tags"><span class="tag activity">쇼핑</span><span class="tag food">기념품</span></div>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-time">17:00</span>
+        <h4>&#x2708; 후쿠오카 공항 → 한국 귀국</h4>
+        <p>후쿠오카 공항에서 인천/김포행 탑승. 후쿠오카 공항은 시내에서 지하철 5분!</p>
+        <div class="timeline-tags"><span class="tag transport">귀국</span></div>
+      </div>
+    </div>
+
+    <div class="tip-box fade-up">
+      <h4>&#x1f4a1; 후쿠오카 여행 팁</h4>
+      <p>후쿠오카 공항은 시내에서 지하철로 5분 거리라 마지막 날까지 알차게 관광 가능! 야타이는 보통 18시 이후 오픈하며, 빈자리가 있는 곳에 앉으면 됩니다. 다자이후는 니시테쓰 전철로 약 40분.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════ PACKING ══════════════════════════════ -->
+  <section class="section" id="packing">
+    <div class="section-header fade-up">
+      <div class="day-badge">PACKING LIST</div>
+      <h2>&#x1f9f3; 짐 싸기 체크리스트</h2>
+      <p>구성원별로 체크하며 준비하세요. 체크 상태는 자동 저장됩니다!</p>
+    </div>
+
+    <div class="packing-tabs fade-up">
+      <button class="packing-tab active" data-who="공통">&#x1f3e0; 공통</button>
+      <button class="packing-tab" data-who="대디">&#x1f468; 대디</button>
+      <button class="packing-tab" data-who="연이">&#x1f469; 연이</button>
+      <button class="packing-tab" data-who="공주">&#x1f478; 공주</button>
+      <button class="packing-tab" data-who="왕자">&#x1f934; 왕자</button>
+    </div>
+
+    <div class="packing-list fade-up" id="packingList"></div>
+    <div class="packing-progress fade-up" id="packingProgress"></div>
+  </section>
+
+  <!-- ══════════════════════════════ BUDGET ══════════════════════════════ -->
+  <section class="section" id="budget">
+    <div class="section-header fade-up">
+      <div class="day-badge">BUDGET</div>
+      <h2>&#x1f4b0; 여행 경비 요약</h2>
+      <p>도시별 / 항목별 예상 경비 (1인 기준, 한화 환산)</p>
+    </div>
+
+    <!-- 데스크톱: 테이블 / 모바일: 카드 -->
+    <div class="overview-section fade-up budget-desktop">
+      <table class="budget-table">
+        <thead>
+          <tr>
+            <th>구분</th>
+            <th>&#x1f3d4; 삿포로<br><small>3일</small></th>
+            <th>&#x1f5fc; 도쿄<br><small>4일</small></th>
+            <th>&#x1f98c; 나라<br><small>2일</small></th>
+            <th>&#x26e9; 교토<br><small>3일</small></th>
+            <th>&#x1f35c; 후쿠오카<br><small>2일</small></th>
+            <th>합계</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>&#x1f3e8; 숙소</td><td>30만</td><td>56만</td><td>16만</td><td>30만</td><td>16만</td><td class="budget-total">148만</td>
+          </tr>
+          <tr>
+            <td>&#x1f35c; 식비</td><td>15만</td><td>24만</td><td>8만</td><td>15만</td><td>10만</td><td class="budget-total">72만</td>
+          </tr>
+          <tr>
+            <td>&#x1f685; 교통</td><td>5만</td><td>8만</td><td>3만</td><td>5만</td><td>3만</td><td class="budget-total">24만</td>
+          </tr>
+          <tr>
+            <td>&#x1f3ab; 입장/체험</td><td>3만</td><td>8만</td><td>2만</td><td>5만</td><td>2만</td><td class="budget-total">20만</td>
+          </tr>
+          <tr>
+            <td>&#x1f6cd; 쇼핑/기타</td><td>5만</td><td>10만</td><td>3만</td><td>5만</td><td>5만</td><td class="budget-total">28만</td>
+          </tr>
+          <tr class="budget-row-total">
+            <td>도시별 소계</td><td>58만</td><td>106만</td><td>32만</td><td>60만</td><td>36만</td><td class="budget-grand">292만</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="budget-mobile fade-up">
+      <div class="budget-card">
+        <div class="budget-card-header" style="background:linear-gradient(135deg,#4FC3F7,#039BE5);">&#x1f3d4; 삿포로 <small>3일</small></div>
+        <div class="budget-card-body">
+          <div class="budget-card-row"><span>&#x1f3e8; 숙소</span><span>30만</span></div>
+          <div class="budget-card-row"><span>&#x1f35c; 식비</span><span>15만</span></div>
+          <div class="budget-card-row"><span>&#x1f685; 교통</span><span>5만</span></div>
+          <div class="budget-card-row"><span>&#x1f3ab; 입장/체험</span><span>3만</span></div>
+          <div class="budget-card-row"><span>&#x1f6cd; 쇼핑/기타</span><span>5만</span></div>
+          <div class="budget-card-row total"><span>소계</span><span>58만</span></div>
+        </div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-card-header" style="background:linear-gradient(135deg,#FF7043,#E64A19);">&#x1f5fc; 도쿄 <small>4일</small></div>
+        <div class="budget-card-body">
+          <div class="budget-card-row"><span>&#x1f3e8; 숙소</span><span>56만</span></div>
+          <div class="budget-card-row"><span>&#x1f35c; 식비</span><span>24만</span></div>
+          <div class="budget-card-row"><span>&#x1f685; 교통</span><span>8만</span></div>
+          <div class="budget-card-row"><span>&#x1f3ab; 입장/체험</span><span>8만</span></div>
+          <div class="budget-card-row"><span>&#x1f6cd; 쇼핑/기타</span><span>10만</span></div>
+          <div class="budget-card-row total"><span>소계</span><span>106만</span></div>
+        </div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-card-header" style="background:linear-gradient(135deg,#81C784,#388E3C);">&#x1f98c; 나라 <small>2일</small></div>
+        <div class="budget-card-body">
+          <div class="budget-card-row"><span>&#x1f3e8; 숙소</span><span>16만</span></div>
+          <div class="budget-card-row"><span>&#x1f35c; 식비</span><span>8만</span></div>
+          <div class="budget-card-row"><span>&#x1f685; 교통</span><span>3만</span></div>
+          <div class="budget-card-row"><span>&#x1f3ab; 입장/체험</span><span>2만</span></div>
+          <div class="budget-card-row"><span>&#x1f6cd; 쇼핑/기타</span><span>3만</span></div>
+          <div class="budget-card-row total"><span>소계</span><span>32만</span></div>
+        </div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-card-header" style="background:linear-gradient(135deg,#CE93D8,#8E24AA);">&#x26e9; 교토 <small>3일</small></div>
+        <div class="budget-card-body">
+          <div class="budget-card-row"><span>&#x1f3e8; 숙소</span><span>30만</span></div>
+          <div class="budget-card-row"><span>&#x1f35c; 식비</span><span>15만</span></div>
+          <div class="budget-card-row"><span>&#x1f685; 교통</span><span>5만</span></div>
+          <div class="budget-card-row"><span>&#x1f3ab; 입장/체험</span><span>5만</span></div>
+          <div class="budget-card-row"><span>&#x1f6cd; 쇼핑/기타</span><span>5만</span></div>
+          <div class="budget-card-row total"><span>소계</span><span>60만</span></div>
+        </div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-card-header" style="background:linear-gradient(135deg,#FFD54F,#F9A825);">&#x1f35c; 후쿠오카 <small>2일</small></div>
+        <div class="budget-card-body">
+          <div class="budget-card-row"><span>&#x1f3e8; 숙소</span><span>16만</span></div>
+          <div class="budget-card-row"><span>&#x1f35c; 식비</span><span>10만</span></div>
+          <div class="budget-card-row"><span>&#x1f685; 교통</span><span>3만</span></div>
+          <div class="budget-card-row"><span>&#x1f3ab; 입장/체험</span><span>2만</span></div>
+          <div class="budget-card-row"><span>&#x1f6cd; 쇼핑/기타</span><span>5만</span></div>
+          <div class="budget-card-row total"><span>소계</span><span>36만</span></div>
+        </div>
+      </div>
+      <div class="budget-card">
+        <div class="budget-card-header" style="background:linear-gradient(135deg,var(--indigo),#5B4A8C);">&#x1f4b0; 1인 총 예상 경비</div>
+        <div class="budget-card-body">
+          <div class="budget-card-row total" style="border:none; padding-top:0;"><span>도시별 합계</span><span>292만</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="overview-section fade-up">
+      <h4 style="font-weight:700; color:var(--deep-navy); margin-bottom:1rem;">&#x2708; 별도 경비 (가족 전체)</h4>
+      <div class="budget-extra">
+        <div class="budget-extra-item"><span>인천↔삿포로 항공</span><span>약 120만</span></div>
+        <div class="budget-extra-item"><span>후쿠오카→인천 항공</span><span>약 60만</span></div>
+        <div class="budget-extra-item"><span>삿포로→도쿄 국내선</span><span>약 40만</span></div>
+        <div class="budget-extra-item"><span>JR패스 / 신칸센</span><span>약 80만</span></div>
+        <div class="budget-extra-item"><span>여행자보험 (4인)</span><span>약 12만</span></div>
+        <div class="budget-extra-item total"><span>별도 경비 합계</span><span>약 312만</span></div>
+      </div>
+    </div>
+
+    <div class="tip-box fade-up">
+      <h4>&#x1f4a1; 경비 팁</h4>
+      <p>위 금액은 예상치이며 실제와 다를 수 있어요. 환율 변동에 유의하세요. 편의점(세븐일레븐, 패밀리마트) 식사를 적절히 섞으면 식비를 절약할 수 있습니다. 돈키호테에서는 면세 혜택도 챙기세요!</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════ EMERGENCY ══════════════════════════════ -->
+  <section class="section" id="emergency">
+    <div class="section-header fade-up">
+      <div class="day-badge">EMERGENCY</div>
+      <h2>&#x1f6a8; 긴급 연락처</h2>
+      <p>만약을 위해 저장해두세요. 길게 눌러 전화번호를 복사할 수 있어요.</p>
+    </div>
+
+    <div class="emergency-grid fade-up">
+      <div class="emergency-card">
+        <div class="emergency-icon">&#x1f3e5;</div>
+        <h4>일본 긴급전화</h4>
+        <p class="emergency-num">경찰: <strong>110</strong></p>
+        <p class="emergency-num">소방/구급: <strong>119</strong></p>
+      </div>
+      <div class="emergency-card">
+        <div class="emergency-icon">&#x1f1f0;&#x1f1f7;</div>
+        <h4>주일 한국대사관</h4>
+        <p class="emergency-num">&#x1f4de; <strong>+81-3-3452-7611</strong></p>
+        <p class="emergency-detail">도쿄 미나토구 미나미아자부</p>
+        <p class="emergency-detail">긴급(영사콜센터): <strong>+82-2-3210-0404</strong></p>
+      </div>
+      <div class="emergency-card">
+        <div class="emergency-icon">&#x1f6e1;</div>
+        <h4>여행자보험</h4>
+        <p class="emergency-detail">보험사: <strong>___________</strong></p>
+        <p class="emergency-detail">증권번호: <strong>___________</strong></p>
+        <p class="emergency-detail">긴급연락: <strong>___________</strong></p>
+      </div>
+      <div class="emergency-card">
+        <div class="emergency-icon">&#x1f3e8;</div>
+        <h4>숙소 연락처</h4>
+        <p class="emergency-detail">삿포로: <strong>___________</strong></p>
+        <p class="emergency-detail">도쿄: <strong>___________</strong></p>
+        <p class="emergency-detail">나라: <strong>___________</strong></p>
+        <p class="emergency-detail">교토: <strong>___________</strong></p>
+        <p class="emergency-detail">후쿠오카: <strong>___________</strong></p>
+      </div>
+      <div class="emergency-card">
+        <div class="emergency-icon">&#x1f4b1;</div>
+        <h4>유용한 정보</h4>
+        <p class="emergency-detail">일본 국가번호: <strong>+81</strong></p>
+        <p class="emergency-detail">한국→일본: 시차 <strong>없음</strong></p>
+        <p class="emergency-detail">전압: <strong>100V</strong> (한국 돼지코 필요)</p>
+      </div>
+      <div class="emergency-card">
+        <div class="emergency-icon">&#x1f4f1;</div>
+        <h4>유용한 앱</h4>
+        <p class="emergency-detail"><strong>Google Maps</strong> — 길찾기 필수</p>
+        <p class="emergency-detail"><strong>Papago</strong> — 실시간 번역</p>
+        <p class="emergency-detail"><strong>Suica</strong> — 교통카드 충전</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════ COMMENTS ══════════════════════════════ -->
+  <section class="section" id="comments">
+    <div class="section-header fade-up">
+      <div class="day-badge">FAMILY TALK</div>
+      <h2>&#x1f4ac; 가족 의견 남기기</h2>
+      <p>이 여행 일정에 대한 의견이나 가고 싶은 곳, 수정 사항을 자유롭게 남겨주세요!</p>
+    </div>
+
+    <div class="comments-section fade-up">
+      <h3>&#x270d; 의견 작성</h3>
+      <p>누가 쓰는지 선택하고, 자유롭게 의견을 남겨주세요!</p>
+
+      <div class="comment-form" id="commentForm">
+        <div class="full">
+          <label>누구의 의견인가요?</label>
+          <div class="member-picker" id="memberPicker">
+            <button type="button" class="member-btn" data-name="대디" data-emoji="&#x1f468;">&#x1f468; 대디</button>
+            <button type="button" class="member-btn" data-name="연이" data-emoji="&#x1f469;">&#x1f469; 연이</button>
+            <button type="button" class="member-btn" data-name="공주" data-emoji="&#x1f478;">&#x1f478; 공주</button>
+            <button type="button" class="member-btn" data-name="왕자" data-emoji="&#x1f934;">&#x1f934; 왕자</button>
+          </div>
+          <input type="hidden" id="authorName" value="">
+        </div>
+        <div>
+          <label for="commentCity">관련 도시</label>
+          <select id="commentCity">
+            <option value="전체">전체 일정</option>
+            <option value="삿포로">삿포로</option>
+            <option value="도쿄">도쿄</option>
+            <option value="나라">나라</option>
+            <option value="교토">교토</option>
+            <option value="후쿠오카">후쿠오카</option>
+          </select>
+        </div>
+        <div>
+          <label for="commentReaction">반응</label>
+          <select id="commentReaction">
+            <option value="">선택 안함</option>
+            <option value="&#x1f60d;">&#x1f60d; 좋아요!</option>
+            <option value="&#x1f914;">&#x1f914; 고민되네</option>
+            <option value="&#x1f64b;">&#x1f64b; 여기 꼭 가자!</option>
+            <option value="&#x1f622;">&#x1f622; 여기는 빼자</option>
+            <option value="&#x1f4a1;">&#x1f4a1; 대안 제안</option>
+            <option value="&#x2753;">&#x2753; 질문 있어요</option>
+          </select>
+        </div>
+        <div class="full">
+          <label for="commentText">의견</label>
+          <textarea id="commentText" placeholder="여행 일정에 대한 의견을 자유롭게 작성해주세요..."></textarea>
+        </div>
+        <div class="full">
+          <button class="comment-submit" onclick="addComment()">&#x1f4e8; 의견 남기기</button>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:0.5rem; flex-wrap:wrap; margin-bottom:1rem;">
+        <button class="tag" style="cursor:pointer; border:none; font-size:0.85rem;" onclick="filterComments('전체')" data-filter="전체">전체 보기</button>
+        <button class="tag spot" style="cursor:pointer; border:none; font-size:0.85rem;" onclick="filterComments('삿포로')" data-filter="삿포로">삿포로</button>
+        <button class="tag spot" style="cursor:pointer; border:none; font-size:0.85rem;" onclick="filterComments('도쿄')" data-filter="도쿄">도쿄</button>
+        <button class="tag spot" style="cursor:pointer; border:none; font-size:0.85rem;" onclick="filterComments('나라')" data-filter="나라">나라</button>
+        <button class="tag spot" style="cursor:pointer; border:none; font-size:0.85rem;" onclick="filterComments('교토')" data-filter="교토">교토</button>
+        <button class="tag spot" style="cursor:pointer; border:none; font-size:0.85rem;" onclick="filterComments('후쿠오카')" data-filter="후쿠오카">후쿠오카</button>
+      </div>
+
+      <div class="comment-list" id="commentList">
+        <div class="no-comments">아직 의견이 없습니다. 첫 번째 의견을 남겨보세요!</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer class="footer">
+    <p class="footer-title">&#x1f1ef;&#x1f1f5; 우리 가족 일본 여행 2026 &#x1f1f0;&#x1f1f7;</p>
+    <p>2026. 4. 27 ~ 5. 10 &middot; 14일간의 여정</p>
+    <p>인천 &#x2192; 삿포로 &#x2192; 도쿄 &#x2192; 나라 &#x2192; 교토 &#x2192; 후쿠오카 &#x2192; 인천</p>
+    <p style="margin-top:0.5rem; font-size:0.8rem;">Made with &#x2665; for our family</p>
+  </footer>
+
+  <!-- ── Delete Modal ── -->
+  <div class="modal-overlay" id="deleteModal">
+    <div class="modal">
+      <h3>&#x1f5d1; 댓글 삭제</h3>
+      <p>이 댓글을 정말 삭제할까요?</p>
+      <div class="modal-btns">
+        <button class="btn-cancel" onclick="closeDeleteModal()">취소</button>
+        <button class="btn-confirm" onclick="confirmDelete()">삭제</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- Scroll buttons -->
+  <div class="scroll-btns" id="scrollBtns">
+    <button class="scroll-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="맨 위로">&#x2191;</button>
+    <button class="scroll-btn" onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})" title="맨 아래로">&#x2193;</button>
+  </div>
+
+  <!-- Touch zone for revealing nav on mobile -->
+  <div class="nav-touch-zone" id="navTouchZone"></div>
+
+  <script>
+    // ── Scroll buttons (show after scrolling 400px) ──
+    const scrollBtns = document.getElementById('scrollBtns');
+    window.addEventListener('scroll', () => {
+      scrollBtns.classList.toggle('show', scrollY > 400);
+    });
+
+    // ── Mobile nav: auto-hide on scroll down, reveal on touch top zone ──
+    (function() {
+      const nav = document.querySelector('.nav-bar');
+      const zone = document.getElementById('navTouchZone');
+      if (!nav || !zone) return;
+      let lastY = 0, hideTimer = null;
+
+      // Only activate on mobile
+      function isMobile() { return window.innerWidth <= 768; }
+
+      window.addEventListener('scroll', () => {
+        if (!isMobile()) { nav.classList.remove('nav-hidden'); return; }
+        const y = scrollY;
+        if (y > 200 && y > lastY) {
+          nav.classList.add('nav-hidden');
+        }
+        lastY = y;
+      });
+
+      // Touch/hover top zone to reveal
+      function revealNav() {
+        nav.classList.remove('nav-hidden');
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(() => {
+          if (scrollY > 200) nav.classList.add('nav-hidden');
+        }, 3000);
+      }
+
+      zone.addEventListener('touchstart', revealNav);
+      zone.addEventListener('mouseenter', revealNav);
+
+      // Also reveal on scroll up
+      window.addEventListener('scroll', () => {
+        if (!isMobile()) return;
+        if (scrollY < lastY - 30) {
+          nav.classList.remove('nav-hidden');
+          clearTimeout(hideTimer);
+          hideTimer = setTimeout(() => {
+            if (scrollY > 200) nav.classList.add('nav-hidden');
+          }, 2500);
+        }
+      });
+    })();
+
+    // ── D-Day Countdown ──
+    (function updateDday() {
+      const tripStart = new Date('2026-04-27T07:00:00+09:00');
+      const tripEnd = new Date('2026-05-10T23:59:59+09:00');
+      const box = document.getElementById('ddayBox');
+
+      function render() {
+        const now = new Date();
+        if (now >= tripStart && now <= tripEnd) {
+          const day = Math.floor((now - tripStart) / 86400000) + 1;
+          box.className = 'dday-box traveling';
+          box.innerHTML = `<div class="dday-unit"><span class="dday-num">DAY ${day}</span><span class="dday-label">여행 중!</span></div>`;
+        } else if (now > tripEnd) {
+          box.className = 'dday-box ended';
+          box.innerHTML = `<div class="dday-unit"><span class="dday-num">&#x2728;</span><span class="dday-label">다녀왔어요!</span></div>`;
+        } else {
+          const diff = tripStart - now;
+          const d = Math.floor(diff / 86400000);
+          const h = Math.floor((diff % 86400000) / 3600000);
+          const m = Math.floor((diff % 3600000) / 60000);
+          const s = Math.floor((diff % 60000) / 1000);
+          box.className = 'dday-box';
+          box.innerHTML = `
+            <div class="dday-unit"><span class="dday-num">${d}</span><span class="dday-label">DAYS</span></div>
+            <span class="dday-sep">:</span>
+            <div class="dday-unit"><span class="dday-num">${String(h).padStart(2,'0')}</span><span class="dday-label">HRS</span></div>
+            <span class="dday-sep">:</span>
+            <div class="dday-unit"><span class="dday-num">${String(m).padStart(2,'0')}</span><span class="dday-label">MIN</span></div>
+            <span class="dday-sep">:</span>
+            <div class="dday-unit"><span class="dday-num">${String(s).padStart(2,'0')}</span><span class="dday-label">SEC</span></div>`;
+        }
+      }
+      render();
+      setInterval(render, 1000);
+    })();
+
+    // ── Sync Layer (jsonbin.io / localStorage fallback) ──
+    let _syncDirty = false;
+
+    function syncUpload() {
+      if (!SYNC_ENABLED) return;
+      const payload = {
+        comments: JSON.parse(localStorage.getItem('japan_trip_comments') || '[]'),
+        schedComments: JSON.parse(localStorage.getItem('japan_trip_sched_comments') || '{}'),
+        packing: JSON.parse(localStorage.getItem('japan_trip_packing') || '{}')
+      };
+      fetch(SYNC_URL, { method: 'PUT', headers: SYNC_HEADERS, body: JSON.stringify(payload) })
+        .then(() => { _syncDirty = false; })
+        .catch(e => console.warn('Sync upload failed:', e));
+    }
+
+    function syncDownload() {
+      if (!SYNC_ENABLED) return;
+      fetch(SYNC_URL + '/latest', { headers: { 'X-Access-Key': JSONBIN_API_KEY } })
+        .then(r => r.json())
+        .then(data => {
+          const d = data.record || data;
+          if (d.comments) { localStorage.setItem('japan_trip_comments', JSON.stringify(d.comments)); renderComments(); }
+          if (d.schedComments) {
+            localStorage.setItem('japan_trip_sched_comments', JSON.stringify(d.schedComments));
+            document.querySelectorAll('.timeline-item').forEach((_, i) => renderSchedComments('sched-' + i));
+          }
+          if (d.packing) { localStorage.setItem('japan_trip_packing', JSON.stringify(d.packing)); renderPacking(); }
+        })
+        .catch(e => console.warn('Sync download failed:', e));
+    }
+
+    function markDirtyAndSync() {
+      if (!SYNC_ENABLED) return;
+      _syncDirty = true;
+      clearTimeout(_syncTimer);
+      _syncTimer = setTimeout(syncUpload, 1500);
+    }
+
+    // ── Packing Checklist ──
+
+    const PACK_KEY = 'japan_trip_packing';
+    const PACKING_DATA = {
+      '공통': {
+        '필수 서류': ['여권', '항공권 (e-티켓)', '호텔 예약 확인서', '여행자보험 증서', '여권 사본 (별도 보관)'],
+        '전자기기': ['스마트폰 충전기', '보조배터리', '카메라', '멀티어댑터 (100V)', '와이파이 / 유심'],
+        '의약품': ['상비약 (해열제, 소화제)', '밴드 / 반창고', '모기약 / 벌레퇴치', '개인 처방약'],
+        '기타': ['우산 / 우비', '에코백 (쇼핑용)', '필기도구', '지퍼백 (짐 정리)', '캐리어 자물쇠']
+      },
+      '대디': {
+        '의류': ['반팔 4벌', '긴팔/셔츠 3벌', '긴바지 2벌', '반바지 1벌', '속옷/양말 7세트', '잠옷', '가벼운 겉옷'],
+        '세면도구': ['칫솔/치약', '면도기', '선크림', '개인 용품'],
+        '기타': ['선글라스', '운동화 (편한 것)', '슬리퍼']
+      },
+      '연이': {
+        '의류': ['반팔 4벌', '긴팔/블라우스 3벌', '바지 2벌', '원피스/치마 1벌', '속옷/양말 7세트', '잠옷', '가디건'],
+        '세면도구': ['칫솔/치약', '스킨케어', '선크림', '화장품 파우치'],
+        '기타': ['선글라스', '운동화', '슬리퍼', '모자']
+      },
+      '공주': {
+        '의류': ['반팔 5벌', '긴팔 3벌', '바지 3벌', '치마 1벌', '속옷/양말 7세트', '잠옷', '겉옷'],
+        '세면도구': ['칫솔/치약', '선크림 (어린이용)'],
+        '놀거리': ['색칠공부/스케치북', '좋아하는 장난감', '태블릿/이어폰'],
+        '기타': ['운동화', '슬리퍼', '물병']
+      },
+      '왕자': {
+        '의류': ['반팔 5벌', '긴팔 3벌', '바지 3벌', '반바지 1벌', '속옷/양말 7세트', '잠옷', '겉옷'],
+        '세면도구': ['칫솔/치약', '선크림 (어린이용)'],
+        '놀거리': ['색칠공부/스케치북', '좋아하는 장난감', '태블릿/이어폰'],
+        '기타': ['운동화', '슬리퍼', '물병']
+      }
+    };
+
+    let currentPackTab = '공통';
+
+    function getPackState() {
+      try { return JSON.parse(localStorage.getItem(PACK_KEY)) || {}; } catch { return {}; }
+    }
+    function savePackState(s) {
+      localStorage.setItem(PACK_KEY, JSON.stringify(s));
+      markDirtyAndSync();
+    }
+
+    function renderPacking() {
+      const state = getPackState();
+      const data = PACKING_DATA[currentPackTab];
+      const list = document.getElementById('packingList');
+      let total = 0, checked = 0;
+
+      let html = '';
+      for (const [cat, items] of Object.entries(data)) {
+        html += `<div class="packing-category"><h4>${cat}</h4>`;
+        items.forEach(item => {
+          const key = `${currentPackTab}::${item}`;
+          const isChecked = !!state[key];
+          total++;
+          if (isChecked) checked++;
+          html += `<div class="packing-item ${isChecked ? 'checked' : ''}" onclick="togglePack(this, '${key.replace(/'/g, "\\'")}')">
+            <input type="checkbox" ${isChecked ? 'checked' : ''} tabindex="-1">
+            <label>${item}</label>
+          </div>`;
+        });
+        html += '</div>';
+      }
+      list.innerHTML = html;
+
+      const pct = total > 0 ? Math.round(checked / total * 100) : 0;
+      document.getElementById('packingProgress').innerHTML = `
+        <div class="packing-bar"><div class="packing-bar-fill" style="width:${pct}%"></div></div>
+        <span>${checked}/${total} 완료 (${pct}%)</span>`;
+    }
+
+    function togglePack(el, key) {
+      const state = getPackState();
+      state[key] = !state[key];
+      savePackState(state);
+      renderPacking();
+    }
+
+    document.querySelectorAll('.packing-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.packing-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        currentPackTab = tab.dataset.who;
+        renderPacking();
+      });
+    });
+
+    renderPacking();
+
+    // ── Sakura Petals ──
+    (function() {
+      const c = document.getElementById('sakuraFall');
+      for (let i = 0; i < 25; i++) {
+        const p = document.createElement('div');
+        p.className = 'petal';
+        p.style.left = Math.random()*100+'%';
+        p.style.animationDuration = (5+Math.random()*8)+'s';
+        p.style.animationDelay = Math.random()*10+'s';
+        p.style.width = (8+Math.random()*8)+'px';
+        p.style.height = p.style.width;
+        p.style.opacity = 0.3+Math.random()*0.4;
+        c.appendChild(p);
+      }
+    })();
+
+    // ── Scroll Animations ──
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ── Navigation ──
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+      item.addEventListener('click', () => {
+        const t = document.getElementById(item.dataset.target);
+        if (t) t.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    const sections = document.querySelectorAll('.section, .city-section');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => { if (scrollY >= s.offsetTop - 120) current = s.id; });
+      navItems.forEach(item => item.classList.toggle('active', item.dataset.target === current));
+    });
+
+    // ── Global Comments ──
+    const STORAGE_KEY = 'japan_trip_comments';
+    let currentFilter = '전체';
+    let deleteTargetId = null;
+
+    function getComments() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; }
+    }
+    function saveComments(c) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(c));
+      markDirtyAndSync();
+    }
+
+    function hashPassword(pw) {
+      let h = 0;
+      for (let i = 0; i < pw.length; i++) { h = ((h << 5) - h) + pw.charCodeAt(i); h = h & h; }
+      return h.toString();
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    function escapeHtml(str) { const d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
+
+    // ── Member Picker ──
+    const MEMBERS = {
+      '대디': '&#x1f468;',
+      '연이': '&#x1f469;',
+      '공주': '&#x1f478;',
+      '왕자': '&#x1f934;'
+    };
+
+    document.querySelectorAll('.member-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const picker = btn.closest('.member-picker');
+        picker.querySelectorAll('.member-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        document.getElementById('authorName').value = btn.dataset.name;
+      });
+    });
+
+    function addComment() {
+      const name = document.getElementById('authorName').value.trim();
+      const city = document.getElementById('commentCity').value;
+      const reaction = document.getElementById('commentReaction').value;
+      const text = document.getElementById('commentText').value.trim();
+
+      if (!name) { showToast('가족 구성원을 선택해주세요.'); return; }
+      if (!text) { showToast('의견을 입력해주세요.'); return; }
+
+      const comments = getComments();
+      comments.unshift({
+        id: Date.now().toString(), name, city, reaction, text,
+        date: new Date().toLocaleString('ko-KR', { year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit' })
+      });
+      saveComments(comments);
+      renderComments();
+      document.getElementById('commentText').value = '';
+      document.getElementById('commentCity').value = '전체';
+      document.getElementById('commentReaction').value = '';
+      showToast('의견이 등록되었습니다!');
+    }
+
+    function renderComments() {
+      const comments = getComments();
+      const list = document.getElementById('commentList');
+      const filtered = currentFilter === '전체' ? comments : comments.filter(c => c.city === currentFilter);
+
+      if (filtered.length === 0) {
+        list.innerHTML = '<div class="no-comments">' +
+          (currentFilter === '전체' ? '아직 의견이 없습니다. 첫 번째 의견을 남겨보세요!' : `"${currentFilter}" 관련 의견이 없습니다.`) + '</div>';
+        return;
+      }
+      list.innerHTML = filtered.map(c => `
+        <div class="comment-item" data-id="${c.id}">
+          <button class="comment-delete" onclick="openDeleteModal('${c.id}')" title="삭제">&times;</button>
+          <div class="comment-header"><div>
+            <span class="comment-author">${MEMBERS[c.name] || ''} ${escapeHtml(c.name)}</span>
+            <span class="comment-city-tag">${escapeHtml(c.city)}</span>
+            ${c.reaction ? `<span class="comment-emoji">${c.reaction}</span>` : ''}
+          </div></div>
+          <div class="comment-text">${escapeHtml(c.text)}</div>
+          <div class="comment-date">${c.date}</div>
+        </div>`).join('');
+    }
+
+    function filterComments(city) {
+      currentFilter = city;
+      document.querySelectorAll('[data-filter]').forEach(b => b.style.outline = b.dataset.filter === city ? '2px solid var(--indigo)' : 'none');
+      renderComments();
+    }
+
+    function openDeleteModal(id) {
+      deleteTargetId = id;
+      document.getElementById('deleteModal').classList.add('show');
+    }
+
+    function closeDeleteModal() {
+      deleteTargetId = null;
+      schedDeleteSid = null; schedDeleteCid = null;
+      document.getElementById('deleteModal').classList.remove('show');
+    }
+
+    function confirmDelete() {
+      if (schedDeleteSid) { confirmSchedDelete(); return; }
+      const comments = getComments();
+      const idx = comments.findIndex(c => c.id === deleteTargetId);
+      if (idx === -1) { closeDeleteModal(); return; }
+      comments.splice(idx, 1);
+      saveComments(comments);
+      renderComments();
+      closeDeleteModal();
+      showToast('댓글이 삭제되었습니다.');
+    }
+
+    document.getElementById('deleteModal').addEventListener('click', e => { if (e.target === e.currentTarget) closeDeleteModal(); });
+
+    // ── Per-Schedule Inline Comments ──
+    const SCHED_KEY = 'japan_trip_sched_comments';
+    let schedDeleteSid = null, schedDeleteCid = null;
+
+    function getSchedComments() {
+      try { return JSON.parse(localStorage.getItem(SCHED_KEY)) || {}; } catch { return {}; }
+    }
+    function saveSchedComments(d) {
+      localStorage.setItem(SCHED_KEY, JSON.stringify(d));
+      markDirtyAndSync();
+    }
+
+    (function initScheduleComments() {
+      document.querySelectorAll('.timeline-item').forEach((item, idx) => {
+        const sid = 'sched-' + idx;
+        item.dataset.schedId = sid;
+
+        const btn = document.createElement('button');
+        btn.className = 'tl-comment-toggle';
+        btn.dataset.schedId = sid;
+        btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> <span>의견</span> <span class="cnt"></span>';
+        btn.onclick = () => { document.getElementById('panel-'+sid).classList.toggle('open'); };
+        item.appendChild(btn);
+
+        const panel = document.createElement('div');
+        panel.className = 'tl-comment-panel';
+        panel.id = 'panel-' + sid;
+        panel.innerHTML = `
+          <div class="tl-mini-form">
+            <div class="member-picker tl-member-picker" style="width:100%;">
+              <button type="button" class="member-btn" data-name="대디">&#x1f468; 대디</button>
+              <button type="button" class="member-btn" data-name="연이">&#x1f469; 연이</button>
+              <button type="button" class="member-btn" data-name="공주">&#x1f478; 공주</button>
+              <button type="button" class="member-btn" data-name="왕자">&#x1f934; 왕자</button>
+            </div>
+            <input class="tl-input-name" type="hidden" value="">
+            <textarea class="tl-input-text" placeholder="이 일정에 대한 의견을 남겨주세요..."></textarea>
+            <button class="tl-mini-submit" onclick="addSchedComment('${sid}')">등록</button>
+          </div>
+          <div class="tl-inline-comments" id="list-${sid}"></div>`;
+        // Wire up member picker for this panel
+        panel.querySelectorAll('.member-btn').forEach(b => {
+          b.addEventListener('click', () => {
+            panel.querySelectorAll('.member-btn').forEach(x => x.classList.remove('selected'));
+            b.classList.add('selected');
+            panel.querySelector('.tl-input-name').value = b.dataset.name;
+          });
+        });
+        item.appendChild(panel);
+        renderSchedComments(sid);
+      });
+    })();
+
+    function addSchedComment(sid) {
+      const panel = document.getElementById('panel-' + sid);
+      const name = panel.querySelector('.tl-input-name').value.trim();
+      const text = panel.querySelector('.tl-input-text').value.trim();
+      if (!name) { showToast('가족 구성원을 선택해주세요.'); return; }
+      if (!text) { showToast('의견을 입력해주세요.'); return; }
+      const all = getSchedComments();
+      if (!all[sid]) all[sid] = [];
+      all[sid].unshift({
+        id: Date.now().toString(), name, text,
+        date: new Date().toLocaleString('ko-KR', { year:'numeric', month:'long', day:'numeric', hour:'2-digit', minute:'2-digit' })
+      });
+      saveSchedComments(all);
+      panel.querySelector('.tl-input-text').value = '';
+      renderSchedComments(sid);
+      showToast('의견이 등록되었습니다!');
+    }
+
+    function renderSchedComments(sid) {
+      const all = getSchedComments();
+      const items = all[sid] || [];
+      const btn = document.querySelector(`.tl-comment-toggle[data-sched-id="${sid}"] .cnt`);
+      if (btn) btn.textContent = items.length > 0 ? items.length : '';
+      const list = document.getElementById('list-' + sid);
+      if (!list) return;
+      if (items.length === 0) { list.innerHTML = '<div class="tl-no-comments">아직 의견이 없습니다.</div>'; return; }
+      list.innerHTML = items.map(c => `
+        <div class="tl-c-item">
+          <button class="tl-c-del" onclick="deleteSchedComment('${sid}','${c.id}')" title="삭제">&times;</button>
+          <span class="tl-c-author">${MEMBERS[c.name] || ''} ${escapeHtml(c.name)}</span>
+          <span class="tl-c-date">${c.date}</span>
+          <div class="tl-c-text">${escapeHtml(c.text)}</div>
+        </div>`).join('');
+    }
+
+    function deleteSchedComment(sid, cid) {
+      schedDeleteSid = sid; schedDeleteCid = cid;
+      document.getElementById('deleteModal').classList.add('show');
+    }
+
+    function confirmSchedDelete() {
+      const all = getSchedComments();
+      const items = all[schedDeleteSid] || [];
+      const idx = items.findIndex(c => c.id === schedDeleteCid);
+      if (idx === -1) { closeDeleteModal(); return; }
+      items.splice(idx, 1);
+      all[schedDeleteSid] = items;
+      saveSchedComments(all);
+      renderSchedComments(schedDeleteSid);
+      closeDeleteModal();
+      showToast('댓글이 삭제되었습니다.');
+    }
+
+    // ── Japanese Word Auto-Annotation ──
+    const jwDict = [
+      // ── 음식 ──
+      ['미소 라멘', '味噌ラーメン (미소라멘) — 일본 된장으로 맛을 낸 라멘'],
+      ['돈코츠 라멘', '豚骨ラーメン (돈코츠라멘) — 돼지뼈를 오래 끓인 국물 라멘'],
+      ['돈코츠', '豚骨 (돈코츠) — 돼지뼈를 푹 고은 국물'],
+      ['카이센동', '海鮮丼 (카이센동) — 해산물 덮밥'],
+      ['시라스동', 'しらす丼 (시라스동) — 잔멸치 새끼를 올린 덮밥'],
+      ['다마고야키', '卵焼き (타마고야키) — 달콤한 일본식 계란말이'],
+      ['야키토리', '焼き鳥 (야키토리) — 닭꼬치구이'],
+      ['야키니쿠', '焼肉 (야키니쿠) — 고기 구이, 한국 불고기와 비슷'],
+      ['징기스칸', 'ジンギスカン — 양고기 BBQ, 칭기즈칸 이름에서 유래'],
+      ['유바', '湯葉 (유바) — 두유를 끓여 건져낸 껍질, 교토 별미'],
+      ['유도후', '湯豆腐 (유도후) — 뜨거운 물에 데친 부드러운 두부 요리'],
+      ['가마메시', '釜飯 (카마메시) — 작은 솥에 지은 밥, 솥밥'],
+      ['카키노하즈시', '柿の葉寿司 — 감잎으로 감싼 나라 전통 초밥'],
+      ['가이세키', '懐石 (카이세키) — 여러 코스로 나오는 일본 전통 고급 요리'],
+      ['와가시', '和菓子 (와가시) — 일본 전통 과자, 예쁜 모양이 특징'],
+      ['교자', '餃子 (교자) — 일본식 군만두, 바삭하게 구워요'],
+      ['우메가에모치', '梅ヶ枝餅 (우메가에모치) — 매화가지 떡, 다자이후 명물'],
+      ['카에다마', '替え玉 (카에다마) — 라멘 면 추가 (보통 무료!)'],
+      ['센베이', 'せんべい — 쌀로 만든 납작한 과자, 사슴도 좋아해요'],
+      ['프로마주', 'fromage (프로마주) — 프랑스어로 "치즈"'],
+      ['말차', '抹茶 (맛차) — 녹차 잎을 갈아 만든 가루 차'],
+      ['히요코 만주', 'ひよ子饅頭 — 병아리 모양의 귀여운 과자'],
+      ['소바', 'そば — 메밀로 만든 일본 국수'],
+      // ── 교통 ──
+      ['신칸센', '新幹線 (신칸센) — 일본 초고속 열차, 최대 시속 320km!'],
+      ['노조미', 'のぞみ — "희망"이라는 뜻, 신칸센 중 가장 빠른 열차'],
+      ['에노덴', '江ノ電 (에노덴) — 바닷가를 달리는 작은 전차'],
+      // ── 장소 ──
+      ['라멘 요코초', 'ラーメン横丁 — "라멘 골목"이라는 뜻'],
+      ['오도리 공원', '大通公園 (오도리) — "큰 거리 공원"이라는 뜻'],
+      ['타누키코지', '狸小路 (타누키코지) — "너구리 골목"이라는 뜻'],
+      ['니조 시장', '二条市場 (니조) — "두 번째 거리"의 시장'],
+      ['오르골당', 'オルゴール堂 — 뮤직박스 가게, 네덜란드어에서 유래'],
+      ['르타오', 'LeTAO — "오타루(小樽)"를 거꾸로 읽은 이름!'],
+      ['스스키노', 'すすきの — 삿포로에서 가장 번화한 거리'],
+      ['모이와야마', '藻岩山 (모이와야마) — 삿포로 야경 명소인 산'],
+      ['센소지', '浅草寺 (센소지) — 도쿄에서 가장 오래된 절'],
+      ['아사쿠사', '浅草 (아사쿠사) — "얕은 풀"이라는 뜻의 동네'],
+      ['카미나리몬', '雷門 (카미나리몬) — "번개문", 거대한 빨간 등이 유명'],
+      ['나카미세', '仲見世 (나카미세) — "안쪽 가게들", 절로 가는 상점가'],
+      ['아메요코', 'アメ横 (아메요코) — 미국(アメリカ) 물건을 팔던 골목'],
+      ['메이지 신궁', '明治神宮 — 메이지 천황을 모신 큰 신사'],
+      ['다케시타 거리', '竹下通り — "대나무 아래 거리", 패션의 거리'],
+      ['가부키초', '歌舞伎町 (카부키초) — 가부키 극장이 있던 번화가'],
+      ['오모이데 요코초', '思い出横丁 — "추억의 골목", 작은 술집이 모여있는 곳'],
+      ['오모테산도', '表参道 — "정면 참배길", 도쿄의 세련된 거리'],
+      ['고토쿠인', '高徳院 (코토쿠인) — "높은 덕의 절", 대불이 있는 곳'],
+      ['하세데라', '長谷寺 (하세데라) — "긴 골짜기의 절"'],
+      ['하치만구', '八幡宮 (하치만구) — 전쟁의 신을 모신 신궁'],
+      ['코마치도리', '小町通り — "작은 마을 거리", 가마쿠라 쇼핑거리'],
+      ['도다이지', '東大寺 (토다이지) — "동쪽의 큰 절"'],
+      ['나라마치', '奈良町 (나라마치) — 나라의 옛 마을, 전통 가옥이 남아있어요'],
+      ['가스가타이샤', '春日大社 — "봄날의 큰 신사", 사슴이 신의 사자!'],
+      ['이스이엔', '依水園 (이스이엔) — "물에 기대는 정원"'],
+      ['호류지', '法隆寺 (호류지) — "법이 번성하는 절", 세계에서 가장 오래된 목조 건물'],
+      ['야쿠시지', '薬師寺 (야쿠시지) — "약사불의 절"'],
+      ['도쇼다이지', '唐招提寺 — "당나라에서 초대받은 절"'],
+      ['모치이도노', '餅飯殿 (모치이도노) — "떡밥 전각" 거리'],
+      ['미야게', '土産 (미야게) — 기념품, 선물이라는 뜻'],
+      ['요시키엔', '吉城園 (요시키엔) — "좋은 성의 정원"'],
+      ['후시미 이나리', '伏見稲荷 — 여우신(이나리)을 모신 신사'],
+      ['도리이', '鳥居 (토리이) — 신사 입구의 기둥문, "새가 앉는 곳"'],
+      ['기요미즈데라', '清水寺 (키요미즈데라) — "맑은 물의 절"'],
+      ['니넨자카', '二年坂 — "2년 언덕", 넘어지면 2년 안에 불행이 온다는 전설'],
+      ['산넨자카', '三年坂 — "3년 언덕", 넘어지면 3년 안에 불행이 온다는 전설'],
+      ['기온', '祇園 (기온) — 게이샤를 만날 수 있는 교토의 전통 거리'],
+      ['마치야', '町家 (마치야) — 일본 전통 상가 주택, 길고 좁은 모양'],
+      ['하나미코지', '花見小路 (하나미코지) — "꽃구경 작은 길"'],
+      ['니시키 시장', '錦市場 (니시키) — "비단 시장", 교토의 부엌'],
+      ['가모가와', '鴨川 (카모가와) — "오리 강", 교토를 흐르는 강'],
+      ['노려카', '川床 (카와도코) — 강 위에 만든 좌석, 여름에 시원해요'],
+      ['도게츠교', '渡月橋 (토게츠쿄) — "달이 건너는 다리", 아라시야마 명소'],
+      ['킨카쿠지', '金閣寺 (킨카쿠지) — "금빛 누각의 절", 진짜 금박!'],
+      ['뵤도인', '平等院 (뵤도인) — "평등의 절", 10엔 동전 뒷면 그림'],
+      ['니조성', '二条城 (니조조) — "두 번째 거리의 성"'],
+      ['기모노', '着物 (키모노) — "입는 것", 일본 전통 옷'],
+      ['폰토초', '先斗町 (폰토초) — 교토의 좁고 분위기 있는 골목'],
+      ['이자카야', '居酒屋 (이자카야) — "앉아서 술 마시는 집", 일본식 술집'],
+      ['하카타', '博多 (하카타) — 후쿠오카의 옛 이름'],
+      ['야타이', '屋台 (야타이) — 길가의 포장마차'],
+      ['다자이후', '太宰府 (다자이후) — "큰 재상의 관청"이 있던 곳'],
+      ['텐만구', '天満宮 (텐만구) — "하늘이 가득한 신궁", 공부의 신'],
+      ['텐진', '天神 (텐진) — "하늘의 신", 후쿠오카 최대 번화가 이름'],
+      ['나카무라 토키치', '中村藤吉 — 1854년에 문을 연 우지의 유명 말차 가게'],
+      ['나이팅게일 마루', 'うぐいす張り — 밟으면 새소리가 나는 바닥, 침입자 감지용!'],
+      ['난젠지', '南禅寺 (난젠지) — "남쪽의 선(禪) 절"'],
+      ['히가시무키', '東向 (히가시무키) — "동쪽을 향한" 상점가'],
+      ['스시야도코로', '寿司屋通り — 초밥집이 모여 있는 거리'],
+      ['긴테쓰', '近鉄 (킨테츠) — 긴키 일본 철도, 나라-교토 잇는 전철'],
+    ];
+
+    (function annotateJapaneseWords() {
+      const targets = document.querySelectorAll(
+        '.timeline-item p, .timeline-item h4, .tip-box p, .section-header p'
+      );
+
+      // Sort by length descending so longer terms match first
+      const sorted = [...jwDict].sort((a, b) => b[0].length - a[0].length);
+
+      targets.forEach(el => {
+        // Skip if inside a form or already processed
+        if (el.closest('.tl-mini-form') || el.closest('.comment-form')) return;
+
+        let html = el.innerHTML;
+        sorted.forEach(([term, tip]) => {
+          // Only replace first occurrence per element, avoid replacing inside tags
+          const safeHtml = html;
+          const regex = new RegExp(`(?<![<\\w])${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w>])`, '');
+          if (regex.test(safeHtml)) {
+            html = html.replace(regex,
+              `<span class="jw" data-t="${tip.replace(/"/g, '&quot;')}">${term}</span>`
+            );
+          }
+        });
+        el.innerHTML = html;
+      });
+    })();
+
+    // Tooltip element (shared, fixed position)
+    const jwTip = document.createElement('div');
+    jwTip.className = 'jw-tip';
+    document.body.appendChild(jwTip);
+    let jwTimer = null;
+
+    function showJwTip(text) {
+      clearTimeout(jwTimer);
+      jwTip.textContent = text;
+      jwTip.classList.add('show');
+    }
+
+    function hideJwTip() {
+      jwTimer = setTimeout(() => jwTip.classList.remove('show'), 120);
+    }
+
+    // Desktop hover
+    document.addEventListener('mouseover', (e) => {
+      const jw = e.target.closest('.jw');
+      if (jw && jw.dataset.t) showJwTip(jw.dataset.t);
+    });
+    document.addEventListener('mouseout', (e) => {
+      if (e.target.closest('.jw')) hideJwTip();
+    });
+
+    // Mobile / touch tap
+    document.addEventListener('click', (e) => {
+      const jw = e.target.closest('.jw');
+      if (jw && jw.dataset.t) {
+        e.preventDefault();
+        if (jwTip.classList.contains('show') && jwTip.textContent === jw.dataset.t) {
+          hideJwTip();
+        } else {
+          showJwTip(jw.dataset.t);
+          clearTimeout(jwTimer);
+          jwTimer = setTimeout(() => jwTip.classList.remove('show'), 3500);
+        }
+      } else {
+        jwTip.classList.remove('show');
+      }
+    });
+
+    // Init
+    renderComments();
+    filterComments('전체');
+
+    // ── jsonbin.io sync ──
+    if (SYNC_ENABLED) {
+      syncDownload(); // 페이지 로드 시 최신 데이터 가져오기
+      setInterval(syncDownload, 15000); // 15초마다 다른 기기 변경 확인
+      console.log('%c☁️ 동기화 활성화 — 가족 간 데이터가 공유됩니다', 'color:#4FC3F7; font-weight:bold;');
+    } else {
+      console.log('%c📱 오프라인 모드 — 이 기기에서만 저장됩니다', 'color:#E8829B; font-weight:bold;');
+      console.log('동기화 설정: index.html 상단의 JSONBIN_API_KEY, JSONBIN_BIN_ID를 채워주세요.');
+    }
+  </script>
+</body>
+</html>
