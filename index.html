@@ -1036,10 +1036,20 @@
       const lastSlide=slides[total-1];
       if(idx===total-1){
         quote.classList.add('active');
-        if(lastSlide.tagName==='VIDEO'){
+        if(lastSlide.tagName==='VIDEO'&&!lastSlide._played){
           lastSlide.currentTime=0;
           clearTimeout(lastSlide._playTimer);
-          lastSlide._playTimer=setTimeout(()=>{lastSlide.play().catch(()=>{})},2000);
+          // lock scroll during video
+          lockScroll=true;
+          lastSlide._playTimer=setTimeout(()=>{
+            lastSlide.play().catch(()=>{});
+          },2000);
+          // unlock after video ends once
+          lastSlide.addEventListener('ended',function onEnd(){
+            lockScroll=false;
+            lastSlide._played=true;
+            lastSlide.removeEventListener('ended',onEnd);
+          },{once:true});
         }
       }else{
         quote.classList.remove('active');
@@ -1047,7 +1057,19 @@
       }
       prev=idx;
     }
-    window.addEventListener('scroll',onScroll,{passive:true});
+    let lockScroll=false;
+    let lastScrollY=0;
+    function guardScroll(){
+      if(lockScroll){
+        window.scrollTo(0,lastScrollY);
+      }else{
+        lastScrollY=window.scrollY;
+      }
+    }
+    window.addEventListener('scroll',function(e){
+      guardScroll();
+      onScroll();
+    },{passive:false});
     onScroll();
   })();
 
