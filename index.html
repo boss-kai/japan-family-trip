@@ -189,12 +189,47 @@
   .tip-card p{font-size:.85rem;font-weight:300;color:#86868B;line-height:1.7}
 
   /* ── Luffy Evolution Scroll ── */
-  .luffy-evolution{height:700vh;position:relative;background:#080808}
+  .luffy-evolution{height:600vh;position:relative;background:#080808}
   .luffy-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
-  .luffy-slide{position:absolute;max-height:55vh;max-width:85%;object-fit:contain;opacity:0;transition:opacity .8s ease;z-index:1}
-  .luffy-slide.active{opacity:1}
-  .luffy-quote{position:absolute;bottom:4rem;left:50%;transform:translateX(-50%);text-align:center;z-index:3;opacity:0;transition:opacity .8s ease .2s;max-width:700px;width:100%;padding:0 2rem}
-  .luffy-quote.active{opacity:1}
+  .luffy-slide{position:absolute;max-height:55vh;max-width:85%;object-fit:contain;z-index:1;
+    opacity:0;transform:translateY(60px) scale(.92);
+    transition:opacity 1s cubic-bezier(.25,.46,.45,.94),transform 1s cubic-bezier(.25,.46,.45,.94);will-change:opacity,transform}
+  /* entering: fade in + slide up */
+  .luffy-slide.active{opacity:1;transform:translateY(0) scale(1)}
+  /* leaving: fade out + drift up further */
+  .luffy-slide.leaving{opacity:0;transform:translateY(-80px) scale(.95)}
+
+  /* per-slide unique enter animations */
+  .luffy-slide[data-anim="punch"]{transform:translateX(-80px) scale(.85) rotate(-8deg);transition:opacity .8s,transform .8s cubic-bezier(.34,1.56,.64,1)}
+  .luffy-slide[data-anim="punch"].active{transform:translateX(0) scale(1) rotate(0deg)}
+  .luffy-slide[data-anim="punch"].leaving{transform:translateX(80px) scale(.9);opacity:0}
+
+  .luffy-slide[data-anim="zoom"]{transform:scale(.3);filter:brightness(1.8);transition:opacity .9s,transform .9s cubic-bezier(.34,1.56,.64,1),filter .9s ease}
+  .luffy-slide[data-anim="zoom"].active{transform:scale(1);filter:brightness(1)}
+  .luffy-slide[data-anim="zoom"].leaving{transform:scale(1.15);opacity:0;filter:brightness(.5)}
+
+  .luffy-slide[data-anim="slam"]{transform:translateY(-100px) scale(1.2);transition:opacity .7s,transform .7s cubic-bezier(.22,1,.36,1)}
+  .luffy-slide[data-anim="slam"].active{transform:translateY(0) scale(1)}
+  .luffy-slide[data-anim="slam"].leaving{transform:translateY(100px) scale(.85);opacity:0}
+
+  .luffy-slide[data-anim="stretch"]{transform:scaleX(.3) scaleY(1.4);transition:opacity .8s,transform .8s cubic-bezier(.34,1.56,.64,1)}
+  .luffy-slide[data-anim="stretch"].active{transform:scaleX(1) scaleY(1)}
+  .luffy-slide[data-anim="stretch"].leaving{transform:scaleX(1.2) scaleY(.8);opacity:0}
+
+  .luffy-slide[data-anim="spin"]{transform:rotate(-20deg) scale(.7);transition:opacity .9s,transform .9s cubic-bezier(.25,.46,.45,.94)}
+  .luffy-slide[data-anim="spin"].active{transform:rotate(0deg) scale(1)}
+  .luffy-slide[data-anim="spin"].leaving{transform:rotate(15deg) scale(.85);opacity:0}
+
+  .luffy-slide[data-anim="flash"]{transform:scale(.5);filter:brightness(3) saturate(0);transition:opacity 1s,transform 1s cubic-bezier(.34,1.56,.64,1),filter 1.2s ease}
+  .luffy-slide[data-anim="flash"].active{transform:scale(1);filter:brightness(1) saturate(1)}
+  .luffy-slide[data-anim="flash"].leaving{transform:scale(1.1);opacity:0;filter:brightness(2)}
+
+  .luffy-slide[data-anim="gather"]{transform:scale(.6);opacity:0;transition:opacity 1.2s ease,transform 1.2s cubic-bezier(.25,.46,.45,.94)}
+  .luffy-slide[data-anim="gather"].active{transform:scale(1);opacity:1}
+  .luffy-slide[data-anim="gather"].leaving{transform:scale(1.05);opacity:0}
+
+  .luffy-quote{position:absolute;bottom:4rem;left:50%;transform:translateX(-50%) translateY(30px);text-align:center;z-index:3;opacity:0;transition:opacity 1s ease .3s,transform 1s ease .3s;max-width:700px;width:100%;padding:0 2rem}
+  .luffy-quote.active{opacity:1;transform:translateX(-50%) translateY(0)}
 
   /* ── Anime Interlude ── */
   .anime-interlude{position:relative;overflow:hidden;min-height:85vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;background:#080808;padding-bottom:4rem}
@@ -272,7 +307,7 @@
     .hero h1{font-size:2.5rem}
     .hero-sub{font-size:1rem}
     .city-section{padding:3.5rem 1rem}
-    .luffy-evolution{height:600vh}
+    .luffy-evolution{height:500vh}
     .luffy-slide{max-height:42vh!important}
     .anime-interlude{min-height:70vh;padding-bottom:3rem}
     .anime-char img{max-height:42vh!important}
@@ -443,13 +478,12 @@
 <div class="luffy-evolution" id="luffyEvolution">
   <div class="luffy-sticky">
     <img class="luffy-slide active" src="img/luffy/eastblue_5.png" alt="East Blue" data-idx="0">
-    <img class="luffy-slide" src="img/luffy/gear2_c.png" alt="Gear 2" data-idx="1">
-    <img class="luffy-slide" src="img/luffy/gear3.png" alt="Gear 3" data-idx="2">
-    <img class="luffy-slide" src="img/luffy/gear4.png" alt="Gear 4" data-idx="3">
-    <img class="luffy-slide" src="img/luffy/luffy.png" alt="Boundman" data-idx="4">
-    <img class="luffy-slide" src="img/luffy/nika_1.png" alt="Nika" data-idx="5">
-    <img class="luffy-slide" src="img/luffy/nika_2.png" alt="Nika Joy" data-idx="6">
-    <img class="luffy-slide" src="img/luffy/last.png" alt="Straw Hat Pirates" data-idx="7" style="max-height:65vh;max-width:95%">
+    <img class="luffy-slide" src="img/luffy/gear3.png" alt="Gear 3" data-idx="1" data-anim="punch">
+    <img class="luffy-slide" src="img/luffy/gear4.png" alt="Gear 4" data-idx="2" data-anim="zoom">
+    <img class="luffy-slide" src="img/luffy/luffy.png" alt="Boundman" data-idx="3" data-anim="slam">
+    <img class="luffy-slide" src="img/luffy/nika_1.png" alt="Nika" data-idx="4" data-anim="flash">
+    <img class="luffy-slide" src="img/luffy/nika_2.png" alt="Nika Joy" data-idx="5" data-anim="spin">
+    <img class="luffy-slide" src="img/luffy/last.png" alt="Straw Hat Pirates" data-idx="6" data-anim="gather" style="max-height:65vh;max-width:95%">
     <div class="luffy-quote" id="luffyQuote">
       <p class="quote-text">"얘들아, 출항이다!!"</p>
       <p class="quote-source"><strong>몽키 D. 루피</strong> <span class="work">— 원피스 ONE PIECE</span></p>
@@ -830,8 +864,11 @@
       const progress=scrolled/scrollH;
       const idx=Math.min(Math.floor(progress*total),total-1);
       if(idx===prev)return;
-      slides.forEach((s,i)=>{s.classList.toggle('active',i===idx)});
-      // Show quote only on last slide
+      slides.forEach((s,i)=>{
+        s.classList.remove('active','leaving');
+        if(i===idx) s.classList.add('active');
+        else if(i<idx) s.classList.add('leaving');
+      });
       quote.classList.toggle('active',idx===total-1);
       prev=idx;
     }
