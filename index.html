@@ -373,59 +373,59 @@
   <div class="map-stage" id="mapStage">
     <!-- Phase 1: GIF plays -->
     <img class="map-gif" id="mapGif" src="img/japan-map.gif" alt="일본 지도">
-    <!-- Phase 2: Cropped map (zoom into map) -->
-    <img class="map-crop" id="mapCrop" src="img/japan-map-crop.png" alt="일본 지도 확대">
-    <!-- Phase 3: Route overlay on cropped map -->
+    <!-- Phase 2: Cropped map (user-provided) -->
+    <img class="map-crop" id="mapCrop" src="img/image.png" alt="일본 지도 확대">
+    <!-- Phase 3: Route overlay -->
     <div class="map-overlay" id="mapOverlay">
-      <svg viewBox="0 0 555 610" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <svg viewBox="0 0 544 606" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
         <!-- Gold route line -->
-        <path class="route-line" id="routeLine" d="M370,80 Q378,195 400,310 L400,310 Q345,350 280,390 L260,375 L155,460"
+        <path class="route-line" id="routeLine" d="M370,45 Q385,170 400,300 L400,300 Q348,348 290,395 L265,375 L155,455"
           fill="none" stroke="#D4A853" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
 
         <!-- Sapporo -->
         <g class="city-dot" id="dot0">
-          <circle cx="370" cy="80" r="10" fill="rgba(212,168,83,.25)"><animate attributeName="r" values="10;16;10" dur="2s" repeatCount="indefinite"/></circle>
-          <circle cx="370" cy="80" r="5" fill="#D4A853"/>
-          <text x="390" y="72" class="map-city-label">삿포로</text>
-          <text x="390" y="85" class="map-city-jp">札幌 Sapporo</text>
-          <text x="390" y="98" class="map-city-days">Day 1-3</text>
+          <circle cx="370" cy="45" r="10" fill="rgba(212,168,83,.25)"><animate attributeName="r" values="10;16;10" dur="2s" repeatCount="indefinite"/></circle>
+          <circle cx="370" cy="45" r="5" fill="#D4A853"/>
+          <text x="392" y="36" class="map-city-label">삿포로</text>
+          <text x="392" y="50" class="map-city-jp">札幌 Sapporo</text>
+          <text x="392" y="63" class="map-city-days">Day 1-3</text>
         </g>
         <!-- Tokyo -->
         <g class="city-dot" id="dot1">
-          <circle cx="400" cy="310" r="10" fill="rgba(212,168,83,.25)"><animate attributeName="r" values="10;16;10" dur="2s" repeatCount="indefinite" begin=".4s"/></circle>
-          <circle cx="400" cy="310" r="5" fill="#D4A853"/>
-          <text x="420" y="302" class="map-city-label">도쿄</text>
-          <text x="420" y="315" class="map-city-jp">東京 Tokyo</text>
-          <text x="420" y="328" class="map-city-days">Day 4-7</text>
+          <circle cx="400" cy="300" r="10" fill="rgba(212,168,83,.25)"><animate attributeName="r" values="10;16;10" dur="2s" repeatCount="indefinite" begin=".4s"/></circle>
+          <circle cx="400" cy="300" r="5" fill="#D4A853"/>
+          <text x="422" y="292" class="map-city-label">도쿄</text>
+          <text x="422" y="306" class="map-city-jp">東京 Tokyo</text>
+          <text x="422" y="319" class="map-city-days">Day 4-7</text>
         </g>
         <!-- Nara -->
         <g class="city-dot" id="dot2">
-          <circle cx="280" cy="390" r="10" fill="rgba(212,168,83,.25)"><animate attributeName="r" values="10;16;10" dur="2s" repeatCount="indefinite" begin=".8s"/></circle>
-          <circle cx="280" cy="390" r="5" fill="#D4A853"/>
-          <text x="300" y="383" class="map-city-label">나라</text>
-          <text x="300" y="396" class="map-city-jp">奈良 Nara</text>
-          <text x="300" y="409" class="map-city-days">Day 8-9</text>
+          <circle cx="290" cy="395" r="10" fill="rgba(212,168,83,.25)"><animate attributeName="r" values="10;16;10" dur="2s" repeatCount="indefinite" begin=".8s"/></circle>
+          <circle cx="290" cy="395" r="5" fill="#D4A853"/>
+          <text x="312" y="388" class="map-city-label">나라</text>
+          <text x="312" y="402" class="map-city-jp">奈良 Nara</text>
+          <text x="312" y="415" class="map-city-days">Day 8-9</text>
         </g>
         <!-- Kyoto -->
         <g class="city-dot" id="dot3">
-          <circle cx="260" cy="375" r="10" fill="rgba(212,168,83,.25)"><animate attributeName="r" values="10;16;10" dur="2s" repeatCount="indefinite" begin="1.2s"/></circle>
-          <circle cx="260" cy="375" r="5" fill="#D4A853"/>
-          <text x="210" y="368" text-anchor="end" class="map-city-label">교토</text>
-          <text x="210" y="381" text-anchor="end" class="map-city-jp">京都 Kyoto</text>
-          <text x="210" y="394" text-anchor="end" class="map-city-days">Day 10-12</text>
+          <circle cx="265" cy="375" r="10" fill="rgba(212,168,83,.25)"><animate attributeName="r" values="10;16;10" dur="2s" repeatCount="indefinite" begin="1.2s"/></circle>
+          <circle cx="265" cy="375" r="5" fill="#D4A853"/>
+          <text x="215" y="368" text-anchor="end" class="map-city-label">교토</text>
+          <text x="215" y="382" text-anchor="end" class="map-city-jp">京都 Kyoto</text>
+          <text x="215" y="395" text-anchor="end" class="map-city-days">Day 10-12</text>
         </g>
         <!-- Fukuoka -->
         <g class="city-dot" id="dot4">
-          <circle cx="155" cy="460" r="10" fill="rgba(212,168,83,.25)"><animate attributeName="r" values="10;16;10" dur="2s" repeatCount="indefinite" begin="1.6s"/></circle>
-          <circle cx="155" cy="460" r="5" fill="#D4A853"/>
-          <text x="108" y="453" text-anchor="end" class="map-city-label">후쿠오카</text>
-          <text x="108" y="466" text-anchor="end" class="map-city-jp">福岡 Fukuoka</text>
-          <text x="108" y="479" text-anchor="end" class="map-city-days">Day 13-14</text>
+          <circle cx="155" cy="455" r="10" fill="rgba(212,168,83,.25)"><animate attributeName="r" values="10;16;10" dur="2s" repeatCount="indefinite" begin="1.6s"/></circle>
+          <circle cx="155" cy="455" r="5" fill="#D4A853"/>
+          <text x="105" y="448" text-anchor="end" class="map-city-label">후쿠오카</text>
+          <text x="105" y="462" text-anchor="end" class="map-city-jp">福岡 Fukuoka</text>
+          <text x="105" y="475" text-anchor="end" class="map-city-days">Day 13-14</text>
         </g>
 
         <!-- Animated plane -->
         <g class="route-plane" id="routePlane">
-          <animateMotion id="planeAnim" dur="4s" fill="freeze" begin="indefinite" path="M370,80 L400,310 L280,390 L260,375 L155,460"/>
+          <animateMotion id="planeAnim" dur="4s" fill="freeze" begin="indefinite" path="M370,45 L400,300 L290,395 L265,375 L155,455"/>
           <text font-size="18" text-anchor="middle" dy="5" fill="#D4A853">✈</text>
         </g>
       </svg>
@@ -810,30 +810,40 @@
     const plane=document.getElementById('routePlane');
     const planeAnim=document.getElementById('planeAnim');
 
-    // Phase 1: GIF plays for 5s
+    // GIF duration = 24 frames × 200ms = 4800ms, add buffer
+    const GIF_DURATION = 5200;
+
+    // Phase 1: GIF plays, then freeze by replacing src with static image
     setTimeout(()=>{
-      // Phase 2: Swap GIF → cropped map
-      gif.classList.add('hidden');
-      crop.classList.add('show');
+      // Freeze GIF: replace with last-frame static PNG
+      gif.src = 'img/japan-map-last.png';
 
+      // Phase 2: After brief pause, crossfade to cropped map
       setTimeout(()=>{
-        // Phase 3: Show overlay + draw route line
-        overlay.classList.add('show');
-        line.classList.add('animate');
+        gif.classList.add('hidden');
+        crop.classList.add('show');
 
-        // Phase 4: Pop in city dots one by one
-        dots.forEach((d,i)=>{
-          setTimeout(()=>d.classList.add('show'), 800 + i*600);
-        });
-
-        // Phase 5: Fly plane after dots
+        // Phase 3: After crop is visible, show overlay + animate
         setTimeout(()=>{
-          plane.classList.add('show');
-          planeAnim.beginElement();
-        }, 800 + dots.length*600 + 500);
+          overlay.classList.add('show');
 
-      },800); // wait for crop fade-in
-    },5000); // GIF duration
+          // Draw route line
+          setTimeout(()=> line.classList.add('animate'), 300);
+
+          // Pop in city dots sequentially
+          dots.forEach((d,i)=>{
+            setTimeout(()=>d.classList.add('show'), 3500 + i*700);
+          });
+
+          // Fly plane after all dots
+          setTimeout(()=>{
+            plane.classList.add('show');
+            planeAnim.beginElement();
+          }, 3500 + dots.length*700 + 500);
+
+        }, 1000); // wait for crop fade
+      }, 800); // brief pause after freeze
+    }, GIF_DURATION);
   }
 
   // ── Utils ──
