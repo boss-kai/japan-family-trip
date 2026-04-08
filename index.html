@@ -53,8 +53,110 @@
   .nav-item .nav-emoji{margin-right:.3rem}
 
   /* Tools link in nav */
-  .nav-tools-link{padding:.85rem 1.3rem;font-size:.85rem;font-weight:600;color:#FF375F;cursor:pointer;white-space:nowrap;text-decoration:none;transition:color .3s}
-  .nav-tools-link:hover{color:#FF6B8A}
+  /* ── Packing ── */
+  .packing-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;justify-content:center}
+  .packing-tab{padding:.5rem 1.2rem;border:2px solid rgba(255,255,255,.1);border-radius:50px;background:transparent;font-family:inherit;font-size:.9rem;font-weight:600;color:#86868B;cursor:pointer;transition:all .25s}
+  .packing-tab:hover{border-color:#FF375F;color:#FF375F}
+  .packing-tab.active{background:#FF375F;color:#fff;border-color:#FF375F}
+  .packing-list{background:#1D1D1F;border-radius:16px;padding:1.5rem}
+  .packing-category{margin-bottom:1.2rem}
+  .packing-category h4{font-size:.95rem;font-weight:700;color:#F5F5F7;margin-bottom:.6rem}
+  .packing-item{display:flex;align-items:center;gap:.6rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer}
+  .packing-item input[type="checkbox"]{width:20px;height:20px;accent-color:#FF375F;cursor:pointer;flex-shrink:0}
+  .packing-item label{cursor:pointer;font-size:.92rem;flex:1;color:#F5F5F7}
+  .packing-item.checked label{text-decoration:line-through;color:#86868B}
+  .packing-progress{text-align:center;margin-top:1rem;font-size:.88rem;color:#86868B}
+  .packing-bar{height:8px;background:#1D1D1F;border-radius:4px;margin:.5rem auto;max-width:300px;overflow:hidden}
+  .packing-bar-fill{height:100%;background:linear-gradient(90deg,#FF375F,#FF9F0A);border-radius:4px;transition:width .4s}
+
+  /* ── Budget ── */
+  .budget-card{background:#1D1D1F;border-radius:16px;overflow:hidden;margin-bottom:1rem}
+  .budget-card-header{padding:.7rem 1.2rem;color:#fff;font-weight:700;font-size:1rem}
+  .budget-card-header small{opacity:.8;font-weight:400;margin-left:.3rem}
+  .budget-card-body{padding:.5rem 1.2rem}
+  .budget-card-row{display:flex;justify-content:space-between;padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.92rem;color:#86868B}
+  .budget-card-row.total{border-top:2px solid #FF375F;border-bottom:none;font-weight:700;color:#FF375F;padding-top:.6rem;margin-top:.2rem}
+  .budget-extra{display:flex;flex-direction:column;gap:.4rem;background:#1D1D1F;border-radius:16px;padding:1.2rem 1.5rem}
+  .budget-extra-item{display:flex;justify-content:space-between;padding:.5rem 0;font-size:.92rem;color:#86868B;border-bottom:1px solid rgba(255,255,255,.04)}
+  .budget-extra-item.total{border-top:2px solid #FF375F;border-bottom:none;font-weight:700;color:#FF375F;margin-top:.3rem;padding-top:.8rem}
+  .budget-total-box{background:#1D1D1F;border-radius:16px;padding:2rem;text-align:center;margin-top:1rem}
+  .budget-total-box h3{font-size:1.1rem;font-weight:700;color:#F5F5F7;margin-bottom:.5rem}
+  .budget-total-box .big{font-size:2rem;font-weight:900;color:#FF375F}
+  .budget-total-box .detail{font-size:.85rem;color:#86868B;margin-top:.3rem}
+  .rate-cards{display:flex;justify-content:center;flex-wrap:wrap;gap:.8rem}
+  .rate-card{background:#1D1D1F;border-radius:12px;padding:1rem 1.5rem;min-width:130px;flex:1;max-width:180px;text-align:center}
+  .rate-card .label{font-size:.8rem;color:#86868B}
+  .rate-card .value{font-size:1.4rem;font-weight:900;color:#FF375F}
+  .rate-card .example{font-size:.75rem;color:#555}
+
+  /* ── Emergency ── */
+  .emergency-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+  .emergency-card{background:#1D1D1F;border-radius:16px;padding:1.5rem;transition:all .3s}
+  .emergency-card:hover{background:#2D2D2F}
+  .emergency-icon{font-size:2rem;margin-bottom:.5rem}
+  .emergency-card h4{font-size:1rem;font-weight:700;color:#F5F5F7;margin-bottom:.6rem}
+  .emergency-num{font-size:.95rem;margin-bottom:.3rem;color:#86868B}
+  .emergency-num strong{color:#FF375F;font-size:1.05rem}
+  .emergency-detail{font-size:.88rem;color:#86868B;margin-bottom:.2rem;line-height:1.5}
+  .emergency-detail strong{color:#F5F5F7}
+
+  /* ── Comments ── */
+  .comment-form{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+  .member-picker{display:flex;gap:.5rem;flex-wrap:wrap}
+  .member-btn{flex:1;min-width:70px;padding:.6rem .5rem;border:2px solid rgba(255,255,255,.1);border-radius:12px;background:transparent;font-family:inherit;font-size:.95rem;font-weight:600;color:#86868B;cursor:pointer;transition:all .25s;text-align:center}
+  .member-btn:hover{border-color:#FF375F;color:#FF375F}
+  .member-btn.selected{border-color:#FF375F;background:#FF375F;color:#fff}
+  .comment-form select,.comment-form textarea{width:100%;padding:.75rem 1rem;border:2px solid rgba(255,255,255,.1);border-radius:12px;font-family:inherit;font-size:16px;background:#1D1D1F;color:#F5F5F7;transition:border-color .3s}
+  .comment-form select:focus,.comment-form textarea:focus{outline:none;border-color:#FF375F}
+  .comment-form textarea{resize:vertical;min-height:80px}
+  .comment-submit{background:#FF375F;color:#fff;border:none;padding:.85rem 2.5rem;border-radius:50px;font-family:inherit;font-size:1rem;font-weight:700;cursor:pointer;transition:all .3s;width:100%}
+  .comment-submit:hover{background:#E0294F}
+  .comment-item{padding:1.2rem 1.5rem;background:#1D1D1F;border-radius:12px;margin-bottom:.8rem;position:relative}
+  .comment-item .comment-author{font-weight:700;color:#FF375F}
+  .comment-item .comment-city-tag{font-size:.72rem;padding:.1rem .5rem;border-radius:50px;background:rgba(0,113,227,.15);color:#0071E3;font-weight:600}
+  .comment-item .comment-emoji{font-size:.82rem;padding:.1rem .5rem;border-radius:50px;background:rgba(255,55,95,.1)}
+  .comment-item .comment-text{color:#F5F5F7;font-size:.92rem;line-height:1.6;margin-top:.5rem}
+  .comment-item .comment-date{font-size:.78rem;color:#555;margin-top:.5rem}
+  .comment-item .comment-delete{position:absolute;top:1rem;right:1rem;background:none;border:none;color:#555;cursor:pointer;font-size:1.1rem;transition:color .3s}
+  .comment-item .comment-delete:hover{color:#FF375F}
+  .no-comments{text-align:center;color:#555;padding:2rem;font-style:italic}
+  .filter-tags{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+  .filter-tag{padding:.3rem .8rem;border-radius:50px;font-size:.82rem;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,.1);background:transparent;color:#86868B;transition:all .25s}
+  .filter-tag:hover,.filter-tag.active{border-color:#FF375F;color:#FF375F}
+
+  /* ── Modal ── */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(5px);z-index:1000;align-items:center;justify-content:center}
+  .modal-overlay.show{display:flex}
+  .modal{background:#1D1D1F;border-radius:16px;padding:2rem;max-width:400px;width:90%;text-align:center;border:1px solid rgba(255,255,255,.1)}
+  .modal h3{margin-bottom:1rem;color:#F5F5F7}
+  .modal p{margin-bottom:1.5rem;color:#86868B}
+  .modal-btns{display:flex;gap:.8rem;justify-content:center}
+  .modal-btns button{padding:.6rem 1.5rem;border-radius:50px;font-family:inherit;font-weight:600;cursor:pointer;font-size:.9rem;border:none}
+  .btn-confirm{background:#FF375F;color:#fff}
+  .btn-cancel{background:rgba(255,255,255,.1);color:#F5F5F7}
+
+  .toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:#1D1D1F;color:#F5F5F7;padding:1rem 2rem;border-radius:50px;font-size:.95rem;font-weight:500;z-index:2000;transition:transform .4s;border:1px solid rgba(255,255,255,.1)}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+
+  /* ── Inline schedule comments ── */
+  .tl-comment-toggle{display:inline-flex;align-items:center;gap:.4rem;margin-top:.6rem;padding:.3rem .8rem;background:none;border:1.5px solid rgba(255,255,255,.1);border-radius:50px;font-family:inherit;font-size:.75rem;color:#86868B;cursor:pointer;transition:all .25s}
+  .tl-comment-toggle:hover{border-color:#FF375F;color:#FF375F}
+  .tl-comment-toggle .cnt{font-weight:700}
+  .tl-comment-panel{display:none;margin-top:.8rem;padding-top:.8rem;border-top:1px dashed rgba(255,255,255,.08)}
+  .tl-comment-panel.open{display:block}
+  .tl-mini-form{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.8rem}
+  .tl-mini-form .member-picker{width:100%}
+  .tl-mini-form .member-btn{font-size:.82rem;padding:.4rem .3rem}
+  .tl-mini-form textarea{width:100%;padding:.5rem .75rem;border:1.5px solid rgba(255,255,255,.1);border-radius:8px;font-family:inherit;font-size:16px;background:#111;color:#F5F5F7;resize:vertical;min-height:40px}
+  .tl-mini-form textarea:focus{outline:none;border-color:#FF375F}
+  .tl-mini-submit{background:#FF375F;color:#fff;border:none;padding:.4rem 1rem;border-radius:50px;font-family:inherit;font-size:.8rem;font-weight:600;cursor:pointer;width:100%}
+  .tl-inline-comments .tl-c-item{padding:.6rem .8rem;background:rgba(255,255,255,.04);border-radius:8px;margin-bottom:.4rem;position:relative;font-size:.85rem}
+  .tl-c-item .tl-c-author{font-weight:700;color:#FF375F;font-size:.82rem}
+  .tl-c-item .tl-c-date{font-size:.72rem;color:#555;margin-left:.5rem}
+  .tl-c-item .tl-c-text{color:#F5F5F7;margin-top:.2rem;line-height:1.5}
+  .tl-c-item .tl-c-del{position:absolute;top:.4rem;right:.5rem;background:none;border:none;color:#555;cursor:pointer;font-size:.9rem}
+  .tl-c-item .tl-c-del:hover{color:#FF375F}
+  .tl-no-comments{text-align:center;color:#555;padding:.5rem;font-size:.8rem;font-style:italic}
 
   /* ── City Sections ── */
   .city-section{background:#000;padding:5rem 1.5rem;border-top:1px solid rgba(255,255,255,.04)}
@@ -214,7 +316,10 @@
     <div class="nav-item" data-target="nara"><span class="nav-emoji">🦌</span> 나라</div>
     <div class="nav-item" data-target="kyoto"><span class="nav-emoji">⛩</span> 교토</div>
     <div class="nav-item" data-target="fukuoka"><span class="nav-emoji">🍜</span> 후쿠오카</div>
-    <a class="nav-tools-link" href="tools.html">🧰 준비/경비/의견 →</a>
+    <div class="nav-item" data-target="packing"><span class="nav-emoji">🧳</span> 짐싸기</div>
+    <div class="nav-item" data-target="budget"><span class="nav-emoji">💰</span> 경비</div>
+    <div class="nav-item" data-target="emergency"><span class="nav-emoji">🚨</span> 긴급</div>
+    <div class="nav-item" data-target="comments"><span class="nav-emoji">💬</span> 의견</div>
   </div>
 </nav>
 
@@ -436,11 +541,117 @@
   </div>
 </div>
 
+<!-- ═══ Packing ═══ -->
+<div class="city-section" id="packing">
+  <div class="container">
+    <p class="sec-eyebrow fade-in">PACKING LIST</p>
+    <h2 class="sec-title fade-in">짐 싸기.</h2>
+    <p class="sec-sub fade-in">구성원별로 체크하며 준비하세요. 자동 저장됩니다.</p>
+    <div class="packing-tabs fade-in">
+      <button class="packing-tab active" data-who="공통">🏠 공통</button>
+      <button class="packing-tab" data-who="대디">👨 대디</button>
+      <button class="packing-tab" data-who="연이">👩 연이</button>
+      <button class="packing-tab" data-who="공주">👸 공주</button>
+      <button class="packing-tab" data-who="왕자">🤴 왕자</button>
+    </div>
+    <div class="packing-list fade-in" id="packingList"></div>
+    <div class="packing-progress fade-in" id="packingProgress"></div>
+  </div>
+</div>
+
+<!-- ═══ Budget ═══ -->
+<div class="city-section" id="budget">
+  <div class="container">
+    <p class="sec-eyebrow fade-in">BUDGET</p>
+    <h2 class="sec-title fade-in">여행 경비.</h2>
+    <p class="sec-sub fade-in">가족 4인 기준 · 넉넉하게 산정</p>
+    <div class="fade-in">
+      <div class="budget-card"><div class="budget-card-header" style="background:linear-gradient(135deg,#4FC3F7,#039BE5);">⛰ 삿포로 <small>3일</small></div><div class="budget-card-body"><div class="budget-card-row"><span>🏨 숙소</span><span>60만</span></div><div class="budget-card-row"><span>🍜 식비</span><span>55만</span></div><div class="budget-card-row"><span>🚅 교통</span><span>8만</span></div><div class="budget-card-row"><span>🎫 입장</span><span>10만</span></div><div class="budget-card-row"><span>🛍 쇼핑</span><span>15만</span></div><div class="budget-card-row total"><span>소계</span><span>148만</span></div></div></div>
+      <div class="budget-card"><div class="budget-card-header" style="background:linear-gradient(135deg,#FF7043,#E64A19);">🗼 도쿄 <small>4일</small></div><div class="budget-card-body"><div class="budget-card-row"><span>🏨 숙소</span><span>100만</span></div><div class="budget-card-row"><span>🍜 식비</span><span>75만</span></div><div class="budget-card-row"><span>🚅 교통</span><span>25만</span></div><div class="budget-card-row"><span>🎫 입장</span><span>30만</span></div><div class="budget-card-row"><span>🛍 쇼핑</span><span>25만</span></div><div class="budget-card-row total"><span>소계</span><span>255만</span></div></div></div>
+      <div class="budget-card"><div class="budget-card-header" style="background:linear-gradient(135deg,#81C784,#388E3C);">🦌 나라 <small>2일</small></div><div class="budget-card-body"><div class="budget-card-row"><span>🏨 숙소</span><span>30만</span></div><div class="budget-card-row"><span>🍜 식비</span><span>36만</span></div><div class="budget-card-row"><span>🚅 교통</span><span>5만</span></div><div class="budget-card-row"><span>🎫 입장</span><span>5만</span></div><div class="budget-card-row"><span>🛍 쇼핑</span><span>5만</span></div><div class="budget-card-row total"><span>소계</span><span>81만</span></div></div></div>
+      <div class="budget-card"><div class="budget-card-header" style="background:linear-gradient(135deg,#CE93D8,#8E24AA);">⛩ 교토 <small>3일</small></div><div class="budget-card-body"><div class="budget-card-row"><span>🏨 숙소</span><span>65만</span></div><div class="budget-card-row"><span>🍜 식비</span><span>55만</span></div><div class="budget-card-row"><span>🚅 교통</span><span>15만</span></div><div class="budget-card-row"><span>🎫 입장</span><span>25만</span></div><div class="budget-card-row"><span>🛍 쇼핑</span><span>15만</span></div><div class="budget-card-row total"><span>소계</span><span>175만</span></div></div></div>
+      <div class="budget-card"><div class="budget-card-header" style="background:linear-gradient(135deg,#FFD54F,#F9A825);">🍜 후쿠오카 <small>2일</small></div><div class="budget-card-body"><div class="budget-card-row"><span>🏨 숙소</span><span>30만</span></div><div class="budget-card-row"><span>🍜 식비</span><span>36만</span></div><div class="budget-card-row"><span>🚅 교통</span><span>6만</span></div><div class="budget-card-row"><span>🎫 입장</span><span>5만</span></div><div class="budget-card-row"><span>🛍 쇼핑</span><span>10만</span></div><div class="budget-card-row total"><span>소계</span><span>87만</span></div></div></div>
+    </div>
+    <div class="fade-in" style="margin-top:1.5rem;">
+      <h4 style="font-weight:700;color:#F5F5F7;margin-bottom:1rem;">✈ 별도 경비 (가족 4인)</h4>
+      <div class="budget-extra">
+        <div class="budget-extra-item"><span>인천→삿포로 항공</span><span>약 150만</span></div>
+        <div class="budget-extra-item"><span>삿포로→도쿄 국내선</span><span>약 50만</span></div>
+        <div class="budget-extra-item"><span>후쿠오카→인천 항공</span><span>약 70만</span></div>
+        <div class="budget-extra-item"><span>JR패스 7일 (어른2+어린이2)</span><span>약 150만</span></div>
+        <div class="budget-extra-item"><span>여행자보험 (4인/14일)</span><span>약 15만</span></div>
+        <div class="budget-extra-item"><span>포켓와이파이 / 유심</span><span>약 5만</span></div>
+        <div class="budget-extra-item total"><span>별도 경비 합계</span><span>약 440만</span></div>
+      </div>
+    </div>
+    <div class="budget-total-box fade-in"><h3>💳 총 예상 경비</h3><p class="big">약 1,200만원</p><p class="detail">현지 746만 + 별도 440만</p></div>
+    <div class="fade-in" style="text-align:center;margin-top:2rem;">
+      <h4 style="font-weight:700;color:#F5F5F7;margin-bottom:.3rem;">💱 환율표</h4>
+      <p id="rateSubtitle" style="font-size:.8rem;color:#86868B;margin-bottom:1rem;">로딩 중...</p>
+      <div class="rate-cards" id="rateCards"></div>
+      <p id="rateTip" style="margin-top:1rem;font-size:.82rem;color:#555;"></p>
+    </div>
+    <div class="tip-card fade-in"><h4>팁</h4><p>숙소는 Airbnb/패밀리룸이면 호텔보다 30% 절약. 편의점 아침(4인 1만원 이내) + 점심 맛집 + 저녁 레스토랑 조합 추천. 돈키호테 면세(5,000엔↑), JR패스는 출발 전 온라인 구매가 저렴.</p></div>
+  </div>
+</div>
+
+<!-- ═══ Emergency ═══ -->
+<div class="city-section" id="emergency">
+  <div class="container">
+    <p class="sec-eyebrow fade-in">EMERGENCY</p>
+    <h2 class="sec-title fade-in">긴급 연락처.</h2>
+    <p class="sec-sub fade-in">만약을 위해 저장해두세요.</p>
+    <div class="emergency-grid fade-in">
+      <div class="emergency-card"><div class="emergency-icon">🏥</div><h4>일본 긴급전화</h4><p class="emergency-num">경찰: <strong>110</strong></p><p class="emergency-num">소방/구급: <strong>119</strong></p></div>
+      <div class="emergency-card"><div class="emergency-icon">🇰🇷</div><h4>주일 한국대사관</h4><p class="emergency-num">📞 <strong>+81-3-3452-7611</strong></p><p class="emergency-detail">영사콜센터: <strong>+82-2-3210-0404</strong></p></div>
+      <div class="emergency-card"><div class="emergency-icon">🛡</div><h4>여행자보험</h4><p class="emergency-detail">보험사: <strong>___________</strong></p><p class="emergency-detail">증권번호: <strong>___________</strong></p><p class="emergency-detail">긴급연락: <strong>___________</strong></p></div>
+      <div class="emergency-card"><div class="emergency-icon">🏨</div><h4>숙소 연락처</h4><p class="emergency-detail">삿포로: <strong>___________</strong></p><p class="emergency-detail">도쿄: <strong>___________</strong></p><p class="emergency-detail">나라: <strong>___________</strong></p><p class="emergency-detail">교토: <strong>___________</strong></p><p class="emergency-detail">후쿠오카: <strong>___________</strong></p></div>
+      <div class="emergency-card"><div class="emergency-icon">💱</div><h4>유용한 정보</h4><p class="emergency-detail">국가번호: <strong>+81</strong></p><p class="emergency-detail">시차: <strong>없음</strong></p><p class="emergency-detail">전압: <strong>100V</strong> (돼지코 필요)</p></div>
+      <div class="emergency-card"><div class="emergency-icon">📱</div><h4>유용한 앱</h4><p class="emergency-detail"><strong>Google Maps</strong> — 길찾기</p><p class="emergency-detail"><strong>Papago</strong> — 번역</p><p class="emergency-detail"><strong>Suica</strong> — 교통카드</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ Comments ═══ -->
+<div class="city-section" id="comments">
+  <div class="container">
+    <p class="sec-eyebrow fade-in">FAMILY TALK</p>
+    <h2 class="sec-title fade-in">가족 의견.</h2>
+    <p class="sec-sub fade-in">여행 일정에 대한 의견을 자유롭게 남겨주세요.</p>
+    <div class="comment-form fade-in">
+      <div><label style="font-size:.85rem;font-weight:600;margin-bottom:.3rem;display:block;">누구의 의견?</label>
+        <div class="member-picker" id="memberPicker">
+          <button type="button" class="member-btn" data-name="대디">👨 대디</button>
+          <button type="button" class="member-btn" data-name="연이">👩 연이</button>
+          <button type="button" class="member-btn" data-name="공주">👸 공주</button>
+          <button type="button" class="member-btn" data-name="왕자">🤴 왕자</button>
+        </div><input type="hidden" id="authorName" value="">
+      </div>
+      <select id="commentCity"><option value="전체">전체 일정</option><option value="삿포로">삿포로</option><option value="도쿄">도쿄</option><option value="나라">나라</option><option value="교토">교토</option><option value="후쿠오카">후쿠오카</option></select>
+      <select id="commentReaction"><option value="">반응 선택</option><option value="😍">😍 좋아요!</option><option value="🤔">🤔 고민</option><option value="🙋">🙋 꼭 가자!</option><option value="😢">😢 빼자</option><option value="💡">💡 대안</option><option value="❓">❓ 질문</option></select>
+      <textarea id="commentText" placeholder="의견을 자유롭게 작성해주세요..."></textarea>
+      <button class="comment-submit" onclick="addComment()">📨 의견 남기기</button>
+    </div>
+    <div class="filter-tags fade-in">
+      <button class="filter-tag active" onclick="filterComments('전체')" data-filter="전체">전체</button>
+      <button class="filter-tag" onclick="filterComments('삿포로')" data-filter="삿포로">삿포로</button>
+      <button class="filter-tag" onclick="filterComments('도쿄')" data-filter="도쿄">도쿄</button>
+      <button class="filter-tag" onclick="filterComments('나라')" data-filter="나라">나라</button>
+      <button class="filter-tag" onclick="filterComments('교토')" data-filter="교토">교토</button>
+      <button class="filter-tag" onclick="filterComments('후쿠오카')" data-filter="후쿠오카">후쿠오카</button>
+    </div>
+    <div id="commentList"><div class="no-comments">아직 의견이 없습니다.</div></div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="deleteModal"><div class="modal"><h3>🗑 댓글 삭제</h3><p>정말 삭제할까요?</p><div class="modal-btns"><button class="btn-cancel" onclick="closeDeleteModal()">취소</button><button class="btn-confirm" onclick="confirmDelete()">삭제</button></div></div></div>
+<div class="toast" id="toast"></div>
+
 <!-- ═══ Footer ═══ -->
 <footer class="footer">
   <p class="label">우리 가족 일본 여행 2026</p>
   <p>인천 → 삿포로 → 도쿄 → 나라 → 교토 → 후쿠오카 → 인천</p>
-  <p style="margin-top:1rem;"><a href="tools.html">🧰 짐싸기 / 경비 / 긴급연락처 / 의견 →</a></p>
   <p style="margin-top:1rem;">Designed for our family.</p>
 </footer>
 
@@ -467,8 +678,8 @@
   // ── Navigation ──
   const navItems=document.querySelectorAll('.nav-item');
   navItems.forEach(item=>{item.addEventListener('click',()=>{const t=document.getElementById(item.dataset.target);if(t)t.scrollIntoView({behavior:'smooth'})})});
-  const sections=document.querySelectorAll('.city-section');
-  window.addEventListener('scroll',()=>{let c='';sections.forEach(s=>{if(scrollY>=s.offsetTop-120)c=s.id});navItems.forEach(i=>i.classList.toggle('active',i.dataset.target===c))});
+  const allSections=document.querySelectorAll('[id]');
+  window.addEventListener('scroll',()=>{let c='';allSections.forEach(s=>{if(s.id&&scrollY>=s.offsetTop-120)c=s.id});navItems.forEach(i=>i.classList.toggle('active',i.dataset.target===c))});
 
   // ── Observer (fade-in + anime interlude) ──
   const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;if(el.classList.contains('anime-interlude')&&!el.dataset.revealed){el.dataset.revealed='1';el.classList.add('visible');if(el.dataset.shake==='1')setTimeout(()=>{el.classList.add('shake-active');setTimeout(()=>el.classList.remove('shake-active'),400)},400)}if(el.classList.contains('fade-in'))el.classList.add('visible')})},{threshold:.15});
@@ -478,6 +689,57 @@
   const jwDict=[['미소 라멘','味噌ラーメン — 일본 된장으로 맛을 낸 라멘'],['돈코츠','豚骨 — 돼지뼈를 푹 고은 국물'],['카에다마','替え玉 — 라멘 면 추가'],['센베이','せんべい — 쌀로 만든 과자, 사슴도 좋아해요'],['징기스칸','ジンギスカン — 양고기 BBQ'],['신칸센','新幹線 — 일본 초고속 열차, 최대 시속 320km!'],['노조미','のぞみ — "희망", 신칸센 중 가장 빠른 열차'],['센소지','浅草寺 — 도쿄에서 가장 오래된 절'],['카미나리몬','雷門 — "번개문", 거대한 빨간 등이 유명'],['나카미세','仲見世 — 절로 가는 상점가'],['아메요코','アメ横 — 미국 물건을 팔던 골목'],['가부키초','歌舞伎町 — 가부키 극장이 있던 번화가'],['오모이데 요코초','思い出横丁 — "추억의 골목"'],['도다이지','東大寺 — "동쪽의 큰 절"'],['가스가타이샤','春日大社 — "봄날의 큰 신사"'],['호류지','法隆寺 — 세계에서 가장 오래된 목조 건물'],['후시미 이나리','伏見稲荷 — 여우신을 모신 신사'],['도리이','鳥居 — 신사 입구의 기둥문'],['기요미즈데라','清水寺 — "맑은 물의 절"'],['킨카쿠지','金閣寺 — "금빛 누각의 절"'],['기온','祇園 — 게이샤를 만날 수 있는 거리'],['가모가와','鴨川 — "오리 강", 교토를 흐르는 강'],['니시키 시장','錦市場 — "비단 시장", 교토의 부엌'],['뵤도인','平等院 — 10엔 동전 뒷면 그림'],['하카타','博多 — 후쿠오카의 옛 이름'],['야타이','屋台 — 길가의 포장마차'],['다마고야키','卵焼き — 달콤한 일본식 계란말이'],['야키토리','焼き鳥 — 닭꼬치구이'],['유바','湯葉 — 두유를 끓여 건져낸 껍질'],['와가시','和菓子 — 일본 전통 과자'],['말차','抹茶 — 녹차 잎을 갈아 만든 가루 차'],['기모노','着物 — 일본 전통 옷'],['이자카야','居酒屋 — 일본식 술집'],['우메가에모치','梅ヶ枝餅 — 매화가지 떡, 다자이후 명물'],['가마메시','釜飯 — 작은 솥에 지은 밥'],['시라스동','しらす丼 — 잔멸치 덮밥'],['에노덴','江ノ電 — 바닷가를 달리는 작은 전차']];
 
   (function(){const targets=document.querySelectorAll('.tl-card p,.tip-card p,.sec-sub');const sorted=[...jwDict].sort((a,b)=>b[0].length-a[0].length);targets.forEach(el=>{let html=el.innerHTML;sorted.forEach(([term,tip])=>{const re=new RegExp(`(?<![<\\w])${term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}(?![\\w>])`,'');if(re.test(html))html=html.replace(re,`<span class="jw" data-t="${tip.replace(/"/g,'&quot;')}">${term}</span>`)});el.innerHTML=html})})();
+
+  // ── Utils ──
+  function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)}
+  function escapeHtml(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+  const MEMBERS={'대디':'👨','연이':'👩','공주':'👸','왕자':'🤴'};
+  document.querySelectorAll('#memberPicker .member-btn').forEach(b=>{b.addEventListener('click',()=>{b.closest('.member-picker').querySelectorAll('.member-btn').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');document.getElementById('authorName').value=b.dataset.name})});
+
+  // ── Packing ──
+  const PACK_KEY='japan_trip_packing';
+  const PACKING_DATA={'공통':{'필수 서류':['여권','항공권 (e-티켓)','호텔 예약 확인서','여행자보험 증서','여권 사본'],'전자기기':['스마트폰 충전기','보조배터리','카메라','멀티어댑터 (100V)','와이파이 / 유심'],'의약품':['상비약 (해열제, 소화제)','밴드 / 반창고','모기약','개인 처방약'],'기타':['우산 / 우비','에코백','필기도구','지퍼백','캐리어 자물쇠']},'대디':{'의류':['반팔 4벌','긴팔 3벌','긴바지 2벌','반바지 1벌','속옷/양말 7세트','잠옷','겉옷'],'세면도구':['칫솔/치약','면도기','선크림'],'기타':['선글라스','운동화','슬리퍼']},'연이':{'의류':['반팔 4벌','긴팔 3벌','바지 2벌','원피스 1벌','속옷/양말 7세트','잠옷','가디건'],'세면도구':['칫솔/치약','스킨케어','선크림','화장품'],'기타':['선글라스','운동화','슬리퍼','모자']},'공주':{'의류':['반팔 5벌','긴팔 3벌','바지 3벌','치마 1벌','속옷/양말 7세트','잠옷','겉옷'],'세면도구':['칫솔/치약','선크림'],'놀거리':['스케치북','장난감','태블릿/이어폰'],'기타':['운동화','슬리퍼','물병']},'왕자':{'의류':['반팔 5벌','긴팔 3벌','바지 3벌','반바지 1벌','속옷/양말 7세트','잠옷','겉옷'],'세면도구':['칫솔/치약','선크림'],'놀거리':['스케치북','장난감','태블릿/이어폰'],'기타':['운동화','슬리퍼','물병']}};
+  let currentPackTab='공통';
+  function getPackState(){try{return JSON.parse(localStorage.getItem(PACK_KEY))||{}}catch{return{}}}
+  function savePackState(s){localStorage.setItem(PACK_KEY,JSON.stringify(s))}
+  function renderPacking(){const state=getPackState(),data=PACKING_DATA[currentPackTab],list=document.getElementById('packingList');let total=0,checked=0,html='';for(const[cat,items]of Object.entries(data)){html+=`<div class="packing-category"><h4>${cat}</h4>`;items.forEach(item=>{const key=`${currentPackTab}::${item}`,c=!!state[key];total++;if(c)checked++;html+=`<div class="packing-item ${c?'checked':''}" onclick="togglePack(this,'${key.replace(/'/g,"\\'")}')"><input type="checkbox" ${c?'checked':''} tabindex="-1"><label>${item}</label></div>`});html+='</div>'}list.innerHTML=html;const pct=total>0?Math.round(checked/total*100):0;document.getElementById('packingProgress').innerHTML=`<div class="packing-bar"><div class="packing-bar-fill" style="width:${pct}%"></div></div><span>${checked}/${total} 완료 (${pct}%)</span>`}
+  function togglePack(el,key){const s=getPackState();s[key]=!s[key];savePackState(s);renderPacking()}
+  document.querySelectorAll('.packing-tab').forEach(t=>{t.addEventListener('click',()=>{document.querySelectorAll('.packing-tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');currentPackTab=t.dataset.who;renderPacking()})});
+  renderPacking();
+
+  // ── Comments ──
+  const STORAGE_KEY='japan_trip_comments';let currentFilter='전체',deleteTargetId=null,schedDeleteSid=null,schedDeleteCid=null;
+  function getComments(){try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||[]}catch{return[]}}
+  function saveComments(c){localStorage.setItem(STORAGE_KEY,JSON.stringify(c))}
+  function addComment(){const name=document.getElementById('authorName').value.trim(),city=document.getElementById('commentCity').value,reaction=document.getElementById('commentReaction').value,text=document.getElementById('commentText').value.trim();if(!name){showToast('가족 구성원을 선택해주세요.');return}if(!text){showToast('의견을 입력해주세요.');return}const c=getComments();c.unshift({id:Date.now().toString(),name,city,reaction,text,date:new Date().toLocaleString('ko-KR',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'})});saveComments(c);renderComments();document.getElementById('commentText').value='';showToast('의견이 등록되었습니다!')}
+  function renderComments(){const c=getComments(),list=document.getElementById('commentList'),f=currentFilter==='전체'?c:c.filter(x=>x.city===currentFilter);if(!f.length){list.innerHTML='<div class="no-comments">'+(currentFilter==='전체'?'아직 의견이 없습니다.':`"${currentFilter}" 관련 의견이 없습니다.`)+'</div>';return}list.innerHTML=f.map(x=>`<div class="comment-item"><button class="comment-delete" onclick="openDeleteModal('${x.id}')">&times;</button><div class="comment-header" style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem"><span class="comment-author">${MEMBERS[x.name]||''} ${escapeHtml(x.name)}</span><span class="comment-city-tag">${escapeHtml(x.city)}</span>${x.reaction?`<span class="comment-emoji">${x.reaction}</span>`:''}</div><div class="comment-text">${escapeHtml(x.text)}</div><div class="comment-date">${x.date}</div></div>`).join('')}
+  function filterComments(city){currentFilter=city;document.querySelectorAll('.filter-tag').forEach(b=>b.classList.toggle('active',b.dataset.filter===city));renderComments()}
+  function openDeleteModal(id){deleteTargetId=id;document.getElementById('deleteModal').classList.add('show')}
+  function closeDeleteModal(){deleteTargetId=null;schedDeleteSid=null;schedDeleteCid=null;document.getElementById('deleteModal').classList.remove('show')}
+  function confirmDelete(){if(schedDeleteSid){confirmSchedDelete();return}const c=getComments(),i=c.findIndex(x=>x.id===deleteTargetId);if(i===-1){closeDeleteModal();return}c.splice(i,1);saveComments(c);renderComments();closeDeleteModal();showToast('댓글이 삭제되었습니다.')}
+  document.getElementById('deleteModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeDeleteModal()});
+  renderComments();filterComments('전체');
+
+  // ── Per-Schedule Inline Comments ──
+  const SCHED_KEY='japan_trip_sched_comments';
+  function getSchedComments(){try{return JSON.parse(localStorage.getItem(SCHED_KEY))||{}}catch{return{}}}
+  function saveSchedComments(d){localStorage.setItem(SCHED_KEY,JSON.stringify(d))}
+  (function(){document.querySelectorAll('.tl-card').forEach((item,idx)=>{const sid='sched-'+idx;item.dataset.schedId=sid;
+    const btn=document.createElement('button');btn.className='tl-comment-toggle';btn.dataset.schedId=sid;btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> <span>의견</span> <span class="cnt"></span>';btn.onclick=()=>{document.getElementById('panel-'+sid).classList.toggle('open')};item.appendChild(btn);
+    const panel=document.createElement('div');panel.className='tl-comment-panel';panel.id='panel-'+sid;panel.innerHTML=`<div class="tl-mini-form"><div class="member-picker tl-member-picker" style="width:100%"><button type="button" class="member-btn" data-name="대디">👨 대디</button><button type="button" class="member-btn" data-name="연이">👩 연이</button><button type="button" class="member-btn" data-name="공주">👸 공주</button><button type="button" class="member-btn" data-name="왕자">🤴 왕자</button></div><input class="tl-input-name" type="hidden" value=""><textarea placeholder="이 일정에 대한 의견..."></textarea><button class="tl-mini-submit" onclick="addSchedComment('${sid}')">등록</button></div><div class="tl-inline-comments" id="list-${sid}"></div>`;
+    item.appendChild(panel);
+    panel.querySelectorAll('.member-btn').forEach(b=>{b.addEventListener('click',()=>{panel.querySelectorAll('.member-btn').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');panel.querySelector('.tl-input-name').value=b.dataset.name})});
+    renderSchedComments(sid);
+  })})();
+  function addSchedComment(sid){const panel=document.getElementById('panel-'+sid),name=panel.querySelector('.tl-input-name').value.trim(),text=panel.querySelector('textarea').value.trim();if(!name){showToast('가족 구성원을 선택해주세요.');return}if(!text){showToast('의견을 입력해주세요.');return}const all=getSchedComments();if(!all[sid])all[sid]=[];all[sid].unshift({id:Date.now().toString(),name,text,date:new Date().toLocaleString('ko-KR',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'})});saveSchedComments(all);panel.querySelector('textarea').value='';renderSchedComments(sid);showToast('의견이 등록되었습니다!')}
+  function renderSchedComments(sid){const all=getSchedComments(),items=all[sid]||[];const btn=document.querySelector(`.tl-comment-toggle[data-sched-id="${sid}"] .cnt`);if(btn)btn.textContent=items.length>0?items.length:'';const list=document.getElementById('list-'+sid);if(!list)return;if(!items.length){list.innerHTML='<div class="tl-no-comments">아직 의견이 없습니다.</div>';return}list.innerHTML=items.map(c=>`<div class="tl-c-item"><button class="tl-c-del" onclick="deleteSchedComment('${sid}','${c.id}')">&times;</button><span class="tl-c-author">${MEMBERS[c.name]||''} ${escapeHtml(c.name)}</span><span class="tl-c-date">${c.date}</span><div class="tl-c-text">${escapeHtml(c.text)}</div></div>`).join('')}
+  function deleteSchedComment(sid,cid){schedDeleteSid=sid;schedDeleteCid=cid;document.getElementById('deleteModal').classList.add('show')}
+  function confirmSchedDelete(){const all=getSchedComments(),items=all[schedDeleteSid]||[],i=items.findIndex(c=>c.id===schedDeleteCid);if(i===-1){closeDeleteModal();return}items.splice(i,1);all[schedDeleteSid]=items;saveSchedComments(all);renderSchedComments(schedDeleteSid);closeDeleteModal();showToast('댓글이 삭제되었습니다.')}
+
+  // ── Exchange Rate ──
+  function renderRate(rate,live){const r=rate,sub=document.getElementById('rateSubtitle'),cards=document.getElementById('rateCards'),tip=document.getElementById('rateTip'),mult=Math.round(r);sub.textContent=live?`1엔 = ${r.toFixed(1)}원 (실시간)`:`1엔 ≈ ${r.toFixed(1)}원 (기본값)`;const data=[{krw:10,label:'자판기 음료',jpy:140},{krw:100,label:'삼각김밥',jpy:160},{krw:1000,label:'라멘 한 그릇',jpy:950},{krw:10000,label:'회전초밥 10접시',jpy:1600}];cards.innerHTML=data.map(d=>{const j=Math.round(d.krw/r),k=Math.round(d.jpy*r/100)*100,ks=k>=10000?(k/10000).toFixed(1).replace('.0','')+'만':k.toLocaleString();return`<div class="rate-card"><div class="label">🇰🇷 ${d.krw.toLocaleString()}원</div><div class="value">≈ ${j.toLocaleString()}엔</div><div class="example">${d.label} ≈ ${ks}원</div></div>`}).join('');tip.innerHTML=`쉽게 외우기: <strong>일본 가격 × ${mult}</strong> ≈ 한국 원화!`}
+  renderRate(9.4,false);
+  fetch('https://open.er-api.com/v6/latest/JPY').then(r=>r.json()).then(d=>{if(d.result==='success'&&d.rates&&d.rates.KRW)renderRate(d.rates.KRW,true)}).catch(()=>{});
 
   // Tooltip display
   const jwTip=document.getElementById('jwTip');let jwTimer=null;
