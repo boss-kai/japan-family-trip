@@ -280,65 +280,41 @@
     .tip-card p,.tip-card h4{word-break:keep-all}
   }
 
-  /* ── Scroll / Parchment Map ── */
+  /* ── GIF Map Section ── */
   .map-section{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#050505;padding:4rem 1.5rem;position:relative;overflow:hidden}
-
-  /* Scroll (parchment) container */
-  .scroll-parchment{position:relative;z-index:2;width:100%;max-width:520px}
-
-  /* Top/bottom scroll roll */
-  .scroll-roll{height:32px;background:linear-gradient(180deg,#8B6914,#C4973B,#8B6914);border-radius:16px;position:relative;z-index:3;box-shadow:0 4px 12px rgba(0,0,0,.5)}
-  .scroll-roll::after{content:'';position:absolute;inset:4px 20px;background:linear-gradient(180deg,rgba(255,255,255,.15),transparent,rgba(0,0,0,.2));border-radius:12px}
-  .scroll-roll-bottom{margin-top:-4px}
-
-  /* Parchment paper */
-  .parchment{background:linear-gradient(180deg,#F5E6C8,#EDD9B0,#F0DFC0,#E8D4A8);position:relative;padding:2rem 1.5rem;overflow:hidden;box-shadow:inset 0 0 40px rgba(139,105,20,.15)}
-  .parchment::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='.04'/%3E%3C/svg%3E");opacity:.5}
-
-  /* Unroll animation */
-  .parchment{max-height:0;opacity:0;transition:max-height 1.5s cubic-bezier(.4,0,.2,1),opacity .8s ease .3s,padding 1s ease}
-  .map-section.visible .parchment{max-height:800px;opacity:1;padding:2rem 1.5rem}
-
-  /* Map title on parchment */
-  .parch-title{text-align:center;font-size:1.1rem;font-weight:900;color:#5C3D1A;margin-bottom:.3rem;position:relative}
-  .parch-sub{text-align:center;font-size:.8rem;color:#8B7355;margin-bottom:1.5rem;position:relative}
-
-  .japan-map-wrap{position:relative;width:100%}
-  .japan-map-wrap svg{width:100%;height:auto;display:block}
-
-  /* Route line draw animation */
-  .route-line{stroke-dasharray:1200;stroke-dashoffset:1200}
-  .map-section.visible .route-line{stroke-dashoffset:0;transition:stroke-dashoffset 3s ease 1s}
-
-  /* City dots pop in */
-  .city-dot{opacity:0;transform-origin:center;transform:scale(0)}
-  .map-section.visible .city-dot{opacity:1;transform:scale(1);transition:all .5s cubic-bezier(.34,1.56,.64,1)}
-  .map-section.visible .city-dot:nth-of-type(1){transition-delay:1.2s}
-  .map-section.visible .city-dot:nth-of-type(2){transition-delay:1.8s}
-  .map-section.visible .city-dot:nth-of-type(3){transition-delay:2.4s}
-  .map-section.visible .city-dot:nth-of-type(4){transition-delay:2.8s}
-  .map-section.visible .city-dot:nth-of-type(5){transition-delay:3.2s}
-
-  /* Plane animation */
-  .route-plane{opacity:0}
-  .map-section.visible .route-plane{opacity:1}
-
-  /* Labels */
-  .map-city-label{font-family:'Noto Sans KR',sans-serif;font-size:11px;font-weight:700;fill:#3C2415;opacity:0}
-  .map-city-jp{font-family:'Noto Sans KR',sans-serif;font-size:8px;font-weight:400;fill:#8B7355;opacity:0}
-  .map-city-days{font-family:'Noto Sans KR',sans-serif;font-size:7.5px;font-weight:700;fill:#C41E3A;opacity:0}
-  .map-section.visible .map-city-label,.map-section.visible .map-city-jp,.map-section.visible .map-city-days{opacity:1;transition:opacity .5s ease 2s}
-
-  /* Header text above scroll */
   .map-eyebrow{font-size:.85rem;font-weight:600;color:#FF375F;margin-bottom:.5rem;position:relative;z-index:2}
   .map-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:#F5F5F7;margin-bottom:.5rem;text-align:center;position:relative;z-index:2}
   .map-sub{font-size:1rem;font-weight:300;color:#86868B;margin-bottom:2rem;text-align:center;position:relative;z-index:2}
 
+  .map-gif-wrap{position:relative;z-index:2;width:100%;max-width:640px;border-radius:12px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.5)}
+  .map-gif-wrap img{width:100%;display:block}
+
+  /* Route overlay on top of GIF */
+  .map-overlay{position:absolute;inset:0;z-index:3;pointer-events:none}
+  .map-overlay svg{width:100%;height:100%}
+
+  .route-line{stroke-dasharray:800;stroke-dashoffset:800}
+  .map-section.visible .route-line{stroke-dashoffset:0;transition:stroke-dashoffset 3s ease .5s}
+
+  .city-dot{opacity:0;transform-origin:center}
+  .map-section.visible .city-dot{opacity:1;transition:opacity .5s ease}
+  .map-section.visible .city-dot:nth-of-type(1){transition-delay:1s}
+  .map-section.visible .city-dot:nth-of-type(2){transition-delay:1.6s}
+  .map-section.visible .city-dot:nth-of-type(3){transition-delay:2.2s}
+  .map-section.visible .city-dot:nth-of-type(4){transition-delay:2.6s}
+  .map-section.visible .city-dot:nth-of-type(5){transition-delay:3s}
+
+  .map-city-label{font-family:'Noto Sans KR',sans-serif;font-size:10px;font-weight:700;fill:#fff;opacity:0;filter:drop-shadow(0 1px 3px rgba(0,0,0,.8))}
+  .map-city-jp{font-family:'Noto Sans KR',sans-serif;font-size:7px;fill:rgba(255,255,255,.7);opacity:0;filter:drop-shadow(0 1px 2px rgba(0,0,0,.8))}
+  .map-city-days{font-family:'Noto Sans KR',sans-serif;font-size:7px;font-weight:700;fill:#FF375F;opacity:0;filter:drop-shadow(0 1px 2px rgba(0,0,0,.8))}
+  .map-section.visible .map-city-label,.map-section.visible .map-city-jp,.map-section.visible .map-city-days{opacity:1;transition:opacity .5s ease 2s}
+
+  .route-plane{opacity:0}
+  .map-section.visible .route-plane{opacity:1}
+
   @media(max-width:430px){
     .map-section{min-height:auto;padding:3rem 1rem}
-    .scroll-parchment{max-width:100%}
-    .parchment{padding:1.5rem 1rem}
-    .map-section.visible .parchment{padding:1.5rem 1rem}
+    .map-gif-wrap{border-radius:8px}
   }
 
   .fade-in{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.25,.46,.45,.94)}
@@ -384,116 +360,65 @@
   </div>
 </nav>
 
-<!-- ═══ Japan Route Map (Parchment Scroll) ═══ -->
+<!-- ═══ Japan Route Map (GIF + Overlay) ═══ -->
 <div class="map-section" id="routeMap">
   <p class="map-eyebrow">OUR ROUTE</p>
   <h2 class="map-title">14일간의 여정.</h2>
   <p class="map-sub">인천에서 출발, 일본 열도를 종단합니다.</p>
 
-  <div class="scroll-parchment">
-    <!-- Top roll -->
-    <div class="scroll-roll"></div>
+  <div class="map-gif-wrap">
+    <img src="img/japan-map.gif" alt="일본 지도">
+    <!-- SVG route overlay on top of GIF -->
+    <div class="map-overlay">
+      <svg viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <!-- Route line (animated draw) -->
+        <path class="route-line" d="M460,82 Q430,145 400,178 L400,178 Q370,210 340,235 L295,270 L278,282 L215,310"
+          fill="none" stroke="#FF375F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/>
 
-    <!-- Parchment paper (unrolls on scroll) -->
-    <div class="parchment">
-      <p class="parch-title">日本縦断 家族旅行</p>
-      <p class="parch-sub">2026年 4月27日 — 5月10日</p>
+        <!-- City dots -->
+        <g class="city-dot">
+          <circle cx="460" cy="82" r="7" fill="rgba(255,55,95,.25)"><animate attributeName="r" values="7;11;7" dur="2s" repeatCount="indefinite"/></circle>
+          <circle cx="460" cy="82" r="4" fill="#FF375F"/>
+          <text x="475" y="74" class="map-city-label">삿포로</text>
+          <text x="475" y="84" class="map-city-jp">札幌</text>
+          <text x="475" y="93" class="map-city-days">Day 1-3</text>
+        </g>
+        <g class="city-dot">
+          <circle cx="400" cy="178" r="7" fill="rgba(255,55,95,.25)"><animate attributeName="r" values="7;11;7" dur="2s" repeatCount="indefinite" begin=".4s"/></circle>
+          <circle cx="400" cy="178" r="4" fill="#FF375F"/>
+          <text x="415" y="172" class="map-city-label">도쿄</text>
+          <text x="415" y="182" class="map-city-jp">東京</text>
+          <text x="415" y="191" class="map-city-days">Day 4-7</text>
+        </g>
+        <g class="city-dot">
+          <circle cx="295" cy="270" r="7" fill="rgba(255,55,95,.25)"><animate attributeName="r" values="7;11;7" dur="2s" repeatCount="indefinite" begin=".8s"/></circle>
+          <circle cx="295" cy="270" r="4" fill="#FF375F"/>
+          <text x="310" y="265" class="map-city-label">나라</text>
+          <text x="310" y="275" class="map-city-jp">奈良</text>
+          <text x="310" y="284" class="map-city-days">Day 8-9</text>
+        </g>
+        <g class="city-dot">
+          <circle cx="278" cy="282" r="7" fill="rgba(255,55,95,.25)"><animate attributeName="r" values="7;11;7" dur="2s" repeatCount="indefinite" begin="1.2s"/></circle>
+          <circle cx="278" cy="282" r="4" fill="#FF375F"/>
+          <text x="238" y="278" text-anchor="end" class="map-city-label">교토</text>
+          <text x="238" y="288" text-anchor="end" class="map-city-jp">京都</text>
+          <text x="238" y="297" text-anchor="end" class="map-city-days">Day 10-12</text>
+        </g>
+        <g class="city-dot">
+          <circle cx="215" cy="310" r="7" fill="rgba(255,55,95,.25)"><animate attributeName="r" values="7;11;7" dur="2s" repeatCount="indefinite" begin="1.6s"/></circle>
+          <circle cx="215" cy="310" r="4" fill="#FF375F"/>
+          <text x="175" y="306" text-anchor="end" class="map-city-label">후쿠오카</text>
+          <text x="175" y="316" text-anchor="end" class="map-city-jp">福岡</text>
+          <text x="175" y="325" text-anchor="end" class="map-city-days">Day 13-14</text>
+        </g>
 
-      <div class="japan-map-wrap">
-        <svg viewBox="0 0 500 620" xmlns="http://www.w3.org/2000/svg">
-          <!-- Japan islands - white stroke on parchment -->
-          <!-- Hokkaido -->
-          <path d="M340,75 Q348,52 365,48 Q385,45 400,52 Q418,62 422,82 Q424,100 415,115 Q405,128 390,132 Q372,135 358,128 Q345,120 340,105 Q336,92 340,75Z" fill="rgba(92,61,26,.06)" stroke="#5C3D1A" stroke-width="1.8" stroke-linejoin="round"/>
-          <!-- Honshu (main) -->
-          <path d="M275,155 Q290,145 310,148 Q332,152 348,162 Q365,174 368,190 Q367,208 355,225 Q342,242 328,255 Q312,270 298,285 Q282,300 268,318 Q255,335 242,350 Q230,363 222,372 Q215,380 210,386 Q205,392 198,395 Q190,398 183,394 Q175,388 172,378 Q170,368 175,358 Q182,348 192,342 Q200,338 205,332" fill="rgba(92,61,26,.06)" stroke="#5C3D1A" stroke-width="1.8" stroke-linejoin="round"/>
-          <!-- Kii peninsula -->
-          <path d="M248,370 Q258,362 268,368 Q275,375 270,385 Q262,392 252,388 Q245,380 248,370Z" fill="rgba(92,61,26,.06)" stroke="#5C3D1A" stroke-width="1.2"/>
-          <!-- Shikoku -->
-          <path d="M215,405 Q232,395 248,400 Q260,406 262,418 Q258,430 242,432 Q226,428 218,418 Q212,412 215,405Z" fill="rgba(92,61,26,.06)" stroke="#5C3D1A" stroke-width="1.5"/>
-          <!-- Kyushu -->
-          <path d="M140,392 Q158,378 175,384 Q188,392 190,408 Q192,425 182,440 Q170,452 152,452 Q136,446 128,432 Q120,416 125,400 Q130,393 140,392Z" fill="rgba(92,61,26,.06)" stroke="#5C3D1A" stroke-width="1.8" stroke-linejoin="round"/>
-          <!-- Okinawa hint -->
-          <ellipse cx="120" cy="540" rx="8" ry="4" fill="none" stroke="#5C3D1A" stroke-width="1" opacity=".4" transform="rotate(-30,120,540)"/>
-
-          <!-- Sea label -->
-          <text x="440" y="300" font-size="10" fill="#B8A88A" font-style="italic" transform="rotate(90,440,300)">日 本 海</text>
-          <text x="80" y="300" font-size="10" fill="#B8A88A" font-style="italic" transform="rotate(-90,80,300)">太 平 洋</text>
-
-          <!-- Korea hint -->
-          <path d="M55,350 Q50,320 55,290 Q60,270 68,260" fill="none" stroke="#5C3D1A" stroke-width="1" opacity=".3"/>
-          <text x="40" y="340" font-size="8" fill="#B8A88A" text-anchor="middle">韓国</text>
-
-          <!-- Flight dashed arcs -->
-          <path d="M52,350 Q200,200 375,78" fill="none" stroke="#C41E3A" stroke-width="1" stroke-dasharray="5,5" opacity=".5"/>
-          <path d="M160,440 Q100,420 52,350" fill="none" stroke="#C41E3A" stroke-width="1" stroke-dasharray="5,5" opacity=".5"/>
-
-          <!-- Route line (animated draw) -->
-          <path class="route-line" d="M375,78 Q360,135 340,175 L340,175 Q325,210 310,240 L248,348 L222,372 L160,430"
-            fill="none" stroke="#C41E3A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-
-          <!-- Incheon -->
-          <circle cx="52" cy="350" r="4" fill="#8B7355"/>
-          <text x="42" y="368" text-anchor="middle" font-size="9" fill="#8B7355" font-weight="700">인천</text>
-          <text x="42" y="378" text-anchor="middle" font-size="7" fill="#B8A88A">IN/OUT ✈</text>
-
-          <!-- City dots -->
-          <g class="city-dot">
-            <circle cx="375" cy="78" r="9" fill="rgba(196,30,58,.15)"><animate attributeName="r" values="9;13;9" dur="2s" repeatCount="indefinite"/></circle>
-            <circle cx="375" cy="78" r="5" fill="#C41E3A"/>
-            <text x="395" y="68" class="map-city-label">삿포로</text>
-            <text x="395" y="79" class="map-city-jp">札幌 Sapporo</text>
-            <text x="395" y="90" class="map-city-days">Day 1-3 ✈</text>
-          </g>
-          <g class="city-dot">
-            <circle cx="340" cy="175" r="9" fill="rgba(196,30,58,.15)"><animate attributeName="r" values="9;13;9" dur="2s" repeatCount="indefinite" begin=".4s"/></circle>
-            <circle cx="340" cy="175" r="5" fill="#C41E3A"/>
-            <text x="358" y="168" class="map-city-label">도쿄</text>
-            <text x="358" y="179" class="map-city-jp">東京 Tokyo</text>
-            <text x="358" y="190" class="map-city-days">Day 4-7 ✈🚅</text>
-          </g>
-          <g class="city-dot">
-            <circle cx="248" cy="348" r="9" fill="rgba(196,30,58,.15)"><animate attributeName="r" values="9;13;9" dur="2s" repeatCount="indefinite" begin=".8s"/></circle>
-            <circle cx="248" cy="348" r="5" fill="#C41E3A"/>
-            <text x="268" y="342" class="map-city-label">나라</text>
-            <text x="268" y="353" class="map-city-jp">奈良 Nara</text>
-            <text x="268" y="364" class="map-city-days">Day 8-9 🚅</text>
-          </g>
-          <g class="city-dot">
-            <circle cx="222" cy="372" r="9" fill="rgba(196,30,58,.15)"><animate attributeName="r" values="9;13;9" dur="2s" repeatCount="indefinite" begin="1.2s"/></circle>
-            <circle cx="222" cy="372" r="5" fill="#C41E3A"/>
-            <text x="178" y="365" text-anchor="end" class="map-city-label">교토</text>
-            <text x="178" y="376" text-anchor="end" class="map-city-jp">京都 Kyoto</text>
-            <text x="178" y="387" text-anchor="end" class="map-city-days">Day 10-12 🚅</text>
-          </g>
-          <g class="city-dot">
-            <circle cx="160" cy="430" r="9" fill="rgba(196,30,58,.15)"><animate attributeName="r" values="9;13;9" dur="2s" repeatCount="indefinite" begin="1.6s"/></circle>
-            <circle cx="160" cy="430" r="5" fill="#C41E3A"/>
-            <text x="118" y="425" text-anchor="end" class="map-city-label">후쿠오카</text>
-            <text x="118" y="436" text-anchor="end" class="map-city-jp">福岡 Fukuoka</text>
-            <text x="118" y="447" text-anchor="end" class="map-city-days">Day 13-14 ✈</text>
-          </g>
-
-          <!-- Animated plane -->
-          <g class="route-plane">
-            <animateMotion dur="5s" begin="2s" fill="freeze" path="M52,350 Q200,200 375,78 L340,175 L248,348 L222,372 L160,430"/>
-            <text font-size="16" text-anchor="middle" dy="5">✈</text>
-          </g>
-
-          <!-- Compass -->
-          <g transform="translate(440,530)">
-            <circle r="18" fill="none" stroke="#B8A88A" stroke-width=".5"/>
-            <text y="-8" text-anchor="middle" font-size="8" fill="#8B7355" font-weight="700">N</text>
-            <text y="13" text-anchor="middle" font-size="6" fill="#B8A88A">S</text>
-            <line x1="0" y1="-14" x2="0" y2="14" stroke="#B8A88A" stroke-width=".5"/>
-            <line x1="-14" y1="0" x2="14" y2="0" stroke="#B8A88A" stroke-width=".5"/>
-            <polygon points="0,-12 -3,-4 3,-4" fill="#C41E3A" opacity=".6"/>
-          </g>
-        </svg>
-      </div>
+        <!-- Animated plane -->
+        <g class="route-plane">
+          <animateMotion dur="4s" begin="1.5s" fill="freeze" path="M460,82 L400,178 L295,270 L278,282 L215,310"/>
+          <text font-size="14" text-anchor="middle" dy="4">✈</text>
+        </g>
+      </svg>
     </div>
-
-    <!-- Bottom roll -->
-    <div class="scroll-roll scroll-roll-bottom"></div>
   </div>
 </div>
 
