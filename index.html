@@ -173,20 +173,22 @@
 
     /* ── Navigation ── */
     .nav-bar {
-      position: sticky; top: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       background: rgba(255,249,240,0.95); backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(0,0,0,0.06);
       padding: 0; overflow-x: auto; -webkit-overflow-scrolling: touch;
     }
     .nav-bar::-webkit-scrollbar { display: none; }
 
+    .nav-spacer { height: 50px; } /* 고정 네비만큼 여백 확보 */
+
     .nav-inner {
-      display: flex; align-items: center; justify-content: center; gap: 0;
+      display: flex; align-items: center; gap: 0;
       max-width: 1200px; margin: 0 auto; min-width: max-content;
     }
 
     .nav-item {
-      padding: 1rem 1.5rem; font-size: 0.9rem; font-weight: 500;
+      padding: 0.85rem 1.3rem; font-size: 0.88rem; font-weight: 500;
       color: var(--text-light); cursor: pointer; white-space: nowrap;
       border-bottom: 3px solid transparent; transition: all 0.3s;
     }
@@ -831,6 +833,7 @@
       <div class="nav-item" data-target="comments"><span class="nav-emoji">&#x1f4ac;</span> 의견</div>
     </div>
   </nav>
+  <div class="nav-spacer"></div>
 
   <!-- ══════════════════════════════ OVERVIEW ══════════════════════════════ -->
   <section class="section" id="overview">
