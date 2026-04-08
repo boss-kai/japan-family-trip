@@ -372,9 +372,9 @@
 
   <div class="map-stage" id="mapStage">
     <!-- Phase 1: GIF plays -->
-    <img class="map-gif" id="mapGif" src="img/map/japan-map.gif" alt="일본 지도">
+    <img class="map-gif" id="mapGif" src="img/0_map/japan-map.gif" alt="일본 지도">
     <!-- Phase 2: Cropped map (user-provided) -->
-    <img class="map-crop" id="mapCrop" src="img/map/image.png" alt="일본 지도 확대">
+    <img class="map-crop" id="mapCrop" src="img/0_map/image.png" alt="일본 지도 확대">
     <!-- Phase 3: Route overlay -->
     <div class="map-overlay" id="mapOverlay">
       <svg viewBox="0 0 544 606" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
@@ -816,7 +816,7 @@
     // Phase 1: GIF plays, then freeze by replacing src with static image
     setTimeout(()=>{
       // Freeze GIF: replace with last-frame static PNG
-      gif.src = 'img/map/japan-map-last.png';
+      gif.src = 'img/0_map/japan-map-last.png';
 
       // Phase 2: After brief pause, crossfade to cropped map
       setTimeout(()=>{
