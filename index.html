@@ -454,18 +454,18 @@
     <div class="map-overlay" id="mapOverlay">
       <svg viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
         <!-- Brush-style route along glowing coastline -->
-        <path class="route-line" id="routeLine" d="M720,88 Q724,204 725,320 Q680,370 635,418 L618,400 L525,492"
+        <path class="route-line" id="routeLine" d="M750,88 Q724,204 725,320 Q680,370 635,418 L618,400 L525,492"
           fill="none" stroke="#111" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" opacity=".85"/>
-        <path class="route-line" id="routeLine2" d="M720,88 Q724,204 725,320 Q680,370 635,418 L618,400 L525,492"
+        <path class="route-line" id="routeLine2" d="M750,88 Q724,204 725,320 Q680,370 635,418 L618,400 L525,492"
           fill="none" stroke="rgba(255,255,255,.35)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 
         <!-- Sapporo (홋카이도) -->
         <g class="city-dot" id="dot0">
-          <circle cx="720" cy="88" r="15" fill="rgba(0,0,0,.5)"><animate attributeName="r" values="15;22;15" dur="2s" repeatCount="indefinite"/></circle>
-          <circle cx="720" cy="88" r="8" fill="#fff"/>
-          <rect x="744" y="56" width="165" height="70" class="label-bg"/>
-          <text x="758" y="84" class="map-city-label">삿포로</text>
-          <text x="758" y="108" class="map-city-jp">札幌 · Day 1-3</text>
+          <circle cx="750" cy="88" r="15" fill="rgba(0,0,0,.5)"><animate attributeName="r" values="15;22;15" dur="2s" repeatCount="indefinite"/></circle>
+          <circle cx="750" cy="88" r="8" fill="#fff"/>
+          <rect x="580" y="56" width="160" height="70" class="label-bg"/>
+          <text x="594" y="84" class="map-city-label">삿포로</text>
+          <text x="594" y="108" class="map-city-jp">札幌 · Day 1-3</text>
         </g>
         <!-- Tokyo (혼슈 동해안) -->
         <g class="city-dot" id="dot1">
@@ -502,7 +502,7 @@
 
         <!-- Animated plane -->
         <g class="route-plane" id="routePlane">
-          <animateMotion id="planeAnim" dur="4s" fill="freeze" begin="indefinite" path="M720,88 L725,320 L635,418 L618,400 L525,492"/>
+          <animateMotion id="planeAnim" dur="4s" fill="freeze" begin="indefinite" path="M750,88 L725,320 L635,418 L618,400 L525,492"/>
           <text font-size="36" text-anchor="middle" dy="10">✈</text>
         </g>
       </svg>
