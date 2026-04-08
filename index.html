@@ -249,8 +249,17 @@
   .luffy-slide[data-anim="flash"].leaving{transform:scale(1.1);opacity:0;filter:brightness(2)}
 
   .luffy-slide[data-anim="gather"]{transform:scale(.6);opacity:0;transition:opacity 1.2s ease,transform 1.2s cubic-bezier(.25,.46,.45,.94)}
-  .luffy-slide[data-anim="gather"].active{transform:scale(1);opacity:1}
+  .luffy-slide[data-anim="gather"].active{opacity:1;animation:heartbeat 1.8s cubic-bezier(.25,.46,.45,.94) forwards}
   .luffy-slide[data-anim="gather"].leaving{transform:scale(1.05);opacity:0}
+  @keyframes heartbeat{
+    0%{transform:scale(.5)}
+    25%{transform:scale(1.08)}
+    35%{transform:scale(.92)}
+    50%{transform:scale(1.15)}
+    65%{transform:scale(.97)}
+    80%{transform:scale(1.1)}
+    100%{transform:scale(1.1)}
+  }
 
   .luffy-quote{position:absolute;bottom:4rem;left:50%;transform:translateX(-50%) translateY(30px);text-align:center;z-index:3;opacity:0;transition:opacity 1s ease .3s,transform 1s ease .3s;max-width:700px;width:100%;padding:0 2rem}
   .luffy-quote.active{opacity:1;transform:translateX(-50%) translateY(0)}
