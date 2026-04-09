@@ -186,6 +186,23 @@
   .tag.activity{background:rgba(48,209,88,.1);color:#30D158}
   .tag.transport{background:rgba(191,90,242,.1);color:#BF5AF2}
 
+  /* ── Category Accent System ── */
+  .tl-card{border-left:3px solid rgba(255,255,255,.04)}
+  .tl-card[data-cat="food"]{border-left-color:#FF375F}
+  .tl-card[data-cat="spot"]{border-left-color:#0071E3}
+  .tl-card[data-cat="transport"]{border-left-color:#BF5AF2}
+  .tl-card[data-cat="activity"]{border-left-color:#30D158}
+  .tl-card[data-cat="food"]:hover{box-shadow:inset 3px 0 18px -6px rgba(255,55,95,.3),0 4px 24px rgba(255,55,95,.07)}
+  .tl-card[data-cat="spot"]:hover{box-shadow:inset 3px 0 18px -6px rgba(0,113,227,.3),0 4px 24px rgba(0,113,227,.07)}
+  .tl-card[data-cat="transport"]:hover{box-shadow:inset 3px 0 18px -6px rgba(191,90,242,.3),0 4px 24px rgba(191,90,242,.07)}
+  .tl-card[data-cat="activity"]:hover{box-shadow:inset 3px 0 18px -6px rgba(48,209,88,.3),0 4px 24px rgba(48,209,88,.07)}
+  .cat-icon{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:7px;margin-right:6px;vertical-align:middle;flex-shrink:0;position:relative;top:-1px;transition:transform .3s ease}
+  .tl-card:hover .cat-icon{transform:scale(1.15)}
+  .tl-card[data-cat="food"] .cat-icon{background:rgba(255,55,95,.12);color:#FF375F}
+  .tl-card[data-cat="spot"] .cat-icon{background:rgba(0,113,227,.12);color:#0071E3}
+  .tl-card[data-cat="transport"] .cat-icon{background:rgba(191,90,242,.12);color:#BF5AF2}
+  .tl-card[data-cat="activity"] .cat-icon{background:rgba(48,209,88,.12);color:#30D158}
+
   .tip-card{border-radius:16px;padding:1.4rem 1.6rem;margin-top:1.5rem;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)}
   .tip-card h4{font-size:.85rem;font-weight:700;margin-bottom:.3rem;color:#FF9F0A}
   .tip-card p{font-size:.85rem;font-weight:300;color:#86868B;line-height:1.7}
@@ -405,13 +422,10 @@
   @keyframes slashDraw{0%{opacity:1;transform:scaleX(0)}100%{opacity:1;transform:scaleX(1)}}
 
   /* Musashi crows */
-  .musashi-crows{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+  .musashi-crows{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
   .crow{position:absolute;opacity:0;will-change:transform}
-  .crow svg{width:40px;height:auto;fill:#111}
-  .crow svg .wing-l,.crow svg .wing-r{animation:flapWing .4s ease-in-out infinite alternate}
-  .crow svg .wing-r{animation-delay:.2s}
-  @keyframes flapWing{0%{transform:rotate(0)}100%{transform:rotate(-25deg)}}
-  .anime-interlude[data-char="musashi"].visible .crow{opacity:.8}
+  .crow svg{width:36px;height:auto}
+  .anime-interlude[data-char="musashi"].visible .crow{opacity:.7}
   .crow:nth-child(1){animation:crowFly1 4s ease-in-out 0.5s infinite}
   .crow:nth-child(2){animation:crowFly2 5s ease-in-out 1s infinite}
   .crow:nth-child(3){animation:crowFly3 3.5s ease-in-out 0.3s infinite}
@@ -499,6 +513,8 @@
     .anime-interlude{min-height:70vh;padding-bottom:3rem}
     .anime-char img{max-height:42vh!important}
     .tl-card{padding:1.1rem 1.2rem;border-radius:12px}
+    .cat-icon{width:20px;height:20px;border-radius:5px;margin-right:5px}
+    .cat-icon svg{width:11px;height:11px}
     .tl-card h4{font-size:.95rem}
     .tl-card p{font-size:.82rem;word-break:keep-all}
     .hero-cities{gap:1rem}
@@ -1364,6 +1380,34 @@
   function renderRate(rate,live){const r=rate,sub=document.getElementById('rateSubtitle'),cards=document.getElementById('rateCards'),tip=document.getElementById('rateTip'),mult=Math.round(r);sub.textContent=live?`1엔 = ${r.toFixed(1)}원 (실시간)`:`1엔 ≈ ${r.toFixed(1)}원 (기본값)`;const data=[{krw:10,label:'자판기 음료',jpy:140},{krw:100,label:'삼각김밥',jpy:160},{krw:1000,label:'라멘 한 그릇',jpy:950},{krw:10000,label:'회전초밥 10접시',jpy:1600}];cards.innerHTML=data.map(d=>{const j=Math.round(d.krw/r),k=Math.round(d.jpy*r/100)*100,ks=k>=10000?(k/10000).toFixed(1).replace('.0','')+'만':k.toLocaleString();return`<div class="rate-card"><div class="label">🇰🇷 ${d.krw.toLocaleString()}원</div><div class="value">≈ ${j.toLocaleString()}엔</div><div class="example">${d.label} ≈ ${ks}원</div></div>`}).join('');tip.innerHTML=`쉽게 외우기: <strong>일본 가격 × ${mult}</strong> ≈ 한국 원화!`}
   renderRate(9.4,false);
   fetch('https://open.er-api.com/v6/latest/JPY').then(r=>r.json()).then(d=>{if(d.result==='success'&&d.rates&&d.rates.KRW)renderRate(d.rates.KRW,true)}).catch(()=>{});
+
+  // ── Category Icon System (emoji → elegant icons) ──
+  (function(){
+    const icons={
+      food:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>',
+      spot:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"/><circle cx="12" cy="10" r="3"/></svg>',
+      transport:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>',
+      activity:'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'
+    };
+    document.querySelectorAll('.tl-card').forEach(card=>{
+      const tag=card.querySelector('.tag');
+      let cat='spot';
+      if(tag){
+        if(tag.classList.contains('food'))cat='food';
+        else if(tag.classList.contains('transport'))cat='transport';
+        else if(tag.classList.contains('activity'))cat='activity';
+      }
+      card.dataset.cat=cat;
+      const h4=card.querySelector('h4');
+      if(h4){
+        h4.textContent=h4.textContent.replace(/^[\s\p{Emoji_Presentation}\p{Extended_Pictographic}\u200d\uFE0F]+/u,'').trim();
+        const ic=document.createElement('span');
+        ic.className='cat-icon';
+        ic.innerHTML=icons[cat];
+        h4.prepend(ic);
+      }
+    });
+  })();
 
   // ── Auto-inject Japanese names into h4 titles ──
   const jpNames=[
