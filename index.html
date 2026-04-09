@@ -392,6 +392,38 @@
   }
 
 
+  /* ── Naruto Evolution Scroll ── */
+  .naruto-evolution{height:550vh;position:relative;background:#080808}
+  .naruto-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .naruto-flash{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0}
+  .naruto-flash.flash-orange{animation:narutoFlashOrange .5s ease forwards}
+  .naruto-flash.flash-gold{animation:narutoFlashGold .6s ease forwards}
+  @keyframes narutoFlashOrange{0%{opacity:1;background:radial-gradient(circle,rgba(255,140,0,.8),transparent 70%)}100%{opacity:0}}
+  @keyframes narutoFlashGold{0%{opacity:1;background:radial-gradient(circle,rgba(255,215,0,.9),transparent 70%)}100%{opacity:0}}
+  .naruto-slide{position:absolute;max-height:55vh;max-width:85%;object-fit:contain;z-index:1;
+    opacity:0;transform:translateX(-80vw);
+    transition:opacity .5s ease,transform .5s cubic-bezier(.22,1,.36,1);will-change:opacity,transform}
+  .naruto-slide.active{opacity:1;transform:translateX(0) scale(1)}
+  .naruto-slide.leaving{opacity:0;transform:translateX(80vw)}
+  .naruto-slide[data-anim="sage"]{transform:scale(.5);filter:brightness(1.5) saturate(1.5);transition:opacity .8s,transform .8s cubic-bezier(.34,1.56,.64,1),filter .8s}
+  .naruto-slide[data-anim="sage"].active{transform:scale(1);filter:brightness(1) saturate(1)}
+  .naruto-slide[data-anim="sage"].leaving{transform:scale(.95);opacity:0;filter:brightness(1.3)}
+  .naruto-slide[data-anim="chakra"]{transform:scale(.2);filter:brightness(3) saturate(0);transition:opacity .9s,transform .9s cubic-bezier(.34,1.56,.64,1),filter 1s}
+  .naruto-slide[data-anim="chakra"].active{transform:scale(1);filter:brightness(1) saturate(1)}
+  .naruto-slide[data-anim="chakra"].leaving{transform:scale(1.1);opacity:0;filter:brightness(2)}
+  .naruto-slide[data-anim="sixpaths"]{transform:scale(.4) rotate(-5deg);filter:hue-rotate(30deg) brightness(1.5);transition:opacity 1s,transform 1s cubic-bezier(.34,1.56,.64,1),filter 1s}
+  .naruto-slide[data-anim="sixpaths"].active{transform:scale(1) rotate(0deg);filter:hue-rotate(0deg) brightness(1)}
+  .naruto-slide[data-anim="sixpaths"].leaving{transform:scale(.95) rotate(3deg);opacity:0}
+  .naruto-label{position:absolute;top:2.5rem;left:50%;transform:translateX(-50%);z-index:3;text-align:center;opacity:0;transition:opacity .8s ease .2s;pointer-events:none}
+  .naruto-label.active{opacity:1}
+  .naruto-label .form-name{font-size:clamp(.85rem,2vw,1.1rem);font-weight:700;color:#F5F5F7;letter-spacing:.05em}
+  .naruto-label .form-arc{font-size:clamp(.7rem,1.5vw,.85rem);font-weight:300;color:#86868B;margin-top:.3rem}
+  .naruto-quote{position:absolute;bottom:4rem;left:50%;transform:translateX(-50%) translateY(30px);text-align:center;z-index:3;opacity:0;transition:opacity 1s ease .3s,transform 1s ease .3s;max-width:700px;width:100%;padding:0 2rem}
+  .naruto-quote.active{opacity:1;transform:translateX(-50%) translateY(0)}
+  .naruto-quote .quote-source{color:#ccc;font-size:1rem}
+  .naruto-quote .quote-source strong{color:#F5F5F7}
+  .naruto-quote .quote-source .work{opacity:1;color:#F5F5F7;font-size:.9rem}
+
   /* ── Anime Interlude ── */
   .anime-interlude{position:relative;overflow:hidden;min-height:85vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;background:#080808;padding-bottom:4rem}
 
@@ -437,9 +469,6 @@
   .anime-interlude[data-char="goku"].visible .anime-char img{opacity:1;transform:scale(1);filter:brightness(1) saturate(1)}
   .anime-interlude[data-char="goku"]::after{content:'';position:absolute;top:50%;left:50%;width:0;height:0;border-radius:50%;background:radial-gradient(circle,rgba(255,200,0,.3),transparent);transform:translate(-50%,-50%);transition:all .8s ease .2s;z-index:1}
   .anime-interlude[data-char="goku"].visible::after{width:600px;height:600px}
-
-  .anime-interlude[data-char="naruto"] .anime-char img{transform:translateX(-100vw);transition:opacity .3s,transform .5s cubic-bezier(.22,1,.36,1)}
-  .anime-interlude[data-char="naruto"].visible .anime-char img{opacity:1;transform:translateX(0)}
 
   .anime-interlude[data-char="tanjiro"] .anime-char img{transform:rotate(-15deg) scale(.7);transition:opacity .4s,transform .6s cubic-bezier(.34,1.56,.64,1)}
   .anime-interlude[data-char="tanjiro"].visible .anime-char img{opacity:1;transform:rotate(0) scale(1)}
@@ -487,6 +516,9 @@
     .goku-evolution{height:400vh}
     .goku-slide{max-height:42vh!important}
     .goku-label{top:1.5rem}
+    .naruto-evolution{height:450vh}
+    .naruto-slide{max-height:50vh!important}
+    .naruto-label{top:1.5rem}
     .anime-interlude{min-height:70vh;padding-bottom:3rem}
     .anime-char img{max-height:42vh!important}
     .tl-card{padding:1.1rem 1.2rem;border-radius:12px}
@@ -786,13 +818,30 @@
   </div>
 </div>
 
-<!-- ═══ Anime: 나루토 (도쿄→나라) ═══ -->
-<div class="anime-interlude" data-char="naruto" data-shake="1">
-  <div class="anime-char"><img src="img/naruto/naruto.png" alt="Naruto"></div>
-  <div class="anime-bottom">
-    <p class="quote-text">"포기하지 않는 것.<br>그게 내 닌자도야."</p>
-    <p class="quote-source"><strong>우즈마키 나루토</strong> <span class="work">— 나루토 NARUTO</span></p>
-    <p class="quote-context">긴 여정도 포기하지 않고 끝까지!</p>
+<!-- ═══ Anime: 나루토 진화 (도쿄→나라) ═══ -->
+<div class="naruto-evolution" id="narutoEvolution">
+  <div class="naruto-sticky">
+    <div class="naruto-flash" id="narutoFlash"></div>
+    <div class="naruto-label" id="narutoLabel">
+      <div class="form-name" id="narutoFormName"></div>
+      <div class="form-arc" id="narutoFormArc"></div>
+    </div>
+
+    <img class="naruto-slide active" src="img/naruto/01_shippuden.png" alt="Shippuden Naruto" data-idx="0"
+         data-name="질풍전 나루토" data-arc="질풍전 · 더 강해진 닌자">
+    <img class="naruto-slide" src="img/naruto/02_sage.png" alt="Sage Mode" data-idx="1" data-anim="sage" data-flash="orange"
+         data-name="선인모드" data-arc="페인 습격 · 자연 에너지 각성">
+    <img class="naruto-slide" src="img/naruto/03_kcm1.png" alt="KCM1" data-idx="2" data-anim="chakra" data-flash="orange"
+         data-name="구미 차크라 모드" data-arc="4차 닌자대전 · 구미와 공명">
+    <img class="naruto-slide" src="img/naruto/04_kcm2.png" alt="KCM2" data-idx="3" data-anim="chakra" data-flash="gold"
+         data-name="구미 차크라 모드 완성체" data-arc="4차 닌자대전 · 완전한 조화">
+    <img class="naruto-slide" src="img/naruto/05_sixpaths.png" alt="Six Paths" data-idx="4" data-anim="sixpaths" data-flash="gold"
+         data-name="육도선인모드" data-arc="카구야전 · 신의 힘을 받은 닌자">
+
+    <div class="naruto-quote" id="narutoQuote">
+      <p class="quote-text">"포기하지 않는 것.<br>그게 내 닌자도야."</p>
+      <p class="quote-source"><strong>우즈마키 나루토</strong> <span class="work">— 나루토 NARUTO</span></p>
+    </div>
   </div>
 </div>
 
@@ -932,7 +981,7 @@
     <h2 class="sec-title fade-in">여행 경비.</h2>
     <p class="sec-sub fade-in">가족 4인 기준 · 넉넉하게 산정</p>
     <div class="fade-in">
-      <div class="budget-card"><div class="budget-card-header" style="background:linear-gradient(135deg,#4FC3F7,#039BE5);">⛰ 삿포로 <small>3일</small></div><div class="budget-card-body"><div class="budget-card-row"><span>🏨 숙소</span><span>60만</span></div><div class="budget-card-row"><span>🍜 식비</span><span>55만</span></div><div class="budget-card-row"><span>🚅 교통</span><span>8만</span></div><div class="budget-card-row"><span>🎫 입장</span><span>10만</span></div><div class="budget-card-row"><span>🛍 쇼핑</span><span>15만</span></div><div class="budget-card-row total"><span>소계</span><span>148만</span></div></div></div>
+      <div class="budget-card"><div class="budget-card-header" style="background:linear-gradient(135deg,#4FC3F7,#039BE5);">⛰ 삿포로 <small>3일</small></div><div class="budget-card-body"><div class="budget-card-row"><span>🏨 숙소</span><span>60만</span></div><div class="budget-card-row"><span>🍜 식비</span><span>55만</span></div><div class="budget-card-row"><span>🚅 교통 (JR에어포트+오타루+지하철)</span><span>20만</span></div><div class="budget-card-row"><span>🎫 입장</span><span>10만</span></div><div class="budget-card-row"><span>🛍 쇼핑</span><span>15만</span></div><div class="budget-card-row total"><span>소계</span><span>160만</span></div></div></div>
       <div class="budget-card"><div class="budget-card-header" style="background:linear-gradient(135deg,#FF7043,#E64A19);">🗼 도쿄 <small>4일</small></div><div class="budget-card-body"><div class="budget-card-row"><span>🏨 숙소</span><span>100만</span></div><div class="budget-card-row"><span>🍜 식비</span><span>75만</span></div><div class="budget-card-row"><span>🚅 교통</span><span>25만</span></div><div class="budget-card-row"><span>🎫 입장</span><span>30만</span></div><div class="budget-card-row"><span>🛍 쇼핑</span><span>25만</span></div><div class="budget-card-row total"><span>소계</span><span>255만</span></div></div></div>
       <div class="budget-card"><div class="budget-card-header" style="background:linear-gradient(135deg,#81C784,#388E3C);">🦌 나라 <small>2일</small></div><div class="budget-card-body"><div class="budget-card-row"><span>🏨 숙소</span><span>30만</span></div><div class="budget-card-row"><span>🍜 식비</span><span>36만</span></div><div class="budget-card-row"><span>🚅 교통</span><span>5만</span></div><div class="budget-card-row"><span>🎫 입장</span><span>5만</span></div><div class="budget-card-row"><span>🛍 쇼핑</span><span>5만</span></div><div class="budget-card-row total"><span>소계</span><span>81만</span></div></div></div>
       <div class="budget-card"><div class="budget-card-header" style="background:linear-gradient(135deg,#CE93D8,#8E24AA);">⛩ 교토 <small>3일</small></div><div class="budget-card-body"><div class="budget-card-row"><span>🏨 숙소</span><span>65만</span></div><div class="budget-card-row"><span>🍜 식비</span><span>55만</span></div><div class="budget-card-row"><span>🚅 교통</span><span>15만</span></div><div class="budget-card-row"><span>🎫 입장</span><span>25만</span></div><div class="budget-card-row"><span>🛍 쇼핑</span><span>15만</span></div><div class="budget-card-row total"><span>소계</span><span>175만</span></div></div></div>
@@ -951,7 +1000,7 @@
         <div class="budget-extra-item total"><span>별도 경비 합계</span><span>약 405만</span></div>
       </div>
     </div>
-    <div class="budget-total-box fade-in"><h3>💳 총 예상 경비</h3><p class="big">약 1,150만원</p><p class="detail">현지 746만 + 별도 405만 (JR패스 X, 개별구매)</p></div>
+    <div class="budget-total-box fade-in"><h3>💳 총 예상 경비</h3><p class="big">약 1,163만원</p><p class="detail">현지 758만 + 별도 405만 (JR패스 X, 개별구매)</p></div>
     <div class="fade-in" style="text-align:center;margin-top:2rem;">
       <h4 style="font-weight:700;color:#F5F5F7;margin-bottom:.3rem;">💱 환율표</h4>
       <p id="rateSubtitle" style="font-size:.8rem;color:#86868B;margin-bottom:1rem;">로딩 중...</p>
