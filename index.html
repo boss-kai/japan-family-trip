@@ -1169,14 +1169,10 @@
         if(lastSlide.tagName==='VIDEO'&&!lastSlide._played){
           lastSlide.currentTime=0;
           clearTimeout(lastSlide._playTimer);
-          // lock scroll during video
-          lockScroll=true;
           lastSlide._playTimer=setTimeout(()=>{
             lastSlide.play().catch(()=>{});
           },2000);
-          // unlock after video ends once, then enable loop
           lastSlide.addEventListener('ended',function onEnd(){
-            lockScroll=false;
             lastSlide._played=true;
             lastSlide.loop=true;
             lastSlide.play().catch(()=>{});
@@ -1188,19 +1184,7 @@
       }
       prev=idx;
     }
-    let lockScroll=false;
-    let lastScrollY=0;
-    function guardScroll(){
-      if(lockScroll){
-        window.scrollTo(0,lastScrollY);
-      }else{
-        lastScrollY=window.scrollY;
-      }
-    }
-    window.addEventListener('scroll',function(e){
-      guardScroll();
-      onScroll();
-    },{passive:false});
+    window.addEventListener('scroll',onScroll,{passive:true});
     onScroll();
 
     // ── Auto-play: 루피 섹션 도착 시 자동 슬라이드 ──
