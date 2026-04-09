@@ -21,14 +21,6 @@ a{color:inherit;text-decoration:none}
 .page-header p{color:#86868B;font-size:1rem;margin-top:.5rem}
 
 /* Route Animation */
-.route-anim{max-width:800px;margin:2rem auto 0;padding:0 1rem}
-.route-anim svg{width:100%;height:auto}
-.route-city-text{fill:#86868B;font-size:13px;font-family:'Noto Sans KR',sans-serif;font-weight:600}
-.route-dot{opacity:0;transition:opacity .5s ease}
-.route-dot.show{opacity:1}
-.route-draw-line{transition:stroke-dashoffset 2s ease}
-.route-draw-line.animate{stroke-dashoffset:0}
-.route-plane{opacity:0}.route-plane.show{opacity:1}
 
 /* City Tabs */
 .city-tabs{display:flex;justify-content:center;gap:.5rem;padding:2rem 1rem 1rem;position:sticky;top:0;z-index:50;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06)}
@@ -71,6 +63,17 @@ td{padding:.7rem .8rem;vertical-align:top}
 .tag.transport{background:rgba(191,90,242,.1);color:#BF5AF2}
 .tag.activity{background:rgba(48,209,88,.1);color:#30D158}
 
+
+/* Mini Route per city */
+.city-route{margin-bottom:1.5rem;padding:.8rem 0}
+.city-route svg{width:100%;height:auto;max-width:600px;display:block}
+.mini-label{fill:#86868B;font-size:11px;font-family:'Noto Sans KR',sans-serif;font-weight:500;text-anchor:middle}
+.mini-label.active-label{fill:#FF375F;font-weight:700}
+.city-route-progress{stroke-dasharray:480;stroke-dashoffset:480;transition:stroke-dashoffset 1.5s ease .3s}
+.city-route.visible .city-route-progress{stroke-dashoffset:0}
+.city-route .pulse{opacity:0;transition:opacity .5s ease .8s}
+.city-route.visible .pulse{opacity:1}
+
 /* Mobile */
 @media(max-width:600px){
   .page-header{padding:4rem 1rem 1.5rem}
@@ -81,28 +84,17 @@ td{padding:.7rem .8rem;vertical-align:top}
   td{padding:.5rem .4rem}
   .td-desc{min-width:140px}
   .back-btn{top:.8rem;left:.8rem;font-size:.75rem;padding:.4rem .8rem}
-  .route-city-text{font-size:10px}
+    .mini-label{font-size:9px}
+  .city-route svg{max-width:100%}
 }
 </style>
 </head>
 <body>
-<a href="index.html" class="back-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>돌아가기</a>
+<a href="index.html" class="back-btn" id="backBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>돌아가기</a>
 
 <header class="page-header">
   <h1>일정표.</h1>
   <p>14일간의 여정을 한눈에 볼 수 있는 표 형식 일정</p>
-  <div class="route-anim">
-  <svg viewBox="0 0 900 80" preserveAspectRatio="xMidYMid meet">
-    <line class="route-bg-line" x1="90" y1="40" x2="810" y2="40" stroke="rgba(255,255,255,.08)" stroke-width="3"/>
-    <line class="route-draw-line" x1="90" y1="40" x2="810" y2="40" stroke="rgba(255,55,95,.5)" stroke-width="3" stroke-dasharray="720" stroke-dashoffset="720"/>
-    <g class="route-dot" data-delay="0"><circle cx="90" cy="40" r="18" fill="rgba(255,55,95,.1)"/><circle cx="90" cy="40" r="6" fill="#FF375F"/><text x="90" y="70" text-anchor="middle" class="route-city-text">삿포로</text></g>
-    <g class="route-dot" data-delay="1"><circle cx="270" cy="40" r="18" fill="rgba(255,55,95,.1)"/><circle cx="270" cy="40" r="6" fill="#FF375F"/><text x="270" y="70" text-anchor="middle" class="route-city-text">도쿄</text></g>
-    <g class="route-dot" data-delay="2"><circle cx="450" cy="40" r="18" fill="rgba(255,55,95,.1)"/><circle cx="450" cy="40" r="6" fill="#FF375F"/><text x="450" y="70" text-anchor="middle" class="route-city-text">나라</text></g>
-    <g class="route-dot" data-delay="3"><circle cx="630" cy="40" r="18" fill="rgba(255,55,95,.1)"/><circle cx="630" cy="40" r="6" fill="#FF375F"/><text x="630" y="70" text-anchor="middle" class="route-city-text">교토</text></g>
-    <g class="route-dot" data-delay="4"><circle cx="810" cy="40" r="18" fill="rgba(255,55,95,.1)"/><circle cx="810" cy="40" r="6" fill="#FF375F"/><text x="810" y="70" text-anchor="middle" class="route-city-text">후쿠오카</text></g>
-    <g class="route-plane"><animateMotion dur="2s" fill="freeze" begin="0.5s" path="M90,40 L810,40"/><text font-size="20" dy="6" text-anchor="middle">✈</text></g>
-  </svg>
-</div>
 </header>
 
 <nav class="city-tabs" id="cityTabs">
@@ -118,6 +110,23 @@ td{padding:.7rem .8rem;vertical-align:top}
 <section class="sched-city" id="sapporo">
   <h2 class="city-heading">삿포로 <span class="city-jp">札幌</span></h2>
   <p class="city-period">Day 1-3 · 4/27-29</p>
+  <div class="city-route" data-city="sapporo">
+    <svg viewBox="0 0 600 52">
+      <line x1="60" y1="20" x2="540" y2="20" stroke="rgba(255,255,255,.06)" stroke-width="2"/>
+      <circle class="pulse" cx="60" cy="20" r="14" fill="rgba(255,55,95,.12)"><animate attributeName="r" values="14;20;14" dur="2s" repeatCount="indefinite"/></circle>
+      <circle class="pulse" cx="60" cy="20" r="5" fill="#FF375F"/>
+      <text x="60" y="44" class="mini-label active-label">삿포로</text>
+      <circle cx="180" cy="20" r="3.5" fill="rgba(255,255,255,.15)"/>
+      <text x="180" y="44" class="mini-label">도쿄</text>
+      <circle cx="300" cy="20" r="3.5" fill="rgba(255,255,255,.15)"/>
+      <text x="300" y="44" class="mini-label">나라</text>
+      <circle cx="420" cy="20" r="3.5" fill="rgba(255,255,255,.15)"/>
+      <text x="420" y="44" class="mini-label">교토</text>
+      <circle cx="540" cy="20" r="3.5" fill="rgba(255,255,255,.15)"/>
+      <text x="540" y="44" class="mini-label">후쿠오카</text>
+    </svg>
+  </div>
+
   <h3 class="day-title">Day 1 · 4/26 (토) — 인천 → 삿포로 시내</h3>
   <div class="table-wrap"><table>
     <thead><tr><th class="col-time">시간</th><th class="col-place">장소</th><th class="col-desc">설명</th><th class="col-cat">분류</th></tr></thead>
@@ -160,6 +169,24 @@ td{padding:.7rem .8rem;vertical-align:top}
 <section class="sched-city" id="tokyo">
   <h2 class="city-heading">도쿄 <span class="city-jp">東京</span></h2>
   <p class="city-period">Day 4-7 · 4/30-5/3</p>
+  <div class="city-route" data-city="tokyo">
+    <svg viewBox="0 0 600 52">
+      <line x1="60" y1="20" x2="540" y2="20" stroke="rgba(255,255,255,.06)" stroke-width="2"/>
+      <line class="city-route-progress" x1="60" y1="20" x2="180" y2="20" stroke="rgba(255,55,95,.35)" stroke-width="2.5" stroke-dasharray="120" stroke-dashoffset="120"/>
+      <circle cx="60" cy="20" r="4" fill="rgba(255,55,95,.4)"/>
+      <text x="60" y="44" class="mini-label">삿포로</text>
+      <circle class="pulse" cx="180" cy="20" r="14" fill="rgba(255,55,95,.12)"><animate attributeName="r" values="14;20;14" dur="2s" repeatCount="indefinite"/></circle>
+      <circle class="pulse" cx="180" cy="20" r="5" fill="#FF375F"/>
+      <text x="180" y="44" class="mini-label active-label">도쿄</text>
+      <circle cx="300" cy="20" r="3.5" fill="rgba(255,255,255,.15)"/>
+      <text x="300" y="44" class="mini-label">나라</text>
+      <circle cx="420" cy="20" r="3.5" fill="rgba(255,255,255,.15)"/>
+      <text x="420" y="44" class="mini-label">교토</text>
+      <circle cx="540" cy="20" r="3.5" fill="rgba(255,255,255,.15)"/>
+      <text x="540" y="44" class="mini-label">후쿠오카</text>
+    </svg>
+  </div>
+
   <h3 class="day-title">Day 4 · 4/29 (화) — 도쿄 클래식 코스</h3>
   <div class="table-wrap"><table>
     <thead><tr><th class="col-time">시간</th><th class="col-place">장소</th><th class="col-desc">설명</th><th class="col-cat">분류</th></tr></thead>
@@ -204,6 +231,24 @@ td{padding:.7rem .8rem;vertical-align:top}
 <section class="sched-city" id="nara">
   <h2 class="city-heading">나라 <span class="city-jp">奈良</span></h2>
   <p class="city-period">Day 8-9 · 5/4-5</p>
+  <div class="city-route" data-city="nara">
+    <svg viewBox="0 0 600 52">
+      <line x1="60" y1="20" x2="540" y2="20" stroke="rgba(255,255,255,.06)" stroke-width="2"/>
+      <line class="city-route-progress" x1="60" y1="20" x2="300" y2="20" stroke="rgba(255,55,95,.35)" stroke-width="2.5" stroke-dasharray="240" stroke-dashoffset="240"/>
+      <circle cx="60" cy="20" r="4" fill="rgba(255,55,95,.4)"/>
+      <text x="60" y="44" class="mini-label">삿포로</text>
+      <circle cx="180" cy="20" r="4" fill="rgba(255,55,95,.4)"/>
+      <text x="180" y="44" class="mini-label">도쿄</text>
+      <circle class="pulse" cx="300" cy="20" r="14" fill="rgba(255,55,95,.12)"><animate attributeName="r" values="14;20;14" dur="2s" repeatCount="indefinite"/></circle>
+      <circle class="pulse" cx="300" cy="20" r="5" fill="#FF375F"/>
+      <text x="300" y="44" class="mini-label active-label">나라</text>
+      <circle cx="420" cy="20" r="3.5" fill="rgba(255,255,255,.15)"/>
+      <text x="420" y="44" class="mini-label">교토</text>
+      <circle cx="540" cy="20" r="3.5" fill="rgba(255,255,255,.15)"/>
+      <text x="540" y="44" class="mini-label">후쿠오카</text>
+    </svg>
+  </div>
+
   <h3 class="day-title">Day 8 · 5/3 (토) — 나라 핵심 관광</h3>
   <div class="table-wrap"><table>
     <thead><tr><th class="col-time">시간</th><th class="col-place">장소</th><th class="col-desc">설명</th><th class="col-cat">분류</th></tr></thead>
@@ -229,6 +274,24 @@ td{padding:.7rem .8rem;vertical-align:top}
 <section class="sched-city" id="kyoto">
   <h2 class="city-heading">교토 <span class="city-jp">京都</span></h2>
   <p class="city-period">Day 10-12 · 5/6-8</p>
+  <div class="city-route" data-city="kyoto">
+    <svg viewBox="0 0 600 52">
+      <line x1="60" y1="20" x2="540" y2="20" stroke="rgba(255,255,255,.06)" stroke-width="2"/>
+      <line class="city-route-progress" x1="60" y1="20" x2="420" y2="20" stroke="rgba(255,55,95,.35)" stroke-width="2.5" stroke-dasharray="360" stroke-dashoffset="360"/>
+      <circle cx="60" cy="20" r="4" fill="rgba(255,55,95,.4)"/>
+      <text x="60" y="44" class="mini-label">삿포로</text>
+      <circle cx="180" cy="20" r="4" fill="rgba(255,55,95,.4)"/>
+      <text x="180" y="44" class="mini-label">도쿄</text>
+      <circle cx="300" cy="20" r="4" fill="rgba(255,55,95,.4)"/>
+      <text x="300" y="44" class="mini-label">나라</text>
+      <circle class="pulse" cx="420" cy="20" r="14" fill="rgba(255,55,95,.12)"><animate attributeName="r" values="14;20;14" dur="2s" repeatCount="indefinite"/></circle>
+      <circle class="pulse" cx="420" cy="20" r="5" fill="#FF375F"/>
+      <text x="420" y="44" class="mini-label active-label">교토</text>
+      <circle cx="540" cy="20" r="3.5" fill="rgba(255,255,255,.15)"/>
+      <text x="540" y="44" class="mini-label">후쿠오카</text>
+    </svg>
+  </div>
+
   <h3 class="day-title">Day 10 · 5/5 (월) — 교토 동부 코스</h3>
   <div class="table-wrap"><table>
     <thead><tr><th class="col-time">시간</th><th class="col-place">장소</th><th class="col-desc">설명</th><th class="col-cat">분류</th></tr></thead>
@@ -267,6 +330,24 @@ td{padding:.7rem .8rem;vertical-align:top}
 <section class="sched-city" id="fukuoka">
   <h2 class="city-heading">후쿠오카 <span class="city-jp">福岡</span></h2>
   <p class="city-period">Day 13-14 · 5/9-10</p>
+  <div class="city-route" data-city="fukuoka">
+    <svg viewBox="0 0 600 52">
+      <line x1="60" y1="20" x2="540" y2="20" stroke="rgba(255,255,255,.06)" stroke-width="2"/>
+      <line class="city-route-progress" x1="60" y1="20" x2="540" y2="20" stroke="rgba(255,55,95,.35)" stroke-width="2.5" stroke-dasharray="480" stroke-dashoffset="480"/>
+      <circle cx="60" cy="20" r="4" fill="rgba(255,55,95,.4)"/>
+      <text x="60" y="44" class="mini-label">삿포로</text>
+      <circle cx="180" cy="20" r="4" fill="rgba(255,55,95,.4)"/>
+      <text x="180" y="44" class="mini-label">도쿄</text>
+      <circle cx="300" cy="20" r="4" fill="rgba(255,55,95,.4)"/>
+      <text x="300" y="44" class="mini-label">나라</text>
+      <circle cx="420" cy="20" r="4" fill="rgba(255,55,95,.4)"/>
+      <text x="420" y="44" class="mini-label">교토</text>
+      <circle class="pulse" cx="540" cy="20" r="14" fill="rgba(255,55,95,.12)"><animate attributeName="r" values="14;20;14" dur="2s" repeatCount="indefinite"/></circle>
+      <circle class="pulse" cx="540" cy="20" r="5" fill="#FF375F"/>
+      <text x="540" y="44" class="mini-label active-label">후쿠오카</text>
+    </svg>
+  </div>
+
   <h3 class="day-title">Day 13 · 5/8 (목) — 후쿠오카 도착 & 시내 관광</h3>
   <div class="table-wrap"><table>
     <thead><tr><th class="col-time">시간</th><th class="col-place">장소</th><th class="col-desc">설명</th><th class="col-cat">분류</th></tr></thead>
@@ -292,18 +373,12 @@ td{padding:.7rem .8rem;vertical-align:top}
 </main>
 
 <script>
-// Route animation
-setTimeout(()=>{
-  document.querySelector('.route-draw-line').classList.add('animate');
-  document.querySelectorAll('.route-dot').forEach((d,i)=>{
-    setTimeout(()=>d.classList.add('show'), 300 + i*400);
-  });
-  setTimeout(()=>document.querySelector('.route-plane').classList.add('show'), 500);
-}, 300);
-
-// Tab click + scroll highlight
+// Tab click + scroll highlight + dynamic back button
 const tabs=document.querySelectorAll('.tab');
 const sections=document.querySelectorAll('.sched-city');
+const backBtn=document.getElementById('backBtn');
+let currentCity='sapporo';
+
 tabs.forEach(t=>{
   t.addEventListener('click',e=>{
     e.preventDefault();
@@ -311,20 +386,35 @@ tabs.forEach(t=>{
     if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
   });
 });
+
+// Intersection observer: tabs + route animations + back button
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting){
       tabs.forEach(t=>t.classList.remove('active'));
       const tab=document.querySelector(`.tab[data-city="${e.target.id}"]`);
       if(tab) tab.classList.add('active');
+      currentCity=e.target.id;
+      backBtn.href='index.html#'+currentCity;
     }
   });
-},{threshold:0.3});
+},{threshold:0.2});
 sections.forEach(s=>obs.observe(s));
 
-// Hash navigation
+// Route animation per city (trigger on scroll into view)
+const routeObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.classList.add('visible');
+  });
+},{threshold:0.5});
+document.querySelectorAll('.city-route').forEach(r=>routeObs.observe(r));
+
+// Hash navigation + set initial back link
 if(location.hash){
-  const el=document.querySelector(location.hash);
+  const id=location.hash.slice(1);
+  currentCity=id;
+  backBtn.href='index.html#'+id;
+  const el=document.getElementById(id);
   if(el) setTimeout(()=>el.scrollIntoView({behavior:'smooth'}),100);
 }
 </script>
