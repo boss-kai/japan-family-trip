@@ -1129,6 +1129,37 @@
       onScroll();
     },{passive:false});
     onScroll();
+
+    // ── Auto-play: 루피 섹션 도착 시 자동 슬라이드 ──
+    let autoPlayed=false;
+    const autoObs=new IntersectionObserver(entries=>{
+      if(autoPlayed)return;
+      const e=entries[0];
+      if(!e.isIntersecting)return;
+      autoPlayed=true;
+      autoObs.disconnect();
+      const scrollStart=evo.offsetTop;
+      const scrollEnd=scrollStart+evo.offsetHeight-window.innerHeight;
+      const duration=total*800; // 슬라이드당 800ms
+      const startTime=performance.now();
+      const startY=window.scrollY;
+      // 이미 중간이면 남은 구간만
+      const from=Math.max(startY,scrollStart);
+      const dist=scrollEnd-from;
+      if(dist<=0)return;
+      function autoStep(now){
+        if(lockScroll){requestAnimationFrame(autoStep);return}
+        const elapsed=now-startTime;
+        const t=Math.min(elapsed/duration,1);
+        // easeInOutCubic
+        const ease=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+        window.scrollTo(0,from+dist*ease);
+        if(t<1)requestAnimationFrame(autoStep);
+      }
+      // 살짝 딜레이 후 시작
+      setTimeout(()=>requestAnimationFrame(autoStep),300);
+    },{threshold:0.05});
+    autoObs.observe(evo);
   })();
 
   // ── Goku Evolution Scroll ──
