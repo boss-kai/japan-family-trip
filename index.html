@@ -391,8 +391,6 @@
     100%{transform:scale(1.05);filter:blur(24px) brightness(1.2)}
   }
 
-  .ssj-lightning{position:absolute;inset:-20%;z-index:3;pointer-events:none;opacity:0;transition:opacity .5s ease}
-  .goku-slide-wrap.active .ssj-lightning{opacity:1}
 
   /* ── Anime Interlude ── */
   .anime-interlude{position:relative;overflow:hidden;min-height:85vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;background:#080808;padding-bottom:4rem}
@@ -420,28 +418,6 @@
   .slash-line.draw{animation:slashDraw .4s ease-out forwards}
   @keyframes slashWild{0%{opacity:1;transform:scaleX(0)}60%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1)}}
   @keyframes slashDraw{0%{opacity:1;transform:scaleX(0)}100%{opacity:1;transform:scaleX(1)}}
-
-  /* Musashi crows */
-  .musashi-crows{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden}
-  .crow{position:absolute;opacity:0;will-change:transform}
-  .crow svg{width:36px;height:auto}
-  .anime-interlude[data-char="musashi"].visible .crow{opacity:.7}
-  .crow:nth-child(1){animation:crowFly1 4s ease-in-out 0.5s infinite}
-  .crow:nth-child(2){animation:crowFly2 5s ease-in-out 1s infinite}
-  .crow:nth-child(3){animation:crowFly3 3.5s ease-in-out 0.3s infinite}
-  .crow:nth-child(4){animation:crowFly4 4.5s ease-in-out 1.5s infinite}
-  .crow:nth-child(5){animation:crowFly5 5.5s ease-in-out 0.8s infinite}
-  .crow:nth-child(6){animation:crowFly6 3.8s ease-in-out 2s infinite}
-  .crow:nth-child(7){animation:crowFly7 4.2s ease-in-out 0.2s infinite}
-  .crow:nth-child(8){animation:crowFly8 6s ease-in-out 1.2s infinite}
-  @keyframes crowFly1{0%{opacity:0;transform:translate(-10vw,30vh) scale(.8)}20%{opacity:.8}50%{transform:translate(50vw,15vh) scale(1.1)}80%{opacity:.6}100%{opacity:0;transform:translate(110vw,5vh) scale(.7)}}
-  @keyframes crowFly2{0%{opacity:0;transform:translate(110vw,20vh) scale(1) scaleX(-1)}20%{opacity:.7}50%{transform:translate(50vw,40vh) scale(1.2) scaleX(-1)}80%{opacity:.5}100%{opacity:0;transform:translate(-10vw,55vh) scale(.6) scaleX(-1)}}
-  @keyframes crowFly3{0%{opacity:0;transform:translate(20vw,-5vh) scale(.6)}20%{opacity:.9}50%{transform:translate(60vw,25vh) scale(1)}80%{opacity:.4}100%{opacity:0;transform:translate(105vw,50vh) scale(.5)}}
-  @keyframes crowFly4{0%{opacity:0;transform:translate(100vw,60vh) scale(.9) scaleX(-1)}20%{opacity:.6}50%{transform:translate(40vw,35vh) scale(1.3) scaleX(-1)}80%{opacity:.5}100%{opacity:0;transform:translate(-5vw,10vh) scale(.7) scaleX(-1)}}
-  @keyframes crowFly5{0%{opacity:0;transform:translate(-5vw,50vh) scale(.7)}25%{opacity:.7}50%{transform:translate(45vw,20vh) scale(1)}75%{opacity:.6}100%{opacity:0;transform:translate(100vw,60vh) scale(.8)}}
-  @keyframes crowFly6{0%{opacity:0;transform:translate(80vw,-5vh) scale(1)}20%{opacity:.8}50%{transform:translate(30vw,30vh) scale(.9) scaleX(-1)}80%{opacity:.4}100%{opacity:0;transform:translate(-10vw,50vh) scale(.6) scaleX(-1)}}
-  @keyframes crowFly7{0%{opacity:0;transform:translate(50vw,70vh) scale(.5)}30%{opacity:.7}60%{transform:translate(70vw,10vh) scale(1.1)}100%{opacity:0;transform:translate(110vw,-5vh) scale(.8)}}
-  @keyframes crowFly8{0%{opacity:0;transform:translate(-5vw,10vh) scale(1.2)}15%{opacity:.6}40%{transform:translate(35vw,50vh) scale(.8)}70%{transform:translate(75vw,25vh) scale(1)}100%{opacity:0;transform:translate(110vw,40vh) scale(.6)}}
 
   .anime-bottom{position:relative;z-index:3;text-align:center;padding:2rem 2rem 0;max-width:700px;width:100%;opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.25,.46,.45,.94) .5s}
   .anime-interlude.visible .anime-bottom{opacity:1;transform:translateY(0)}
@@ -853,16 +829,6 @@
     <div class="curtain-top"></div>
     <div class="curtain-bottom"></div>
   </div>
-  <div class="musashi-crows">
-    <span class="crow"><svg viewBox="0 0 40 20" width="36"><path stroke="#111" stroke-width="2.5" fill="none"><animate attributeName="d" values="M20,15 Q10,5 0,8;M20,15 Q10,13 0,15;M20,15 Q10,5 0,8" dur="0.5s" repeatCount="indefinite"/></path><path stroke="#111" stroke-width="2.5" fill="none"><animate attributeName="d" values="M20,15 Q30,5 40,8;M20,15 Q30,13 40,15;M20,15 Q30,5 40,8" dur="0.5s" repeatCount="indefinite"/></path></svg></span>
-    <span class="crow"><svg viewBox="0 0 40 20" width="42"><path stroke="#111" stroke-width="2.5" fill="none"><animate attributeName="d" values="M20,15 Q10,5 0,8;M20,15 Q10,13 0,15;M20,15 Q10,5 0,8" dur="0.6s" repeatCount="indefinite"/></path><path stroke="#111" stroke-width="2.5" fill="none"><animate attributeName="d" values="M20,15 Q30,5 40,8;M20,15 Q30,13 40,15;M20,15 Q30,5 40,8" dur="0.6s" repeatCount="indefinite"/></path></svg></span>
-    <span class="crow"><svg viewBox="0 0 40 20" width="30"><path stroke="#111" stroke-width="2.5" fill="none"><animate attributeName="d" values="M20,15 Q10,5 0,8;M20,15 Q10,13 0,15;M20,15 Q10,5 0,8" dur="0.45s" repeatCount="indefinite"/></path><path stroke="#111" stroke-width="2.5" fill="none"><animate attributeName="d" values="M20,15 Q30,5 40,8;M20,15 Q30,13 40,15;M20,15 Q30,5 40,8" dur="0.45s" repeatCount="indefinite"/></path></svg></span>
-    <span class="crow"><svg viewBox="0 0 40 20" width="38"><path stroke="#111" stroke-width="2.5" fill="none"><animate attributeName="d" values="M20,15 Q10,5 0,8;M20,15 Q10,13 0,15;M20,15 Q10,5 0,8" dur="0.55s" repeatCount="indefinite"/></path><path stroke="#111" stroke-width="2.5" fill="none"><animate attributeName="d" values="M20,15 Q30,5 40,8;M20,15 Q30,13 40,15;M20,15 Q30,5 40,8" dur="0.55s" repeatCount="indefinite"/></path></svg></span>
-    <span class="crow"><svg viewBox="0 0 40 20" width="34"><path stroke="#111" stroke-width="2.5" fill="none"><animate attributeName="d" values="M20,15 Q10,5 0,8;M20,15 Q10,13 0,15;M20,15 Q10,5 0,8" dur="0.5s" repeatCount="indefinite"/></path><path stroke="#111" stroke-width="2.5" fill="none"><animate attributeName="d" values="M20,15 Q30,5 40,8;M20,15 Q30,13 40,15;M20,15 Q30,5 40,8" dur="0.5s" repeatCount="indefinite"/></path></svg></span>
-    <span class="crow"><svg viewBox="0 0 40 20" width="44"><path stroke="#111" stroke-width="2.5" fill="none"><animate attributeName="d" values="M20,15 Q10,5 0,8;M20,15 Q10,13 0,15;M20,15 Q10,5 0,8" dur="0.65s" repeatCount="indefinite"/></path><path stroke="#111" stroke-width="2.5" fill="none"><animate attributeName="d" values="M20,15 Q30,5 40,8;M20,15 Q30,13 40,15;M20,15 Q30,5 40,8" dur="0.65s" repeatCount="indefinite"/></path></svg></span>
-    <span class="crow"><svg viewBox="0 0 40 20" width="32"><path stroke="#111" stroke-width="2.5" fill="none"><animate attributeName="d" values="M20,15 Q10,5 0,8;M20,15 Q10,13 0,15;M20,15 Q10,5 0,8" dur="0.48s" repeatCount="indefinite"/></path><path stroke="#111" stroke-width="2.5" fill="none"><animate attributeName="d" values="M20,15 Q30,5 40,8;M20,15 Q30,13 40,15;M20,15 Q30,5 40,8" dur="0.48s" repeatCount="indefinite"/></path></svg></span>
-    <span class="crow"><svg viewBox="0 0 40 20" width="40"><path stroke="#111" stroke-width="2.5" fill="none"><animate attributeName="d" values="M20,15 Q10,5 0,8;M20,15 Q10,13 0,15;M20,15 Q10,5 0,8" dur="0.58s" repeatCount="indefinite"/></path><path stroke="#111" stroke-width="2.5" fill="none"><animate attributeName="d" values="M20,15 Q30,5 40,8;M20,15 Q30,13 40,15;M20,15 Q30,5 40,8" dur="0.58s" repeatCount="indefinite"/></path></svg></span>
-  </div>
   <div class="anime-bottom" style="padding-top:0;padding-bottom:3rem;">
     <p class="quote-text">"강해져라.<br>그래야 소중한 것을<br>지킬 수 있다."</p>
     <p class="quote-source"><strong>미야모토 무사시</strong> <span class="work">— 베가본드 バガボンド</span></p>
@@ -1214,51 +1180,6 @@
     }
     window.addEventListener('scroll',onScroll,{passive:true});
     onScroll();
-    // ── SSJ Lightning Canvas (draws around character) ──
-    evo.querySelectorAll('.ssj-lightning').forEach(canvas=>{
-      const ctx=canvas.getContext('2d');
-      const bolts=parseInt(canvas.dataset.bolts)||5;
-      const inner=canvas.closest('.ssj-inner');
-      function resize(){
-        const r=inner.getBoundingClientRect();
-        canvas.width=r.width*1.4;canvas.height=r.height*1.4;
-      }
-      resize();window.addEventListener('resize',resize);
-      function drawBolt(x1,y1,x2,y2,d){
-        if(!d){ctx.lineTo(x2,y2);return}
-        const j=55/d;
-        const mx=(x1+x2)/2+(Math.random()-.5)*j;
-        const my=(y1+y2)/2+(Math.random()-.5)*j;
-        drawBolt(x1,y1,mx,my,d-1);drawBolt(mx,my,x2,y2,d-1);
-      }
-      function render(){
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        if(!canvas.closest('.goku-slide-wrap.active')){requestAnimationFrame(render);return}
-        if(inner.getBoundingClientRect().width*1.4!==canvas.width)resize();
-        const w=canvas.width,h=canvas.height,cx=w/2,cy=h/2;
-        for(let i=0;i<bolts;i++){
-          if(Math.random()>.45)continue;
-          ctx.beginPath();
-          const angle=Math.random()*Math.PI*2;
-          const sr=Math.min(w,h)*.12;
-          const er=Math.min(w,h)*(.28+Math.random()*.18);
-          const sx=cx+Math.cos(angle)*sr+(Math.random()-.5)*20;
-          const sy=cy+Math.sin(angle)*sr*1.4+(Math.random()-.5)*20;
-          const ex=cx+Math.cos(angle+(Math.random()-.5)*.7)*er;
-          const ey=cy+Math.sin(angle+(Math.random()-.5)*.7)*er*1.3;
-          ctx.moveTo(sx,sy);
-          drawBolt(sx,sy,ex,ey,4);
-          ctx.strokeStyle=`rgba(${180+Math.random()*75},${220+Math.random()*35},255,${.6+Math.random()*.4})`;
-          ctx.lineWidth=1.2+Math.random()*1.2;
-          ctx.shadowColor='rgba(180,230,255,.9)';ctx.shadowBlur=8;
-          ctx.stroke();
-          ctx.strokeStyle=`rgba(255,255,200,${.1+Math.random()*.12})`;
-          ctx.lineWidth=3.5;ctx.shadowBlur=14;ctx.stroke();
-        }
-        requestAnimationFrame(render);
-      }
-      render();
-    });
   })();
 
   // ── Musashi Slash Reveal ──
