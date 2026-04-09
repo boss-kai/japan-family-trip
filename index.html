@@ -406,8 +406,12 @@
 
   /* Musashi crows */
   .musashi-crows{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
-  .crow{position:absolute;font-size:2rem;opacity:0;filter:brightness(0);will-change:transform}
-  .anime-interlude[data-char="musashi"].visible .crow{opacity:.7;filter:brightness(0)}
+  .crow{position:absolute;opacity:0;will-change:transform}
+  .crow svg{width:40px;height:auto;fill:#111}
+  .crow svg .wing-l,.crow svg .wing-r{animation:flapWing .4s ease-in-out infinite alternate}
+  .crow svg .wing-r{animation-delay:.2s}
+  @keyframes flapWing{0%{transform:rotate(0)}100%{transform:rotate(-25deg)}}
+  .anime-interlude[data-char="musashi"].visible .crow{opacity:.8}
   .crow:nth-child(1){animation:crowFly1 4s ease-in-out 0.5s infinite}
   .crow:nth-child(2){animation:crowFly2 5s ease-in-out 1s infinite}
   .crow:nth-child(3){animation:crowFly3 3.5s ease-in-out 0.3s infinite}
