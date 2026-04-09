@@ -49,9 +49,10 @@
   .nav-bar{position:sticky;top:0;z-index:100;background:rgba(0,0,0,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06);overflow-x:auto;-webkit-overflow-scrolling:touch}
   .nav-bar::-webkit-scrollbar{display:none}
   .nav-inner{display:flex;align-items:center;justify-content:center;gap:0;max-width:1200px;margin:0 auto;min-width:max-content}
-  .nav-item{padding:.85rem 1.3rem;font-size:.85rem;font-weight:500;color:#86868B;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .3s}
-  .nav-item:hover,.nav-item.active{color:#F5F5F7;border-bottom-color:#FF375F}
-  .nav-item .nav-emoji{margin-right:.3rem}
+  .nav-item{padding:.65rem 1.3rem;font-size:.85rem;font-weight:600;color:#F5F5F7;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:all .3s;text-align:center;line-height:1.3}
+  .nav-item:hover,.nav-item.active{color:#fff;border-bottom-color:#FF375F}
+  .nav-item .nav-jp{display:block;font-size:.65rem;font-weight:400;color:#86868B}
+  .nav-item:hover .nav-jp,.nav-item.active .nav-jp{color:#aaa}
 
   /* Tools link in nav */
   /* ── Packing ── */
@@ -562,15 +563,15 @@
 <!-- ═══ Nav ═══ -->
 <nav class="nav-bar">
   <div class="nav-inner">
-    <div class="nav-item active" data-target="sapporo"><span class="nav-emoji">⛰</span> 삿포로</div>
-    <div class="nav-item" data-target="tokyo"><span class="nav-emoji">🗼</span> 도쿄</div>
-    <div class="nav-item" data-target="nara"><span class="nav-emoji">🦌</span> 나라</div>
-    <div class="nav-item" data-target="kyoto"><span class="nav-emoji">⛩</span> 교토</div>
-    <div class="nav-item" data-target="fukuoka"><span class="nav-emoji">🍜</span> 후쿠오카</div>
-    <div class="nav-item" data-target="packing"><span class="nav-emoji">🧳</span> 짐싸기</div>
-    <div class="nav-item" data-target="budget"><span class="nav-emoji">💰</span> 경비</div>
-    <div class="nav-item" data-target="emergency"><span class="nav-emoji">🚨</span> 긴급</div>
-    <div class="nav-item" data-target="comments"><span class="nav-emoji">💬</span> 의견</div>
+    <div class="nav-item active" data-target="sapporo">삿포로<span class="nav-jp">(札幌)</span></div>
+    <div class="nav-item" data-target="tokyo">도쿄<span class="nav-jp">(東京)</span></div>
+    <div class="nav-item" data-target="nara">나라<span class="nav-jp">(奈良)</span></div>
+    <div class="nav-item" data-target="kyoto">교토<span class="nav-jp">(京都)</span></div>
+    <div class="nav-item" data-target="fukuoka">후쿠오카<span class="nav-jp">(福岡)</span></div>
+    <div class="nav-item" data-target="packing">짐싸기</div>
+    <div class="nav-item" data-target="budget">경비</div>
+    <div class="nav-item" data-target="emergency">긴급</div>
+    <div class="nav-item" data-target="comments">의견</div>
   </div>
 </nav>
 
