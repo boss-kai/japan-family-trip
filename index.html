@@ -1272,6 +1272,51 @@
     onScroll();
   })();
 
+  // ── Naruto Evolution Scroll ──
+  (function(){
+    const evo=document.getElementById('narutoEvolution');
+    if(!evo)return;
+    const items=[...evo.querySelectorAll('.naruto-slide')];
+    const quote=document.getElementById('narutoQuote');
+    const flash=document.getElementById('narutoFlash');
+    const label=document.getElementById('narutoLabel');
+    const formName=document.getElementById('narutoFormName');
+    const formArc=document.getElementById('narutoFormArc');
+    const total=items.length;
+    let prev=-1;
+    function fireFlash(type){
+      flash.className='naruto-flash';
+      void flash.offsetWidth;
+      flash.classList.add('flash-'+type);
+    }
+    function onScroll(){
+      const rect=evo.getBoundingClientRect();
+      const scrolled=-rect.top;
+      const scrollH=evo.offsetHeight-window.innerHeight;
+      if(scrolled<0||scrolled>scrollH)return;
+      const progress=scrolled/scrollH;
+      const idx=Math.min(Math.floor(progress*total),total-1);
+      if(idx===prev)return;
+      items.forEach((item,i)=>{
+        item.classList.remove('active','leaving');
+        if(i===idx)item.classList.add('active');
+        else if(i<idx)item.classList.add('leaving');
+      });
+      if(prev!==-1&&idx>prev){
+        const flashType=items[idx].dataset.flash;
+        if(flashType)fireFlash(flashType);
+      }
+      formName.textContent=items[idx].dataset.name||'';
+      formArc.textContent=items[idx].dataset.arc||'';
+      label.classList.add('active');
+      if(idx===total-1)quote.classList.add('active');
+      else quote.classList.remove('active');
+      prev=idx;
+    }
+    window.addEventListener('scroll',onScroll,{passive:true});
+    onScroll();
+  })();
+
   // ── Musashi Slash Reveal ──
   function startMusashiSlash(el){
     const curtain=el.querySelector('.musashi-curtain');
