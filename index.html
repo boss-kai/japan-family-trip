@@ -414,21 +414,9 @@
   .curtain-top{top:0}
   .curtain-bottom{bottom:0}
   .slash-line{position:absolute;height:3px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.9) 20%,#fff 50%,rgba(255,255,255,.9) 80%,transparent);left:0;right:0;transform:scaleX(0);transform-origin:left;opacity:0;z-index:3;box-shadow:0 0 15px rgba(255,255,255,.6),0 0 30px rgba(200,200,255,.3)}
-  .slash-wild{position:absolute;width:150%;height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85) 20%,#fff 50%,rgba(255,255,255,.85) 80%,transparent);opacity:0;z-index:3;left:-25%;box-shadow:0 0 12px rgba(255,255,255,.5)}
-  .slash-wild.from-bl{transform-origin:0% 100%;animation:slashBL .15s ease-out forwards}
-  .slash-wild.from-br{transform-origin:100% 100%;animation:slashBR .15s ease-out forwards}
-  .slash-wild.from-top{transform-origin:50% 0%;animation:slashTop .15s ease-out forwards}
-  .slash-wild.from-left{transform-origin:0% 50%;animation:slashLeft .15s ease-out forwards}
-  .slash-wild.from-right{transform-origin:100% 50%;animation:slashRight .15s ease-out forwards}
-  .slash-wild.from-tl{transform-origin:0% 0%;animation:slashTL .15s ease-out forwards}
-  .slash-wild.from-tr{transform-origin:100% 0%;animation:slashTR .15s ease-out forwards}
-  @keyframes slashBL{0%{opacity:1;transform:scaleX(0) rotate(var(--angle))}50%{opacity:1;transform:scaleX(1) rotate(var(--angle))}100%{opacity:0;transform:scaleX(1) rotate(var(--angle))}}
-  @keyframes slashBR{0%{opacity:1;transform:scaleX(0) rotate(var(--angle))}50%{opacity:1;transform:scaleX(1) rotate(var(--angle))}100%{opacity:0;transform:scaleX(1) rotate(var(--angle))}}
-  @keyframes slashTop{0%{opacity:1;transform:scaleX(0) rotate(var(--angle))}50%{opacity:1;transform:scaleX(1) rotate(var(--angle))}100%{opacity:0;transform:scaleX(1) rotate(var(--angle))}}
-  @keyframes slashLeft{0%{opacity:1;transform:scaleX(0) rotate(var(--angle))}50%{opacity:1;transform:scaleX(1) rotate(var(--angle))}100%{opacity:0;transform:scaleX(1) rotate(var(--angle))}}
-  @keyframes slashRight{0%{opacity:1;transform:scaleX(0) rotate(var(--angle))}50%{opacity:1;transform:scaleX(1) rotate(var(--angle))}100%{opacity:0;transform:scaleX(1) rotate(var(--angle))}}
-  @keyframes slashTL{0%{opacity:1;transform:scaleX(0) rotate(var(--angle))}50%{opacity:1;transform:scaleX(1) rotate(var(--angle))}100%{opacity:0;transform:scaleX(1) rotate(var(--angle))}}
-  @keyframes slashTR{0%{opacity:1;transform:scaleX(0) rotate(var(--angle))}50%{opacity:1;transform:scaleX(1) rotate(var(--angle))}100%{opacity:0;transform:scaleX(1) rotate(var(--angle))}}
+  .slash-wild{position:absolute;width:150%;height:2.5px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85) 20%,#fff 50%,rgba(255,255,255,.85) 80%,transparent);opacity:0;z-index:3;left:-25%;box-shadow:0 0 12px rgba(255,255,255,.5)}
+  .slash-wild.go{animation:slashGo .15s ease-out forwards}
+  @keyframes slashGo{0%{opacity:1;transform:scaleX(0) rotate(var(--a,0deg))}50%{opacity:1;transform:scaleX(1) rotate(var(--a,0deg))}100%{opacity:0;transform:scaleX(1) rotate(var(--a,0deg))}}
   .slash-line.draw{animation:slashDraw .4s ease-out forwards}
   @keyframes slashDraw{0%{opacity:1;transform:scaleX(0)}100%{opacity:1;transform:scaleX(1)}}
 
@@ -1198,21 +1186,28 @@
     const curtain=el.querySelector('.musashi-curtain');
     if(!curtain)return el.classList.add('visible');
 
-    // Create wild slashes
-    const wildAngles=[-25,15,-40,30,-10,45,-35];
-    const wildTops=[20,55,35,70,45,25,60];
-    wildAngles.forEach((angle,i)=>{
+    // Create wild slashes from various directions
+    const slashes=[
+      {top:'80%',origin:'0% 100%',angle:-35},    // 좌하→우상
+      {top:'20%',origin:'100% 0%',angle:30},      // 우상→좌하
+      {top:'50%',origin:'50% 0%',angle:90},        // 위→아래
+      {top:'60%',origin:'0% 50%',angle:0},         // 좌→우
+      {top:'35%',origin:'100% 50%',angle:0},       // 우→좌
+      {top:'75%',origin:'0% 0%',angle:-50},        // 좌상→우하
+      {top:'15%',origin:'100% 100%',angle:45},     // 우하→좌상
+      {top:'45%',origin:'0% 50%',angle:-15},       // 좌→살짝 위
+    ];
+    slashes.forEach((sl,i)=>{
       const s=document.createElement('div');
       s.className='slash-wild';
-      s.style.top=wildTops[i]+'%';
-      s.style.left='0';s.style.right='0';
-      s.style.transform=`rotate(${angle}deg) scaleX(0)`;
-      s.style.transformOrigin=Math.random()>.5?'left':'right';
+      s.style.top=sl.top;
+      s.style.transformOrigin=sl.origin;
+      s.style.setProperty('--a',sl.angle+'deg');
       curtain.appendChild(s);
-      setTimeout(()=>s.classList.add('flash'),150+i*120);
+      setTimeout(()=>s.classList.add('go'),80+i*90);
     });
 
-    // After wild slashes, draw the horizontal cut
+    // After wild slashes (8 slashes × 90ms + buffer), draw the horizontal cut
     setTimeout(()=>{
       const mainSlash=document.createElement('div');
       mainSlash.className='slash-line';
@@ -1229,7 +1224,7 @@
 
       // Remove curtain after reveal animation
       setTimeout(()=>{curtain.style.display='none'},2000);
-    },wildAngles.length*120+400);
+    },slashes.length*90+300);
   }
 
   // ── Map Sequence: video play → freeze → zoom → route animation ──
