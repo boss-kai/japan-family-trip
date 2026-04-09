@@ -1174,10 +1174,10 @@
     const quote=document.getElementById('luffyQuote');
     const total=slides.length;
     const slash=document.getElementById('luffySlash');
-    let prev=-1;
+    let prev=-1,maxIdx=-1;
     function fireSlash(type){
       slash.className='luffy-slash';
-      void slash.offsetWidth; // reflow
+      void slash.offsetWidth;
       slash.classList.add('slash-'+type);
     }
     function onScroll(){
@@ -1186,20 +1186,21 @@
       const scrollH=evo.offsetHeight-window.innerHeight;
       if(scrolled<0||scrolled>scrollH)return;
       const progress=scrolled/scrollH;
-      const idx=Math.min(Math.floor(progress*total),total-1);
+      let idx=Math.min(Math.floor(progress*total),total-1);
+      // 한번 본 최대 슬라이드 이하로 안 내려감
+      if(idx>maxIdx)maxIdx=idx;
+      idx=maxIdx;
       if(idx===prev)return;
       slides.forEach((s,i)=>{
         s.classList.remove('active','leaving');
         if(i===idx) s.classList.add('active');
         else if(i<idx) s.classList.add('leaving');
       });
-      // fire slash effect on transition
       if(prev!==-1&&idx>prev){
         const incoming=slides[idx];
         const slashType=incoming.dataset.slash;
         if(slashType) fireSlash(slashType);
       }
-      // play/pause last video
       const lastSlide=slides[total-1];
       if(idx===total-1){
         quote.classList.add('active');
@@ -1227,7 +1228,7 @@
     const quote=document.getElementById(quoteId);
     const slash=document.getElementById(slashId);
     const total=slides.length;
-    let prev=-1;
+    let prev=-1,maxIdx=-1;
     function fireSlash(type){
       slash.className='chara-evo-slash';
       void slash.offsetWidth;
@@ -1239,7 +1240,9 @@
       const scrollH=evo.offsetHeight-window.innerHeight;
       if(scrolled<0||scrolled>scrollH)return;
       const progress=scrolled/scrollH;
-      const idx=Math.min(Math.floor(progress*total),total-1);
+      let idx=Math.min(Math.floor(progress*total),total-1);
+      if(idx>maxIdx)maxIdx=idx;
+      idx=maxIdx;
       if(idx===prev)return;
       slides.forEach((s,i)=>{
         s.classList.remove('active','leaving');
@@ -1271,7 +1274,7 @@
     const formName=document.getElementById('gokuFormName');
     const formArc=document.getElementById('gokuFormArc');
     const total=items.length;
-    let prev=-1;
+    let prev=-1,maxIdx=-1;
     function fireFlash(type){
       flash.className='goku-flash';
       void flash.offsetWidth;
@@ -1284,7 +1287,9 @@
       const scrollH=evo.offsetHeight-window.innerHeight;
       if(scrolled<0||scrolled>scrollH)return;
       const progress=scrolled/scrollH;
-      const idx=Math.min(Math.floor(progress*total),total-1);
+      let idx=Math.min(Math.floor(progress*total),total-1);
+      if(idx>maxIdx)maxIdx=idx;
+      idx=maxIdx;
       if(idx===prev)return;
       items.forEach((item,i)=>{
         item.classList.remove('active','leaving');
@@ -1320,7 +1325,7 @@
     const formName=document.getElementById('narutoFormName');
     const formArc=document.getElementById('narutoFormArc');
     const total=items.length;
-    let prev=-1;
+    let prev=-1,maxIdx=-1;
     function fireFlash(type){
       flash.className='naruto-flash';
       void flash.offsetWidth;
@@ -1332,7 +1337,9 @@
       const scrollH=evo.offsetHeight-window.innerHeight;
       if(scrolled<0||scrolled>scrollH)return;
       const progress=scrolled/scrollH;
-      const idx=Math.min(Math.floor(progress*total),total-1);
+      let idx=Math.min(Math.floor(progress*total),total-1);
+      if(idx>maxIdx)maxIdx=idx;
+      idx=maxIdx;
       if(idx===prev)return;
       items.forEach((item,i)=>{
         item.classList.remove('active','leaving');
