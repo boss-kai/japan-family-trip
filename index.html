@@ -385,11 +385,24 @@
   .anime-interlude.visible .anime-char img{opacity:1}
 
   /* Musashi wallpaper style */
-  .anime-interlude[data-char="musashi"]{background:url('img/musashi/musashi.jpg') center center/cover no-repeat}
+  .anime-interlude[data-char="musashi"]{background:url('img/musashi/musashi.jpg') center center/cover no-repeat;background-size:120%;transition:background-size 2s ease}
   .anime-interlude[data-char="musashi"]::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,.45)}
-  .anime-interlude[data-char="musashi"]{background-size:120%;transition:background-size 2s ease}
   .anime-interlude[data-char="musashi"].visible{background-size:100%}
   .anime-interlude[data-char="musashi"] .anime-char{display:none}
+
+  /* Musashi sword slash reveal */
+  .musashi-curtain{position:absolute;inset:0;z-index:5;background:#000;pointer-events:none;overflow:hidden}
+  .musashi-curtain.reveal .curtain-top{transform:translateY(-100%)}
+  .musashi-curtain.reveal .curtain-bottom{transform:translateY(100%)}
+  .curtain-top,.curtain-bottom{position:absolute;left:0;right:0;height:50%;background:#000;transition:transform 1.2s cubic-bezier(.4,0,.2,1);z-index:2}
+  .curtain-top{top:0}
+  .curtain-bottom{bottom:0}
+  .slash-line{position:absolute;height:3px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.9) 20%,#fff 50%,rgba(255,255,255,.9) 80%,transparent);left:0;right:0;transform:scaleX(0);transform-origin:left;opacity:0;z-index:3;box-shadow:0 0 15px rgba(255,255,255,.6),0 0 30px rgba(200,200,255,.3)}
+  .slash-wild{position:absolute;height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.7) 30%,rgba(255,255,255,.7) 70%,transparent);opacity:0;z-index:3;transform:scaleX(0);box-shadow:0 0 8px rgba(255,255,255,.4)}
+  .slash-wild.flash{animation:slashWild .25s ease-out forwards}
+  .slash-line.draw{animation:slashDraw .4s ease-out forwards}
+  @keyframes slashWild{0%{opacity:1;transform:scaleX(0)}60%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1)}}
+  @keyframes slashDraw{0%{opacity:1;transform:scaleX(0)}100%{opacity:1;transform:scaleX(1)}}
 
   /* Musashi crows */
   .musashi-crows{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
@@ -816,6 +829,10 @@
 
 <!-- ═══ Anime: 베가본드 (나라→교토) ═══ -->
 <div class="anime-interlude" data-char="musashi" style="justify-content:flex-end;">
+  <div class="musashi-curtain" id="musashiCurtain">
+    <div class="curtain-top"></div>
+    <div class="curtain-bottom"></div>
+  </div>
   <div class="musashi-crows">
     <span class="crow">🐦‍⬛</span><span class="crow">🐦‍⬛</span><span class="crow">🐦‍⬛</span><span class="crow">🐦‍⬛</span>
     <span class="crow">🐦‍⬛</span><span class="crow">🐦‍⬛</span><span class="crow">🐦‍⬛</span><span class="crow">🐦‍⬛</span>
@@ -1040,7 +1057,7 @@
   window.addEventListener('scroll',()=>{let c='';allSections.forEach(s=>{if(s.id&&scrollY>=s.offsetTop-120)c=s.id});navItems.forEach(i=>i.classList.toggle('active',i.dataset.target===c))});
 
   // ── Observer (fade-in + anime interlude) ──
-  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;if(el.classList.contains('anime-interlude')&&!el.dataset.revealed){el.dataset.revealed='1';el.classList.add('visible');if(el.dataset.shake==='1')setTimeout(()=>{el.classList.add('shake-active');setTimeout(()=>el.classList.remove('shake-active'),400)},400)}if(el.classList.contains('fade-in'))el.classList.add('visible');if(el.classList.contains('map-section')&&!el.dataset.revealed){el.dataset.revealed='1';el.classList.add('visible');startMapSequence()}})},{threshold:.15});
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;if(el.classList.contains('anime-interlude')&&!el.dataset.revealed){el.dataset.revealed='1';if(el.dataset.char==='musashi'){startMusashiSlash(el)}else{el.classList.add('visible')}if(el.dataset.shake==='1')setTimeout(()=>{el.classList.add('shake-active');setTimeout(()=>el.classList.remove('shake-active'),400)},400)}if(el.classList.contains('fade-in'))el.classList.add('visible');if(el.classList.contains('map-section')&&!el.dataset.revealed){el.dataset.revealed='1';el.classList.add('visible');startMapSequence()}})},{threshold:.15});
   document.querySelectorAll('.anime-interlude,.fade-in,.map-section').forEach(el=>obs.observe(el));
 
   // ── Japanese word tooltips ──
@@ -1211,6 +1228,45 @@
       render();
     });
   })();
+
+  // ── Musashi Slash Reveal ──
+  function startMusashiSlash(el){
+    const curtain=el.querySelector('.musashi-curtain');
+    if(!curtain)return el.classList.add('visible');
+
+    // Create wild slashes
+    const wildAngles=[-25,15,-40,30,-10,45,-35];
+    const wildTops=[20,55,35,70,45,25,60];
+    wildAngles.forEach((angle,i)=>{
+      const s=document.createElement('div');
+      s.className='slash-wild';
+      s.style.top=wildTops[i]+'%';
+      s.style.left='0';s.style.right='0';
+      s.style.transform=`rotate(${angle}deg) scaleX(0)`;
+      s.style.transformOrigin=Math.random()>.5?'left':'right';
+      curtain.appendChild(s);
+      setTimeout(()=>s.classList.add('flash'),150+i*120);
+    });
+
+    // After wild slashes, draw the horizontal cut
+    setTimeout(()=>{
+      const mainSlash=document.createElement('div');
+      mainSlash.className='slash-line';
+      mainSlash.style.top='50%';
+      mainSlash.style.marginTop='-1.5px';
+      curtain.appendChild(mainSlash);
+      mainSlash.classList.add('draw');
+
+      // After horizontal slash drawn, split the curtain open
+      setTimeout(()=>{
+        curtain.classList.add('reveal');
+        el.classList.add('visible');
+      },500);
+
+      // Remove curtain after reveal animation
+      setTimeout(()=>{curtain.style.display='none'},2000);
+    },wildAngles.length*120+400);
+  }
 
   // ── Map Sequence: video play → freeze → zoom → route animation ──
   function startMapSequence(){
