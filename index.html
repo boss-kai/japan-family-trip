@@ -649,10 +649,10 @@
 <div class="luffy-evolution" id="luffyEvolution">
   <div class="luffy-sticky">
     <div class="luffy-slash" id="luffySlash"></div>
-    <img class="luffy-slide active" src="img/luffy/eastblue_5.png" alt="East Blue" data-idx="0">
-    <img class="luffy-slide" src="img/luffy/gear3.png" alt="Gear 3" data-idx="1" data-anim="punch" data-slash="left">
-    <img class="luffy-slide" src="img/luffy/gear4.png" alt="Gear 4" data-idx="2" data-anim="zoom" data-slash="right">
-    <img class="luffy-slide" src="img/luffy/luffy.png" alt="Boundman" data-idx="3" data-anim="slam" data-slash="cross">
+    <img class="luffy-slide active" src="img/luffy/0_eastblue.png" alt="East Blue" data-idx="0">
+    <img class="luffy-slide" src="img/luffy/1_gear3.png" alt="Gear 3" data-idx="1" data-anim="punch" data-slash="left">
+    <img class="luffy-slide" src="img/luffy/2_gear4.png" alt="Gear 4" data-idx="2" data-anim="zoom" data-slash="right">
+    <img class="luffy-slide" src="img/luffy/3_luffy.png" alt="Boundman" data-idx="3" data-anim="slam" data-slash="cross">
     <img class="luffy-slide" src="img/luffy/nika_2.png" alt="Nika Joy" data-idx="4" data-anim="flash" data-slash="left">
     <video class="luffy-slide" data-idx="5" data-anim="gather" muted playsinline style="max-height:75vh;max-width:95%" poster="img/luffy/last.png">
       <source src="img/luffy/last.mp4" type="video/mp4">
@@ -1128,19 +1128,21 @@
   (function(){
     const evo=document.getElementById('gokuEvolution');
     if(!evo)return;
-    const slides=evo.querySelectorAll('.goku-slide');
+    const items=[];
+    evo.querySelectorAll('.goku-sticky > .goku-slide, .goku-sticky > .goku-slide-wrap').forEach(el=>items.push(el));
     const quote=document.getElementById('gokuQuote');
     const flash=document.getElementById('gokuFlash');
     const label=document.getElementById('gokuLabel');
     const formName=document.getElementById('gokuFormName');
     const formArc=document.getElementById('gokuFormArc');
-    const total=slides.length;
+    const total=items.length;
     let prev=-1;
     function fireFlash(type){
       flash.className='goku-flash';
       void flash.offsetWidth;
       flash.classList.add('flash-'+type);
     }
+    function getImg(item){return item.tagName==='IMG'?item:item.querySelector('.goku-slide')}
     function onScroll(){
       const rect=evo.getBoundingClientRect();
       const scrolled=-rect.top;
@@ -1149,31 +1151,65 @@
       const progress=scrolled/scrollH;
       const idx=Math.min(Math.floor(progress*total),total-1);
       if(idx===prev)return;
-      slides.forEach((s,i)=>{
-        s.classList.remove('active','leaving');
-        if(i===idx) s.classList.add('active');
-        else if(i<idx) s.classList.add('leaving');
+      items.forEach((item,i)=>{
+        item.classList.remove('active','leaving');
+        const img=getImg(item);
+        if(img!==item){img.classList.remove('active','leaving')}
+        if(i===idx){item.classList.add('active');if(img!==item)img.classList.add('active')}
+        else if(i<idx){item.classList.add('leaving');if(img!==item)img.classList.add('leaving')}
       });
       if(prev!==-1&&idx>prev){
-        const incoming=slides[idx];
-        const flashType=incoming.dataset.flash;
+        const flashType=getImg(items[idx]).dataset.flash;
         if(flashType) fireFlash(flashType);
       }
-      // update label
-      const cur=slides[idx];
+      const cur=getImg(items[idx]);
       formName.textContent=cur.dataset.name||'';
       formArc.textContent=cur.dataset.arc||'';
       label.classList.add('active');
-      // show quote on last slide
-      if(idx===total-1){
-        quote.classList.add('active');
-      }else{
-        quote.classList.remove('active');
-      }
+      if(idx===total-1){quote.classList.add('active')}
+      else{quote.classList.remove('active')}
       prev=idx;
     }
     window.addEventListener('scroll',onScroll,{passive:true});
     onScroll();
+    // ── SSJ Lightning Canvas ──
+    evo.querySelectorAll('.ssj-lightning').forEach(canvas=>{
+      const ctx=canvas.getContext('2d');
+      const bolts=parseInt(canvas.dataset.bolts)||4;
+      function resize(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight}
+      resize(); window.addEventListener('resize',resize);
+      function drawBolt(x1,y1,x2,y2,d){
+        if(!d){ctx.lineTo(x2,y2);return}
+        const mx=(x1+x2)/2+(Math.random()-.5)*90/d;
+        const my=(y1+y2)/2+(Math.random()-.5)*90/d;
+        drawBolt(x1,y1,mx,my,d-1);drawBolt(mx,my,x2,y2,d-1);
+      }
+      let frame=0;
+      function render(){
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        if(!canvas.closest('.goku-slide-wrap.active')){requestAnimationFrame(render);return}
+        const w=canvas.width,h=canvas.height,cx=w/2,cy=h/2;
+        for(let i=0;i<bolts;i++){
+          if(Math.random()>.4)continue;
+          ctx.beginPath();
+          const sx=cx+(Math.random()-.5)*w*.5;
+          const sy=cy-h*.28+Math.random()*h*.12;
+          const ex=cx+(Math.random()-.5)*w*.55;
+          const ey=cy+h*.08+Math.random()*h*.28;
+          ctx.moveTo(sx,sy);
+          drawBolt(sx,sy,ex,ey,4);
+          const r=180+Math.random()*75,g=220+Math.random()*35;
+          ctx.strokeStyle=`rgba(${r},${g},255,${.55+Math.random()*.45})`;
+          ctx.lineWidth=1+Math.random()*1.5;
+          ctx.shadowColor='rgba(200,240,255,.8)';ctx.shadowBlur=10;
+          ctx.stroke();
+          ctx.strokeStyle=`rgba(255,255,180,${.1+Math.random()*.15})`;
+          ctx.lineWidth=4;ctx.shadowBlur=18;ctx.stroke();
+        }
+        frame++;requestAnimationFrame(render);
+      }
+      render();
+    });
   })();
 
   // ── Map Sequence: video play → freeze → zoom → route animation ──
