@@ -35,8 +35,9 @@
   .hero-cities{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;position:relative;z-index:2}
   .hero-city{display:flex;flex-direction:column;align-items:center;gap:.4rem;transition:transform .4s}
   .hero-city:hover{transform:translateY(-6px)}
-  .hero-city .icon{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:1.5rem;backdrop-filter:blur(20px);transition:all .4s}
-  .hero-city:hover .icon{background:rgba(255,255,255,.12)}
+  .hero-city .icon{width:52px;height:60px;border-radius:0;clip-path:polygon(15% 0%,85% 0%,100% 12%,100% 88%,85% 100%,15% 100%,0% 88%,0% 12%);background:linear-gradient(180deg,#3a2a1a 0%,#2a1c10 100%);border:none;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:900;color:#d4a44a;font-family:serif;text-shadow:0 1px 2px rgba(0,0,0,.6);position:relative;transition:all .4s;box-shadow:0 2px 8px rgba(0,0,0,.5)}
+  .hero-city .icon::after{content:'';position:absolute;inset:3px;clip-path:polygon(15% 0%,85% 0%,100% 12%,100% 88%,85% 100%,15% 100%,0% 88%,0% 12%);border:1.5px solid rgba(212,164,74,.6);pointer-events:none}
+  .hero-city:hover .icon{background:linear-gradient(180deg,#4a3a2a 0%,#3a2c18 100%);color:#f0c860;box-shadow:0 4px 16px rgba(212,164,74,.3)}
   .hero-city .name{font-size:.82rem;font-weight:600}
   .hero-city .days{font-size:.7rem;color:#86868B}
   .connector{color:#86868B;font-size:.8rem;align-self:center}
@@ -359,6 +360,27 @@
   .anime-interlude[data-char="musashi"].visible{background-size:100%}
   .anime-interlude[data-char="musashi"] .anime-char{display:none}
 
+  /* Musashi crows */
+  .musashi-crows{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden}
+  .crow{position:absolute;font-size:2rem;opacity:0;filter:brightness(0);will-change:transform}
+  .anime-interlude[data-char="musashi"].visible .crow{opacity:.7;filter:brightness(0)}
+  .crow:nth-child(1){animation:crowFly1 4s ease-in-out 0.5s infinite}
+  .crow:nth-child(2){animation:crowFly2 5s ease-in-out 1s infinite}
+  .crow:nth-child(3){animation:crowFly3 3.5s ease-in-out 0.3s infinite}
+  .crow:nth-child(4){animation:crowFly4 4.5s ease-in-out 1.5s infinite}
+  .crow:nth-child(5){animation:crowFly5 5.5s ease-in-out 0.8s infinite}
+  .crow:nth-child(6){animation:crowFly6 3.8s ease-in-out 2s infinite}
+  .crow:nth-child(7){animation:crowFly7 4.2s ease-in-out 0.2s infinite}
+  .crow:nth-child(8){animation:crowFly8 6s ease-in-out 1.2s infinite}
+  @keyframes crowFly1{0%{opacity:0;transform:translate(-10vw,30vh) scale(.8)}20%{opacity:.8}50%{transform:translate(50vw,15vh) scale(1.1)}80%{opacity:.6}100%{opacity:0;transform:translate(110vw,5vh) scale(.7)}}
+  @keyframes crowFly2{0%{opacity:0;transform:translate(110vw,20vh) scale(1) scaleX(-1)}20%{opacity:.7}50%{transform:translate(50vw,40vh) scale(1.2) scaleX(-1)}80%{opacity:.5}100%{opacity:0;transform:translate(-10vw,55vh) scale(.6) scaleX(-1)}}
+  @keyframes crowFly3{0%{opacity:0;transform:translate(20vw,-5vh) scale(.6)}20%{opacity:.9}50%{transform:translate(60vw,25vh) scale(1)}80%{opacity:.4}100%{opacity:0;transform:translate(105vw,50vh) scale(.5)}}
+  @keyframes crowFly4{0%{opacity:0;transform:translate(100vw,60vh) scale(.9) scaleX(-1)}20%{opacity:.6}50%{transform:translate(40vw,35vh) scale(1.3) scaleX(-1)}80%{opacity:.5}100%{opacity:0;transform:translate(-5vw,10vh) scale(.7) scaleX(-1)}}
+  @keyframes crowFly5{0%{opacity:0;transform:translate(-5vw,50vh) scale(.7)}25%{opacity:.7}50%{transform:translate(45vw,20vh) scale(1)}75%{opacity:.6}100%{opacity:0;transform:translate(100vw,60vh) scale(.8)}}
+  @keyframes crowFly6{0%{opacity:0;transform:translate(80vw,-5vh) scale(1)}20%{opacity:.8}50%{transform:translate(30vw,30vh) scale(.9) scaleX(-1)}80%{opacity:.4}100%{opacity:0;transform:translate(-10vw,50vh) scale(.6) scaleX(-1)}}
+  @keyframes crowFly7{0%{opacity:0;transform:translate(50vw,70vh) scale(.5)}30%{opacity:.7}60%{transform:translate(70vw,10vh) scale(1.1)}100%{opacity:0;transform:translate(110vw,-5vh) scale(.8)}}
+  @keyframes crowFly8{0%{opacity:0;transform:translate(-5vw,10vh) scale(1.2)}15%{opacity:.6}40%{transform:translate(35vw,50vh) scale(.8)}70%{transform:translate(75vw,25vh) scale(1)}100%{opacity:0;transform:translate(110vw,40vh) scale(.6)}}
+
   .anime-bottom{position:relative;z-index:3;text-align:center;padding:2rem 2rem 0;max-width:700px;width:100%;opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.25,.46,.45,.94) .5s}
   .anime-interlude.visible .anime-bottom{opacity:1;transform:translateY(0)}
 
@@ -432,7 +454,7 @@
     .tl-card h4{font-size:.95rem}
     .tl-card p{font-size:.82rem;word-break:keep-all}
     .hero-cities{gap:1rem}
-    .hero-city .icon{width:46px;height:46px;font-size:1.2rem}
+    .hero-city .icon{width:44px;height:52px;font-size:1.3rem}
     .connector{display:none}
     .anime-bottom{padding:1.5rem 1rem 0}
     .day-header{font-size:.95rem}
@@ -494,15 +516,15 @@
   <p class="hero-date">2026. 4. 27 — 5. 10</p>
   <div class="dday-box" id="ddayBox"></div>
   <div class="hero-cities">
-    <div class="hero-city" onclick="document.getElementById('sapporo').scrollIntoView({behavior:'smooth'})" style="cursor:pointer"><div class="icon">⛰</div><span class="name">삿포로</span><span class="days" style="font-size:.6rem;opacity:.5;">札幌</span><span class="days">3일</span></div>
+    <div class="hero-city" onclick="document.getElementById('sapporo').scrollIntoView({behavior:'smooth'})" style="cursor:pointer"><div class="icon">札</div><span class="name">삿포로</span><span class="days" style="font-size:.6rem;opacity:.5;">札幌</span><span class="days">3일</span></div>
     <span class="connector">—</span>
-    <div class="hero-city" onclick="document.getElementById('tokyo').scrollIntoView({behavior:'smooth'})" style="cursor:pointer"><div class="icon">🗼</div><span class="name">도쿄</span><span class="days" style="font-size:.6rem;opacity:.5;">東京</span><span class="days">4일</span></div>
+    <div class="hero-city" onclick="document.getElementById('tokyo').scrollIntoView({behavior:'smooth'})" style="cursor:pointer"><div class="icon">東</div><span class="name">도쿄</span><span class="days" style="font-size:.6rem;opacity:.5;">東京</span><span class="days">4일</span></div>
     <span class="connector">—</span>
-    <div class="hero-city" onclick="document.getElementById('nara').scrollIntoView({behavior:'smooth'})" style="cursor:pointer"><div class="icon">🦌</div><span class="name">나라</span><span class="days" style="font-size:.6rem;opacity:.5;">奈良</span><span class="days">2일</span></div>
+    <div class="hero-city" onclick="document.getElementById('nara').scrollIntoView({behavior:'smooth'})" style="cursor:pointer"><div class="icon">奈</div><span class="name">나라</span><span class="days" style="font-size:.6rem;opacity:.5;">奈良</span><span class="days">2일</span></div>
     <span class="connector">—</span>
-    <div class="hero-city" onclick="document.getElementById('kyoto').scrollIntoView({behavior:'smooth'})" style="cursor:pointer"><div class="icon">⛩</div><span class="name">교토</span><span class="days" style="font-size:.6rem;opacity:.5;">京都</span><span class="days">3일</span></div>
+    <div class="hero-city" onclick="document.getElementById('kyoto').scrollIntoView({behavior:'smooth'})" style="cursor:pointer"><div class="icon">京</div><span class="name">교토</span><span class="days" style="font-size:.6rem;opacity:.5;">京都</span><span class="days">3일</span></div>
     <span class="connector">—</span>
-    <div class="hero-city" onclick="document.getElementById('fukuoka').scrollIntoView({behavior:'smooth'})" style="cursor:pointer"><div class="icon">🍜</div><span class="name">후쿠오카</span><span class="days" style="font-size:.6rem;opacity:.5;">福岡</span><span class="days">2일</span></div>
+    <div class="hero-city" onclick="document.getElementById('fukuoka').scrollIntoView({behavior:'smooth'})" style="cursor:pointer"><div class="icon">博</div><span class="name">후쿠오카</span><span class="days" style="font-size:.6rem;opacity:.5;">福岡</span><span class="days">2일</span></div>
   </div>
   <div class="scroll-cue"><span>스크롤</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg></div>
 </section>
@@ -773,6 +795,10 @@
 
 <!-- ═══ Anime: 베가본드 (나라→교토) ═══ -->
 <div class="anime-interlude" data-char="musashi" style="justify-content:center;">
+  <div class="musashi-crows">
+    <span class="crow">🐦‍⬛</span><span class="crow">🐦‍⬛</span><span class="crow">🐦‍⬛</span><span class="crow">🐦‍⬛</span>
+    <span class="crow">🐦‍⬛</span><span class="crow">🐦‍⬛</span><span class="crow">🐦‍⬛</span><span class="crow">🐦‍⬛</span>
+  </div>
   <div class="anime-bottom" style="padding-top:0;">
     <p class="quote-text">"강해져라.<br>그래야 소중한 것을<br>지킬 수 있다."</p>
     <p class="quote-source"><strong>미야모토 무사시</strong> <span class="work">— 베가본드 バガボンド</span></p>
