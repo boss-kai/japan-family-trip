@@ -402,8 +402,9 @@
   /* Musashi wallpaper style */
   .anime-interlude[data-char="musashi"]{background:url('img/musashi/musashi.jpg') center center/cover no-repeat;background-size:120%;transition:background-size 2s ease}
   .anime-interlude[data-char="musashi"]::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,.45)}
-  .anime-interlude[data-char="musashi"].visible{background-size:100%}
+  .anime-interlude[data-char="musashi"].visible{background-size:100%;animation:musashiDrift 6s ease-in-out 2.5s infinite alternate}
   .anime-interlude[data-char="musashi"] .anime-char{display:none}
+  @keyframes musashiDrift{0%{background-position:50% 50%}25%{background-position:49% 49.5%}50%{background-position:51% 50.5%}75%{background-position:50.5% 49%}100%{background-position:49.5% 50.5%}}
 
   /* Musashi sword slash reveal */
   .musashi-curtain{position:absolute;inset:0;z-index:5;background:#000;pointer-events:none;overflow:hidden}
