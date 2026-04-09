@@ -1056,6 +1056,16 @@
 
   (function(){const targets=document.querySelectorAll('.tl-card p,.tip-card p,.sec-sub');const sorted=[...jwDict].sort((a,b)=>b[0].length-a[0].length);targets.forEach(el=>{let html=el.innerHTML;sorted.forEach(([term,tip])=>{const re=new RegExp(`(?<![<\\w])${term.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}(?![\\w>])`,'');if(re.test(html))html=html.replace(re,`<span class="jw" data-t="${tip.replace(/"/g,'&quot;')}">${term}</span>`)});el.innerHTML=html})})();
 
+  // ── Tooltip display (registered right after .jw spans are created) ──
+  (function(){
+    const jwTip=document.getElementById('jwTip');let jwTimer=null;
+    function showJw(t){clearTimeout(jwTimer);jwTip.textContent=t;jwTip.classList.add('show')}
+    function hideJw(){jwTimer=setTimeout(()=>jwTip.classList.remove('show'),120)}
+    document.addEventListener('mouseover',e=>{const j=e.target.closest('.jw');if(j&&j.dataset.t)showJw(j.dataset.t)});
+    document.addEventListener('mouseout',e=>{if(e.target.closest('.jw'))hideJw()});
+    document.addEventListener('click',e=>{const j=e.target.closest('.jw');if(j&&j.dataset.t){e.preventDefault();if(jwTip.classList.contains('show')&&jwTip.textContent===j.dataset.t)hideJw();else{showJw(j.dataset.t);clearTimeout(jwTimer);jwTimer=setTimeout(()=>jwTip.classList.remove('show'),3500)}}else jwTip.classList.remove('show')});
+  })();
+
   // ── Luffy Evolution Scroll ──
   (function(){
     const evo=document.getElementById('luffyEvolution');
@@ -1411,13 +1421,6 @@
     });
   });
 
-  // Tooltip display
-  const jwTip=document.getElementById('jwTip');let jwTimer=null;
-  function showJw(t){clearTimeout(jwTimer);jwTip.textContent=t;jwTip.classList.add('show')}
-  function hideJw(){jwTimer=setTimeout(()=>jwTip.classList.remove('show'),120)}
-  document.addEventListener('mouseover',e=>{const j=e.target.closest('.jw');if(j&&j.dataset.t)showJw(j.dataset.t)});
-  document.addEventListener('mouseout',e=>{if(e.target.closest('.jw'))hideJw()});
-  document.addEventListener('click',e=>{const j=e.target.closest('.jw');if(j&&j.dataset.t){e.preventDefault();if(jwTip.classList.contains('show')&&jwTip.textContent===j.dataset.t)hideJw();else{showJw(j.dataset.t);clearTimeout(jwTimer);jwTimer=setTimeout(()=>jwTip.classList.remove('show'),3500)}}else jwTip.classList.remove('show')});
 </script>
 </body>
 </html>
