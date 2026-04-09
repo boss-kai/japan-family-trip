@@ -1036,13 +1036,7 @@
     <p class="sec-eyebrow fade-in">BUDGET</p>
     <h2 class="sec-title fade-in">여행 경비.</h2>
     <p class="sec-sub fade-in">가족 4인 기준 · 넉넉하게 산정</p>
-    <div class="fade-in">
-      <div class="budget-card"><div class="budget-card-header" style="background:linear-gradient(135deg,#4FC3F7,#039BE5);">⛰ 삿포로 <small>3일</small></div><div class="budget-card-body"><div class="budget-card-row"><span>🏨 숙소</span><span>60만</span></div><div class="budget-card-row"><span>🍜 식비</span><span>55만</span></div><div class="budget-card-row"><span>🚅 교통 (JR에어포트+오타루+지하철)</span><span>20만</span></div><div class="budget-card-row"><span>🎫 입장</span><span>10만</span></div><div class="budget-card-row"><span>🛍 쇼핑</span><span>15만</span></div><div class="budget-card-row total"><span>소계</span><span>160만</span></div></div></div>
-      <div class="budget-card"><div class="budget-card-header" style="background:linear-gradient(135deg,#FF7043,#E64A19);">🗼 도쿄 <small>4일</small></div><div class="budget-card-body"><div class="budget-card-row"><span>🏨 숙소</span><span>100만</span></div><div class="budget-card-row"><span>🍜 식비</span><span>75만</span></div><div class="budget-card-row"><span>🚅 교통</span><span>25만</span></div><div class="budget-card-row"><span>🎫 입장</span><span>30만</span></div><div class="budget-card-row"><span>🛍 쇼핑</span><span>25만</span></div><div class="budget-card-row total"><span>소계</span><span>255만</span></div></div></div>
-      <div class="budget-card"><div class="budget-card-header" style="background:linear-gradient(135deg,#81C784,#388E3C);">🦌 나라 <small>2일</small></div><div class="budget-card-body"><div class="budget-card-row"><span>🏨 숙소</span><span>30만</span></div><div class="budget-card-row"><span>🍜 식비</span><span>36만</span></div><div class="budget-card-row"><span>🚅 교통</span><span>5만</span></div><div class="budget-card-row"><span>🎫 입장</span><span>5만</span></div><div class="budget-card-row"><span>🛍 쇼핑</span><span>5만</span></div><div class="budget-card-row total"><span>소계</span><span>81만</span></div></div></div>
-      <div class="budget-card"><div class="budget-card-header" style="background:linear-gradient(135deg,#CE93D8,#8E24AA);">⛩ 교토 <small>3일</small></div><div class="budget-card-body"><div class="budget-card-row"><span>🏨 숙소</span><span>65만</span></div><div class="budget-card-row"><span>🍜 식비</span><span>55만</span></div><div class="budget-card-row"><span>🚅 교통</span><span>15만</span></div><div class="budget-card-row"><span>🎫 입장</span><span>25만</span></div><div class="budget-card-row"><span>🛍 쇼핑</span><span>15만</span></div><div class="budget-card-row total"><span>소계</span><span>175만</span></div></div></div>
-      <div class="budget-card"><div class="budget-card-header" style="background:linear-gradient(135deg,#FFD54F,#F9A825);">🍜 후쿠오카 <small>2일</small></div><div class="budget-card-body"><div class="budget-card-row"><span>🏨 숙소</span><span>30만</span></div><div class="budget-card-row"><span>🍜 식비</span><span>36만</span></div><div class="budget-card-row"><span>🚅 교통</span><span>6만</span></div><div class="budget-card-row"><span>🎫 입장</span><span>5만</span></div><div class="budget-card-row"><span>🛍 쇼핑</span><span>10만</span></div><div class="budget-card-row total"><span>소계</span><span>87만</span></div></div></div>
-    </div>
+    <div class="fade-in" id="budgetCards"></div>
     <div class="fade-in" style="margin-top:1.5rem;">
       <h4 style="font-weight:700;color:#F5F5F7;margin-bottom:1rem;">✈ 별도 경비 (가족 4인)</h4>
       <div class="budget-extra">
@@ -1053,10 +1047,10 @@
         <div class="budget-extra-item"><span>교토→후쿠오카 신칸센 (어른3+어린이1)</span><span>약 60만</span></div>
         <div class="budget-extra-item"><span>여행자보험 (4인/14일)</span><span>약 15만</span></div>
         <div class="budget-extra-item"><span>포켓와이파이 / 유심</span><span>약 5만</span></div>
-        <div class="budget-extra-item total"><span>별도 경비 합계</span><span>약 407만</span></div>
+        <div class="budget-extra-item total"><span>별도 경비 합계</span><span id="budgetExtraTotal">약 407만</span></div>
       </div>
     </div>
-    <div class="budget-total-box fade-in"><h3>💳 총 예상 경비</h3><p class="big">약 1,165만원</p><p class="detail">현지 758만 + 별도 407만 (JR패스 X, 개별구매)</p></div>
+    <div class="budget-total-box fade-in" id="budgetTotalBox"></div>
     <div class="fade-in" style="text-align:center;margin-top:2rem;">
       <h4 style="font-weight:700;color:#F5F5F7;margin-bottom:.3rem;">💱 환율표</h4>
       <p id="rateSubtitle" style="font-size:.8rem;color:#86868B;margin-bottom:1rem;">로딩 중...</p>
@@ -1515,6 +1509,55 @@
   function deleteSchedComment(sid,cid){schedDeleteSid=sid;schedDeleteCid=cid;document.getElementById('deleteModal').classList.add('show')}
   function confirmSchedDelete(){const all=getSchedComments(),items=all[schedDeleteSid]||[],i=items.findIndex(c=>c.id===schedDeleteCid);if(i===-1){closeDeleteModal();return}items.splice(i,1);all[schedDeleteSid]=items;saveSchedComments(all);renderSchedComments(schedDeleteSid);closeDeleteModal();showToast('댓글이 삭제되었습니다.')}
 
+  // ── Auto Budget Calculation ──
+  function renderBudget(rate){
+    const cityDefs=[
+      {id:'sapporo',name:'삿포로',days:3,icon:'⛰',grad:'#4FC3F7,#039BE5',hotel:60,transport:20,shop:15},
+      {id:'tokyo',name:'도쿄',days:4,icon:'🗼',grad:'#FF7043,#E64A19',hotel:100,transport:25,shop:25},
+      {id:'nara',name:'나라',days:2,icon:'🦌',grad:'#81C784,#388E3C',hotel:30,transport:5,shop:5},
+      {id:'kyoto',name:'교토',days:3,icon:'⛩',grad:'#CE93D8,#8E24AA',hotel:65,transport:15,shop:15},
+      {id:'fukuoka',name:'후쿠오카',days:2,icon:'🍜',grad:'#FFD54F,#F9A825',hotel:30,transport:6,shop:10}
+    ];
+    const extraItems=[
+      {label:'인천→삿포로 항공 (대한항공 KE765)',cost:125.5},
+      {label:'삿포로→도쿄 국내선',cost:50},
+      {label:'후쿠오카→인천 항공',cost:95.5},
+      {label:'도쿄→나라 신칸센',cost:55},
+      {label:'교토→후쿠오카 신칸센',cost:60},
+      {label:'여행자보험 (4인/14일)',cost:15},
+      {label:'포켓와이파이 / 유심',cost:5}
+    ];
+
+    let localTotal=0;
+    const container=document.getElementById('budgetCards');
+    let html='';
+    cityDefs.forEach(city=>{
+      const sec=document.getElementById(city.id);
+      if(!sec)return;
+      let jpy=0;
+      sec.querySelectorAll('.tag.cost[data-jpy]').forEach(el=>jpy+=parseInt(el.dataset.jpy));
+      const foodKrw=Math.round(jpy*rate/10000);
+      const sub=city.hotel+foodKrw+city.transport+city.shop;
+      localTotal+=sub;
+      html+=`<div class="budget-card"><div class="budget-card-header" style="background:linear-gradient(135deg,${city.grad});">${city.icon} ${city.name} <small>${city.days}일</small></div><div class="budget-card-body">`
+        +`<div class="budget-card-row"><span>🏨 숙소</span><span>${city.hotel}만</span></div>`
+        +`<div class="budget-card-row"><span>🍜 식비+입장 (일정 기반)</span><span>${foodKrw}만</span></div>`
+        +`<div class="budget-card-row"><span>🚅 교통</span><span>${city.transport}만</span></div>`
+        +`<div class="budget-card-row"><span>🛍 쇼핑</span><span>${city.shop}만</span></div>`
+        +`<div class="budget-card-row total"><span>소계</span><span>${sub}만</span></div>`
+        +`</div></div>`;
+    });
+    container.innerHTML=html;
+
+    const extraTotal=extraItems.reduce((s,i)=>s+i.cost,0);
+    const extraEl=document.getElementById('budgetExtraTotal');
+    if(extraEl)extraEl.textContent='약 '+Math.round(extraTotal)+'만';
+
+    const grand=localTotal+Math.round(extraTotal);
+    const box=document.getElementById('budgetTotalBox');
+    box.innerHTML=`<h3>💳 총 예상 경비</h3><p class="big">약 ${grand.toLocaleString()}만원</p><p class="detail">현지 ${localTotal}만 + 별도 ${Math.round(extraTotal)}만</p>`;
+  }
+
   // ── Exchange Rate ──
   function renderRate(rate,live){const r=rate,sub=document.getElementById('rateSubtitle'),cards=document.getElementById('rateCards'),tip=document.getElementById('rateTip'),mult=Math.round(r);sub.textContent=live?`1엔 = ${r.toFixed(1)}원 (실시간)`:`1엔 ≈ ${r.toFixed(1)}원 (기본값)`;const data=[{krw:10,label:'자판기 음료',jpy:140},{krw:100,label:'삼각김밥',jpy:160},{krw:1000,label:'라멘 한 그릇',jpy:950},{krw:10000,label:'회전초밥 10접시',jpy:1600}];cards.innerHTML=data.map(d=>{const j=Math.round(d.krw/r),k=Math.round(d.jpy*r/100)*100,ks=k>=10000?(k/10000).toFixed(1).replace('.0','')+'만':k.toLocaleString();return`<div class="rate-card"><div class="label">🇰🇷 ${d.krw.toLocaleString()}원</div><div class="value">≈ ${j.toLocaleString()}엔</div><div class="example">${d.label} ≈ ${ks}원</div></div>`}).join('');tip.innerHTML=`쉽게 외우기: <strong>일본 가격 × ${mult}</strong> ≈ 한국 원화!`}
   function renderCosts(rate){
@@ -1551,13 +1594,13 @@
       const lbl=isToday?'📍 오늘 예상 지출':'당일 예상 지출';
       const rateTag=live?` <span style="font-size:.7em;opacity:.6">(${rate.toFixed(1)}원/엔)</span>`:'';
       const krTime=new Date().toLocaleString('ko-KR',{timeZone:'Asia/Seoul',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
-      const timeTag=isToday?` <span style="font-size:.7em;opacity:.6">🇰🇷 ${krTime} KST</span>`:'';
+      const timeTag=` <span style="font-size:.7em;opacity:.6">🇰🇷 ${krTime} KST</span>`;
       el.innerHTML=`<span class="day-total-label">${lbl}${rateTag}${timeTag}</span><span class="day-total-amount">¥${totalJpy.toLocaleString()} ≈ ${ks}원</span>`;
       last.after(el);
     });
   }
-  renderRate(9.4,false);renderCosts(9.4);renderDayTotals(9.4,false);
-  fetch('https://open.er-api.com/v6/latest/JPY').then(r=>r.json()).then(d=>{if(d.result==='success'&&d.rates&&d.rates.KRW){renderRate(d.rates.KRW,true);renderCosts(d.rates.KRW);renderDayTotals(d.rates.KRW,true)}}).catch(()=>{});
+  renderRate(9.4,false);renderCosts(9.4);renderDayTotals(9.4,false);renderBudget(9.4);
+  fetch('https://open.er-api.com/v6/latest/JPY').then(r=>r.json()).then(d=>{if(d.result==='success'&&d.rates&&d.rates.KRW){renderRate(d.rates.KRW,true);renderCosts(d.rates.KRW);renderDayTotals(d.rates.KRW,true);renderBudget(d.rates.KRW)}}).catch(()=>{});
 
   // ── Category Icon System (emoji → elegant icons) ──
   (function(){
