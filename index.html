@@ -269,7 +269,7 @@
   .luffy-quote .quote-source .work{opacity:1;color:#F5F5F7;font-size:.9rem}
 
   /* ── Goku Evolution Scroll ── */
-  .goku-evolution{height:900vh;position:relative;background:#080808}
+  .goku-evolution{height:450vh;position:relative;background:#080808}
   .goku-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
   .goku-flash{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0}
   .goku-flash.flash-gold{animation:gokuFlashGold .5s ease forwards}
@@ -345,6 +345,36 @@
   .goku-quote .quote-source{color:#ccc;font-size:1rem}
   .goku-quote .quote-source strong{color:#F5F5F7}
   .goku-quote .quote-source .work{opacity:1;color:#F5F5F7;font-size:.9rem}
+
+  /* ── SSJ Aura + Lightning ── */
+  .goku-slide-wrap{position:absolute;display:flex;align-items:center;justify-content:center;width:100%;height:100%;
+    opacity:0;transition:opacity 1s cubic-bezier(.25,.46,.45,.94);will-change:opacity}
+  .goku-slide-wrap.active{opacity:1}
+  .goku-slide-wrap.leaving{opacity:0}
+  .goku-slide-wrap .goku-slide{position:relative;z-index:2}
+
+  .ssj-aura{position:absolute;width:60%;height:80%;border-radius:50% 50% 40% 40%;z-index:1;pointer-events:none;
+    background:radial-gradient(ellipse at center,rgba(255,220,50,.4) 0%,rgba(255,180,0,.2) 40%,rgba(255,150,0,.08) 65%,transparent 80%);
+    filter:blur(18px);opacity:0;transition:opacity .8s ease;
+    animation:none}
+  .goku-slide-wrap.active .ssj-aura{opacity:1;animation:auraPulse 2s ease-in-out infinite alternate}
+  .ssj2-aura{
+    background:radial-gradient(ellipse at center,rgba(255,235,80,.55) 0%,rgba(255,200,0,.35) 35%,rgba(255,160,0,.15) 60%,transparent 78%);
+    filter:blur(22px);width:70%;height:85%}
+  .goku-slide-wrap.active .ssj2-aura{animation:auraPulse2 1.2s ease-in-out infinite alternate}
+
+  @keyframes auraPulse{
+    0%{transform:scale(.95);filter:blur(18px) brightness(1)}
+    100%{transform:scale(1.08);filter:blur(22px) brightness(1.3)}
+  }
+  @keyframes auraPulse2{
+    0%{transform:scale(.92);filter:blur(20px) brightness(1)}
+    50%{transform:scale(1.12);filter:blur(26px) brightness(1.5)}
+    100%{transform:scale(1.05);filter:blur(22px) brightness(1.2)}
+  }
+
+  .ssj-lightning{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;transition:opacity .5s ease}
+  .goku-slide-wrap.active .ssj-lightning{opacity:1}
 
   /* ── Anime Interlude ── */
   .anime-interlude{position:relative;overflow:hidden;min-height:85vh;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;background:#080808;padding-bottom:4rem}
@@ -445,7 +475,7 @@
     .city-section{padding:3.5rem 1rem}
     .luffy-evolution{height:500vh}
     .luffy-slide{max-height:60vh!important}
-    .goku-evolution{height:750vh}
+    .goku-evolution{height:400vh}
     .goku-slide{max-height:42vh!important}
     .goku-label{top:1.5rem}
     .anime-interlude{min-height:70vh;padding-bottom:3rem}
@@ -690,26 +720,18 @@
          data-name="소년 오공" data-arc="드래곤볼 · 여의봉과 근두운">
     <img class="goku-slide" src="img/goku/02_teen.png" alt="Teen Goku" data-idx="1" data-anim="grow" data-flash="gold"
          data-name="청년 오공" data-arc="천하제일무도회 · 첫 성인 등장">
-    <img class="goku-slide" src="img/goku/03_saiyan.png" alt="Saiyan Saga" data-idx="2" data-anim="powerup" data-flash="gold"
-         data-name="사이어인편 오공" data-arc="드래곤볼Z · 계왕권 수련">
-    <img class="goku-slide" src="img/goku/04_ssj1.png" alt="Super Saiyan" data-idx="3" data-anim="burst" data-flash="gold"
-         data-name="슈퍼사이어인" data-arc="나메크성 · 전설의 각성">
-    <img class="goku-slide" src="img/goku/05_ssj2.png" alt="SSJ2" data-idx="4" data-anim="powerup" data-flash="gold"
-         data-name="슈퍼사이어인 2" data-arc="부우편 · 번개를 두른 전사">
-    <img class="goku-slide" src="img/goku/06_ssj3.png" alt="SSJ3" data-idx="5" data-anim="burst" data-flash="gold"
-         data-name="슈퍼사이어인 3" data-arc="부우편 · 한계를 넘은 장발">
-    <img class="goku-slide" src="img/goku/07_ssg.png" alt="SSG" data-idx="6" data-anim="divine" data-flash="red"
-         data-name="슈퍼사이어인 갓" data-arc="신과 신 · 신의 영역에 도달">
-    <img class="goku-slide" src="img/goku/08_ssb.png" alt="SSB" data-idx="7" data-anim="ascend" data-flash="blue"
-         data-name="슈퍼사이어인 블루" data-arc="부활의 F · 신의 기운 + 사이어인">
-    <img class="goku-slide" src="img/goku/09_ssbkk.png" alt="SSBKK" data-idx="8" data-anim="burst" data-flash="red"
-         data-name="SSB 계왕권" data-arc="제6우주편 · 이중 오라의 폭발">
-    <img class="goku-slide" src="img/goku/10_ui_sign.png" alt="UI Sign" data-idx="9" data-anim="ultra" data-flash="silver"
-         data-name="울트라 인스팅트 조짐" data-arc="우주서바이벌 · 무의식의 시작">
-    <img class="goku-slide" src="img/goku/11_mui.png" alt="MUI" data-idx="10" data-anim="awaken" data-flash="silver"
-         data-name="울트라 인스팅트 완성" data-arc="우주서바이벌 최종전 · 은빛 각성">
-    <img class="goku-slide" src="img/goku/12_true_ui.png" alt="True UI" data-idx="11" data-anim="ultra" data-flash="silver"
-         data-name="트루 울트라 인스팅트" data-arc="그래놀라편 · 감정을 품은 극의">
+    <div class="goku-slide-wrap" data-idx="2">
+      <img class="goku-slide" src="img/goku/04_ssj1.png" alt="Super Saiyan" data-idx="2" data-anim="burst" data-flash="gold"
+           data-name="슈퍼사이어인" data-arc="나메크성 · 전설의 각성">
+      <div class="ssj-aura"></div>
+      <canvas class="ssj-lightning" data-bolts="4"></canvas>
+    </div>
+    <div class="goku-slide-wrap" data-idx="3">
+      <img class="goku-slide" src="img/goku/05_ssj2.png" alt="SSJ2" data-idx="3" data-anim="burst" data-flash="gold"
+           data-name="슈퍼사이어인 2" data-arc="부우편 · 번개를 두른 전사">
+      <div class="ssj-aura ssj2-aura"></div>
+      <canvas class="ssj-lightning" data-bolts="8"></canvas>
+    </div>
 
     <div class="goku-quote" id="gokuQuote">
       <p class="quote-text">"한계를 넘어서는 것.<br>그게 수행이다."</p>
