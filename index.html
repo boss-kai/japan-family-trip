@@ -286,6 +286,30 @@
   .luffy-quote .quote-source strong{color:#F5F5F7}
   .luffy-quote .quote-source .work{opacity:1;color:#F5F5F7;font-size:.9rem}
 
+  /* ── Character Evolution (reusable: tanjiro etc) ── */
+  .chara-evo{height:300vh;position:relative;background:#080808}
+  .chara-evo-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .chara-evo-slide{position:absolute;max-height:70vh;max-width:85%;object-fit:contain;z-index:1;
+    opacity:0;transform:translateY(50px) scale(.9);
+    transition:opacity .7s ease,transform .7s ease;will-change:opacity,transform}
+  .chara-evo-slide.active{opacity:1;transform:translateY(0) scale(1)}
+  .chara-evo-slide.leaving{opacity:0;transform:translateY(-60px) scale(.95)}
+  .chara-evo-slide[data-anim="water"]{transform:translateX(-80px) rotate(-5deg) scale(.85);transition:opacity .6s,transform .6s cubic-bezier(.34,1.56,.64,1)}
+  .chara-evo-slide[data-anim="water"].active{transform:translateX(0) rotate(0) scale(1)}
+  .chara-evo-slide[data-anim="water"].leaving{transform:translateX(60px) scale(.9);opacity:0}
+  .chara-evo-slide[data-anim="zoom"]{transform:scale(.4);filter:brightness(1.5);transition:opacity .7s,transform .7s cubic-bezier(.34,1.56,.64,1),filter .7s}
+  .chara-evo-slide[data-anim="zoom"].active{transform:scale(1);filter:brightness(1)}
+  .chara-evo-slide[data-anim="zoom"].leaving{transform:scale(1.1);opacity:0;filter:brightness(.5)}
+  .chara-evo-slide[data-anim="slash"]{transform:rotate(-15deg) scale(.7);transition:opacity .6s,transform .6s cubic-bezier(.34,1.56,.64,1)}
+  .chara-evo-slide[data-anim="slash"].active{transform:rotate(0) scale(1)}
+  .chara-evo-slide[data-anim="slash"].leaving{transform:rotate(10deg) scale(.9);opacity:0}
+  .chara-evo-slash{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:0}
+  .chara-evo-slash.slash-left{animation:slashLeft .6s ease forwards}
+  .chara-evo-slash.slash-right{animation:slashRight .6s ease forwards}
+  .chara-evo-slash.slash-cross{animation:slashCross .7s ease forwards}
+  .chara-evo-quote{position:absolute;bottom:4rem;left:50%;transform:translateX(-50%) translateY(30px);text-align:center;z-index:3;opacity:0;transition:opacity .8s ease .2s,transform .8s ease .2s;max-width:700px;width:100%;padding:0 2rem}
+  .chara-evo-quote.active{opacity:1;transform:translateX(-50%) translateY(0)}
+
   /* ── Goku Evolution Scroll ── */
   .goku-evolution{height:450vh;position:relative;background:#080808}
   .goku-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
@@ -933,14 +957,18 @@
   </div>
 </div>
 
-<!-- ═══ Anime: 귀멸의 칼날 (교토→후쿠오카) ═══ -->
-<div class="anime-interlude" data-char="tanjiro" data-shake="1">
-  <div class="slash-fx"></div>
-  <div class="anime-char"><img src="img/tanjiro/tanjiro.png" alt="Tanjiro"></div>
-  <div class="anime-bottom">
-    <p class="quote-text">"흐르는 물처럼,<br>어떤 형태에도<br>맞출 수 있게."</p>
-    <p class="quote-source"><strong>카마도 탄지로</strong> <span class="work">— 귀멸의 칼날 鬼滅の刃</span></p>
-    <p class="quote-context">여행의 마지막까지 유연하게!</p>
+<!-- ═══ Anime: 탄지로 진화 (교토→후쿠오카) ═══ -->
+<div class="chara-evo" id="tanjiroEvolution">
+  <div class="chara-evo-sticky">
+    <div class="chara-evo-slash" id="tanjiroSlash"></div>
+    <img class="chara-evo-slide active" src="img/tanjiro/0_early.png" alt="Early Tanjiro" data-idx="0">
+    <img class="chara-evo-slide" src="img/tanjiro/1_water.png" alt="Water Breathing" data-idx="1" data-anim="water" data-slash="left">
+    <img class="chara-evo-slide" src="img/tanjiro/2_calm.png" alt="Tanjiro Calm" data-idx="2" data-anim="zoom" data-slash="right">
+    <img class="chara-evo-slide" src="img/tanjiro/tanjiro.png" alt="Tanjiro Final" data-idx="3" data-anim="slash" data-slash="cross">
+    <div class="chara-evo-quote" id="tanjiroQuote">
+      <p class="quote-text">"흐르는 물처럼,<br>어떤 형태에도 맞출 수 있게."</p>
+      <p class="quote-source" style="color:#F5F5F7"><strong>카마도 탄지로</strong> <span class="work" style="color:#F5F5F7;opacity:1">— 귀멸의 칼날 鬼滅の刃</span></p>
+    </div>
   </div>
 </div>
 
@@ -1218,6 +1246,46 @@
     },{threshold:0.05});
     autoObs.observe(evo);
   })();
+
+  // ── Character Evolution Scroll (reusable) ──
+  function initCharaEvo(containerId, slashId, quoteId){
+    const evo=document.getElementById(containerId);
+    if(!evo)return;
+    const slides=evo.querySelectorAll('.chara-evo-slide');
+    const quote=document.getElementById(quoteId);
+    const slash=document.getElementById(slashId);
+    const total=slides.length;
+    let prev=-1;
+    function fireSlash(type){
+      slash.className='chara-evo-slash';
+      void slash.offsetWidth;
+      slash.classList.add('slash-'+type);
+    }
+    function onScroll(){
+      const rect=evo.getBoundingClientRect();
+      const scrolled=-rect.top;
+      const scrollH=evo.offsetHeight-window.innerHeight;
+      if(scrolled<0||scrolled>scrollH)return;
+      const progress=scrolled/scrollH;
+      const idx=Math.min(Math.floor(progress*total),total-1);
+      if(idx===prev)return;
+      slides.forEach((s,i)=>{
+        s.classList.remove('active','leaving');
+        if(i===idx) s.classList.add('active');
+        else if(i<idx) s.classList.add('leaving');
+      });
+      if(prev!==-1&&idx>prev){
+        const incoming=slides[idx];
+        const st=incoming.dataset.slash;
+        if(st) fireSlash(st);
+      }
+      if(quote) quote.classList.toggle('active',idx===total-1);
+      prev=idx;
+    }
+    window.addEventListener('scroll',onScroll,{passive:true});
+    onScroll();
+  }
+  initCharaEvo('tanjiroEvolution','tanjiroSlash','tanjiroQuote');
 
   // ── Goku Evolution Scroll ──
   (function(){
