@@ -65,6 +65,12 @@ td{padding:.7rem .8rem;vertical-align:top}
 .tag.cost{background:rgba(255,159,10,.1);color:#FF9F0A;font-weight:700;white-space:nowrap;letter-spacing:-.02em}
 
 
+/* Day total row */
+.day-total-row td{padding:.6rem .8rem;font-weight:700;border-top:1.5px solid rgba(255,159,10,.2);background:rgba(255,159,10,.03)}
+.day-total-row .dtl{color:#86868B}.day-total-row .dta{color:#FF9F0A;text-align:right;white-space:nowrap}
+.day-total-row.is-today td{border-top-color:rgba(255,55,95,.3);background:rgba(255,55,95,.04)}
+.day-total-row.is-today .dtl{color:#FF375F}.day-total-row.is-today .dta{color:#FF375F}
+
 /* Mini Route per city */
 .city-route{margin-bottom:1.5rem;padding:.8rem 0}
 .city-route svg{width:100%;height:auto;max-width:600px;display:block}
@@ -428,8 +434,33 @@ function renderCosts(rate){
     el.textContent='¥'+jpy.toLocaleString()+' ≈'+ks+'원';
   });
 }
-renderCosts(9.4);
-fetch('https://open.er-api.com/v6/latest/JPY').then(r=>r.json()).then(d=>{if(d.result==='success'&&d.rates&&d.rates.KRW)renderCosts(d.rates.KRW)}).catch(()=>{});
+function renderDayTotals(rate,live){
+  document.querySelectorAll('.day-total-row').forEach(e=>e.remove());
+  const now=new Date();
+  const jp=new Date(now.toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));
+  const todayKey=(jp.getMonth()+1)+'/'+jp.getDate();
+  document.querySelectorAll('.day-title').forEach(hdr=>{
+    const table=hdr.nextElementSibling;
+    if(!table||!table.classList.contains('table-wrap'))return;
+    const rows=table.querySelectorAll('.tag.cost[data-jpy]');
+    let totalJpy=0;
+    rows.forEach(c=>totalJpy+=parseInt(c.dataset.jpy));
+    if(!totalJpy)return;
+    const dateM=hdr.textContent.match(/(\d+)\/(\d+)/);
+    const isToday=dateM&&dateM[1]+'/'+dateM[2]===todayKey;
+    const krw=Math.round(totalJpy*rate/100)*100;
+    const ks=krw>=10000?(krw/10000).toFixed(1).replace('.0','')+'만':krw.toLocaleString();
+    const lbl=isToday?'📍 오늘 예상 지출':'당일 예상 지출';
+    const rateTag=live?` (${rate.toFixed(1)}원/엔)`:'';
+    const tr=document.createElement('tr');
+    tr.className='day-total-row'+(isToday?' is-today':'');
+    tr.innerHTML=`<td colspan="3" class="dtl">${lbl}${rateTag}</td><td class="dta">¥${totalJpy.toLocaleString()} ≈ ${ks}원</td>`;
+    const tbody=table.querySelector('tbody');
+    if(tbody)tbody.appendChild(tr);
+  });
+}
+renderCosts(9.4);renderDayTotals(9.4,false);
+fetch('https://open.er-api.com/v6/latest/JPY').then(r=>r.json()).then(d=>{if(d.result==='success'&&d.rates&&d.rates.KRW){renderCosts(d.rates.KRW);renderDayTotals(d.rates.KRW,true)}}).catch(()=>{});
 </script>
 </body>
 </html>

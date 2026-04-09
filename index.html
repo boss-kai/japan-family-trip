@@ -204,6 +204,13 @@
   .tl-card[data-cat="transport"] .cat-icon{background:rgba(191,90,242,.12);color:#BF5AF2}
   .tl-card[data-cat="activity"] .cat-icon{background:rgba(48,209,88,.12);color:#30D158}
 
+  .day-total{display:flex;align-items:center;justify-content:space-between;padding:.65rem 1.4rem;margin:.5rem 0;background:rgba(255,159,10,.04);border:1px solid rgba(255,159,10,.1);border-radius:12px;font-size:.82rem}
+  .day-total-label{color:#86868B;font-weight:500}
+  .day-total-amount{color:#FF9F0A;font-weight:700;white-space:nowrap}
+  .day-total.is-today{border-color:rgba(255,55,95,.35);background:rgba(255,55,95,.06);box-shadow:0 0 20px rgba(255,55,95,.08)}
+  .day-total.is-today .day-total-label{color:#FF375F}
+  .day-total.is-today .day-total-amount{color:#FF375F}
+
   .tip-card{border-radius:16px;padding:1.4rem 1.6rem;margin-top:1.5rem;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02)}
   .tip-card h4{font-size:.85rem;font-weight:700;margin-bottom:.3rem;color:#FF9F0A}
   .tip-card p{font-size:.85rem;font-weight:300;color:#86868B;line-height:1.7}
@@ -1521,8 +1528,37 @@
       el.textContent='¥'+jpy.toLocaleString()+' ≈'+ks+'원';
     });
   }
-  renderRate(9.4,false);renderCosts(9.4);
-  fetch('https://open.er-api.com/v6/latest/JPY').then(r=>r.json()).then(d=>{if(d.result==='success'&&d.rates&&d.rates.KRW){renderRate(d.rates.KRW,true);renderCosts(d.rates.KRW)}}).catch(()=>{});
+  function renderDayTotals(rate,live){
+    document.querySelectorAll('.day-total').forEach(e=>e.remove());
+    const now=new Date();
+    const jp=new Date(now.toLocaleString('en-US',{timeZone:'Asia/Tokyo'}));
+    const todayKey=(jp.getMonth()+1)+'/'+jp.getDate();
+    const year=2026;
+    document.querySelectorAll('.day-header').forEach(hdr=>{
+      let totalJpy=0,sib=hdr.nextElementSibling,last=hdr;
+      while(sib&&!sib.classList.contains('day-header')&&!sib.classList.contains('tip-card')&&!sib.classList.contains('table-view-btn')){
+        if(sib.classList.contains('tl-card')){
+          const c=sib.querySelector('.tag.cost[data-jpy]');
+          if(c)totalJpy+=parseInt(c.dataset.jpy);
+          last=sib;
+        }
+        sib=sib.nextElementSibling;
+      }
+      if(!totalJpy)return;
+      const dateM=hdr.textContent.match(/(\d+)\/(\d+)/);
+      const isToday=dateM&&dateM[1]+'/'+dateM[2]===todayKey;
+      const krw=Math.round(totalJpy*rate/100)*100;
+      const ks=krw>=10000?(krw/10000).toFixed(1).replace('.0','')+'만':krw.toLocaleString();
+      const el=document.createElement('div');
+      el.className='day-total fade-in'+(isToday?' is-today':'');
+      const lbl=isToday?'📍 오늘 예상 지출':'당일 예상 지출';
+      const rateTag=live?` <span style="font-size:.7em;opacity:.6">(${rate.toFixed(1)}원/엔)</span>`:'';
+      el.innerHTML=`<span class="day-total-label">${lbl}${rateTag}</span><span class="day-total-amount">¥${totalJpy.toLocaleString()} ≈ ${ks}원</span>`;
+      last.after(el);
+    });
+  }
+  renderRate(9.4,false);renderCosts(9.4);renderDayTotals(9.4,false);
+  fetch('https://open.er-api.com/v6/latest/JPY').then(r=>r.json()).then(d=>{if(d.result==='success'&&d.rates&&d.rates.KRW){renderRate(d.rates.KRW,true);renderCosts(d.rates.KRW);renderDayTotals(d.rates.KRW,true)}}).catch(()=>{});
 
   // ── Category Icon System (emoji → elegant icons) ──
   (function(){
