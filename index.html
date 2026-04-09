@@ -735,7 +735,7 @@
     <img class="luffy-slide" src="img/luffy/2_gear4.png" alt="Gear 4" data-idx="2" data-anim="zoom" data-slash="right">
     <img class="luffy-slide" src="img/luffy/3_luffy.png" alt="Boundman" data-idx="3" data-anim="slam" data-slash="cross">
     <img class="luffy-slide" src="img/luffy/4_nika.png" alt="Nika Joy" data-idx="4" data-anim="flash" data-slash="left">
-    <video class="luffy-slide" data-idx="5" data-anim="gather" muted playsinline style="max-height:75vh;max-width:95%" >
+    <video class="luffy-slide" data-idx="5" data-anim="gather" muted playsinline webkit-playsinline autoplay style="max-height:75vh;max-width:95%" >
       <source src="img/luffy/5_last.mp4" type="video/mp4">
     </video>
     <div class="luffy-quote" id="luffyQuote">
@@ -1203,21 +1203,14 @@
       const lastSlide=slides[total-1];
       if(idx===total-1){
         quote.classList.add('active');
-        if(lastSlide.tagName==='VIDEO'&&!lastSlide._played){
+        if(lastSlide.tagName==='VIDEO'){
           lastSlide.currentTime=0;
-          clearTimeout(lastSlide._playTimer);
-          lastSlide._playTimer=setTimeout(()=>{
-            lastSlide.play().catch(()=>{});
-          },2000);
-          lastSlide.addEventListener('ended',function onEnd(){
-            lastSlide._played=true;
-            lastSlide.loop=true;
-            lastSlide.play().catch(()=>{});
-          },{once:true});
+          lastSlide.loop=true;
+          lastSlide.play().catch(()=>{});
         }
       }else{
         quote.classList.remove('active');
-        if(lastSlide.tagName==='VIDEO'){clearTimeout(lastSlide._playTimer);lastSlide.pause()}
+        if(lastSlide.tagName==='VIDEO'){lastSlide.pause()}
       }
       prev=idx;
     }
