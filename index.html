@@ -663,7 +663,7 @@
 
   <div class="map-stage" id="mapStage">
     <!-- Phase 1: MP4 video plays → freeze → zoom -->
-    <video class="map-video" id="mapVideo" src="img/0_map/영상_지도_평면화_요청.mp4" muted playsinline preload="auto" poster="img/0_map/japan-map-last.png"></video>
+    <video class="map-video" id="mapVideo" src="img/0_map/영상_지도_평면화_요청.mp4" muted playsinline webkit-playsinline preload="auto" poster="img/0_map/japan-map-last.png"></video>
     <!-- Phase 2: Route overlay (zooms together with video) -->
     <div class="map-overlay" id="mapOverlay">
       <svg viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
@@ -1224,36 +1224,6 @@
     window.addEventListener('scroll',onScroll,{passive:true});
     onScroll();
 
-    // ── Auto-play: 루피 섹션 도착 시 자동 슬라이드 ──
-    let autoPlayed=false;
-    const autoObs=new IntersectionObserver(entries=>{
-      if(autoPlayed)return;
-      const e=entries[0];
-      if(!e.isIntersecting)return;
-      autoPlayed=true;
-      autoObs.disconnect();
-      const scrollStart=evo.offsetTop;
-      const scrollEnd=scrollStart+evo.offsetHeight-window.innerHeight;
-      const duration=total*800; // 슬라이드당 800ms
-      const startTime=performance.now();
-      const startY=window.scrollY;
-      // 이미 중간이면 남은 구간만
-      const from=Math.max(startY,scrollStart);
-      const dist=scrollEnd-from;
-      if(dist<=0)return;
-      function autoStep(now){
-        if(lockScroll){requestAnimationFrame(autoStep);return}
-        const elapsed=now-startTime;
-        const t=Math.min(elapsed/duration,1);
-        // easeInOutCubic
-        const ease=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
-        window.scrollTo(0,from+dist*ease);
-        if(t<1)requestAnimationFrame(autoStep);
-      }
-      // 살짝 딜레이 후 시작
-      setTimeout(()=>requestAnimationFrame(autoStep),300);
-    },{threshold:0.05});
-    autoObs.observe(evo);
   })();
 
   // ── Character Evolution Scroll (reusable) ──
@@ -1390,31 +1360,6 @@
     window.addEventListener('scroll',onScroll,{passive:true});
     onScroll();
 
-    // Auto-play: 나루토 섹션 도착 시 자동 슬라이드
-    let autoPlayed=false;
-    const autoObs=new IntersectionObserver(entries=>{
-      if(autoPlayed)return;
-      const e=entries[0];
-      if(!e.isIntersecting)return;
-      autoPlayed=true;
-      autoObs.disconnect();
-      const scrollStart=evo.offsetTop;
-      const scrollEnd=scrollStart+evo.offsetHeight-window.innerHeight;
-      const duration=total*800;
-      const startTime=performance.now();
-      const from=Math.max(window.scrollY,scrollStart);
-      const dist=scrollEnd-from;
-      if(dist<=0)return;
-      function autoStep(now){
-        const elapsed=now-startTime;
-        const t=Math.min(elapsed/duration,1);
-        const ease=t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
-        window.scrollTo(0,from+dist*ease);
-        if(t<1)requestAnimationFrame(autoStep);
-      }
-      setTimeout(()=>requestAnimationFrame(autoStep),300);
-    },{threshold:0.05});
-    autoObs.observe(evo);
   })();
 
   // ── Musashi Slash Reveal ──
@@ -1474,8 +1419,7 @@
     const planeAnim=document.getElementById('planeAnim');
 
     // Phase 1: MP4 plays
-    vid.play();
-    vid.addEventListener('ended', ()=>{
+    function afterVideo(){
       // Phase 2: Video freezes on last frame → zoom into archipelago
       vid.classList.add('zoomed');
 
@@ -1502,6 +1446,11 @@
         }, 200);
 
       }, 1400);
+    }
+    vid.addEventListener('ended', afterVideo, {once:true});
+    vid.play().catch(()=>{
+      // iOS autoplay blocked — skip video, go straight to zoom
+      afterVideo();
     });
   }
 
