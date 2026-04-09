@@ -1550,7 +1550,9 @@
       el.className='day-total'+(isToday?' is-today':'');
       const lbl=isToday?'📍 오늘 예상 지출':'당일 예상 지출';
       const rateTag=live?` <span style="font-size:.7em;opacity:.6">(${rate.toFixed(1)}원/엔)</span>`:'';
-      el.innerHTML=`<span class="day-total-label">${lbl}${rateTag}</span><span class="day-total-amount">¥${totalJpy.toLocaleString()} ≈ ${ks}원</span>`;
+      const krTime=new Date().toLocaleString('ko-KR',{timeZone:'Asia/Seoul',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+      const timeTag=isToday?` <span style="font-size:.7em;opacity:.6">🇰🇷 ${krTime} KST</span>`:'';
+      el.innerHTML=`<span class="day-total-label">${lbl}${rateTag}${timeTag}</span><span class="day-total-amount">¥${totalJpy.toLocaleString()} ≈ ${ks}원</span>`;
       last.after(el);
     });
   }
