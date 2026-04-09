@@ -414,10 +414,22 @@
   .curtain-top{top:0}
   .curtain-bottom{bottom:0}
   .slash-line{position:absolute;height:3px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.9) 20%,#fff 50%,rgba(255,255,255,.9) 80%,transparent);left:0;right:0;transform:scaleX(0);transform-origin:left;opacity:0;z-index:3;box-shadow:0 0 15px rgba(255,255,255,.6),0 0 30px rgba(200,200,255,.3)}
-  .slash-wild{position:absolute;height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.7) 30%,rgba(255,255,255,.7) 70%,transparent);opacity:0;z-index:3;transform:scaleX(0);box-shadow:0 0 8px rgba(255,255,255,.4)}
-  .slash-wild.flash{animation:slashWild .25s ease-out forwards}
+  .slash-wild{position:absolute;width:150%;height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.85) 20%,#fff 50%,rgba(255,255,255,.85) 80%,transparent);opacity:0;z-index:3;left:-25%;box-shadow:0 0 12px rgba(255,255,255,.5)}
+  .slash-wild.from-bl{transform-origin:0% 100%;animation:slashBL .15s ease-out forwards}
+  .slash-wild.from-br{transform-origin:100% 100%;animation:slashBR .15s ease-out forwards}
+  .slash-wild.from-top{transform-origin:50% 0%;animation:slashTop .15s ease-out forwards}
+  .slash-wild.from-left{transform-origin:0% 50%;animation:slashLeft .15s ease-out forwards}
+  .slash-wild.from-right{transform-origin:100% 50%;animation:slashRight .15s ease-out forwards}
+  .slash-wild.from-tl{transform-origin:0% 0%;animation:slashTL .15s ease-out forwards}
+  .slash-wild.from-tr{transform-origin:100% 0%;animation:slashTR .15s ease-out forwards}
+  @keyframes slashBL{0%{opacity:1;transform:scaleX(0) rotate(var(--angle))}50%{opacity:1;transform:scaleX(1) rotate(var(--angle))}100%{opacity:0;transform:scaleX(1) rotate(var(--angle))}}
+  @keyframes slashBR{0%{opacity:1;transform:scaleX(0) rotate(var(--angle))}50%{opacity:1;transform:scaleX(1) rotate(var(--angle))}100%{opacity:0;transform:scaleX(1) rotate(var(--angle))}}
+  @keyframes slashTop{0%{opacity:1;transform:scaleX(0) rotate(var(--angle))}50%{opacity:1;transform:scaleX(1) rotate(var(--angle))}100%{opacity:0;transform:scaleX(1) rotate(var(--angle))}}
+  @keyframes slashLeft{0%{opacity:1;transform:scaleX(0) rotate(var(--angle))}50%{opacity:1;transform:scaleX(1) rotate(var(--angle))}100%{opacity:0;transform:scaleX(1) rotate(var(--angle))}}
+  @keyframes slashRight{0%{opacity:1;transform:scaleX(0) rotate(var(--angle))}50%{opacity:1;transform:scaleX(1) rotate(var(--angle))}100%{opacity:0;transform:scaleX(1) rotate(var(--angle))}}
+  @keyframes slashTL{0%{opacity:1;transform:scaleX(0) rotate(var(--angle))}50%{opacity:1;transform:scaleX(1) rotate(var(--angle))}100%{opacity:0;transform:scaleX(1) rotate(var(--angle))}}
+  @keyframes slashTR{0%{opacity:1;transform:scaleX(0) rotate(var(--angle))}50%{opacity:1;transform:scaleX(1) rotate(var(--angle))}100%{opacity:0;transform:scaleX(1) rotate(var(--angle))}}
   .slash-line.draw{animation:slashDraw .4s ease-out forwards}
-  @keyframes slashWild{0%{opacity:1;transform:scaleX(0)}60%{opacity:1;transform:scaleX(1)}100%{opacity:0;transform:scaleX(1)}}
   @keyframes slashDraw{0%{opacity:1;transform:scaleX(0)}100%{opacity:1;transform:scaleX(1)}}
 
   .anime-bottom{position:relative;z-index:3;text-align:center;padding:2rem 2rem 0;max-width:700px;width:100%;opacity:0;transform:translateY(30px);transition:all .7s cubic-bezier(.25,.46,.45,.94) .5s}
@@ -733,13 +745,11 @@
       <img class="goku-slide" src="img/goku/04_ssj1.png" alt="Super Saiyan" data-idx="1" data-anim="burst" data-flash="gold"
            data-name="슈퍼사이어인" data-arc="나메크성 · 전설의 각성">
       <div class="ssj-aura"></div>
-      <canvas class="ssj-lightning" data-bolts="4"></canvas>
     </div>
     <div class="goku-slide-wrap" data-idx="2">
       <img class="goku-slide" src="img/goku/05_ssj2.png" alt="SSJ2" data-idx="2" data-anim="burst" data-flash="gold"
            data-name="슈퍼사이어인 2" data-arc="부우편 · 번개를 두른 전사">
       <div class="ssj-aura ssj2-aura"></div>
-      <canvas class="ssj-lightning" data-bolts="8"></canvas>
     </div>
 
     <div class="goku-quote" id="gokuQuote">
