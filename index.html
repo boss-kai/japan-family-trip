@@ -289,7 +289,7 @@
   /* ── Character Evolution (reusable: tanjiro etc) ── */
   .chara-evo{height:300vh;position:relative;background:#080808}
   .chara-evo-sticky{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
-  .chara-evo-slide{position:absolute;max-height:70vh;max-width:85%;object-fit:contain;z-index:1;
+  .chara-evo-slide{position:absolute;height:75vh;max-width:90%;object-fit:contain;z-index:1;
     opacity:0;transform:translateY(50px) scale(.9);
     transition:opacity .7s ease,transform .7s ease;will-change:opacity,transform}
   .chara-evo-slide.active{opacity:1;transform:translateY(0) scale(1)}
@@ -334,7 +334,7 @@
     0%{opacity:1;background:radial-gradient(circle,rgba(220,220,240,.9),transparent 70%)}
     100%{opacity:0}
   }
-  .goku-slide{position:absolute;max-height:55vh;max-width:85%;object-fit:contain;z-index:1;
+  .goku-slide{position:absolute;max-height:75vh;max-width:90%;object-fit:contain;z-index:1;
     opacity:0;transform:translateY(60px) scale(.92);
     transition:opacity 1s cubic-bezier(.25,.46,.45,.94),transform 1s cubic-bezier(.25,.46,.45,.94);will-change:opacity,transform}
   .goku-slide.active{opacity:1;transform:translateY(0) scale(1)}
@@ -394,7 +394,7 @@
   .goku-slide-wrap.active{opacity:1}
   .goku-slide-wrap.leaving{opacity:0}
   .goku-slide-wrap .ssj-inner{position:relative;display:inline-block}
-  .goku-slide-wrap .goku-slide{position:relative;z-index:2;display:block;max-height:55vh;max-width:85vw;object-fit:contain}
+  .goku-slide-wrap .goku-slide{position:relative;z-index:2;display:block;max-height:75vh;max-width:90vw;object-fit:contain}
 
   .ssj-aura{position:absolute;inset:-25%;border-radius:50% 50% 40% 40%;z-index:1;pointer-events:none;
     background:radial-gradient(ellipse at center,rgba(255,220,50,.45) 0%,rgba(255,180,0,.25) 35%,rgba(255,150,0,.1) 60%,transparent 78%);
@@ -424,7 +424,7 @@
   .naruto-flash.flash-gold{animation:narutoFlashGold .6s ease forwards}
   @keyframes narutoFlashOrange{0%{opacity:1;background:radial-gradient(circle,rgba(255,140,0,.8),transparent 70%)}100%{opacity:0}}
   @keyframes narutoFlashGold{0%{opacity:1;background:radial-gradient(circle,rgba(255,215,0,.9),transparent 70%)}100%{opacity:0}}
-  .naruto-slide{position:absolute;max-height:55vh;max-width:85%;object-fit:contain;z-index:1;
+  .naruto-slide{position:absolute;max-height:75vh;max-width:90%;object-fit:contain;z-index:1;
     opacity:0;transform:translateX(-80vw);
     transition:opacity .5s ease,transform .5s cubic-bezier(.22,1,.36,1);will-change:opacity,transform}
   .naruto-slide.active{opacity:1;transform:translateX(0) scale(1)}
@@ -547,12 +547,12 @@
     .hero-sub{font-size:1rem}
     .city-section{padding:3.5rem 1rem}
     .luffy-evolution{height:500vh}
-    .luffy-slide{max-height:60vh!important}
+    .luffy-slide{max-height:65vh!important}
     .goku-evolution{height:400vh}
-    .goku-slide{max-height:42vh!important}
+    .goku-slide{max-height:60vh!important}
     .goku-label{top:1.5rem}
     .naruto-evolution{height:450vh}
-    .naruto-slide{max-height:50vh!important}
+    .naruto-slide{max-height:60vh!important}
     .naruto-label{top:1.5rem}
     .anime-interlude{min-height:70vh;padding-bottom:3rem}
     .anime-char img{max-height:42vh!important}
